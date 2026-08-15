@@ -2,228 +2,183 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-      maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BerryAnime</title>
 
 <style>
 
-/* =====================================================
-   BASE
-===================================================== */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
-html{
-    background:#0b0b0b;
+html,body{
+    background:#0b0b0d;
+    color:#fff;
 }
 
 body{
-    background:#0b0b0b;
-    color:white;
-    min-height:100vh;
-    padding-bottom:80px;
+    padding-bottom:68px;
 }
 
-button{
-    border:0;
-    background:none;
-    color:white;
-}
-
-/* =====================================================
+/* =========================
    TOPO
-===================================================== */
+========================= */
 
 .topbar{
-    height:72px;
+    height:68px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 20px;
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:#0b0b0b;
+    padding:0 18px;
 }
 
 .logo{
-    width:42px;
-    height:42px;
+    width:38px;
+    height:38px;
     object-fit:contain;
-    border-radius:50%;
 }
 
 .top-right{
     display:flex;
     align-items:center;
-    gap:22px;
+    gap:18px;
 }
 
-.search-btn{
-    width:27px;
-    height:27px;
+/* PESQUISA */
+
+.search-icon{
+    width:25px;
+    height:25px;
+    fill:none;
+    stroke:#fff;
+    stroke-width:2.2;
+    stroke-linecap:round;
+}
+
+/* PERFIL */
+
+.profile{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#303033;
     display:flex;
     align-items:center;
     justify-content:center;
-}
-
-.search-btn svg{
-    width:25px;
-    height:25px;
-    stroke:white;
-    stroke-width:2.5;
-    fill:none;
-}
-
-.profile{
-    width:40px;
-    height:40px;
-    border-radius:50%;
     overflow:hidden;
-    background:#303030;
-    border:1px solid #444;
 }
 
-.profile img{
+.profile svg{
+    width:23px;
+    height:23px;
+    fill:#777;
+}
+
+/* =========================
+   SEÇÕES
+========================= */
+
+.section{
+    margin-top:18px;
+}
+
+.section-title{
+    margin:0 18px 10px;
+    font-size:18px;
+    font-weight:700;
+}
+
+/* =========================
+   FILAS GRANDES
+========================= */
+
+.large-row{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:0 18px 4px;
+    scrollbar-width:none;
+}
+
+.large-row::-webkit-scrollbar{
+    display:none;
+}
+
+.large-card{
+    width:calc((100vw - 56px) / 2);
+    min-width:calc((100vw - 56px) / 2);
+    height:145px;
+    flex-shrink:0;
+    position:relative;
+    overflow:hidden;
+    border-radius:11px;
+    background:#18181b;
+}
+
+.large-card img{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-/* =====================================================
-   CONTEÚDO
-===================================================== */
+/* =========================
+   CARDS PEQUENOS
+========================= */
 
-main{
-    width:100%;
-    overflow:hidden;
-}
-
-.section{
-    margin-top:22px;
-}
-
-.section-title{
-    font-size:24px;
-    font-weight:800;
-    padding:0 20px;
-    margin-bottom:12px;
-}
-
-/* =====================================================
-   CARDS HORIZONTAIS
-===================================================== */
-
-.horizontal{
+.small-row{
     display:flex;
     gap:10px;
     overflow-x:auto;
-    padding:0 20px 5px;
+    padding:0 18px 5px;
     scrollbar-width:none;
 }
 
-.horizontal::-webkit-scrollbar{
+.small-row::-webkit-scrollbar{
     display:none;
 }
 
 .small-card{
-    flex:0 0 158px;
-    min-width:158px;
+    width:78px;
+    min-width:78px;
+    flex-shrink:0;
 }
 
 .small-card img{
-    width:158px;
-    height:220px;
-    object-fit:cover;
-    border-radius:10px;
     display:block;
-    background:#191919;
+    width:78px;
+    height:112px;
+    object-fit:cover;
+    border-radius:9px;
+    background:#18181b;
 }
 
-.card-name{
-    font-size:14px;
-    font-weight:700;
-    margin-top:7px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
+/* =========================
+   CONTINUE ASSISTINDO
+========================= */
 
-.card-info{
-    color:#999;
-    font-size:12px;
-    margin-top:4px;
-}
-
-/* =====================================================
-   EM ALTA
-===================================================== */
-
-.feature-horizontal{
+.continue-row{
     display:flex;
     gap:10px;
     overflow-x:auto;
-    padding:0 20px;
+    padding:0 18px;
     scrollbar-width:none;
 }
 
-.feature-horizontal::-webkit-scrollbar{
+.continue-row::-webkit-scrollbar{
     display:none;
 }
 
-.feature-card{
-    flex:0 0 410px;
-    height:205px;
-    border-radius:12px;
-    overflow:hidden;
-    position:relative;
-    background:#181818;
-}
-
-.feature-card img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.feature-overlay{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        to top,
-        rgba(0,0,0,.75),
-        transparent 55%
-    );
-}
-
-.feature-title{
-    position:absolute;
-    bottom:12px;
-    left:14px;
-    right:14px;
-    font-size:18px;
-    font-weight:bold;
-}
-
-/* =====================================================
-   CONTINUE ASSISTINDO
-===================================================== */
-
 .continue-card{
-    flex:0 0 420px;
-    height:235px;
+    width:78vw;
+    min-width:78vw;
+    height:175px;
     position:relative;
-    border-radius:12px;
     overflow:hidden;
-    background:#181818;
+    border-radius:12px;
 }
 
 .continue-card img{
@@ -232,243 +187,125 @@ main{
     object-fit:cover;
 }
 
-.continue-overlay{
+.continue-gradient{
     position:absolute;
-    inset:0;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:55px 13px 12px;
     background:linear-gradient(
-        to top,
-        rgba(0,0,0,.9),
-        rgba(0,0,0,.05)
+        transparent,
+        rgba(0,0,0,.95)
     );
 }
 
-.continue-info{
-    position:absolute;
-    left:15px;
-    bottom:15px;
-}
-
 .continue-title{
-    font-size:18px;
+    font-size:16px;
     font-weight:bold;
 }
 
-.continue-time{
-    color:#bbb;
-    font-size:13px;
-    margin-top:5px;
-}
-
-.play-circle{
-    position:absolute;
-    right:20px;
-    bottom:20px;
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    background:rgba(30,30,30,.85);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.play-circle svg{
-    width:22px;
-    height:22px;
-    fill:white;
-}
-
-/* =====================================================
-   LANÇAMENTO
-===================================================== */
-
-.launch-card{
-    margin:0 20px;
-    background:#191919;
-    border-radius:15px;
-    overflow:hidden;
-}
-
-.launch-image{
+.progress{
     width:100%;
-    height:235px;
-    object-fit:cover;
-    display:block;
-}
-
-.launch-body{
-    padding:14px 16px 18px;
-}
-
-.launch-title{
-    font-size:22px;
-    font-weight:800;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    padding-right:70px;
-}
-
-.launch-meta{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-top:9px;
-}
-
-.age{
-    background:#ff9d19;
-    color:white;
-    padding:7px 9px;
+    height:4px;
+    margin-top:8px;
+    background:#555;
     border-radius:5px;
-    font-weight:bold;
 }
 
-.genre{
-    color:#aaa;
+.progress-bar{
+    width:45%;
+    height:100%;
+    background:#ed1745;
+    border-radius:5px;
 }
 
-.launch-description{
-    color:#ddd;
-    line-height:1.45;
-    margin-top:15px;
-    font-size:15px;
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-}
-
-.launch-actions{
-    position:relative;
-    margin-top:-65px;
-    margin-right:12px;
-    display:flex;
-    justify-content:flex-end;
-    gap:10px;
-    margin-bottom:35px;
-}
-
-.launch-button{
-    width:58px;
-    height:58px;
-    border-radius:50%;
-    background:#111;
-    border:2px solid #777;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.launch-button svg{
-    width:25px;
-    height:25px;
-}
-
-.launch-button.play{
-    background:white;
-    color:black;
-}
-
-.launch-button.play svg{
-    fill:#111;
-}
-
-/* =====================================================
-   HISTÓRICO
-===================================================== */
-
-.history{
-    display:none;
-}
-
-/* =====================================================
-   NAVBAR
-===================================================== */
+/* =========================
+   BARRA DE NAVEGAÇÃO
+   ÍCONES BEM PEQUENOS
+========================= */
 
 .bottom-nav{
     position:fixed;
-    bottom:0;
     left:0;
     right:0;
-    height:72px;
-    background:#101010;
-    border-top:1px solid #1e1e1e;
+    bottom:0;
+
+    height:68px;
+
     display:flex;
-    justify-content:space-around;
     align-items:center;
-    z-index:100;
+    justify-content:space-around;
+
+    background:#101012;
+    border-top:1px solid #242427;
+
+    z-index:1000;
 }
 
 .nav-item{
     width:25%;
-    height:72px;
+    height:68px;
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:4px;
-    color:#777;
+
+    gap:2px;
+
+    color:#666;
+    text-decoration:none;
+
+    font-size:10px;
 }
 
 .nav-item.active{
-    color:white;
+    color:#fff;
 }
 
+/* ÍCONES PEQUENOS */
+
 .nav-icon{
-    width:24px;
-    height:24px;
+    width:18px;
+    height:18px;
+
+    fill:none;
+    stroke:currentColor;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+
     display:block;
 }
 
-.nav-icon svg{
-    width:24px;
-    height:24px;
-    stroke:currentColor;
-    fill:none;
-    stroke-width:2;
-    stroke-linecap:round;
-    stroke-linejoin:round;
+.nav-item span{
+    font-size:10px;
+    line-height:12px;
 }
 
-.nav-label{
-    font-size:12px;
-    font-weight:600;
-}
-
-/* =====================================================
+/* =========================
    RESPONSIVO
-===================================================== */
+========================= */
 
-@media(max-width:500px){
+@media(min-width:700px){
 
-    .feature-card{
-        flex-basis:88vw;
-        height:180px;
-    }
-
-    .continue-card{
-        flex-basis:88vw;
-        height:210px;
+    .large-card{
+        width:360px;
+        min-width:360px;
     }
 
     .small-card{
-        flex-basis:145px;
-        min-width:145px;
+        width:110px;
+        min-width:110px;
     }
 
     .small-card img{
-        width:145px;
-        height:205px;
+        width:110px;
+        height:155px;
     }
 
-    .section-title{
-        font-size:22px;
-    }
-
-    .launch-image{
-        height:210px;
-    }
 }
 
 </style>
@@ -476,9 +313,9 @@ main{
 
 <body>
 
-<!-- =====================================================
+<!-- =========================
      TOPO
-===================================================== -->
+========================= -->
 
 <header class="topbar">
 
@@ -490,22 +327,46 @@ main{
     <div class="top-right">
 
         <!-- PESQUISA -->
-        <button class="search-btn" onclick="abrirPesquisa()">
 
-            <svg viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7"></circle>
-                <line x1="16.5" y1="16.5"
-                      x2="21" y2="21"></line>
-            </svg>
+        <svg
+            class="search-icon"
+            viewBox="0 0 24 24"
+            onclick="abrirPesquisa()">
 
-        </button>
+            <circle
+                cx="11"
+                cy="11"
+                r="7">
+            </circle>
+
+            <line
+                x1="16.5"
+                y1="16.5"
+                x2="22"
+                y2="22">
+            </line>
+
+        </svg>
 
         <!-- PERFIL -->
-        <div class="profile">
 
-            <img
-                src="https://i.pravatar.cc/100"
-                alt="Perfil">
+        <div
+            class="profile"
+            onclick="abrirPerfil()">
+
+            <svg viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="4">
+                </circle>
+
+                <path
+                    d="M4 21c0-4 3.5-7 8-7s8 3 8 7">
+                </path>
+
+            </svg>
 
         </div>
 
@@ -514,11 +375,9 @@ main{
 </header>
 
 
-<main>
-
-<!-- =====================================================
+<!-- =========================
      EM ALTA
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -527,19 +386,16 @@ main{
     </h2>
 
     <div
-        class="feature-horizontal"
+        class="large-row"
         id="emAlta">
-
-        <!-- preenchido pelo JavaScript -->
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      NOVOS EPISÓDIOS
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -548,38 +404,37 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="large-row"
         id="novosEpisodios">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      CONTINUE ASSISTINDO
-===================================================== -->
+========================= -->
 
 <section
     class="section"
-    id="continueSection">
+    id="continueSection"
+    style="display:none;">
 
     <h2 class="section-title">
         Continue assistindo
     </h2>
 
     <div
-        class="horizontal"
+        class="continue-row"
         id="continueAssistindo">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      RECÉM ADICIONADOS
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -588,38 +443,37 @@ main{
     </h2>
 
     <div
-        class="horizontal"
-        id="recentes">
-
+        class="small-row"
+        id="recemAdicionados">
     </div>
 
 </section>
 
 
-<!-- =====================================================
-     SEU HISTÓRICO
-===================================================== -->
+<!-- =========================
+     HISTÓRICO
+========================= -->
 
 <section
-    class="section history"
-    id="historicoSection">
+    class="section"
+    id="historicoSection"
+    style="display:none;">
 
     <h2 class="section-title">
         Seu histórico
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="historico">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      SEMANAIS
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -628,17 +482,16 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="semanais">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      LANÇAMENTO
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -647,17 +500,16 @@ main{
     </h2>
 
     <div
-        class="launch-card"
+        class="large-row"
         id="lancamento">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      COM DUBLAGEM
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -666,17 +518,16 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="dublagem">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      AVENTURA
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -685,17 +536,16 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="aventura">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      COMÉDIA
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -704,17 +554,16 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="comedia">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      RECOMENDADOS
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -723,17 +572,16 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="recomendados">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      MAIS CURTIDOS
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -742,17 +590,16 @@ main{
     </h2>
 
     <div
-        class="horizontal"
-        id="curtidos">
-
+        class="small-row"
+        id="maisCurtidos">
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      SLICE OF LIFE
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -761,17 +608,16 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="slice">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      ROMANCE
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -780,17 +626,16 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="romance">
-
     </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      TALVEZ VOCÊ GOSTE
-===================================================== -->
+========================= -->
 
 <section class="section">
 
@@ -799,273 +644,211 @@ main{
     </h2>
 
     <div
-        class="horizontal"
+        class="small-row"
         id="talvez">
-
     </div>
 
 </section>
 
-</main>
 
-
-<!-- =====================================================
-     BARRA DE NAVEGAÇÃO
-===================================================== -->
+<!-- =================================================
+     BARRA INFERIOR
+================================================= -->
 
 <nav class="bottom-nav">
 
+
     <!-- INÍCIO -->
-    <button
-        class="nav-item active"
-        onclick="irPara('index.html')">
 
-        <span class="nav-icon">
+    <a
+        href="home.html"
+        class="nav-item active">
 
-            <svg viewBox="0 0 24 24">
+        <svg
+            class="nav-icon"
+            viewBox="0 0 24 24">
 
-                <path d="
-                    M3 10.5
-                    L12 3
-                    L21 10.5
-                    V21
-                    H14
-                    V14
-                    H10
-                    V21
-                    H3
-                    Z
-                "></path>
+            <path
+                d="M3 10.5L12 3l9 7.5">
+            </path>
 
-            </svg>
+            <path
+                d="M5 9.5V21h14V9.5">
+            </path>
 
-        </span>
+        </svg>
 
-        <span class="nav-label">
+        <span>
             Início
         </span>
 
-    </button>
+    </a>
 
 
-    <!-- MANGÁS -->
-    <button
-        class="nav-item"
-        onclick="irPara('mangas.html')">
+    <!-- MANGÁS - LIVRO ABERTO -->
 
-        <span class="nav-icon">
+    <a
+        href="mangas.html"
+        class="nav-item">
 
-            <!-- LIVRO ABERTO -->
-            <svg viewBox="0 0 24 24">
+        <svg
+            class="nav-icon"
+            viewBox="0 0 24 24">
 
-                <path d="
-                    M3 5.5
-                    C6 4 9 4.5 12 6
-                    V20
-                    C9 18.5 6 18 3 19.5
-                    Z
-                "></path>
+            <path
+                d="M3 5.5
+                   A3.5 3.5 0 0 1 6.5 2
+                   H12
+                   V20
+                   H6.5
+                   A3.5 3.5 0 0 0 3 23
+                   Z">
+            </path>
 
-                <path d="
-                    M21 5.5
-                    C18 4 15 4.5 12 6
-                    V20
-                    C15 18.5 18 18 21 19.5
-                    Z
-                "></path>
+            <path
+                d="M21 5.5
+                   A3.5 3.5 0 0 0 17.5 2
+                   H12
+                   V20
+                   H17.5
+                   A3.5 3.5 0 0 1 21 23
+                   Z">
+            </path>
 
-            </svg>
+        </svg>
 
-        </span>
-
-        <span class="nav-label">
+        <span>
             Mangás
         </span>
 
-    </button>
+    </a>
 
 
     <!-- FAVORITOS -->
-    <button
-        class="nav-item"
-        onclick="irPara('favoritos.html')">
 
-        <span class="nav-icon">
+    <a
+        href="favoritos.html"
+        class="nav-item">
 
-            <svg viewBox="0 0 24 24">
+        <svg
+            class="nav-icon"
+            viewBox="0 0 24 24">
 
-                <path d="
-                    M20.8 8.8
-                    C20.8 13.5 12 20 12 20
-                    C12 20 3.2 13.5 3.2 8.8
-                    C3.2 5.7 5.5 4 8 4
-                    C9.7 4 11 5 12 6.3
-                    C13 5 14.3 4 16 4
-                    C18.5 4 20.8 5.7 20.8 8.8
-                    Z
-                "></path>
+            <path
+                d="M20.8 8.6
+                   C20.8 14.1 12 19.6 12 19.6
+                   S3.2 14.1 3.2 8.6
+                   A4.8 4.8 0 0 1 12 6.2
+                   A4.8 4.8 0 0 1 20.8 8.6Z">
+            </path>
 
-            </svg>
+        </svg>
 
-        </span>
-
-        <span class="nav-label">
+        <span>
             Favoritos
         </span>
 
-    </button>
+    </a>
 
 
     <!-- MAIS -->
-    <button
-        class="nav-item"
-        onclick="irPara('mais.html')">
 
-        <span class="nav-icon">
+    <a
+        href="mais.html"
+        class="nav-item">
 
-            <svg viewBox="0 0 24 24">
+        <svg
+            class="nav-icon"
+            viewBox="0 0 24 24">
 
-                <line x1="4" y1="7" x2="20" y2="7"></line>
-                <line x1="4" y1="12" x2="20" y2="12"></line>
-                <line x1="4" y1="17" x2="20" y2="17"></line>
+            <line
+                x1="4"
+                y1="6"
+                x2="20"
+                y2="6">
+            </line>
 
-            </svg>
+            <line
+                x1="4"
+                y1="12"
+                x2="20"
+                y2="12">
+            </line>
 
-        </span>
+            <line
+                x1="4"
+                y1="18"
+                x2="20"
+                y2="18">
+            </line>
 
-        <span class="nav-label">
+        </svg>
+
+        <span>
             Mais
         </span>
 
-    </button>
+    </a>
 
-</nav>
+      </nav>
 
-
-<script>
-
-/* =====================================================
-   JIKAN API
-===================================================== */
-
-const API = "https://api.jikan.moe/v4";
-
+      <script>
 
 /* =====================================================
-   ABRIR PÁGINA
+   ANILIST API
 ===================================================== */
 
-function irPara(pagina){
-
-    window.location.href = pagina;
-
-}
+const API =
+    "https://graphql.anilist.co";
 
 
 /* =====================================================
-   PESQUISA
+   CONSULTA GRAPHQL
 ===================================================== */
 
-function abrirPesquisa(){
-
-    window.location.href = "pesquisa.html";
-
-}
-
-
-/* =====================================================
-   CARD PEQUENO
-===================================================== */
-
-function criarCard(anime){
-
-    const titulo =
-        anime.title || "Anime";
-
-    const imagem =
-        anime.images?.jpg?.large_image_url ||
-        anime.images?.jpg?.image_url ||
-        "";
-
-    const card =
-        document.createElement("div");
-
-    card.className = "small-card";
-
-    card.innerHTML = `
-
-        <img
-            src="${imagem}"
-            alt="${titulo}"
-            loading="lazy">
-
-        <div class="card-name">
-            ${titulo}
-        </div>
-
-        <div class="card-info">
-            ${anime.type || "Anime"}
-        </div>
-
-    `;
-
-    card.onclick = function(){
-
-        window.location.href =
-            "detalhes.html?id=" + anime.mal_id;
-
-    };
-
-    return card;
-
-}
-
-
-/* =====================================================
-   PREENCHER SEÇÃO
-===================================================== */
-
-function preencherSecao(id, animes){
-
-    const container =
-        document.getElementById(id);
-
-    if(!container) return;
-
-    container.innerHTML = "";
-
-    animes.forEach(anime => {
-
-        container.appendChild(
-            criarCard(anime)
-        );
-
-    });
-
-}
-
-
-/* =====================================================
-   BUSCAR ANIMES
-===================================================== */
-
-async function buscar(url){
+async function buscar(
+    query,
+    variables = {}
+){
 
     try{
 
-        const resposta =
-            await fetch(url);
+        const response =
+            await fetch(API,{
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:JSON.stringify({
+                    query:query,
+                    variables:variables
+                })
+            });
+
+        if(!response.ok){
+
+            throw new Error(
+                "Erro na AniList API"
+            );
+
+        }
 
         const json =
-            await resposta.json();
+            await response.json();
 
-        return json.data || [];
+        return (
+            json?.data?.Page?.media ||
+            []
+        );
 
-    }catch(erro){
+    }catch(error){
 
-        console.log(
-            "Erro Jikan:",
-            erro
+        console.error(
+            "AniList:",
+            error
         );
 
         return [];
@@ -1076,418 +859,138 @@ async function buscar(url){
 
 
 /* =====================================================
-   EM ALTA
+   QUERY BASE
 ===================================================== */
 
-async function carregarEmAlta(){
+const QUERY_ANIME = `
 
-    const animes =
-        await buscar(
-            API +
-            "/top/anime?filter=bypopularity&limit=10"
-        );
+query(
+    $page:Int,
+    $perPage:Int,
+    $sort:[MediaSort],
+    $status:MediaStatus,
+    $genre:String
+){
 
-    const container =
-        document.getElementById("emAlta");
+    Page(
+        page:$page,
+        perPage:$perPage
+    ){
 
-    if(!container) return;
+        media(
+            type:ANIME,
+            sort:$sort,
+            status:$status,
+            genre:$genre
+        ){
 
-    container.innerHTML = "";
+            id
 
-    animes.forEach(anime => {
+            title{
+                romaji
+                english
+                native
+            }
 
-        const imagem =
-            anime.images?.jpg?.large_image_url ||
-            anime.images?.jpg?.image_url;
+            coverImage{
+                large
+                extraLarge
+                color
+            }
 
-        const card =
-            document.createElement("div");
+            bannerImage
 
-        card.className =
-            "feature-card";
+            description
 
-        card.innerHTML = `
+            averageScore
+
+            popularity
+
+            episodes
+
+            status
+
+            genres
+
+            startDate{
+                year
+                month
+                day
+            }
+
+        }
+
+    }
+
+}
+
+`;
+
+
+/* =====================================================
+   NOME
+===================================================== */
+
+function nomeAnime(anime){
+
+    return (
+        anime?.title?.english ||
+        anime?.title?.romaji ||
+        anime?.title?.native ||
+        "Anime"
+    );
+
+}
+
+
+/* =====================================================
+   IMAGEM
+===================================================== */
+
+function imagem(anime){
+
+    return (
+        anime?.coverImage?.extraLarge ||
+        anime?.coverImage?.large ||
+        ""
+    );
+
+}
+
+
+/* =====================================================
+   BANNER
+===================================================== */
+
+function banner(anime){
+
+    return (
+        anime?.bannerImage ||
+        anime?.coverImage?.extraLarge ||
+        anime?.coverImage?.large ||
+        ""
+    );
+
+}
+
+
+/* =====================================================
+   CARD PEQUENO
+   SOMENTE CAPA
+===================================================== */
+
+function cardPequeno(anime){
+
+    return `
+
+        <div
+            class="small-card"
+            onclick="abrirAnime(${anime.id})">
 
             <img
-                src="${imagem}"
+                src="${imagem(anime)}"
+                alt="${nomeAnime(anime)}"
                 loading="lazy">
-
-            <div class="feature-overlay"></div>
-
-            <div class="feature-title">
-                ${anime.title}
-            </div>
-
-        `;
-
-        card.onclick = () => {
-
-            window.location.href =
-                "detalhes.html?id=" +
-                anime.mal_id;
-
-        };
-
-        container.appendChild(card);
-
-    });
-
-}
-
-
-/* =====================================================
-   NOVOS EPISÓDIOS
-===================================================== */
-
-async function carregarNovos(){
-
-    const animes =
-        await buscar(
-            API +
-            "/anime?status=airing&order_by=score&sort=desc&limit=10"
-        );
-
-    preencherSecao(
-        "novosEpisodios",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   RECENTES
-===================================================== */
-
-async function carregarRecentes(){
-
-    const animes =
-        await buscar(
-            API +
-            "/top/anime?filter=airing&limit=10"
-        );
-
-    preencherSecao(
-        "recentes",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   SEMANAIS
-===================================================== */
-
-async function carregarSemanais(){
-
-    const animes =
-        await buscar(
-            API +
-            "/top/anime?filter=airing&limit=10"
-        );
-
-    preencherSecao(
-        "semanais",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   AVENTURA
-===================================================== */
-
-async function carregarAventura(){
-
-    const animes =
-        await buscar(
-            API +
-            "/anime?genres=1&order_by=score&sort=desc&limit=10"
-        );
-
-    preencherSecao(
-        "aventura",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   COMÉDIA
-===================================================== */
-
-async function carregarComedia(){
-
-    const animes =
-        await buscar(
-            API +
-            "/anime?genres=4&order_by=score&sort=desc&limit=10"
-        );
-
-    preencherSecao(
-        "comedia",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   ROMANCE
-===================================================== */
-
-async function carregarRomance(){
-
-    const animes =
-        await buscar(
-            API +
-            "/anime?genres=22&order_by=score&sort=desc&limit=10"
-        );
-
-    preencherSecao(
-        "romance",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   SLICE OF LIFE
-===================================================== */
-
-async function carregarSlice(){
-
-    const animes =
-        await buscar(
-            API +
-            "/anime?genres=36&order_by=score&sort=desc&limit=10"
-        );
-
-    preencherSecao(
-        "slice",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   RECOMENDADOS
-===================================================== */
-
-async function carregarRecomendados(){
-
-    const animes =
-        await buscar(
-            API +
-            "/top/anime?order_by=score&sort=desc&limit=10"
-        );
-
-    preencherSecao(
-        "recomendados",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   MAIS CURTIDOS
-===================================================== */
-
-async function carregarCurtidos(){
-
-    const animes =
-        await buscar(
-            API +
-            "/top/anime?filter=bypopularity&limit=10"
-        );
-
-    preencherSecao(
-        "curtidos",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   TALVEZ VOCÊ GOSTE
-===================================================== */
-
-async function carregarTalvez(){
-
-    const animes =
-        await buscar(
-            API +
-            "/top/anime?limit=10"
-        );
-
-    preencherSecao(
-        "talvez",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   DUBLAGEM
-===================================================== */
-
-async function carregarDublagem(){
-
-    const animes =
-        await buscar(
-            API +
-            "/top/anime?limit=10"
-        );
-
-    preencherSecao(
-        "dublagem",
-        animes
-    );
-
-}
-
-
-/* =====================================================
-   LANÇAMENTO
-===================================================== */
-
-async function carregarLancamento(){
-
-    const animes =
-        await buscar(
-            API +
-            "/anime?order_by=aired&sort=desc&limit=1"
-        );
-
-    if(!animes.length){
-
-        return;
-
-    }
-
-    const anime =
-        animes[0];
-
-    const imagem =
-        anime.images?.jpg?.large_image_url ||
-        anime.images?.jpg?.image_url ||
-        "";
-
-    const descricao =
-        anime.synopsis ||
-        "Novo lançamento disponível no BerryAnime.";
-
-    const lancamento =
-        document.getElementById(
-            "lancamento"
-        );
-
-    if(!lancamento){
-
-        return;
-
-    }
-
-    lancamento.innerHTML = `
-
-        <img
-            class="launch-image"
-            src="${imagem}"
-            alt="${anime.title}">
-
-        <div class="launch-actions">
-
-            <button
-                class="launch-button play"
-                onclick="abrirAnime(${anime.mal_id})">
-
-                <svg viewBox="0 0 24 24">
-
-                    <polygon
-                        points="8,5 19,12 8,19">
-                    </polygon>
-
-                </svg>
-
-            </button>
-
-
-            <button
-                class="launch-button"
-                onclick="abrirAnime(${anime.mal_id})">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none">
-
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="9">
-                    </circle>
-
-                    <line
-                        x1="12"
-                        y1="10"
-                        x2="12"
-                        y2="16">
-                    </line>
-
-                    <circle
-                        cx="12"
-                        cy="7"
-                        r="1">
-                    </circle>
-
-                </svg>
-
-            </button>
-
-        </div>
-
-
-        <div class="launch-body">
-
-            <div class="launch-title">
-
-                ${anime.title}
-
-            </div>
-
-
-            <div class="launch-meta">
-
-                <span class="age">
-
-                    ${anime.rating
-                        ? anime.rating.substring(0,2)
-                        : "14"}
-
-                </span>
-
-
-                <span class="genre">
-
-                    ${anime.type || "Anime"}
-
-                </span>
-
-            </div>
-
-
-            <div class="launch-description">
-
-                ${descricao}
-
-            </div>
 
         </div>
 
@@ -1497,13 +1000,302 @@ async function carregarLancamento(){
 
 
 /* =====================================================
-   ABRIR DETALHES DO ANIME
+   CARD GRANDE
+   SOMENTE IMAGEM
 ===================================================== */
 
-function abrirAnime(id){
+function cardGrande(anime){
 
-    window.location.href =
-        "detalhes.html?id=" + id;
+    return `
+
+        <div
+            class="large-card"
+            onclick="abrirAnime(${anime.id})">
+
+            <img
+                src="${banner(anime)}"
+                alt="${nomeAnime(anime)}"
+                loading="lazy">
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   EM ALTA
+===================================================== */
+
+async function emAlta(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:10,
+                sort:["TRENDING_DESC"]
+            }
+        );
+
+    document.getElementById(
+        "emAlta"
+    ).innerHTML =
+        lista.map(cardGrande).join("");
+
+}
+
+
+/* =====================================================
+   NOVOS EPISÓDIOS
+===================================================== */
+
+async function novosEpisodios(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:10,
+
+                sort:[
+                    "UPDATED_AT_DESC"
+                ],
+
+                status:"RELEASING"
+            }
+        );
+
+    document.getElementById(
+        "novosEpisodios"
+    ).innerHTML =
+        lista.map(cardGrande).join("");
+
+}
+
+
+/* =====================================================
+   RECÉM ADICIONADOS
+===================================================== */
+
+async function recentes(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:12,
+
+                sort:[
+                    "START_DATE_DESC"
+                ]
+            }
+        );
+
+    document.getElementById(
+        "recemAdicionados"
+    ).innerHTML =
+        lista.map(cardPequeno).join("");
+
+}
+
+
+/* =====================================================
+   SEMANAIS
+===================================================== */
+
+async function semanais(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:12,
+
+                sort:[
+                    "UPDATED_AT_DESC"
+                ],
+
+                status:"RELEASING"
+            }
+        );
+
+    document.getElementById(
+        "semanais"
+    ).innerHTML =
+        lista.map(cardPequeno).join("");
+
+}
+
+
+/* =====================================================
+   LANÇAMENTO
+===================================================== */
+
+async function lancamento(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:10,
+
+                sort:[
+                    "START_DATE_DESC"
+                ]
+            }
+        );
+
+    document.getElementById(
+        "lancamento"
+    ).innerHTML =
+        lista.map(cardGrande).join("");
+
+}
+
+
+/* =====================================================
+   CATEGORIAS
+===================================================== */
+
+async function categoria(
+    elemento,
+    genero
+){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:12,
+
+                sort:[
+                    "POPULARITY_DESC"
+                ],
+
+                genre:genero
+            }
+        );
+
+    document.getElementById(
+        elemento
+    ).innerHTML =
+        lista.map(cardPequeno).join("");
+
+}
+
+
+/* =====================================================
+   DUBLAGEM
+===================================================== */
+
+async function dublagem(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:12,
+
+                sort:[
+                    "POPULARITY_DESC"
+                ]
+            }
+        );
+
+    document.getElementById(
+        "dublagem"
+    ).innerHTML =
+        lista.map(cardPequeno).join("");
+
+}
+
+
+/* =====================================================
+   RECOMENDADOS
+===================================================== */
+
+async function recomendados(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:12,
+
+                sort:[
+                    "TRENDING_DESC"
+                ]
+            }
+        );
+
+    document.getElementById(
+        "recomendados"
+    ).innerHTML =
+        lista.map(cardPequeno).join("");
+
+}
+
+
+/* =====================================================
+   MAIS CURTIDOS
+===================================================== */
+
+async function maisCurtidos(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:12,
+
+                sort:[
+                    "FAVOURITES_DESC"
+                ]
+            }
+        );
+
+    document.getElementById(
+        "maisCurtidos"
+    ).innerHTML =
+        lista.map(cardPequeno).join("");
+
+}
+
+
+/* =====================================================
+   TALVEZ VOCÊ GOSTE
+===================================================== */
+
+async function talvez(){
+
+    const lista =
+        await buscar(
+            QUERY_ANIME,
+            {
+                page:1,
+                perPage:12,
+
+                sort:[
+                    "POPULARITY_DESC"
+                ]
+            }
+        );
+
+    document.getElementById(
+        "talvez"
+    ).innerHTML =
+        lista.map(cardPequeno).join("");
 
 }
 
@@ -1514,57 +1306,28 @@ function abrirAnime(id){
 
 function carregarHistorico(){
 
-    const historico =
+    const lista =
         JSON.parse(
             localStorage.getItem(
-                "berryAnimeHistorico"
+                "berryanime_historico"
             ) || "[]"
         );
 
-
-    const section =
-        document.getElementById(
-            "historicoSection"
-        );
-
-
-    const container =
-        document.getElementById(
-            "historico"
-        );
-
-
-    if(!section || !container){
+    if(!lista.length){
 
         return;
 
     }
 
-
-    if(!historico.length){
-
-        section.style.display =
-            "none";
-
-        return;
-
-    }
-
-
-    section.style.display =
+    document.getElementById(
+        "historicoSection"
+    ).style.display =
         "block";
 
-
-    container.innerHTML = "";
-
-
-    historico.forEach(anime => {
-
-        container.appendChild(
-            criarCard(anime)
-        );
-
-    });
+    document.getElementById(
+        "historico"
+    ).innerHTML =
+        lista.map(cardPequeno).join("");
 
 }
 
@@ -1578,166 +1341,153 @@ function carregarContinue(){
     const lista =
         JSON.parse(
             localStorage.getItem(
-                "berryAnimeContinue"
+                "berryanime_continue"
             ) || "[]"
         );
 
-
-    const section =
-        document.getElementById(
-            "continueSection"
-        );
-
-
-    const container =
-        document.getElementById(
-            "continueAssistindo"
-        );
-
-
-    if(!section || !container){
-
-        return;
-
-    }
-
-
     if(!lista.length){
 
-        section.style.display =
-            "none";
-
         return;
 
     }
 
-
-    section.style.display =
+    document.getElementById(
+        "continueSection"
+    ).style.display =
         "block";
 
+    document.getElementById(
+        "continueAssistindo"
+    ).innerHTML =
 
-    container.innerHTML = "";
+        lista.map(anime => `
 
+            <div
+                class="continue-card"
+                onclick="abrirAnime(${anime.id})">
 
-    lista.forEach(anime => {
+                <img
+                    src="${
+                        anime.bannerImage ||
+                        anime.coverImage?.extraLarge ||
+                        anime.coverImage?.large ||
+                        anime.image ||
+                        ""
+                    }"
+                    alt="${
+                        nomeAnime(anime)
+                    }">
 
-        const card =
-            document.createElement(
-                "div"
-            );
+                <div
+                    class="continue-gradient">
 
+                    <div
+                        class="continue-title">
 
-        card.className =
-            "continue-card";
+                        ${
+                            nomeAnime(anime)
+                        }
 
+                    </div>
 
-        card.innerHTML = `
+                    <div class="progress">
 
-            <img
-                src="${anime.imagem}"
-                loading="lazy"
-                alt="${anime.titulo}">
+                        <div
+                            class="progress-bar">
+                        </div>
 
-
-            <div class="continue-overlay"></div>
-
-
-            <div class="continue-info">
-
-                <div class="continue-title">
-
-                    ${anime.titulo}
-
-                </div>
-
-
-                <div class="continue-time">
-
-                    ${anime.tempo ||
-                    "Continuar assistindo"}
+                    </div>
 
                 </div>
 
             </div>
 
-
-            <div class="play-circle">
-
-                <svg viewBox="0 0 24 24">
-
-                    <polygon
-                        points="9,6 19,12 9,18">
-                    </polygon>
-
-                </svg>
-
-            </div>
-
-        `;
-
-
-        card.onclick = function(){
-
-            if(anime.id){
-
-                abrirAnime(anime.id);
-
-            }
-
-        };
-
-
-        container.appendChild(card);
-
-    });
+        `).join("");
 
 }
 
 
 /* =====================================================
-   CARREGAR TODA A HOME
+   ABRIR ANIME
 ===================================================== */
 
-async function carregarHome(){
+function abrirAnime(id){
 
-    carregarHistorico();
-
-    carregarContinue();
-
-    carregarEmAlta();
-
-    carregarNovos();
-
-    carregarRecentes();
-
-    carregarSemanais();
-
-    carregarAventura();
-
-    carregarComedia();
-
-    carregarRomance();
-
-    carregarSlice();
-
-    carregarRecomendados();
-
-    carregarCurtidos();
-
-    carregarTalvez();
-
-    carregarDublagem();
-
-    carregarLancamento();
+    window.location.href =
+        "detalhes.html?id=" + id;
 
 }
 
 
 /* =====================================================
-   INICIAR BERRYANIME
+   PESQUISA
 ===================================================== */
 
-carregarHome();
+function abrirPesquisa(){
+
+    window.location.href =
+        "pesquisa.html";
+
+}
+
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+function abrirPerfil(){
+
+    window.location.href =
+        "perfil.html";
+
+}
+
+
+/* =====================================================
+   INICIAR HOME
+===================================================== */
+
+emAlta();
+
+novosEpisodios();
+
+recentes();
+
+semanais();
+
+lancamento();
+
+dublagem();
+
+categoria(
+    "aventura",
+    "Adventure"
+);
+
+categoria(
+    "comedia",
+    "Comedy"
+);
+
+categoria(
+    "slice",
+    "Slice of Life"
+);
+
+categoria(
+    "romance",
+    "Romance"
+);
+
+recomendados();
+
+maisCurtidos();
+
+talvez();
+
+carregarHistorico();
+
+carregarContinue();
 
 </script>
 
