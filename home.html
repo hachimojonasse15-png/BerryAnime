@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>BerryAnime</title>
 
 <style>
+
+/* =====================================================
+   BASE
+===================================================== */
 
 *{
     margin:0;
@@ -21,86 +27,113 @@ html,body{
 }
 
 body{
-    padding-bottom:68px;
+    padding-bottom:76px;
 }
 
-/* =========================
+
+/* =====================================================
    TOPO
-========================= */
+===================================================== */
 
 .topbar{
-    height:68px;
+    height:78px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 18px;
+
+    padding:0 22px;
 }
 
 .logo{
-    width:38px;
-    height:38px;
+    width:43px;
+    height:43px;
+
     object-fit:contain;
 }
 
 .top-right{
     display:flex;
     align-items:center;
-    gap:18px;
+
+    gap:20px;
 }
+
 
 /* PESQUISA */
 
 .search-icon{
-    width:25px;
-    height:25px;
+    width:27px;
+    height:27px;
+
     fill:none;
     stroke:#fff;
     stroke-width:2.2;
+
     stroke-linecap:round;
+    stroke-linejoin:round;
+
+    cursor:pointer;
 }
+
 
 /* PERFIL */
 
 .profile{
-    width:38px;
-    height:38px;
+    width:40px;
+    height:40px;
+
     border-radius:50%;
+
     background:#303033;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     overflow:hidden;
 }
 
 .profile svg{
-    width:23px;
-    height:23px;
+    width:24px;
+    height:24px;
+
     fill:#777;
 }
 
-/* =========================
+
+/* =====================================================
    SEÇÕES
-========================= */
+===================================================== */
 
 .section{
     margin-top:18px;
 }
 
 .section-title{
-    margin:0 18px 10px;
-    font-size:18px;
+    margin:0 18px 11px;
+
+    font-size:20px;
+    line-height:24px;
+
     font-weight:700;
 }
 
-/* =========================
-   FILAS GRANDES
-========================= */
+
+/* =====================================================
+   CARDS GRANDES
+   EM ALTA / NOVOS EPISÓDIOS
+===================================================== */
 
 .large-row{
     display:flex;
-    gap:10px;
+
+    gap:12px;
+
     overflow-x:auto;
-    padding:0 18px 4px;
+
+    padding:0 18px 5px;
+
     scrollbar-width:none;
 }
 
@@ -109,31 +142,97 @@ body{
 }
 
 .large-card{
-    width:calc((100vw - 56px) / 2);
-    min-width:calc((100vw - 56px) / 2);
-    height:145px;
+
+    width:59vw;
+    min-width:59vw;
+
+    height:180px;
+
     flex-shrink:0;
+
     position:relative;
+
     overflow:hidden;
-    border-radius:11px;
+
+    border-radius:12px;
+
     background:#18181b;
+
+    cursor:pointer;
 }
+
+
+/*
+   A API AniList fornece bannerImage.
+   Assim usamos a imagem horizontal sem
+   cortar personagens.
+*/
 
 .large-card img{
     width:100%;
     height:100%;
+
+    display:block;
+
     object-fit:cover;
 }
 
-/* =========================
+
+/* gradiente inferior */
+
+.large-gradient{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    padding:60px 12px 11px;
+
+    background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.94)
+    );
+}
+
+.large-title{
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.large-info{
+
+    margin-top:4px;
+
+    font-size:12px;
+
+    color:#ddd;
+}
+
+
+/* =====================================================
    CARDS PEQUENOS
-========================= */
+===================================================== */
 
 .small-row{
+
     display:flex;
+
     gap:10px;
+
     overflow-x:auto;
+
     padding:0 18px 5px;
+
     scrollbar-width:none;
 }
 
@@ -142,29 +241,50 @@ body{
 }
 
 .small-card{
-    width:78px;
-    min-width:78px;
+
+    width:132px;
+    min-width:132px;
+
     flex-shrink:0;
+
+    cursor:pointer;
 }
 
 .small-card img{
+
     display:block;
-    width:78px;
-    height:112px;
-    object-fit:cover;
+
+    width:132px;
+    height:180px;
+
+    object-fit:contain;
+
     border-radius:9px;
+
     background:#18181b;
 }
 
-/* =========================
+
+/*
+   IMPORTANTE:
+   Não mostramos nome nos cards pequenos.
+*/
+
+
+/* =====================================================
    CONTINUE ASSISTINDO
-========================= */
+===================================================== */
 
 .continue-row{
+
     display:flex;
-    gap:10px;
+
+    gap:12px;
+
     overflow-x:auto;
+
     padding:0 18px;
+
     scrollbar-width:none;
 }
 
@@ -173,26 +293,41 @@ body{
 }
 
 .continue-card{
+
     width:78vw;
     min-width:78vw;
+
     height:175px;
+
     position:relative;
+
     overflow:hidden;
+
     border-radius:12px;
+
+    background:#18181b;
+
+    cursor:pointer;
 }
 
 .continue-card img{
+
     width:100%;
     height:100%;
+
     object-fit:cover;
 }
 
 .continue-gradient{
+
     position:absolute;
+
     left:0;
     right:0;
     bottom:0;
+
     padding:55px 13px 12px;
+
     background:linear-gradient(
         transparent,
         rgba(0,0,0,.95)
@@ -200,32 +335,173 @@ body{
 }
 
 .continue-title{
+
     font-size:16px;
+
     font-weight:bold;
 }
 
 .progress{
+
     width:100%;
     height:4px;
+
     margin-top:8px;
+
     background:#555;
+
     border-radius:5px;
 }
 
 .progress-bar{
+
     width:45%;
     height:100%;
+
     background:#ed1745;
+
     border-radius:5px;
 }
 
-/* =========================
+
+/* =====================================================
+   LANÇAMENTO
+===================================================== */
+
+.release-card{
+
+    margin:0 18px;
+
+    border-radius:13px;
+
+    overflow:hidden;
+
+    background:#1a1a1c;
+
+    position:relative;
+}
+
+.release-image{
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    display:block;
+
+    object-fit:cover;
+
+    background:#18181b;
+}
+
+.release-content{
+
+    padding:13px 16px 18px;
+}
+
+.release-title{
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.release-meta{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin-top:8px;
+
+    color:#aaa;
+
+    font-size:13px;
+}
+
+.age{
+
+    background:#ff921e;
+
+    color:#fff;
+
+    padding:7px 9px;
+
+    border-radius:5px;
+
+    font-weight:bold;
+}
+
+.release-description{
+
+    margin-top:18px;
+
+    font-size:14px;
+
+    line-height:20px;
+
+    color:#ddd;
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:3;
+
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+}
+
+.release-buttons{
+
+    position:absolute;
+
+    right:14px;
+
+    bottom:105px;
+
+    display:flex;
+
+    gap:10px;
+}
+
+.release-button{
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    border:2px solid #fff;
+
+    background:rgba(0,0,0,.65);
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+}
+
+
+/* =====================================================
    BARRA DE NAVEGAÇÃO
-   ÍCONES BEM PEQUENOS
-========================= */
+===================================================== */
 
 .bottom-nav{
+
     position:fixed;
+
     left:0;
     right:0;
     bottom:0;
@@ -233,27 +509,33 @@ body{
     height:68px;
 
     display:flex;
+
     align-items:center;
     justify-content:space-around;
 
     background:#101012;
+
     border-top:1px solid #242427;
 
     z-index:1000;
 }
 
 .nav-item{
+
     width:25%;
     height:68px;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
 
-    gap:2px;
+    gap:3px;
 
     color:#666;
+
     text-decoration:none;
 
     font-size:10px;
@@ -263,59 +545,66 @@ body{
     color:#fff;
 }
 
-/* ÍCONES PEQUENOS */
+
+/*
+   ÍCONES PEQUENOS
+*/
 
 .nav-icon{
-    width:18px;
-    height:18px;
+
+    width:20px;
+    height:20px;
 
     fill:none;
+
     stroke:currentColor;
 
     stroke-width:2;
 
     stroke-linecap:round;
     stroke-linejoin:round;
-
-    display:block;
 }
 
 .nav-item span{
+
     font-size:10px;
+
     line-height:12px;
 }
 
-/* =========================
+
+/* =====================================================
    RESPONSIVO
-========================= */
+===================================================== */
 
 @media(min-width:700px){
 
     .large-card{
-        width:360px;
-        min-width:360px;
+        width:430px;
+        min-width:430px;
     }
 
     .small-card{
-        width:110px;
-        min-width:110px;
+        width:150px;
+        min-width:150px;
     }
 
     .small-card img{
-        width:110px;
-        height:155px;
+        width:150px;
+        height:205px;
     }
-
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- =====================================================
      TOPO
-========================= -->
+===================================================== -->
 
 <header class="topbar">
 
@@ -323,6 +612,7 @@ body{
         class="logo"
         src="BerryAnime_logo_leve.jpg"
         alt="BerryAnime">
+
 
     <div class="top-right">
 
@@ -347,6 +637,7 @@ body{
             </line>
 
         </svg>
+
 
         <!-- PERFIL -->
 
@@ -375,9 +666,10 @@ body{
 </header>
 
 
-<!-- =========================
+
+<!-- =====================================================
      EM ALTA
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -393,9 +685,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      NOVOS EPISÓDIOS
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -411,9 +704,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      CONTINUE ASSISTINDO
-========================= -->
+===================================================== -->
 
 <section
     class="section"
@@ -432,9 +726,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      RECÉM ADICIONADOS
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -450,9 +745,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      HISTÓRICO
-========================= -->
+===================================================== -->
 
 <section
     class="section"
@@ -471,9 +767,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      SEMANAIS
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -489,9 +786,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      LANÇAMENTO
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -499,17 +797,15 @@ body{
         Lançamento
     </h2>
 
-    <div
-        class="large-row"
-        id="lancamento">
-    </div>
+    <div id="lancamento"></div>
 
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      COM DUBLAGEM
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -525,9 +821,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      AVENTURA
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -543,9 +840,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      COMÉDIA
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -561,9 +859,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      RECOMENDADOS
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -579,9 +878,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      MAIS CURTIDOS
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -597,9 +897,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      SLICE OF LIFE
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -615,9 +916,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      ROMANCE
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -633,9 +935,10 @@ body{
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      TALVEZ VOCÊ GOSTE
-========================= -->
+===================================================== -->
 
 <section class="section">
 
@@ -651,9 +954,10 @@ body{
 </section>
 
 
-<!-- =================================================
-     BARRA INFERIOR
-================================================= -->
+
+<!-- =====================================================
+     NAVEGAÇÃO
+===================================================== -->
 
 <nav class="bottom-nav">
 
@@ -661,7 +965,7 @@ body{
     <!-- INÍCIO -->
 
     <a
-        href="home.html"
+        href="index.html"
         class="nav-item active">
 
         <svg
@@ -685,7 +989,8 @@ body{
     </a>
 
 
-    <!-- MANGÁS - LIVRO ABERTO -->
+
+    <!-- MANGÁS -->
 
     <a
         href="mangas.html"
@@ -724,6 +1029,7 @@ body{
     </a>
 
 
+
     <!-- FAVORITOS -->
 
     <a
@@ -749,6 +1055,7 @@ body{
         </span>
 
     </a>
+
 
 
     <!-- MAIS -->
@@ -790,9 +1097,9 @@ body{
 
     </a>
 
-      </nav>
+        </nav>
 
-      <script>
+    <script>
 
 /* =====================================================
    ANILIST API
@@ -803,18 +1110,76 @@ const API =
 
 
 /* =====================================================
-   CONSULTA GRAPHQL
+   CONSULTA BASE
 ===================================================== */
 
 async function buscar(
-    query,
-    variables = {}
+    sort,
+    perPage = 15,
+    extra = ""
 ){
+
+    const query = `
+
+        query {
+
+            Page(
+                page: 1,
+                perPage: ${perPage}
+            ){
+
+                media(
+                    type: ANIME
+                    sort: ${sort}
+                    ${extra}
+                ){
+
+                    id
+
+                    title{
+                        romaji
+                        english
+                        native
+                    }
+
+                    description
+
+                    episodes
+
+                    status
+
+                    popularity
+
+                    averageScore
+
+                    coverImage{
+                        large
+                        extraLarge
+                    }
+
+                    bannerImage
+
+                    genres
+
+                    nextAiringEpisode{
+                        episode
+                        airingAt
+                    }
+
+                }
+
+            }
+
+        }
+
+    `;
+
 
     try{
 
         const response =
             await fetch(API,{
+
                 method:"POST",
 
                 headers:{
@@ -823,33 +1188,34 @@ async function buscar(
                 },
 
                 body:JSON.stringify({
-                    query:query,
-                    variables:variables
+                    query:query
                 })
+
             });
+
 
         if(!response.ok){
 
             throw new Error(
-                "Erro na AniList API"
+                "Erro na AniList"
             );
 
         }
 
+
         const json =
             await response.json();
 
+
         return (
-            json?.data?.Page?.media ||
-            []
+            json.data?.Page?.media
+            || []
         );
+
 
     }catch(error){
 
-        console.error(
-            "AniList:",
-            error
-        );
+        console.error(error);
 
         return [];
 
@@ -859,84 +1225,15 @@ async function buscar(
 
 
 /* =====================================================
-   QUERY BASE
+   TÍTULO
 ===================================================== */
 
-const QUERY_ANIME = `
-
-query(
-    $page:Int,
-    $perPage:Int,
-    $sort:[MediaSort],
-    $status:MediaStatus,
-    $genre:String
-){
-
-    Page(
-        page:$page,
-        perPage:$perPage
-    ){
-
-        media(
-            type:ANIME,
-            sort:$sort,
-            status:$status,
-            genre:$genre
-        ){
-
-            id
-
-            title{
-                romaji
-                english
-                native
-            }
-
-            coverImage{
-                large
-                extraLarge
-                color
-            }
-
-            bannerImage
-
-            description
-
-            averageScore
-
-            popularity
-
-            episodes
-
-            status
-
-            genres
-
-            startDate{
-                year
-                month
-                day
-            }
-
-        }
-
-    }
-
-}
-
-`;
-
-
-/* =====================================================
-   NOME
-===================================================== */
-
-function nomeAnime(anime){
+function titulo(anime){
 
     return (
-        anime?.title?.english ||
-        anime?.title?.romaji ||
-        anime?.title?.native ||
+        anime.title?.english ||
+        anime.title?.romaji ||
+        anime.title?.native ||
         "Anime"
     );
 
@@ -944,14 +1241,14 @@ function nomeAnime(anime){
 
 
 /* =====================================================
-   IMAGEM
+   CAPA
 ===================================================== */
 
-function imagem(anime){
+function capa(anime){
 
     return (
-        anime?.coverImage?.extraLarge ||
-        anime?.coverImage?.large ||
+        anime.coverImage?.extraLarge ||
+        anime.coverImage?.large ||
         ""
     );
 
@@ -965,10 +1262,8 @@ function imagem(anime){
 function banner(anime){
 
     return (
-        anime?.bannerImage ||
-        anime?.coverImage?.extraLarge ||
-        anime?.coverImage?.large ||
-        ""
+        anime.bannerImage ||
+        capa(anime)
     );
 
 }
@@ -976,7 +1271,7 @@ function banner(anime){
 
 /* =====================================================
    CARD PEQUENO
-   SOMENTE CAPA
+   SEM NOME
 ===================================================== */
 
 function cardPequeno(anime){
@@ -988,8 +1283,8 @@ function cardPequeno(anime){
             onclick="abrirAnime(${anime.id})">
 
             <img
-                src="${imagem(anime)}"
-                alt="${nomeAnime(anime)}"
+                src="${capa(anime)}"
+                alt="${titulo(anime)}"
                 loading="lazy">
 
         </div>
@@ -1001,10 +1296,35 @@ function cardPequeno(anime){
 
 /* =====================================================
    CARD GRANDE
-   SOMENTE IMAGEM
+   NOME + EPISÓDIO
 ===================================================== */
 
 function cardGrande(anime){
+
+    let episodio = "";
+
+
+    if(anime.nextAiringEpisode){
+
+        episodio =
+            "Episódio " +
+            anime.nextAiringEpisode.episode;
+
+    }
+    else if(anime.episodes){
+
+        episodio =
+            anime.episodes +
+            " episódios";
+
+    }
+    else{
+
+        episodio =
+            "Em exibição";
+
+    }
+
 
     return `
 
@@ -1014,8 +1334,27 @@ function cardGrande(anime){
 
             <img
                 src="${banner(anime)}"
-                alt="${nomeAnime(anime)}"
+                alt="${titulo(anime)}"
                 loading="lazy">
+
+            <div
+                class="large-gradient">
+
+                <div
+                    class="large-title">
+
+                    ${titulo(anime)}
+
+                </div>
+
+                <div
+                    class="large-info">
+
+                    ${episodio}
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -1026,142 +1365,229 @@ function cardGrande(anime){
 
 /* =====================================================
    EM ALTA
+   8 ANIMES
 ===================================================== */
 
-async function emAlta(){
+async function carregarEmAlta(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:10,
-                sort:["TRENDING_DESC"]
-            }
+            "TRENDING_DESC",
+            8
         );
+
 
     document.getElementById(
         "emAlta"
     ).innerHTML =
-        lista.map(cardGrande).join("");
+        lista.map(
+            cardGrande
+        ).join("");
 
 }
 
 
 /* =====================================================
    NOVOS EPISÓDIOS
+   16 ANIMES
 ===================================================== */
 
-async function novosEpisodios(){
+async function carregarNovosEpisodios(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:10,
-
-                sort:[
-                    "UPDATED_AT_DESC"
-                ],
-
-                status:"RELEASING"
-            }
+            "UPDATED_AT_DESC",
+            16,
+            "status: RELEASING"
         );
+
 
     document.getElementById(
         "novosEpisodios"
     ).innerHTML =
-        lista.map(cardGrande).join("");
+        lista.map(
+            cardGrande
+        ).join("");
 
 }
 
 
 /* =====================================================
    RECÉM ADICIONADOS
+   15
 ===================================================== */
 
-async function recentes(){
+async function carregarRecentes(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:12,
-
-                sort:[
-                    "START_DATE_DESC"
-                ]
-            }
+            "ID_DESC",
+            15
         );
+
 
     document.getElementById(
         "recemAdicionados"
     ).innerHTML =
-        lista.map(cardPequeno).join("");
+        lista.map(
+            cardPequeno
+        ).join("");
 
 }
 
 
 /* =====================================================
    SEMANAIS
+   15
 ===================================================== */
 
-async function semanais(){
+async function carregarSemanais(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:12,
-
-                sort:[
-                    "UPDATED_AT_DESC"
-                ],
-
-                status:"RELEASING"
-            }
+            "POPULARITY_DESC",
+            15,
+            "status: RELEASING"
         );
+
 
     document.getElementById(
         "semanais"
     ).innerHTML =
-        lista.map(cardPequeno).join("");
+        lista.map(
+            cardPequeno
+        ).join("");
 
 }
 
 
 /* =====================================================
    LANÇAMENTO
+   1 ANIME
 ===================================================== */
 
-async function lancamento(){
+async function carregarLancamento(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:10,
-
-                sort:[
-                    "START_DATE_DESC"
-                ]
-            }
+            "START_DATE_DESC",
+            1
         );
+
+
+    const anime =
+        lista[0];
+
+
+    if(!anime){
+
+        return;
+
+    }
+
 
     document.getElementById(
         "lancamento"
-    ).innerHTML =
-        lista.map(cardGrande).join("");
+    ).innerHTML = `
+
+        <div
+            class="release-card"
+            onclick="abrirAnime(${anime.id})">
+
+            <img
+                class="release-image"
+                src="${banner(anime)}"
+                alt="${titulo(anime)}"
+                loading="lazy">
+
+
+            <div
+                class="release-buttons">
+
+                <div
+                    class="release-button">
+
+                    ▶
+
+                </div>
+
+                <div
+                    class="release-button">
+
+                    ⓘ
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="release-content">
+
+                <div
+                    class="release-title">
+
+                    ${titulo(anime)}
+
+                </div>
+
+
+                <div
+                    class="release-meta">
+
+                    <span class="age">
+                        14
+                    </span>
+
+                    <span>
+                        ${anime.genres?.[0] || "Anime"}
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="release-description">
+
+                    ${limparDescricao(
+                        anime.description
+                    )}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
 
 }
 
 
 /* =====================================================
-   CATEGORIAS
+   LIMPAR DESCRIÇÃO
+===================================================== */
+
+function limparDescricao(texto){
+
+    if(!texto){
+
+        return "Novo anime disponível no BerryAnime.";
+
+    }
+
+
+    return texto
+        .replace(/<[^>]*>/g,"")
+        .replace(/&quot;/g,'"')
+        .replace(/&#039;/g,"'")
+        .replace(/&amp;/g,"&");
+
+}
+
+
+/* =====================================================
+   CATEGORIA
 ===================================================== */
 
 async function categoria(
@@ -1171,50 +1597,47 @@ async function categoria(
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:12,
-
-                sort:[
-                    "POPULARITY_DESC"
-                ],
-
-                genre:genero
-            }
+            "POPULARITY_DESC",
+            15,
+            `genre: ${genero}`
         );
+
 
     document.getElementById(
         elemento
     ).innerHTML =
-        lista.map(cardPequeno).join("");
+        lista.map(
+            cardPequeno
+        ).join("");
 
 }
+
+
+/*
+   Os gêneros abaixo usam o nome oficial
+   da AniList.
+*/
 
 
 /* =====================================================
    DUBLAGEM
 ===================================================== */
 
-async function dublagem(){
+async function carregarDublagem(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:12,
-
-                sort:[
-                    "POPULARITY_DESC"
-                ]
-            }
+            "POPULARITY_DESC",
+            15
         );
+
 
     document.getElementById(
         "dublagem"
     ).innerHTML =
-        lista.map(cardPequeno).join("");
+        lista.map(
+            cardPequeno
+        ).join("");
 
 }
 
@@ -1223,25 +1646,21 @@ async function dublagem(){
    RECOMENDADOS
 ===================================================== */
 
-async function recomendados(){
+async function carregarRecomendados(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:12,
-
-                sort:[
-                    "TRENDING_DESC"
-                ]
-            }
+            "SCORE_DESC",
+            15
         );
+
 
     document.getElementById(
         "recomendados"
     ).innerHTML =
-        lista.map(cardPequeno).join("");
+        lista.map(
+            cardPequeno
+        ).join("");
 
 }
 
@@ -1250,25 +1669,21 @@ async function recomendados(){
    MAIS CURTIDOS
 ===================================================== */
 
-async function maisCurtidos(){
+async function carregarMaisCurtidos(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:12,
-
-                sort:[
-                    "FAVOURITES_DESC"
-                ]
-            }
+            "POPULARITY_DESC",
+            15
         );
+
 
     document.getElementById(
         "maisCurtidos"
     ).innerHTML =
-        lista.map(cardPequeno).join("");
+        lista.map(
+            cardPequeno
+        ).join("");
 
 }
 
@@ -1277,25 +1692,21 @@ async function maisCurtidos(){
    TALVEZ VOCÊ GOSTE
 ===================================================== */
 
-async function talvez(){
+async function carregarTalvez(){
 
     const lista =
         await buscar(
-            QUERY_ANIME,
-            {
-                page:1,
-                perPage:12,
-
-                sort:[
-                    "POPULARITY_DESC"
-                ]
-            }
+            "SCORE_DESC",
+            15
         );
+
 
     document.getElementById(
         "talvez"
     ).innerHTML =
-        lista.map(cardPequeno).join("");
+        lista.map(
+            cardPequeno
+        ).join("");
 
 }
 
@@ -1313,21 +1724,27 @@ function carregarHistorico(){
             ) || "[]"
         );
 
+
     if(!lista.length){
 
         return;
 
     }
 
+
     document.getElementById(
         "historicoSection"
     ).style.display =
         "block";
 
+
     document.getElementById(
         "historico"
     ).innerHTML =
-        lista.map(cardPequeno).join("");
+        lista
+        .slice(0,15)
+        .map(cardPequeno)
+        .join("");
 
 }
 
@@ -1345,16 +1762,19 @@ function carregarContinue(){
             ) || "[]"
         );
 
+
     if(!lista.length){
 
         return;
 
     }
 
+
     document.getElementById(
         "continueSection"
     ).style.display =
         "block";
+
 
     document.getElementById(
         "continueAssistindo"
@@ -1364,19 +1784,18 @@ function carregarContinue(){
 
             <div
                 class="continue-card"
-                onclick="abrirAnime(${anime.id})">
+                onclick="
+                    abrirAnime(${anime.id})
+                ">
 
                 <img
                     src="${
-                        anime.bannerImage ||
-                        anime.coverImage?.extraLarge ||
-                        anime.coverImage?.large ||
-                        anime.image ||
-                        ""
+                        anime.bannerImage
+                        || anime.coverImage?.large
+                        || anime.cover
                     }"
-                    alt="${
-                        nomeAnime(anime)
-                    }">
+                    alt="${titulo(anime)}">
+
 
                 <div
                     class="continue-gradient">
@@ -1384,13 +1803,13 @@ function carregarContinue(){
                     <div
                         class="continue-title">
 
-                        ${
-                            nomeAnime(anime)
-                        }
+                        ${titulo(anime)}
 
                     </div>
 
-                    <div class="progress">
+
+                    <div
+                        class="progress">
 
                         <div
                             class="progress-bar">
@@ -1444,20 +1863,20 @@ function abrirPerfil(){
 
 
 /* =====================================================
-   INICIAR HOME
+   INICIAR
 ===================================================== */
 
-emAlta();
+carregarEmAlta();
 
-novosEpisodios();
+carregarNovosEpisodios();
 
-recentes();
+carregarRecentes();
 
-semanais();
+carregarSemanais();
 
-lancamento();
+carregarLancamento();
 
-dublagem();
+carregarDublagem();
 
 categoria(
     "aventura",
@@ -1479,11 +1898,11 @@ categoria(
     "Romance"
 );
 
-recomendados();
+carregarRecomendados();
 
-maisCurtidos();
+carregarMaisCurtidos();
 
-talvez();
+carregarTalvez();
 
 carregarHistorico();
 
