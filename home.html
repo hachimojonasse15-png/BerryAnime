@@ -484,7 +484,7 @@ main{
 
     <img
         class="logo"
-        src="assets/logo.png"
+        src="BerryAnime_logo_leve.jpg"
         alt="BerryAnime">
 
     <div class="top-right">
@@ -1175,4 +1175,571 @@ async function carregarRecentes(){
 }
 
 
-/* ============================================
+/* =====================================================
+   SEMANAIS
+===================================================== */
+
+async function carregarSemanais(){
+
+    const animes =
+        await buscar(
+            API +
+            "/top/anime?filter=airing&limit=10"
+        );
+
+    preencherSecao(
+        "semanais",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   AVENTURA
+===================================================== */
+
+async function carregarAventura(){
+
+    const animes =
+        await buscar(
+            API +
+            "/anime?genres=1&order_by=score&sort=desc&limit=10"
+        );
+
+    preencherSecao(
+        "aventura",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   COMÉDIA
+===================================================== */
+
+async function carregarComedia(){
+
+    const animes =
+        await buscar(
+            API +
+            "/anime?genres=4&order_by=score&sort=desc&limit=10"
+        );
+
+    preencherSecao(
+        "comedia",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   ROMANCE
+===================================================== */
+
+async function carregarRomance(){
+
+    const animes =
+        await buscar(
+            API +
+            "/anime?genres=22&order_by=score&sort=desc&limit=10"
+        );
+
+    preencherSecao(
+        "romance",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   SLICE OF LIFE
+===================================================== */
+
+async function carregarSlice(){
+
+    const animes =
+        await buscar(
+            API +
+            "/anime?genres=36&order_by=score&sort=desc&limit=10"
+        );
+
+    preencherSecao(
+        "slice",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   RECOMENDADOS
+===================================================== */
+
+async function carregarRecomendados(){
+
+    const animes =
+        await buscar(
+            API +
+            "/top/anime?order_by=score&sort=desc&limit=10"
+        );
+
+    preencherSecao(
+        "recomendados",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   MAIS CURTIDOS
+===================================================== */
+
+async function carregarCurtidos(){
+
+    const animes =
+        await buscar(
+            API +
+            "/top/anime?filter=bypopularity&limit=10"
+        );
+
+    preencherSecao(
+        "curtidos",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   TALVEZ VOCÊ GOSTE
+===================================================== */
+
+async function carregarTalvez(){
+
+    const animes =
+        await buscar(
+            API +
+            "/top/anime?limit=10"
+        );
+
+    preencherSecao(
+        "talvez",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   DUBLAGEM
+===================================================== */
+
+async function carregarDublagem(){
+
+    const animes =
+        await buscar(
+            API +
+            "/top/anime?limit=10"
+        );
+
+    preencherSecao(
+        "dublagem",
+        animes
+    );
+
+}
+
+
+/* =====================================================
+   LANÇAMENTO
+===================================================== */
+
+async function carregarLancamento(){
+
+    const animes =
+        await buscar(
+            API +
+            "/anime?order_by=aired&sort=desc&limit=1"
+        );
+
+    if(!animes.length){
+
+        return;
+
+    }
+
+    const anime =
+        animes[0];
+
+    const imagem =
+        anime.images?.jpg?.large_image_url ||
+        anime.images?.jpg?.image_url ||
+        "";
+
+    const descricao =
+        anime.synopsis ||
+        "Novo lançamento disponível no BerryAnime.";
+
+    const lancamento =
+        document.getElementById(
+            "lancamento"
+        );
+
+    if(!lancamento){
+
+        return;
+
+    }
+
+    lancamento.innerHTML = `
+
+        <img
+            class="launch-image"
+            src="${imagem}"
+            alt="${anime.title}">
+
+        <div class="launch-actions">
+
+            <button
+                class="launch-button play"
+                onclick="abrirAnime(${anime.mal_id})">
+
+                <svg viewBox="0 0 24 24">
+
+                    <polygon
+                        points="8,5 19,12 8,19">
+                    </polygon>
+
+                </svg>
+
+            </button>
+
+
+            <button
+                class="launch-button"
+                onclick="abrirAnime(${anime.mal_id})">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none">
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="9">
+                    </circle>
+
+                    <line
+                        x1="12"
+                        y1="10"
+                        x2="12"
+                        y2="16">
+                    </line>
+
+                    <circle
+                        cx="12"
+                        cy="7"
+                        r="1">
+                    </circle>
+
+                </svg>
+
+            </button>
+
+        </div>
+
+
+        <div class="launch-body">
+
+            <div class="launch-title">
+
+                ${anime.title}
+
+            </div>
+
+
+            <div class="launch-meta">
+
+                <span class="age">
+
+                    ${anime.rating
+                        ? anime.rating.substring(0,2)
+                        : "14"}
+
+                </span>
+
+
+                <span class="genre">
+
+                    ${anime.type || "Anime"}
+
+                </span>
+
+            </div>
+
+
+            <div class="launch-description">
+
+                ${descricao}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ABRIR DETALHES DO ANIME
+===================================================== */
+
+function abrirAnime(id){
+
+    window.location.href =
+        "detalhes.html?id=" + id;
+
+}
+
+
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+function carregarHistorico(){
+
+    const historico =
+        JSON.parse(
+            localStorage.getItem(
+                "berryAnimeHistorico"
+            ) || "[]"
+        );
+
+
+    const section =
+        document.getElementById(
+            "historicoSection"
+        );
+
+
+    const container =
+        document.getElementById(
+            "historico"
+        );
+
+
+    if(!section || !container){
+
+        return;
+
+    }
+
+
+    if(!historico.length){
+
+        section.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    section.style.display =
+        "block";
+
+
+    container.innerHTML = "";
+
+
+    historico.forEach(anime => {
+
+        container.appendChild(
+            criarCard(anime)
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   CONTINUE ASSISTINDO
+===================================================== */
+
+function carregarContinue(){
+
+    const lista =
+        JSON.parse(
+            localStorage.getItem(
+                "berryAnimeContinue"
+            ) || "[]"
+        );
+
+
+    const section =
+        document.getElementById(
+            "continueSection"
+        );
+
+
+    const container =
+        document.getElementById(
+            "continueAssistindo"
+        );
+
+
+    if(!section || !container){
+
+        return;
+
+    }
+
+
+    if(!lista.length){
+
+        section.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    section.style.display =
+        "block";
+
+
+    container.innerHTML = "";
+
+
+    lista.forEach(anime => {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "continue-card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${anime.imagem}"
+                loading="lazy"
+                alt="${anime.titulo}">
+
+
+            <div class="continue-overlay"></div>
+
+
+            <div class="continue-info">
+
+                <div class="continue-title">
+
+                    ${anime.titulo}
+
+                </div>
+
+
+                <div class="continue-time">
+
+                    ${anime.tempo ||
+                    "Continuar assistindo"}
+
+                </div>
+
+            </div>
+
+
+            <div class="play-circle">
+
+                <svg viewBox="0 0 24 24">
+
+                    <polygon
+                        points="9,6 19,12 9,18">
+                    </polygon>
+
+                </svg>
+
+            </div>
+
+        `;
+
+
+        card.onclick = function(){
+
+            if(anime.id){
+
+                abrirAnime(anime.id);
+
+            }
+
+        };
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   CARREGAR TODA A HOME
+===================================================== */
+
+async function carregarHome(){
+
+    carregarHistorico();
+
+    carregarContinue();
+
+    carregarEmAlta();
+
+    carregarNovos();
+
+    carregarRecentes();
+
+    carregarSemanais();
+
+    carregarAventura();
+
+    carregarComedia();
+
+    carregarRomance();
+
+    carregarSlice();
+
+    carregarRecomendados();
+
+    carregarCurtidos();
+
+    carregarTalvez();
+
+    carregarDublagem();
+
+    carregarLancamento();
+
+}
+
+
+/* =====================================================
+   INICIAR BERRYANIME
+===================================================== */
+
+carregarHome();
+
+</script>
+
+</body>
+</html>
