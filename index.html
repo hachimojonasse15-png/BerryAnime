@@ -853,17 +853,11 @@ setTimeout(function(){
    BOTÃO LOGIN
 ===================================================== */
 
-function entrar(){
+function login(){
 
-    localStorage.setItem(
-        "berryanime_logado",
-        "true"
-    );
-
-    window.location.href = "home.html";
+    window.location.href = "login.html";
 
 }
-
 
 /* =====================================================
    BOTÃO REGISTRAR
@@ -882,9 +876,11 @@ function register(){
    GOOGLE
 ===================================================== */
 
-function login(){
+function googleLogin(){
 
-    window.location.href = "login.html";
+    alert(
+        "O Login com Google será conectado no próximo passo."
+    );
 
 }
 
