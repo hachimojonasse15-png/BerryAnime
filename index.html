@@ -853,11 +853,14 @@ setTimeout(function(){
    BOTÃO LOGIN
 ===================================================== */
 
-function login(){
+function entrar(){
 
-    alert(
-        "A tela de Login será criada no próximo passo."
+    localStorage.setItem(
+        "berryanime_logado",
+        "true"
     );
+
+    window.location.href = "home.html";
 
 }
 
