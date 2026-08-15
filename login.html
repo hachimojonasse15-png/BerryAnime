@@ -193,9 +193,12 @@ body{
 
 function entrar(){
 
-    alert(
-        "Login será conectado no próximo passo."
+    localStorage.setItem(
+        "berryanime_logado",
+        "true"
     );
+
+    window.location.href = "home.html";
 
 }
 
