@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>BerryAnime</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    background:#0f0f0f;
+    overflow:hidden;
+}
+
+body{
+    color:white;
+}
+
+
+/* =========================
+   SPLASH
+========================= */
+
+#splash{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#0f0f0f;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:9999;
+
+    transition:
+        opacity .5s ease,
+        visibility .5s ease;
+}
+
+#splash.hidden{
+
+    opacity:0;
+
+    visibility:hidden;
+}
+
+
+/* LOGOTIPO */
+
+.splash-logo{
+
+    width:210px;
+
+    height:210px;
+
+    object-fit:contain;
+
+}
+
+
+/* NOME */
+
+.splash-name{
+
+    margin-top:15px;
+
+    font-size:46px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    color:#ff3030;
+
+}
+
+
+/* CÍRCULO */
+
+.loader{
+
+    width:58px;
+
+    height:58px;
+
+    margin-top:65px;
+
+    border-radius:50%;
+
+    border:6px solid #292929;
+
+    border-top-color:#ff3030;
+
+    animation:
+        girar .9s linear infinite;
+}
+
+
+@keyframes girar{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+#login{
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .5s ease;
+}
+
+
+#login.show{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+
+/* LOGO LOGIN */
+
+.login-logo{
+
+    width:150px;
+
+    height:150px;
+
+    object-fit:contain;
+}
+
+
+.login-title{
+
+    margin-top:10px;
+
+    font-size:38px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    color:#ff3030;
+}
+
+
+.login-subtitle{
+
+    margin-top:8px;
+
+    margin-bottom:42px;
+
+    color:#999;
+
+    font-size:15px;
+}
+
+
+/* BOTÕES */
+
+.login-button{
+
+    width:100%;
+
+    max-width:500px;
+
+    height:62px;
+
+    border-radius:14px;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:
+        transform .15s,
+        opacity .15s;
+}
+
+
+.login-button:active{
+
+    transform:scale(.97);
+
+    opacity:.8;
+}
+
+
+/* LOGIN */
+
+.login{
+
+    background:transparent;
+
+    color:#ff3030;
+
+    border:2px solid #ff3030;
+}
+
+
+/* REGISTAR */
+
+.register{
+
+    margin-top:18px;
+
+    background:#ff3030;
+
+    color:#111;
+
+    border:2px solid #ff3030;
+}
+
+
+/* OU */
+
+.or{
+
+    width:100%;
+
+    max-width:500px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin:22px 0;
+
+    color:white;
+
+    font-size:19px;
+
+    font-weight:800;
+}
+
+
+.or-line{
+
+    flex:1;
+
+    height:1px;
+
+    background:#333;
+}
+
+
+/* GOOGLE */
+
+.google{
+
+    margin-top:20px;
+
+    background:white;
+
+    color:#666;
+
+    border:0;
+
+    font-size:17px;
+}
+
+
+.google-icon{
+
+    font-size:25px;
+
+    margin-right:12px;
+
+    font-weight:900;
+
+    color:#4285f4;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     TELA SPLASH
+========================= -->
+
+<div id="splash">
+
+    <img
+        class="splash-logo"
+        src="logo.png"
+        alt="BerryAnime">
+
+    <div class="splash-name">
+        BerryAnime
+    </div>
+
+    <div class="loader"></div>
+
+</div>
+
+
+<!-- =========================
+     TELA LOGIN
+========================= -->
+
+<div id="login">
+
+    <img
+        class="login-logo"
+        src="logo.png"
+        alt="BerryAnime">
+
+    <div class="login-title">
+        BerryAnime
+    </div>
+
+    <div class="login-subtitle">
+        Entre para continuar
+    </div>
+
+    <button
+        class="login-button login"
+        onclick="login()">
+
+        LOGIN
+
+    </button>
+
+    <div class="or">
+
+        <div class="or-line"></div>
+
+        <span>OU</span>
+
+        <div class="or-line"></div>
+
+    </div>
+
+    <button
+        class="login-button register"
+        onclick="registar()">
+
+        REGISTAR
+
+    </button>
+
+    <button
+        class="login-button google"
+        onclick="googleLogin()">
+
+        <span class="google-icon">
+            G
+        </span>
+
+        Entrar com Google
+
+    </button>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   SPLASH → LOGIN
+========================= */
+
+setTimeout(function(){
+
+    document
+        .getElementById("splash")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("login")
+        .classList
+        .add("show");
+
+},3000);
+
+
+/* =========================
+   BOTÃO LOGIN
+========================= */
+
+function login(){
+
+    alert(
+        "A tela de login será criada no próximo passo."
+    );
+
+}
+
+
+/* =========================
+   BOTÃO REGISTAR
+========================= */
+
+function registar(){
+
+    alert(
+        "A tela de registo será criada no próximo passo."
+    );
+
+}
+
+
+/* =========================
+   GOOGLE
+========================= */
+
+function googleLogin(){
+
+    alert(
+        "O login com Google será ligado depois."
+    );
+
+}
+
+
+</script>
+
+</body>
+  </html>
