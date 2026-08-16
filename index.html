@@ -14,10 +14,6 @@
 
 <style>
 
-/* =====================================================
-   CONFIGURAÇÃO GERAL
-===================================================== */
-
 *{
     margin:0;
     padding:0;
@@ -87,7 +83,7 @@ body{
 
 
 /* =====================================================
-   LOGO DA SPLASH
+   LOGO SPLASH
 ===================================================== */
 
 .splash-content{
@@ -106,14 +102,9 @@ body{
 }
 
 
-/* =====================================================
-   MORANGO
-===================================================== */
-
 .berry-logo{
 
     width:235px;
-
     height:235px;
 
     object-fit:contain;
@@ -121,10 +112,6 @@ body{
     display:block;
 }
 
-
-/* =====================================================
-   NOME BERRYANIME
-===================================================== */
 
 .logo-name{
 
@@ -155,13 +142,12 @@ body{
 
 
 /* =====================================================
-   CÍRCULO DE CARREGAMENTO
+   LOADER
 ===================================================== */
 
 .loader{
 
     width:55px;
-
     height:55px;
 
     border-radius:50%;
@@ -169,7 +155,6 @@ body{
     border:5px solid rgba(255,23,68,.18);
 
     border-top-color:#ff1744;
-
     border-right-color:#ff1744;
 
     margin-top:105px;
@@ -177,7 +162,6 @@ body{
     animation:
         spin .8s linear infinite;
 }
-
 
 @keyframes spin{
 
@@ -193,7 +177,7 @@ body{
 
 
 /* =====================================================
-   LOGIN
+   LOGIN INICIAL
 ===================================================== */
 
 #login{
@@ -217,7 +201,6 @@ body{
     justify-content:flex-start;
 
     padding:
-
         55px
         24px
         30px;
@@ -245,7 +228,7 @@ body{
 
 
 /* =====================================================
-   DECORAÇÃO DE FUNDO
+   DECORAÇÃO
 ===================================================== */
 
 .background-glow{
@@ -253,7 +236,6 @@ body{
     position:absolute;
 
     width:320px;
-
     height:320px;
 
     border-radius:50%;
@@ -266,10 +248,39 @@ body{
         );
 
     top:-100px;
-
     right:-120px;
 
     pointer-events:none;
+}
+
+
+.decor{
+
+    position:absolute;
+
+    z-index:1;
+
+    border-radius:50%;
+
+    background:rgba(255,23,68,.15);
+}
+
+.decor.one{
+
+    width:100px;
+    height:100px;
+
+    left:-55px;
+    bottom:-30px;
+}
+
+.decor.two{
+
+    width:70px;
+    height:70px;
+
+    right:-35px;
+    bottom:100px;
 }
 
 
@@ -297,23 +308,14 @@ body{
 }
 
 
-/* =====================================================
-   LOGO LOGIN
-===================================================== */
-
 .login-logo{
 
     width:230px;
-
     height:230px;
 
     object-fit:contain;
 }
 
-
-/* =====================================================
-   TÍTULO LOGIN
-===================================================== */
 
 .login-brand{
 
@@ -334,10 +336,6 @@ body{
     color:white;
 }
 
-
-/* =====================================================
-   DESCRIÇÃO
-===================================================== */
 
 .subtitle{
 
@@ -373,10 +371,6 @@ body{
 }
 
 
-/* =====================================================
-   BOTÃO LOGIN
-===================================================== */
-
 .btn{
 
     width:100%;
@@ -393,7 +387,7 @@ body{
 
     cursor:pointer;
 
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 
     transition:
         transform .15s ease,
@@ -417,10 +411,6 @@ body{
     border:2px solid #ff1744;
 }
 
-
-/* =====================================================
-   BOTÃO REGISTRAR
-===================================================== */
 
 .register-btn{
 
@@ -506,69 +496,28 @@ body{
 
     justify-content:center;
 
-    gap:18px;
+    gap:15px;
 
     cursor:pointer;
 }
 
 .google-icon{
 
-    font-size:27px;
+    width:23px;
+    height:23px;
 
-    font-weight:900;
-
-    color:#4285f4;
+    display:block;
 }
 
 
 /* =====================================================
-   DECORAÇÕES
-===================================================== */
-
-.decor{
-
-    position:absolute;
-
-    z-index:1;
-
-    border-radius:50%;
-
-    background:rgba(255,23,68,.15);
-}
-
-.decor.one{
-
-    width:100px;
-
-    height:100px;
-
-    left:-55px;
-
-    bottom:-30px;
-}
-
-.decor.two{
-
-    width:70px;
-
-    height:70px;
-
-    right:-35px;
-
-    bottom:100px;
-}
-
-
-/* =====================================================
-   TELAS PEQUENAS
+   RESPONSIVO
 ===================================================== */
 
 @media(max-height:700px){
 
     #login{
-
         padding-top:25px;
-
     }
 
     .login-logo{
@@ -578,7 +527,6 @@ body{
     }
 
     .login-brand{
-
         font-size:35px;
     }
 
@@ -605,10 +553,6 @@ body{
 }
 
 
-/* =====================================================
-   CELULARES PEQUENOS
-===================================================== */
-
 @media(max-width:380px){
 
     .berry-logo{
@@ -618,7 +562,6 @@ body{
     }
 
     .logo-name{
-
         font-size:36px;
     }
 
@@ -637,21 +580,15 @@ body{
     }
 
     .login-brand{
-
         font-size:36px;
     }
 
     .subtitle{
-
         font-size:16px;
     }
 
 }
 
-
-/* =====================================================
-   CELULARES ALTOS
-===================================================== */
 
 @media(min-height:800px){
 
@@ -662,7 +599,6 @@ body{
     }
 
     .loader{
-
         margin-top:110px;
     }
 
@@ -672,12 +608,11 @@ body{
 
 </head>
 
-
 <body>
 
 
 <!-- ===================================================
-     SPLASH SCREEN
+     SPLASH
 =================================================== -->
 
 <section
@@ -693,13 +628,8 @@ body{
 
         <div class="logo-name">
 
-            <span class="berry">
-                BERRY
-            </span>
-
-            <span class="anime">
-                ANIME
-            </span>
+            <span class="berry">BERRY</span>
+            <span class="anime">ANIME</span>
 
         </div>
 
@@ -715,7 +645,7 @@ body{
 
 
 <!-- ===================================================
-     LOGIN SCREEN
+     TELA INICIAL
 =================================================== -->
 
 <section
@@ -725,14 +655,11 @@ body{
     <div class="background-glow"></div>
 
     <div class="decor one"></div>
-
     <div class="decor two"></div>
 
 
     <div class="login-content">
 
-
-        <!-- MORANGO -->
 
         <img
             src="BerryAnime_logo_leve.jpg"
@@ -740,22 +667,13 @@ body{
             alt="BerryAnime">
 
 
-        <!-- NOME -->
-
         <div class="login-brand">
 
-            <span class="berry">
-                BERRY
-            </span>
-
-            <span class="anime">
-                ANIME
-            </span>
+            <span class="berry">BERRY</span>
+            <span class="anime">ANIME</span>
 
         </div>
 
-
-        <!-- DESCRIÇÃO -->
 
         <p class="subtitle">
 
@@ -764,8 +682,6 @@ body{
 
         </p>
 
-
-        <!-- BOTÕES -->
 
         <div class="buttons">
 
@@ -782,8 +698,6 @@ body{
 
             </button>
 
-
-            <!-- OR -->
 
             <div class="or">
 
@@ -809,16 +723,33 @@ body{
 
             <button
                 class="google-btn"
-                onclick="googleLogin()">
+                id="googleButton">
 
-                <span class="google-icon">
-                    G
-                </span>
+                <svg
+                    class="google-icon"
+                    viewBox="0 0 24 24">
 
-                Entrar com Google
+                    <path
+                        fill="#4285F4"
+                        d="M21.35 12.27c0-.79-.07-1.55-.2-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
+
+                    <path
+                        fill="#34A853"
+                        d="M12 21.6c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.93-3.31.93-2.54 0-4.7-1.72-5.47-4.03H3.28v2.53A9.74 9.74 0 0 0 12 21.6z"/>
+
+                    <path
+                        fill="#FBBC05"
+                        d="M6.53 13.69A5.85 5.85 0 0 1 6.23 12c0-.59.1-1.17.3-1.69V7.78H3.28A9.74 9.74 0 0 0 2.25 12c0 1.57.38 3.05 1.03 4.22l3.25-2.53z"/>
+
+                    <path
+                        fill="#EA4335"
+                        d="M12 6.28c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.83 3.33 14.63 2.4 12 2.4a9.74 9.74 0 0 0-8.72 5.38l3.25 2.53C7.3 8 9.46 6.28 12 6.28z"/>
+
+                </svg>
+
+                Continuar com Google
 
             </button>
-
 
         </div>
 
@@ -827,11 +758,20 @@ body{
 </section>
 
 
+<script type="module">
 
-<script>
+import {
+    auth
+} from "./firebase.js";
+
+import {
+    GoogleAuthProvider,
+    signInWithRedirect
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
 
 /* =====================================================
-   TROCA SPLASH → LOGIN
+   SPLASH → TELA INICIAL
 ===================================================== */
 
 setTimeout(function(){
@@ -850,40 +790,104 @@ setTimeout(function(){
 
 
 /* =====================================================
-   BOTÃO LOGIN
+   LOGIN
 ===================================================== */
 
 function login(){
 
-    window.location.href = "login.html";
+    window.location.href =
+        "login.html";
 
 }
 
+
 /* =====================================================
-   BOTÃO REGISTRAR
+   REGISTRAR
 ===================================================== */
 
 function register(){
 
-    window.location.href = "register.html";
+    window.location.href =
+        "register.html";
 
-      }
+}
 
 
 /* =====================================================
    GOOGLE
 ===================================================== */
 
-function googleLogin(){
+const googleButton =
+    document.getElementById("googleButton");
 
-    alert(
-        "O Login com Google será conectado no próximo passo."
-    );
 
-}
+googleButton.addEventListener(
+    "click",
+    async function(){
+
+        googleButton.disabled = true;
+
+        googleButton.textContent =
+            "Abrindo Google...";
+
+
+        try{
+
+            const provider =
+                new GoogleAuthProvider();
+
+
+            provider.addScope("profile");
+
+            provider.addScope("email");
+
+
+            await signInWithRedirect(
+                auth,
+                provider
+            );
+
+
+        }catch(error){
+
+            console.log(error);
+
+            googleButton.disabled = false;
+
+            googleButton.innerHTML = `
+
+                <svg
+                    class="google-icon"
+                    viewBox="0 0 24 24">
+
+                    <path
+                        fill="#4285F4"
+                        d="M21.35 12.27c0-.79-.07-1.55-.2-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
+
+                    <path
+                        fill="#34A853"
+                        d="M12 21.6c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.93-3.31.93-2.54 0-4.7-1.72-5.47-4.03H3.28v2.53A9.74 9.74 0 0 0 12 21.6z"/>
+
+                    <path
+                        fill="#FBBC05"
+                        d="M6.53 13.69A5.85 5.85 0 0 1 6.23 12c0-.59.1-1.17.3-1.69V7.78H3.28A9.74 9.74 0 0 0 2.25 12c0 1.57.38 3.05 1.03 4.22l3.25-2.53z"/>
+
+                    <path
+                        fill="#EA4335"
+                        d="M12 6.28c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.83 3.33 14.63 2.4 12 2.4a9.74 9.74 0 0 0-8.72 5.38l3.25 2.53C7.3 8 9.46 6.28 12 6.28z"/>
+
+                </svg>
+
+                Continuar com Google
+
+            `;
+
+        }
+
+    }
+);
 
 </script>
 
-
 </body>
-      </html>
+              </html>
