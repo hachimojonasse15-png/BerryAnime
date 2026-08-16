@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BerryAnime - Registrar</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    background:#080808;
+    color:#fff;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px 18px;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.auth{
+    width:100%;
+    max-width:420px;
+    text-align:center;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+    width:150px;
+    height:150px;
+    margin:0 auto 18px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(0 0 18px rgba(255,23,68,.25));
+}
+
+/* =========================
+   MARCA
+========================= */
+
+.brand{
+    font-size:40px;
+    font-weight:900;
+    letter-spacing:-2px;
+    margin-bottom:8px;
+}
+
+.brand .berry{
+    color:#ff1744;
+}
+
+.brand .anime{
+    color:#fff;
+}
+
+.subtitle{
+    color:#aaa;
+    font-size:15px;
+    margin-bottom:38px;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.form{
+    width:100%;
+}
+
+.input{
+    width:100%;
+    height:58px;
+
+    background:#151515;
+    border:1px solid #333;
+
+    border-radius:12px;
+
+    padding:0 17px;
+
+    color:#fff;
+    font-size:15px;
+
+    outline:none;
+
+    margin-bottom:13px;
+
+    transition:.2s;
+}
+
+.input:focus{
+    border-color:#ff1744;
+    box-shadow:
+        0 0 0 2px rgba(255,23,68,.08);
+}
+
+.input::placeholder{
+    color:#777;
+}
+
+/* =========================
+   BOTÃO REGISTRAR
+========================= */
+
+.register-button{
+    width:100%;
+    height:60px;
+
+    border:0;
+    border-radius:12px;
+
+    margin-top:7px;
+
+    background:#ff1744;
+
+    color:white;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 25px rgba(255,23,68,.20);
+
+    transition:.2s;
+}
+
+.register-button:active{
+    transform:scale(.98);
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-text{
+    margin-top:25px;
+
+    color:#888;
+
+    font-size:14px;
+}
+
+.login-link{
+    color:#ff1744;
+
+    text-decoration:none;
+
+    font-weight:bold;
+}
+
+/* =========================
+   VOLTAR
+========================= */
+
+.back{
+    display:inline-block;
+
+    margin-top:25px;
+
+    color:#ff1744;
+
+    text-decoration:none;
+
+    font-size:14px;
+}
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.message{
+    display:none;
+
+    margin-top:15px;
+
+    font-size:13px;
+
+    color:#ff6b81;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="auth">
+
+    <!-- LOGO -->
+
+    <img
+        src="BerryAnime_logo_leve.jpg"
+        class="logo"
+        alt="BerryAnime"
+    >
+
+
+    <!-- MARCA -->
+
+    <div class="brand">
+        <span class="berry">BERRY</span><span class="anime">ANIME</span>
+    </div>
+
+
+    <div class="subtitle">
+        Crie sua conta
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+
+    <form
+        class="form"
+        onsubmit="registrar(event)"
+    >
+
+        <input
+            id="nome"
+            class="input"
+            type="text"
+            placeholder="Nome"
+            autocomplete="name"
+            required
+        >
+
+
+        <input
+            id="email"
+            class="input"
+            type="email"
+            placeholder="E-mail"
+            autocomplete="email"
+            required
+        >
+
+
+        <input
+            id="senha"
+            class="input"
+            type="password"
+            placeholder="Senha"
+            autocomplete="new-password"
+            minlength="6"
+            required
+        >
+
+
+        <input
+            id="confirmarSenha"
+            class="input"
+            type="password"
+            placeholder="Confirmar senha"
+            autocomplete="new-password"
+            minlength="6"
+            required
+        >
+
+
+        <button
+            type="submit"
+            class="register-button"
+        >
+            REGISTRAR
+        </button>
+
+    </form>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div class="login-text">
+
+        Já tem uma conta?
+
+        <a
+            href="login.html"
+            class="login-link">
+            Entrar
+        </a>
+
+    </div>
+
+
+    <!-- VOLTAR -->
+
+    <a
+        href="index.html"
+        class="back">
+        ← Voltar
+    </a>
+
+</div>
+
+
+<script>
+
+function registrar(event){
+
+    event.preventDefault();
+
+    const nome =
+        document.getElementById("nome").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const senha =
+        document.getElementById("senha").value;
+
+    const confirmar =
+        document.getElementById("confirmarSenha").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    if(senha !== confirmar){
+
+        message.style.display = "block";
+
+        message.textContent =
+            "As senhas não coincidem.";
+
+        return;
+    }
+
+
+    /*
+       POR ENQUANTO NÃO VAMOS
+       GUARDAR A CONTA AQUI.
+
+       Primeiro vamos preparar
+       corretamente o sistema de
+       autenticação.
+
+       Depois ligaremos esta página
+       ao backend/Firebase.
+    */
+
+    message.style.display = "block";
+
+    message.style.color = "#aaa";
+
+    message.textContent =
+        "Conta pronta para ser criada.";
+
+}
+
+</script>
+
+</body>
+  </html>
