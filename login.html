@@ -384,21 +384,55 @@ form.addEventListener(
     }
 );
 
+import {
+    GoogleAuthProvider,
+    signInWithRedirect
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-/* GOOGLE — VAMOS CONFIGURAR DEPOIS */
 
-document
-    .getElementById("googleButton")
-    .addEventListener(
-        "click",
-        function(){
+const googleButton =
+    document.getElementById("googleButton");
 
-            mostrarMensagem(
-                "Login com Google será configurado no próximo passo."
+googleButton.addEventListener(
+    "click",
+    async function(){
+
+        googleButton.disabled = true;
+
+        googleButton.textContent =
+            "Abrindo Google...";
+
+        try{
+
+            const provider =
+                new GoogleAuthProvider();
+
+            provider.addScope("profile");
+            provider.addScope("email");
+
+            await signInWithRedirect(
+                auth,
+                provider
             );
 
+        }catch(error){
+
+            console.log(error);
+
+            mostrarMensagem(
+                "Não foi possível entrar com Google."
+            );
+
+            googleButton.disabled = false;
+
+            googleButton.textContent =
+                "🇬 Entrar com Google";
+
         }
-    );
+
+    }
+);
+
 
 </script>
 
