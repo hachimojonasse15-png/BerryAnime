@@ -40,7 +40,8 @@ body{
     width:42px;
     height:42px;
     border-radius:50%;
-    background:#ff4054;
+
+    overflow:hidden;
 
     display:flex;
     align-items:center;
@@ -49,9 +50,13 @@ body{
     box-shadow:0 3px 12px rgba(255,64,84,.25);
 }
 
-.logo svg{
-    width:25px;
-    height:25px;
+.logo img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
 }
 
 /* ÍCONES DO TOPO */
@@ -325,11 +330,6 @@ section{
         height:40px;
     }
 
-    .logo svg{
-        width:24px;
-        height:24px;
-    }
-
     .header-icons{
         gap:12px;
     }
@@ -392,27 +392,12 @@ section{
 
     <!-- LOGO BerryAnime -->
 
-    <div class="BerryAnime_logo_leve.jpg">
+    <div class="logo">
 
-        <svg viewBox="0 0 24 24">
-
-            <path
-                d="M4 5h16v14H4z"
-                stroke="white"
-                fill="none"
-                stroke-width="2"
-                stroke-linejoin="round"
-            />
-
-            <path
-                d="M7 8h10M7 12h7M7 16h5"
-                stroke="white"
-                fill="none"
-                stroke-width="2"
-                stroke-linecap="round"
-            />
-
-        </svg>
+        <img
+            src="BerryAnime_logo_leve.jpg"
+            alt="BerryAnime"
+        >
 
     </div>
 
@@ -565,18 +550,9 @@ section{
 
 <script>
 
-/* =========================
-   API
-========================= */
-
 const app = document.getElementById("app");
 
 const API = "https://api.jikan.moe/v4";
-
-
-/* =========================
-   FUNÇÃO DA API
-========================= */
 
 async function api(url){
 
@@ -585,9 +561,7 @@ async function api(url){
         const res = await fetch(API + url);
 
         if(!res.ok){
-
             throw new Error("Erro na API");
-
         }
 
         const data = await res.json();
@@ -605,11 +579,6 @@ async function api(url){
     }
 
 }
-
-
-/* =========================
-   CARD PEQUENO
-========================= */
 
 function smallCard(anime){
 
@@ -633,11 +602,6 @@ function smallCard(anime){
     `;
 
 }
-
-
-/* =========================
-   CARD DE EPISÓDIO
-========================= */
 
 function episodeCard(anime,index){
 
@@ -680,11 +644,6 @@ function episodeCard(anime,index){
 
 }
 
-
-/* =========================
-   SECÇÃO
-========================= */
-
 function section(name,content){
 
     return `
@@ -705,134 +664,81 @@ function section(name,content){
 
 }
 
-
-/* =========================
-   CARREGAR ANIMES
-========================= */
-
 async function loadAnime(){
 
     app.innerHTML = "";
-
-
-    /* EM ALTA */
 
     const popular = await api(
         "/top/anime?filter=bypopularity"
     );
 
     app.innerHTML += section(
-
         "Em alta",
-
-        popular
-        .slice(0,12)
+        popular.slice(0,12)
         .map(smallCard)
         .join("")
-
     );
-
-
-    /* NOVOS EPISÓDIOS */
 
     const airing = await api(
         "/seasons/now"
     );
 
     app.innerHTML += section(
-
         "Novos episódios",
-
-        airing
-        .slice(0,10)
+        airing.slice(0,10)
         .map(episodeCard)
         .join("")
-
     );
-
-
-    /* NOVOS ANIMES */
 
     const latest = await api(
         "/anime?order_by=start_date&sort=desc"
     );
 
     app.innerHTML += section(
-
         "Novos animes",
-
-        latest
-        .slice(0,12)
+        latest.slice(0,12)
         .map(smallCard)
         .join("")
-
     );
-
-
-    /* AÇÃO */
 
     const action = await api(
         "/anime?genres=1&order_by=popularity"
     );
 
     app.innerHTML += section(
-
         "Ação",
-
-        action
-        .slice(0,12)
+        action.slice(0,12)
         .map(smallCard)
         .join("")
-
     );
-
-
-    /* FANTASIA */
 
     const fantasy = await api(
         "/anime?genres=10&order_by=popularity"
     );
 
     app.innerHTML += section(
-
         "Fantasia",
-
-        fantasy
-        .slice(0,12)
+        fantasy.slice(0,12)
         .map(smallCard)
         .join("")
-
     );
-
-
-    /* ROMANCE */
 
     const romance = await api(
         "/anime?genres=22&order_by=popularity"
     );
 
     app.innerHTML += section(
-
         "Romance",
-
-        romance
-        .slice(0,12)
+        romance.slice(0,12)
         .map(smallCard)
         .join("")
-
     );
 
 }
-
-
-/* =========================
-   INICIAR
-========================= */
 
 loadAnime();
 
 </script>
 
 </body>
-    
 </html>
