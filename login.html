@@ -16,12 +16,18 @@
 <style>
 
 *{
+
     margin:0;
     padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
 
+    box-sizing:border-box;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
 
 body{
 
@@ -37,7 +43,10 @@ body{
 
     align-items:center;
 
-    padding:25px 18px;
+    padding:
+        25px
+        18px;
+
 }
 
 
@@ -48,17 +57,20 @@ body{
     max-width:420px;
 
     text-align:center;
+
 }
 
 
 .logo{
 
     width:115px;
+
     height:115px;
 
     object-fit:contain;
 
     margin-bottom:10px;
+
 }
 
 
@@ -69,16 +81,21 @@ body{
     font-weight:900;
 
     margin-bottom:8px;
+
 }
 
 
 .berry{
+
     color:#ff1744;
+
 }
 
 
 .anime{
+
     color:white;
+
 }
 
 
@@ -89,6 +106,7 @@ body{
     font-size:14px;
 
     margin-bottom:28px;
+
 }
 
 
@@ -100,25 +118,32 @@ body{
 
     margin-bottom:13px;
 
-    padding:0 16px;
+    padding:
+        0
+        16px;
 
     background:#151515;
 
     color:white;
 
-    border:1px solid #303030;
+    border:
+        1px solid
+        #303030;
 
     border-radius:12px;
 
     outline:none;
 
     font-size:15px;
+
 }
 
 
 .input:focus{
 
-    border-color:#ff1744;
+    border-color:
+        #ff1744;
+
 }
 
 
@@ -143,6 +168,14 @@ body{
     font-weight:bold;
 
     cursor:pointer;
+
+}
+
+
+.login-button:active{
+
+    transform:scale(.98);
+
 }
 
 
@@ -151,6 +184,7 @@ body{
     opacity:.6;
 
     cursor:not-allowed;
+
 }
 
 
@@ -161,6 +195,7 @@ body{
     margin-top:17px;
 
     font-size:14px;
+
 }
 
 
@@ -171,6 +206,7 @@ body{
     color:#888;
 
     font-size:14px;
+
 }
 
 
@@ -181,6 +217,7 @@ body{
     text-decoration:none;
 
     font-weight:bold;
+
 }
 
 
@@ -195,6 +232,7 @@ body{
     text-decoration:none;
 
     font-size:14px;
+
 }
 
 </style>
@@ -303,6 +341,11 @@ body{
 
 <script type="module">
 
+
+/* =====================================================
+   FIREBASE
+===================================================== */
+
 import {
     auth
 } from "./firebase.js";
@@ -313,16 +356,26 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
 const form =
-    document.getElementById("loginForm");
+    document.getElementById(
+        "loginForm"
+    );
 
 
 const message =
-    document.getElementById("message");
+    document.getElementById(
+        "message"
+    );
 
 
 const button =
-    document.getElementById("loginButton");
+    document.getElementById(
+        "loginButton"
+    );
 
 
 /* =====================================================
@@ -344,14 +397,14 @@ function mostrarMensagem(
 
     message.style.color =
         sucesso
-        ? "#4cff88"
-        : "#ff6b81";
+            ? "#4cff88"
+            : "#ff6b81";
 
 }
 
 
 /* =====================================================
-   LOGIN E-MAIL
+   LOGIN
 ===================================================== */
 
 form.addEventListener(
@@ -407,10 +460,15 @@ form.addEventListener(
                 1200
             );
 
+        }
 
-        }catch(error){
 
-            console.log(error);
+        catch(error){
+
+            console.log(
+                error.code,
+                error.message
+            );
 
 
             let texto =
@@ -427,6 +485,7 @@ form.addEventListener(
 
             }
 
+
             else if(
                 error.code ===
                 "auth/wrong-password"
@@ -437,6 +496,7 @@ form.addEventListener(
 
             }
 
+
             else if(
                 error.code ===
                 "auth/invalid-credential"
@@ -446,6 +506,18 @@ form.addEventListener(
                     "E-mail ou senha incorretos.";
 
             }
+
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                texto =
+                    "E-mail inválido.";
+
+            }
+
 
             else if(
                 error.code ===
@@ -458,7 +530,9 @@ form.addEventListener(
             }
 
 
-            mostrarMensagem(texto);
+            mostrarMensagem(
+                texto
+            );
 
 
             button.disabled =
@@ -475,6 +549,7 @@ form.addEventListener(
 
 </script>
 
+
 </body>
 
-</html>
+    </html>
