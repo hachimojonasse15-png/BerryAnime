@@ -113,6 +113,7 @@ body{
 .berry-logo{
 
     width:235px;
+
     height:235px;
 
     object-fit:contain;
@@ -160,6 +161,7 @@ body{
 .loader{
 
     width:55px;
+
     height:55px;
 
     border-radius:50%;
@@ -167,6 +169,7 @@ body{
     border:5px solid rgba(255,23,68,.18);
 
     border-top-color:#ff1744;
+
     border-right-color:#ff1744;
 
     margin-top:105px;
@@ -214,6 +217,7 @@ body{
     justify-content:flex-start;
 
     padding:
+
         55px
         24px
         30px;
@@ -249,6 +253,7 @@ body{
     position:absolute;
 
     width:320px;
+
     height:320px;
 
     border-radius:50%;
@@ -261,6 +266,7 @@ body{
         );
 
     top:-100px;
+
     right:-120px;
 
     pointer-events:none;
@@ -278,6 +284,7 @@ body{
     z-index:2;
 
     width:100%;
+
     max-width:430px;
 
     display:flex;
@@ -297,6 +304,7 @@ body{
 .login-logo{
 
     width:230px;
+
     height:230px;
 
     object-fit:contain;
@@ -385,7 +393,7 @@ body{
 
     cursor:pointer;
 
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
 
     transition:
         transform .15s ease,
@@ -498,27 +506,18 @@ body{
 
     justify-content:center;
 
-    gap:15px;
+    gap:18px;
 
     cursor:pointer;
 }
 
-.google-btn:disabled{
+.google-icon{
 
-    opacity:.6;
+    font-size:27px;
 
-    cursor:not-allowed;
-}
+    font-weight:900;
 
-
-/* GOOGLE SVG */
-
-.google-svg{
-
-    width:22px;
-    height:22px;
-
-    display:block;
+    color:#4285f4;
 }
 
 
@@ -540,43 +539,23 @@ body{
 .decor.one{
 
     width:100px;
+
     height:100px;
 
     left:-55px;
+
     bottom:-30px;
 }
 
 .decor.two{
 
     width:70px;
+
     height:70px;
 
     right:-35px;
+
     bottom:100px;
-}
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
-.google-message{
-
-    display:none;
-
-    width:100%;
-
-    margin-top:12px;
-
-    padding:10px;
-
-    text-align:center;
-
-    font-size:13px;
-
-    border-radius:8px;
-
-    background:#151515;
 }
 
 
@@ -587,30 +566,39 @@ body{
 @media(max-height:700px){
 
     #login{
+
         padding-top:25px;
+
     }
 
     .login-logo{
+
         width:170px;
         height:170px;
     }
 
     .login-brand{
+
         font-size:35px;
     }
 
     .subtitle{
+
         font-size:16px;
+
         margin-top:10px;
     }
 
     .buttons{
+
         margin-top:30px;
+
         gap:12px;
     }
 
     .btn,
     .google-btn{
+
         min-height:54px;
     }
 
@@ -624,30 +612,37 @@ body{
 @media(max-width:380px){
 
     .berry-logo{
+
         width:190px;
         height:190px;
     }
 
     .logo-name{
+
         font-size:36px;
     }
 
     .loader{
+
         width:45px;
         height:45px;
+
         margin-top:85px;
     }
 
     .login-logo{
+
         width:180px;
         height:180px;
     }
 
     .login-brand{
+
         font-size:36px;
     }
 
     .subtitle{
+
         font-size:16px;
     }
 
@@ -661,11 +656,13 @@ body{
 @media(min-height:800px){
 
     .berry-logo{
+
         width:250px;
         height:250px;
     }
 
     .loader{
+
         margin-top:110px;
     }
 
@@ -674,6 +671,7 @@ body{
 </style>
 
 </head>
+
 
 <body>
 
@@ -715,8 +713,9 @@ body{
 </section>
 
 
+
 <!-- ===================================================
-     TELA INICIAL
+     LOGIN SCREEN
 =================================================== -->
 
 <section
@@ -733,11 +732,15 @@ body{
     <div class="login-content">
 
 
+        <!-- MORANGO -->
+
         <img
             src="BerryAnime_logo_leve.jpg"
             class="login-logo"
             alt="BerryAnime">
 
+
+        <!-- NOME -->
 
         <div class="login-brand">
 
@@ -752,6 +755,8 @@ body{
         </div>
 
 
+        <!-- DESCRIÇÃO -->
+
         <p class="subtitle">
 
             Assista aos seus animes
@@ -760,6 +765,8 @@ body{
         </p>
 
 
+        <!-- BOTÕES -->
+
         <div class="buttons">
 
 
@@ -767,7 +774,7 @@ body{
 
             <button
                 class="btn login-btn"
-                id="loginButton">
+                onclick="login()">
 
                 👤
                 &nbsp;
@@ -775,6 +782,8 @@ body{
 
             </button>
 
+
+            <!-- OR -->
 
             <div class="or">
 
@@ -787,7 +796,7 @@ body{
 
             <button
                 class="btn register-btn"
-                id="registerButton">
+                onclick="register()">
 
                 👤+
                 &nbsp;
@@ -800,47 +809,23 @@ body{
 
             <button
                 class="google-btn"
-                id="googleButton">
+                onclick="googleLogin()">
 
-                <!-- ÍCONE OFICIAL EM SVG -->
-
-                <svg
-                    class="google-svg"
-                    viewBox="0 0 24 24">
-
-                    <path
-                        fill="#4285F4"
-                        d="M21.35 12.27c0-.78-.07-1.54-.2-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
-
-                    <path
-                        fill="#34A853"
-                        d="M12 21.5c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.74 9.74 0 0 0 12 21.5z"/>
-
-                    <path
-                        fill="#FBBC05"
-                        d="M6.54 13.58A5.85 5.85 0 0 1 6.23 12c0-.55.1-1.09.31-1.58V7.89H3.3A9.5 9.5 0 0 0 2.5 12c0 1.53.37 2.98 1.03 4.11l3.01-2.53z"/>
-
-                    <path
-                        fill="#EA4335"
-                        d="M12 6.39c1.43 0 2.71.49 3.72 1.46l2.79-2.79C16.84 3.43 14.63 2.5 12 2.5a9.74 9.74 0 0 0-8.7 5.39l3.01 2.53C7.31 8.11 9.46 6.39 12 6.39z"/>
-
-                </svg>
+                <span class="google-icon">
+                    G
+                </span>
 
                 Entrar com Google
 
             </button>
 
 
-            <div
-                id="googleMessage"
-                class="google-message">
-            </div>
-
         </div>
 
     </div>
 
 </section>
+
 
 
 <script type="module">
@@ -854,151 +839,36 @@ import {
 } from "./firebase.js";
 
 import {
-    GoogleAuthProvider,
-    signInWithRedirect,
-    getRedirectResult
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
 /* =====================================================
-   ELEMENTOS
+   VERIFICAR USUÁRIO JÁ AUTENTICADO
 ===================================================== */
 
-const loginButton =
-    document.getElementById("loginButton");
+let usuarioAutenticado = false;
 
-const registerButton =
-    document.getElementById("registerButton");
+onAuthStateChanged(
+    auth,
+    function(user){
 
-const googleButton =
-    document.getElementById("googleButton");
+        if(user){
 
-const googleMessage =
-    document.getElementById("googleMessage");
+            usuarioAutenticado = true;
 
+            /*
+             * O Google redireciona de volta
+             * para o index.html.
+             *
+             * Se já estiver autenticado,
+             * não mostramos novamente
+             * Splash/Login.
+             */
 
-/* =====================================================
-   MENSAGEM GOOGLE
-===================================================== */
-
-function mostrarMensagemGoogle(texto){
-
-    googleMessage.style.display =
-        "block";
-
-    googleMessage.textContent =
-        texto;
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-loginButton.addEventListener(
-    "click",
-    function(){
-
-        window.location.href =
-            "login.html";
-
-    }
-);
-
-
-/* =====================================================
-   REGISTRAR
-===================================================== */
-
-registerButton.addEventListener(
-    "click",
-    function(){
-
-        window.location.href =
-            "register.html";
-
-    }
-);
-
-
-/* =====================================================
-   GOOGLE LOGIN
-===================================================== */
-
-googleButton.addEventListener(
-    "click",
-    async function(){
-
-        googleButton.disabled =
-            true;
-
-        googleButton.textContent =
-            "Abrindo Google...";
-
-
-        try{
-
-            const provider =
-                new GoogleAuthProvider();
-
-            provider.addScope("profile");
-
-            provider.addScope("email");
-
-
-            await signInWithRedirect(
-                auth,
-                provider
+            window.location.replace(
+                "home.html"
             );
-
-        }
-
-        catch(error){
-
-            console.log(
-                error.code,
-                error.message
-            );
-
-
-            mostrarMensagemGoogle(
-                error.code +
-                ": " +
-                error.message
-            );
-
-
-            googleButton.disabled =
-                false;
-
-
-            googleButton.innerHTML = `
-
-                <svg
-                    class="google-svg"
-                    viewBox="0 0 24 24">
-
-                    <path
-                        fill="#4285F4"
-                        d="M21.35 12.27c0-.78-.07-1.54-.2-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42z"/>
-
-                    <path
-                        fill="#34A853"
-                        d="M12 21.5c2.63 0 4.84-.87 6.45-2.36l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.53A9.74 9.74 0 0 0 12 21.5z"/>
-
-                    <path
-                        fill="#FBBC05"
-                        d="M6.54 13.58A5.85 5.85 0 0 1 6.23 12c0-.55.1-1.09.31-1.58V7.89H3.3A9.5 9.5 0 0 0 2.5 12c0 1.53.37 2.98 1.03 4.11l3.01-2.53z"/>
-
-                    <path
-                        fill="#EA4335"
-                        d="M12 6.39c1.43 0 2.71.49 3.72 1.46l2.79-2.79C16.84 3.43 14.63 2.5 12 2.5a9.74 9.74 0 0 0-8.7 5.39l3.01 2.53C7.31 8.11 9.46 6.39 12 6.39z"/>
-
-                </svg>
-
-                Entrar com Google
-
-            `;
 
         }
 
@@ -1007,86 +877,75 @@ googleButton.addEventListener(
 
 
 /* =====================================================
-   RESULTADO DO REDIRECT GOOGLE
+   TROCA SPLASH → LOGIN
 ===================================================== */
 
-async function verificarGoogle(){
+setTimeout(function(){
 
-    try{
+    /*
+     * Se o usuário já foi reconhecido
+     * pelo Firebase, não mostramos Login.
+     */
 
-        const result =
-            await getRedirectResult(auth);
-
-
-        if(result){
-
-            mostrarMensagemGoogle(
-                "Login com Google realizado com sucesso!"
-            );
-
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "home.html";
-
-                },
-                1000
-            );
-
-        }
-
+    if(usuarioAutenticado){
+        return;
     }
 
-    catch(error){
+    document
+        .getElementById("splash")
+        .classList
+        .add("hidden");
 
-        console.log(
-            error.code,
-            error.message
-        );
+    document
+        .getElementById("login")
+        .classList
+        .add("show");
 
-        mostrarMensagemGoogle(
-            error.code +
-            ": " +
-            error.message
-        );
+},3000);
 
-    }
+
+/* =====================================================
+   BOTÃO LOGIN
+===================================================== */
+
+function login(){
+
+    window.location.href =
+        "login.html";
 
 }
 
 
 /* =====================================================
-   VERIFICAR GOOGLE
+   BOTÃO REGISTRAR
 ===================================================== */
 
-verificarGoogle();
+function register(){
+
+    window.location.href =
+        "register.html";
+
+}
 
 
 /* =====================================================
-   SPLASH → TELA INICIAL
+   GOOGLE
 ===================================================== */
 
-setTimeout(
-    function(){
+function googleLogin(){
 
-        document
-            .getElementById("splash")
-            .classList
-            .add("hidden");
+    /*
+     * O login Google é feito
+     * na página login.html.
+     */
 
+    window.location.href =
+        "login.html";
 
-        document
-            .getElementById("login")
-            .classList
-            .add("show");
-
-    },
-    3000
-);
+}
 
 </script>
 
+
 </body>
-      </html>
+</html>
