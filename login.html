@@ -2,10 +2,16 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width,
+             initial-scale=1.0">
 
 <title>BerryAnime - Login</title>
+
 
 <style>
 
@@ -16,163 +22,220 @@
     font-family:Arial,Helvetica,sans-serif;
 }
 
+
 body{
+
     min-height:100vh;
+
     background:#080808;
+
     color:white;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     padding:25px 18px;
 }
 
+
 .login{
+
     width:100%;
+
     max-width:420px;
+
     text-align:center;
 }
 
+
 .logo{
+
     width:115px;
     height:115px;
+
     object-fit:contain;
+
     margin-bottom:10px;
 }
 
+
 .brand{
+
     font-size:35px;
+
     font-weight:900;
+
     margin-bottom:8px;
 }
+
 
 .berry{
     color:#ff1744;
 }
 
+
 .anime{
     color:white;
 }
 
+
 .subtitle{
+
     color:#999;
+
     font-size:14px;
+
     margin-bottom:28px;
 }
 
+
 .input{
+
     width:100%;
+
     height:56px;
 
     margin-bottom:13px;
+
     padding:0 16px;
 
     background:#151515;
+
     color:white;
 
     border:1px solid #303030;
+
     border-radius:12px;
 
     outline:none;
+
     font-size:15px;
 }
 
+
 .input:focus{
+
     border-color:#ff1744;
 }
 
+
 .login-button{
+
     width:100%;
+
     height:57px;
 
     margin-top:5px;
 
     border:0;
+
     border-radius:12px;
 
     background:#ff1744;
+
     color:white;
 
     font-size:16px;
+
     font-weight:bold;
 
     cursor:pointer;
 }
 
-.login-button:active{
-    transform:scale(.98);
+
+.login-button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
 }
+
 
 .message{
+
     display:none;
+
     margin-top:17px;
+
     font-size:14px;
 }
+
 
 .register-text{
+
     margin-top:25px;
+
     color:#888;
+
     font-size:14px;
 }
 
+
 .register-link{
+
     color:#ff1744;
+
     text-decoration:none;
+
     font-weight:bold;
 }
 
-.google-button{
-    width:100%;
-    height:55px;
-
-    margin-top:18px;
-
-    border:0;
-    border-radius:12px;
-
-    background:white;
-    color:#333;
-
-    font-size:15px;
-    font-weight:bold;
-
-    cursor:pointer;
-}
 
 .back{
+
     display:inline-block;
+
     margin-top:22px;
 
     color:#ff1744;
+
     text-decoration:none;
 
     font-size:14px;
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="login">
+
 
     <img
         src="BerryAnime_logo_leve.jpg"
         class="logo"
-        alt="BerryAnime"
-    >
+        alt="BerryAnime">
+
 
     <div class="brand">
 
-        <span class="berry">BERRY</span><span class="anime">ANIME</span>
+        <span class="berry">
+            BERRY
+        </span>
+
+        <span class="anime">
+            ANIME
+        </span>
 
     </div>
 
+
     <div class="subtitle">
+
         Entre na sua conta
+
     </div>
 
 
     <form id="loginForm">
+
 
         <input
             id="email"
@@ -180,8 +243,8 @@ body{
             type="email"
             placeholder="E-mail"
             autocomplete="email"
-            required
-        >
+            required>
+
 
         <input
             id="senha"
@@ -189,8 +252,8 @@ body{
             type="password"
             placeholder="Senha"
             autocomplete="current-password"
-            required
-        >
+            required>
+
 
         <button
             type="submit"
@@ -200,6 +263,7 @@ body{
             ENTRAR
 
         </button>
+
 
     </form>
 
@@ -225,15 +289,6 @@ body{
     </div>
 
 
-    <button
-        class="google-button"
-        id="googleButton">
-
-        🇬 Entrar com Google
-
-    </button>
-
-
     <a
         href="index.html"
         class="back">
@@ -241,6 +296,7 @@ body{
         ← Voltar
 
     </a>
+
 
 </div>
 
@@ -251,6 +307,7 @@ import {
     auth
 } from "./firebase.js";
 
+
 import {
     signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -259,27 +316,43 @@ import {
 const form =
     document.getElementById("loginForm");
 
+
 const message =
     document.getElementById("message");
+
 
 const button =
     document.getElementById("loginButton");
 
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
 
 function mostrarMensagem(
     texto,
     sucesso=false
 ){
 
-    message.style.display = "block";
+    message.style.display =
+        "block";
 
-    message.textContent = texto;
+
+    message.textContent =
+        texto;
+
 
     message.style.color =
-        sucesso ? "#4cff88" : "#ff6b81";
+        sucesso
+        ? "#4cff88"
+        : "#ff6b81";
 
 }
 
+
+/* =====================================================
+   LOGIN E-MAIL
+===================================================== */
 
 form.addEventListener(
     "submit",
@@ -289,17 +362,21 @@ form.addEventListener(
 
 
         const email =
-            document.getElementById("email")
-            .value
-            .trim();
+            document
+                .getElementById("email")
+                .value
+                .trim();
 
 
         const senha =
-            document.getElementById("senha")
-            .value;
+            document
+                .getElementById("senha")
+                .value;
 
 
-        button.disabled = true;
+        button.disabled =
+            true;
+
 
         button.textContent =
             "ENTRANDO...";
@@ -315,7 +392,7 @@ form.addEventListener(
 
 
             mostrarMensagem(
-                " Login successful!",
+                "Login realizado com sucesso!",
                 true
             );
 
@@ -327,7 +404,7 @@ form.addEventListener(
                         "home.html";
 
                 },
-                1500
+                1200
             );
 
 
@@ -370,11 +447,23 @@ form.addEventListener(
 
             }
 
+            else if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                texto =
+                    "Muitas tentativas. Tente novamente mais tarde.";
+
+            }
+
 
             mostrarMensagem(texto);
 
 
-            button.disabled = false;
+            button.disabled =
+                false;
+
 
             button.textContent =
                 "ENTRAR";
@@ -384,52 +473,8 @@ form.addEventListener(
     }
 );
 
-import {
-    GoogleAuthProvider,
-    signInWithRedirect
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
-const googleButton =
-    document.getElementById("googleButton");
-
-googleButton.addEventListener(
-    "click",
-    async function(){
-
-        googleButton.disabled = true;
-
-        googleButton.textContent =
-            "Abrindo Google...";
-
-        try{
-
-            const provider =
-                new GoogleAuthProvider();
-
-            provider.addScope("profile");
-            provider.addScope("email");
-
-            await signInWithRedirect(
-                auth,
-                provider
-            );
-
-        catch(error){
-
-    console.log(error);
-
-    mostrarMensagem(
-        error.code + ": " + error.message
-    );
-
-    googleButton.disabled = false;
-
-    googleButton.textContent =
-        "🇬 Entrar com Google";
-        }
-
 </script>
 
 </body>
+
 </html>
