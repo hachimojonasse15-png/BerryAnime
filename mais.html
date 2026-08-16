@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>BerryAnime - Mais</title>
+
+<style>
+
+/* =====================================================
+   BASE
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#090909;
+    color:white;
+    padding-bottom:75px;
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.header{
+
+    height:65px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 15px;
+}
+
+.logo{
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+}
+
+.logo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content{
+
+    padding:10px 14px;
+}
+
+
+/* =====================================================
+   VERIFICAÇÃO
+===================================================== */
+
+.verify{
+
+    width:100%;
+
+    background:#e84d51;
+
+    border-radius:12px;
+
+    min-height:48px;
+
+    padding:10px 14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    font-size:13px;
+    font-weight:bold;
+
+    margin-bottom:12px;
+
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   CONTA
+===================================================== */
+
+.account{
+
+    width:100%;
+
+    min-height:86px;
+
+    background:#191919;
+
+    border-radius:13px;
+
+    padding:10px 12px;
+
+    display:flex;
+
+    align-items:center;
+
+    margin-bottom:12px;
+}
+
+
+/* =====================================================
+   AVATAR
+===================================================== */
+
+.avatar{
+
+    width:62px;
+    height:62px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    background:#303030;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.avatar img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:none;
+}
+
+.avatar-default{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.avatar-default svg{
+
+    width:35px;
+    height:35px;
+
+    stroke:#999;
+
+    fill:none;
+
+    stroke-width:1.7;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   INFORMAÇÕES DA CONTA
+===================================================== */
+
+.account-info{
+
+    flex:1;
+
+    min-width:0;
+
+    margin-left:13px;
+}
+
+.account-name{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.account-email{
+
+    margin-top:4px;
+
+    color:#999;
+
+    font-size:13px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+/* =====================================================
+   SAIR
+===================================================== */
+
+.logout{
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    color:#ddd;
+}
+
+.logout svg{
+
+    width:25px;
+    height:25px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   CAIXA DE OPÇÕES
+===================================================== */
+
+.menu-box{
+
+    width:100%;
+
+    background:#191919;
+
+    border-radius:13px;
+
+    padding:5px 0;
+
+    margin-bottom:22px;
+}
+
+
+/* =====================================================
+   ITEM
+===================================================== */
+
+.menu-item{
+
+    min-height:62px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:8px 14px;
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+.menu-item:active{
+
+    background:#242424;
+}
+
+
+/* =====================================================
+   ÍCONE
+===================================================== */
+
+.menu-icon{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.menu-icon svg{
+
+    width:26px;
+    height:26px;
+
+    stroke:white;
+
+    fill:none;
+
+    stroke-width:1.8;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   TEXTO
+===================================================== */
+
+.menu-text{
+
+    margin-left:11px;
+}
+
+.menu-title{
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+.menu-sub{
+
+    color:#999;
+
+    font-size:12px;
+
+    margin-top:4px;
+}
+
+
+/* =====================================================
+   REDES SOCIAIS
+===================================================== */
+
+.socials{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:17px;
+
+    margin-top:3px;
+}
+
+.social{
+
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#111;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   VERSÃO
+===================================================== */
+
+.version{
+
+    text-align:center;
+
+    margin-top:28px;
+
+    color:#999;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   MENU INFERIOR
+===================================================== */
+
+.bottom-menu{
+
+    position:fixed;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:66px;
+
+    background:#101010;
+
+    border-top:1px solid #222;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    z-index:100;
+}
+
+.menu-nav{
+
+    flex:1;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:3px;
+
+    color:#777;
+
+    cursor:pointer;
+
+    font-size:11px;
+}
+
+.menu-nav svg{
+
+    width:20px;
+    height:20px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.menu-nav.active{
+
+    color:white;
+}
+
+.menu-nav span{
+
+    font-size:11px;
+}
+
+
+/* =====================================================
+   CELULARES PEQUENOS
+===================================================== */
+
+@media(max-width:380px){
+
+    .account-name{
+        font-size:17px;
+    }
+
+    .account-email{
+        font-size:12px;
+    }
+
+    .menu-title{
+        font-size:15px;
+    }
+
+    .menu-sub{
+        font-size:11px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <img
+            src="BerryAnime_logo_leve.jpg"
+            alt="BerryAnime">
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main class="content">
+
+
+    <!-- VERIFICAÇÃO -->
+
+    <div
+        class="verify"
+        id="verifyButton">
+
+        Verifique sua conta para personalização e comentários! ›
+
+    </div>
+
+
+    <!-- =================================================
+         CONTA
+    ================================================== -->
+
+    <div class="account">
+
+
+        <!-- AVATAR -->
+
+        <div class="avatar">
+
+            <img
+                id="avatarImage"
+                src=""
+                alt="Perfil">
+
+            <div
+                id="avatarDefault"
+                class="avatar-default">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="8"
+                        r="3.5">
+                    </circle>
+
+                    <path
+                        d="M5 20c.5-3.5 3-6 7-6s6.5 2.5 7 6">
+                    </path>
+
+                </svg>
+
+            </div>
+
+        </div>
+
+
+        <!-- NOME E EMAIL -->
+
+        <div class="account-info">
+
+            <div
+                id="accountName"
+                class="account-name">
+
+                Carregando...
+
+            </div>
+
+            <div
+                id="accountEmail"
+                class="account-email">
+
+                ...
+
+            </div>
+
+        </div>
+
+
+        <!-- SAIR -->
+
+        <div
+            class="logout"
+            id="logoutButton">
+
+            <svg viewBox="0 0 24 24">
+
+                <path
+                    d="M9 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4">
+                </path>
+
+                <path
+                    d="M14 8l5 4-5 4">
+                </path>
+
+                <path
+                    d="M19 12H9">
+                </path>
+
+            </svg>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         OPÇÕES
+    ================================================== -->
+
+    <div class="menu-box">
+
+
+        <!-- EDITAR PERFIL -->
+
+        <div
+            class="menu-item"
+            onclick="editarPerfil()">
+
+            <div class="menu-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="7"
+                        r="3.5">
+                    </circle>
+
+                    <path
+                        d="M5 20c.5-3.5 3-6 7-6s6.5 2.5 7 6">
+                    </path>
+
+                </svg>
+
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-title">
+                    Editar perfil
+                </div>
+
+                <div class="menu-sub">
+                    Deixe sua conta do seu jeito
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONFIGURAÇÕES -->
+
+        <div
+            class="menu-item"
+            onclick="configuracoes()">
+
+            <div class="menu-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="3">
+                    </circle>
+
+                    <path
+                        d="M19 13.5v-3l-2-.6a6.5 6.5 0 0 0-.7-1.6l.9-1.9-2.1-2.1-1.9.9a6.5 6.5 0 0 0-1.6-.7L11 2.5H8l-.6 2a6.5 6.5 0 0 0-1.6.7l-1.9-.9-2.1 2.1.9 1.9a6.5 6.5 0 0 0-.7 1.6l-2 .6v3l2 .6a6.5 6.5 0 0 0 .7 1.6l-.9 1.9 2.1 2.1 1.9-.9a6.5 6.5 0 0 0 1.6.7l.6 2h3l.6-2a6.5 6.5 0 0 0 1.6-.7l1.9.9 2.1-2.1-.9-1.9a6.5 6.5 0 0 0 .7-1.6z">
+                    </path>
+
+                </svg>
+
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-title">
+                    Configurações
+                </div>
+
+                <div class="menu-sub">
+                    Ajustes do BerryAnime
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FAVORITOS -->
+
+        <div
+            class="menu-item"
+            onclick="favoritos()">
+
+            <div class="menu-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M20.8 8.6c0 5.5-8.8 11-8.8 11S3.2 14.1 3.2 8.6A4.6 4.6 0 0 1 12 6.4a4.6 4.6 0 0 1 8.8 2.2z">
+                    </path>
+
+                </svg>
+
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-title">
+                    Favoritos
+                </div>
+
+                <div class="menu-sub">
+                    Seus animes favoritos
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         REDES
+    ================================================== -->
+
+    <div class="socials">
+
+        <div
+            class="social"
+            onclick="abrirLink()">
+
+            🔗
+
+        </div>
+
+        <div
+            class="social"
+            onclick="abrirTikTok()">
+
+            ♪
+
+        </div>
+
+        <div
+            class="social"
+            onclick="abrirX()">
+
+            X
+
+        </div>
+
+    </div>
+
+
+    <div class="version">
+
+        BERRYANIME — VERSÃO 1.0
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     MENU INFERIOR
+===================================================== -->
+
+<nav class="bottom-menu">
+
+
+    <div
+        class="menu-nav"
+        onclick="location.href='home.html'">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M3 11l9-8 9 8"></path>
+            <path d="M5 10v10h14V10"></path>
+
+        </svg>
+
+        <span>Início</span>
+
+    </div>
+
+
+    <div
+        class="menu-nav"
+        onclick="location.href='mangas.html'">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 4h7v16H4z"></path>
+            <path d="M13 4h7v16h-7z"></path>
+
+        </svg>
+
+        <span>Mangás</span>
+
+    </div>
+
+
+    <div
+        class="menu-nav"
+        onclick="location.href='favoritos.html'">
+
+        <svg viewBox="0 0 24 24">
+
+            <path
+                d="M20.8 8.6c0 5.5-8.8 11-8.8 11S3.2 14.1 3.2 8.6A4.6 4.6 0 0 1 12 6.4a4.6 4.6 0 0 1 8.8 2.2z">
+            </path>
+
+        </svg>
+
+        <span>Favoritos</span>
+
+    </div>
+
+
+    <div
+        class="menu-nav active"
+        onclick="location.href='mais.html'">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 6h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 18h16"></path>
+
+        </svg>
+
+        <span>Mais</span>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+import {
+    auth
+} from "./firebase.js";
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+/* =====================================================
+   USUÁRIO
+===================================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(!user){
+
+            window.location.href =
+                "index.html";
+
+            return;
+
+        }
+
+
+        /* EMAIL */
+
+        document
+        .getElementById("accountEmail")
+        .textContent =
+            user.email || "Sem e-mail";
+
+
+        /* NOME */
+
+        let nome =
+            user.displayName;
+
+
+        if(!nome && user.email){
+
+            nome =
+                user.email
+                .split("@")[0];
+
+        }
+
+
+        document
+        .getElementById("accountName")
+        .textContent =
+            nome || "Usuário";
+
+
+        /* FOTO DO GOOGLE */
+
+        if(user.photoURL){
+
+            const imagem =
+                document.getElementById(
+                    "avatarImage"
+                );
+
+            imagem.src =
+                user.photoURL;
+
+            imagem.style.display =
+                "block";
+
+            document
+            .getElementById(
+                "avatarDefault"
+            )
+            .style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SAIR
+===================================================== */
+
+document
+.getElementById("logoutButton")
+.addEventListener(
+    "click",
+    async function(){
+
+        if(!confirm(
+            "Deseja sair da sua conta?"
+        )){
+            return;
+        }
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "index.html";
+
+        }
+
+        catch(error){
+
+            console.log(error);
+
+            alert(
+                "Não foi possível sair da conta."
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   OPÇÕES
+===================================================== */
+
+window.editarPerfil =
+function(){
+
+    alert(
+        "Editar perfil será adicionado no próximo passo."
+    );
+
+};
+
+
+window.configuracoes =
+function(){
+
+    alert(
+        "Configurações serão adicionadas no próximo passo."
+    );
+
+};
+
+
+window.favoritos =
+function(){
+
+    window.location.href =
+        "favoritos.html";
+
+};
+
+
+window.abrirLink =
+function(){
+
+    alert(
+        "Link do BerryAnime será adicionado depois."
+    );
+
+};
+
+
+window.abrirTikTok =
+function(){
+
+    alert(
+        "TikTok do BerryAnime será adicionado depois."
+    );
+
+};
+
+
+window.abrirX =
+function(){
+
+    alert(
+        "X do BerryAnime será adicionado depois."
+    );
+
+};
+
+</script>
+
+</body>
+  </html>
