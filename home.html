@@ -2,12 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BerryAnime</title>
-
+<title>MozAnime</title>
 
 <style>
 
@@ -18,96 +16,89 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
-
 body{
-
     background:#090909;
     color:white;
     padding-bottom:80px;
-
 }
 
-
-/* TOPO */
+/* =========================
+   TOPO
+========================= */
 
 .header{
-
-    height:70px;
+    height:68px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 18px;
-
+    padding:0 16px;
 }
 
+/* LOGO MOZANIME */
 
 .logo{
-
-    width:45px;
-    height:45px;
-
+    width:42px;
+    height:42px;
     border-radius:50%;
-
     background:#ff4054;
 
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 
-    font-size:24px;
-
+    box-shadow:0 3px 12px rgba(255,64,84,.25);
 }
 
+.logo svg{
+    width:25px;
+    height:25px;
+}
 
+/* ÍCONES DO TOPO */
 
 .header-icons{
-
     display:flex;
     align-items:center;
-    gap:20px;
-
+    gap:18px;
 }
 
-
-.search{
-
-    font-size:28px;
-
-}
-
-
-
-.user{
-
+.header-button{
     width:38px;
     height:38px;
 
-    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    background:
-    linear-gradient(135deg,#ff00cc,#4000ff);
-
+    cursor:pointer;
 }
 
+.header-button svg{
+    width:25px;
+    height:25px;
 
+    stroke:white;
+    fill:none;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
 
-/* TITULOS */
+/* =========================
+   TÍTULOS
+========================= */
 
 .title-section{
-
-    font-size:22px;
+    font-size:21px;
     font-weight:bold;
-
     margin:20px 15px 12px;
-
 }
 
-
-
-/* LISTAS */
+/* =========================
+   LISTAS
+========================= */
 
 .container{
-
     display:flex;
     gap:12px;
 
@@ -117,21 +108,18 @@ body{
 
     scrollbar-width:none;
 
+    scroll-behavior:smooth;
 }
-
 
 .container::-webkit-scrollbar{
-
     display:none;
-
 }
 
-
-
-/* CARD PEQUENO */
+/* =========================
+   CARDS
+========================= */
 
 .anime-card{
-
     min-width:92px;
     height:135px;
 
@@ -141,28 +129,27 @@ body{
 
     background:#171717;
 
+    position:relative;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,.35);
 }
 
-
-
 .anime-card img{
-
     width:100%;
     height:100%;
 
     object-fit:cover;
 
+    display:block;
 }
 
-
-
-/* NOVOS EPISÓDIOS */
-
+/* =========================
+   NOVOS EPISÓDIOS
+========================= */
 
 .episode-card{
-
     min-width:270px;
-
     height:160px;
 
     border-radius:9px;
@@ -171,106 +158,89 @@ body{
 
     position:relative;
 
+    box-shadow:
+    0 4px 12px rgba(0,0,0,.35);
 }
 
-
-
 .episode-card img{
-
     width:100%;
     height:100%;
 
     object-fit:cover;
 
+    display:block;
 }
 
-
-
 .episode-shadow{
-
     position:absolute;
 
     left:0;
     right:0;
     bottom:0;
 
-    height:80px;
+    height:85px;
 
-    background:linear-gradient(
-    transparent,
-    rgba(0,0,0,.95)
+    background:
+    linear-gradient(
+        transparent,
+        rgba(0,0,0,.95)
     );
-
 }
 
-
-
 .badge{
-
     position:absolute;
 
     top:8px;
     right:8px;
 
-    background:#555;
+    background:rgba(0,0,0,.65);
 
     padding:4px 8px;
 
     font-size:11px;
 
     border-radius:4px;
-
 }
 
-
-
 .episode-text{
-
     position:absolute;
 
     bottom:10px;
-
     left:10px;
-
+    right:10px;
 }
-
-
 
 .episode-title{
-
     font-size:15px;
-
     font-weight:bold;
 
+    max-width:220px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-
-
 .episode-sub{
-
     color:#ddd;
 
     font-size:12px;
 
     margin-top:4px;
-
 }
 
-
-
-/* MENU INFERIOR */
-
+/* =========================
+   MENU INFERIOR
+========================= */
 
 .bottom-menu{
-
     position:fixed;
 
     bottom:0;
-
     left:0;
     right:0;
 
-    height:65px;
+    height:68px;
 
     background:#101010;
 
@@ -282,11 +252,21 @@ body{
 
     align-items:center;
 
+    z-index:100;
 }
 
-
-
 .menu-item{
+    flex:1;
+
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:4px;
 
     text-align:center;
 
@@ -294,107 +274,321 @@ body{
 
     color:#777;
 
+    cursor:pointer;
+
+    transition:.2s;
 }
 
+.menu-item svg{
+    width:21px;
+    height:21px;
 
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.menu-item span{
+    font-size:12px;
+}
 
 .menu-active{
-
     color:white;
-
 }
 
+/* =========================
+   SECÇÕES
+========================= */
 
+section{
+    margin-bottom:18px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .header{
+        height:65px;
+        padding:0 14px;
+    }
+
+    .logo{
+        width:40px;
+        height:40px;
+    }
+
+    .logo svg{
+        width:24px;
+        height:24px;
+    }
+
+    .header-icons{
+        gap:12px;
+    }
+
+    .header-button{
+        width:38px;
+        height:38px;
+    }
+
+    .header-button svg{
+        width:23px;
+        height:23px;
+    }
+
+    .title-section{
+        font-size:20px;
+        margin-left:14px;
+    }
+
+    .container{
+        padding-left:14px;
+        gap:10px;
+    }
+
+    .anime-card{
+        min-width:82px;
+        height:122px;
+    }
+
+    .episode-card{
+        min-width:285px;
+        height:165px;
+    }
+
+    .bottom-menu{
+        height:66px;
+    }
+
+    .menu-item svg{
+        width:20px;
+        height:20px;
+    }
+
+    .menu-item span{
+        font-size:11px;
+    }
+}
 
 </style>
 
 </head>
 
-
 <body>
 
+<!-- =========================
+     CABEÇALHO
+========================= -->
 
 <header class="header">
 
+    <!-- LOGO BerryAnime -->
 
-<div class="logo">
-🍓
-</div>
+    <div class="BerryAnime_logo_leve.jpg">
+
+        <svg viewBox="0 0 24 24">
+
+            <path
+                d="M4 5h16v14H4z"
+                stroke="white"
+                fill="none"
+                stroke-width="2"
+                stroke-linejoin="round"
+            />
+
+            <path
+                d="M7 8h10M7 12h7M7 16h5"
+                stroke="white"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+            />
+
+        </svg>
+
+    </div>
 
 
-<div class="header-icons">
+    <!-- ÍCONES DO TOPO -->
 
-<div class="search">
-⌕
-</div>
+    <div class="header-icons">
+
+        <!-- PESQUISA -->
+
+        <div class="header-button">
+
+            <svg viewBox="0 0 24 24">
+
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="6"
+                />
+
+                <path
+                    d="M16 16l5 5"
+                />
+
+            </svg>
+
+        </div>
 
 
-<div class="user"></div>
+        <!-- PERFIL -->
 
+        <div class="header-button">
 
-</div>
+            <svg viewBox="0 0 24 24">
 
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="4"
+                />
+
+                <path
+                    d="M4 21c0-4 3.5-7 8-7s8 3 8 7"
+                />
+
+            </svg>
+
+        </div>
+
+    </div>
 
 </header>
 
-  <div id="app"></div>
+
+<!-- =========================
+     CONTEÚDO
+========================= -->
+
+<div id="app"></div>
 
 
+<!-- =========================
+     MENU INFERIOR
+========================= -->
 
 <div class="bottom-menu">
 
 
-<div class="menu-item menu-active">
+    <!-- INÍCIO -->
 
-⌂<br>
-Início
+    <div class="menu-item menu-active">
+
+        <svg viewBox="0 0 24 24">
+
+            <path
+                d="M3 11l9-8 9 8"
+            />
+
+            <path
+                d="M5 10v10h14V10"
+            />
+
+        </svg>
+
+        <span>Início</span>
+
+    </div>
+
+
+    <!-- MANGÁS -->
+
+    <div class="menu-item">
+
+        <svg viewBox="0 0 24 24">
+
+            <path
+                d="M4 4h7v16H4z"
+            />
+
+            <path
+                d="M13 4h7v16h-7z"
+            />
+
+            <path
+                d="M6 7h3M6 10h3M15 7h3M15 10h3"
+            />
+
+        </svg>
+
+        <span>Mangás</span>
+
+    </div>
+
+
+    <!-- FAVORITOS -->
+
+    <div class="menu-item">
+
+        <svg viewBox="0 0 24 24">
+
+            <path
+                d="M20.8 8.6c0 5.5-8.8 11-8.8 11S3.2 14.1 3.2 8.6A4.6 4.6 0 0 1 12 6.4a4.6 4.6 0 0 1 8.8 2.2z"
+            />
+
+        </svg>
+
+        <span>Favoritos</span>
+
+    </div>
+
+
+    <!-- MAIS -->
+
+    <div class="menu-item">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 6h16" />
+            <path d="M4 12h16" />
+            <path d="M4 18h16" />
+
+        </svg>
+
+        <span>Mais</span>
+
+    </div>
 
 </div>
-
-
-<div class="menu-item">
-
-▣<br>
-Anime
-
-</div>
-
-
-<div class="menu-item">
-
-♡<br>
-Favoritos
-
-</div>
-
-
-<div class="menu-item">
-
-☰<br>
-Mais
-
-</div>
-
-
-</div>
-
 
 
 <script>
 
+/* =========================
+   API
+========================= */
 
 const app = document.getElementById("app");
-
 
 const API = "https://api.jikan.moe/v4";
 
 
+/* =========================
+   FUNÇÃO DA API
+========================= */
 
 async function api(url){
 
     try{
 
         const res = await fetch(API + url);
+
+        if(!res.ok){
+
+            throw new Error("Erro na API");
+
+        }
 
         const data = await res.json();
 
@@ -404,6 +598,8 @@ async function api(url){
 
     catch(e){
 
+        console.log("Erro:", e);
+
         return [];
 
     }
@@ -411,415 +607,232 @@ async function api(url){
 }
 
 
-
+/* =========================
+   CARD PEQUENO
+========================= */
 
 function smallCard(anime){
 
-return `
+    const image =
+        anime.images?.jpg?.large_image_url ||
+        anime.images?.jpg?.image_url ||
+        "";
 
-<div class="anime-card">
+    return `
 
-<img src="${anime.images.jpg.image_url}">
+        <div class="anime-card">
 
-</div>
+            <img
+                src="${image}"
+                alt="${anime.title || "Anime"}"
+                loading="lazy"
+            >
 
-`;
+        </div>
+
+    `;
 
 }
 
 
-
+/* =========================
+   CARD DE EPISÓDIO
+========================= */
 
 function episodeCard(anime,index){
 
-return `
+    const image =
+        anime.images?.jpg?.large_image_url ||
+        anime.images?.jpg?.image_url ||
+        "";
 
-<div class="episode-card">
+    return `
 
+        <div class="episode-card">
 
-<img src="${anime.images.jpg.large_image_url}">
+            <img
+                src="${image}"
+                alt="${anime.title || "Anime"}"
+                loading="lazy"
+            >
 
+            <div class="badge">
+                Dublado
+            </div>
 
+            <div class="episode-shadow"></div>
 
-<div class="badge">
+            <div class="episode-text">
 
-Dublado
+                <div class="episode-title">
+                    ${anime.title || "Novo episódio"}
+                </div>
 
-</div>
+                <div class="episode-sub">
+                    ${index + 1}. Novo episódio
+                </div>
 
+            </div>
 
+        </div>
 
-<div class="episode-shadow"></div>
-
-
-
-<div class="episode-text">
-
-
-<div class="episode-title">
-
-${anime.title}
-
-</div>
-
-
-<div class="episode-sub">
-
-${index + 1}. O caçador mais fraco
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-`;
+    `;
 
 }
 
 
-
-
+/* =========================
+   SECÇÃO
+========================= */
 
 function section(name,content){
 
+    return `
 
-return `
+        <section>
 
-<section>
+            <div class="title-section">
+                ${name}
+            </div>
 
+            <div class="container">
+                ${content}
+            </div>
 
-<div class="title-section">
+        </section>
 
-${name}
-
-</div>
-
-
-<div class="container">
-
-${content}
-
-</div>
-
-
-</section>
-
-`;
+    `;
 
 }
 
 
-
+/* =========================
+   CARREGAR ANIMES
+========================= */
 
 async function loadAnime(){
 
+    app.innerHTML = "";
 
 
-// populares
+    /* EM ALTA */
 
-let popular = await api(
-"/top/anime?filter=bypopularity"
-);
+    const popular = await api(
+        "/top/anime?filter=bypopularity"
+    );
 
+    app.innerHTML += section(
 
+        "Em alta",
 
-app.innerHTML += section(
+        popular
+        .slice(0,12)
+        .map(smallCard)
+        .join("")
 
-"Em alta",
+    );
 
-popular
-.slice(0,12)
-.map(smallCard)
-.join("")
 
-);
+    /* NOVOS EPISÓDIOS */
 
+    const airing = await api(
+        "/seasons/now"
+    );
 
+    app.innerHTML += section(
 
+        "Novos episódios",
 
+        airing
+        .slice(0,10)
+        .map(episodeCard)
+        .join("")
 
-// novos episódios
+    );
 
-let airing = await api(
 
-"/seasons/now"
+    /* NOVOS ANIMES */
 
-);
+    const latest = await api(
+        "/anime?order_by=start_date&sort=desc"
+    );
 
+    app.innerHTML += section(
 
+        "Novos animes",
 
-app.innerHTML += section(
+        latest
+        .slice(0,12)
+        .map(smallCard)
+        .join("")
 
-"Novos episódios",
+    );
 
-airing
-.slice(0,10)
-.map(episodeCard)
-.join("")
 
-);
+    /* AÇÃO */
 
+    const action = await api(
+        "/anime?genres=1&order_by=popularity"
+    );
 
+    app.innerHTML += section(
 
+        "Ação",
 
+        action
+        .slice(0,12)
+        .map(smallCard)
+        .join("")
 
+    );
 
-// lançamentos
 
-let latest = await api(
+    /* FANTASIA */
 
-"/anime?order_by=start_date&sort=desc"
+    const fantasy = await api(
+        "/anime?genres=10&order_by=popularity"
+    );
 
-);
+    app.innerHTML += section(
 
+        "Fantasia",
 
+        fantasy
+        .slice(0,12)
+        .map(smallCard)
+        .join("")
 
-app.innerHTML += section(
+    );
 
-"Novos animes",
 
-latest
-.slice(0,12)
-.map(smallCard)
-.join("")
+    /* ROMANCE */
 
-);
+    const romance = await api(
+        "/anime?genres=22&order_by=popularity"
+    );
 
+    app.innerHTML += section(
 
+        "Romance",
 
+        romance
+        .slice(0,12)
+        .map(smallCard)
+        .join("")
 
+    );
 
+}
 
-// ação
 
-let action = await api(
-
-"/anime?genres=1&order_by=popularity"
-
-);
-
-
-
-app.innerHTML += section(
-
-"Ação",
-
-action
-.slice(0,12)
-.map(smallCard)
-.join("")
-
-);
-
-
-
-
-
-
-
-// fantasia
-
-let fantasy = await api(
-
-"/anime?genres=10&order_by=popularity"
-
-);
-
-
-
-app.innerHTML += section(
-
-"Fantasia",
-
-fantasy
-.slice(0,12)
-.map(smallCard)
-.join("")
-
-);
-
-
-
-
-
-
-
-// romance
-
-let romance = await api(
-
-"/anime?genres=22&order_by=popularity"
-
-);
-
-
-
-app.innerHTML += section(
-
-"Romance",
-
-romance
-.slice(0,12)
-.map(smallCard)
-.join("")
-
-);
-
-
-
-
+/* =========================
+   INICIAR
+========================= */
 
 loadAnime();
 
-
 </script>
 
- <style>
-
-/* AJUSTES FINAIS DE ESCALA */
-
-@media (max-width:600px){
-
-
-.header{
-
-    height:65px;
-    padding:0 14px;
-
-}
-
-
-.logo{
-
-    width:42px;
-    height:42px;
-
-    font-size:21px;
-
-}
-
-
-
-.title-section{
-
-    font-size:20px;
-
-    margin-left:14px;
-
-}
-
-
-
-.container{
-
-    padding-left:14px;
-
-    gap:10px;
-
-}
-
-
-
-.anime-card{
-
-    min-width:82px;
-
-    height:122px;
-
-}
-
-
-
-.episode-card{
-
-    min-width:285px;
-
-    height:165px;
-
-}
-
-
-}
-
-
-
-
-/* EFEITO DE DESLIZE SUAVE */
-
-.container{
-
-scroll-behavior:smooth;
-
-}
-
-
-
-/* PRIMEIRO CARD SEMPRE ALINHADO */
-
-section{
-
-margin-bottom:18px;
-
-}
-
-
-
-/* SOMBRA NOS CARDS */
-
-.anime-card,
-.episode-card{
-
-box-shadow:
-
-0 4px 12px rgba(0,0,0,.35);
-
-}
-
-
-
-/* ESCONDER TEXTO DOS CARDS NORMAIS */
-
-.anime-card{
-
-position:relative;
-
-}
-
-
-
-/* NOVOS EPISÓDIOS COM MAIS DESTAQUE */
-
-.episode-title{
-
-max-width:220px;
-
-white-space:nowrap;
-
-overflow:hidden;
-
-text-overflow:ellipsis;
-
-}
-
-
-
-/* MENU IGUAL APP */
-
-.bottom-menu{
-
-z-index:100;
-
-}
-
-
-
-</style>
-
-
 </body>
-
-</html>     
+    
+</html>
