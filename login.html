@@ -415,24 +415,19 @@ googleButton.addEventListener(
                 provider
             );
 
-        }catch(error){
+        catch(error){
 
-            console.log(error);
+    console.log(error);
 
-            mostrarMensagem(
-                "Não foi possível entrar com Google."
-            );
+    mostrarMensagem(
+        error.code + ": " + error.message
+    );
 
-            googleButton.disabled = false;
+    googleButton.disabled = false;
 
-            googleButton.textContent =
-                "🇬 Entrar com Google";
-
+    googleButton.textContent =
+        "🇬 Entrar com Google";
         }
-
-    }
-);
-
 
 </script>
 
