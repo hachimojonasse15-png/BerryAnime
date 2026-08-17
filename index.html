@@ -92,8 +92,7 @@ body{
 
 
 /* =====================================================
-   PEQUENA DECORAÇÃO VERMELHA NO FUNDO
-   Fica bem discreta, como na imagem de referência.
+   PEQUENA DECORAÇÃO VERMELHA
 ===================================================== */
 
 #splash::after{
@@ -113,8 +112,8 @@ body{
     background:
         radial-gradient(
             circle,
-            rgba(255,23,68,.22) 0%,
-            rgba(255,23,68,.10) 38%,
+            rgba(255,23,68,.20) 0%,
+            rgba(255,23,68,.08) 38%,
             rgba(255,23,68,0) 72%
         );
 
@@ -127,7 +126,7 @@ body{
 
 
 /* =====================================================
-   CONTEÚDO DA SPLASH
+   CONTEÚDO SPLASH
 ===================================================== */
 
 .splash-content{
@@ -146,16 +145,12 @@ body{
 
     justify-content:center;
 
-    /*
-       Sobe o conjunto inteiro.
-    */
-
-    transform:translateY(-55px);
+    transform:translateY(-65px);
 }
 
 
 /* =====================================================
-   LOGO DA SPLASH
+   LOGO SPLASH
 ===================================================== */
 
 .berry-logo{
@@ -168,29 +163,26 @@ body{
     display:block;
 
     /*
-       O JPG possui fundo preto.
-       SCREEN faz o preto desaparecer
-       contra o fundo preto da splash.
+       IMPORTANTE:
+       A imagem é JPG com fundo preto.
+       "lighten" elimina visualmente o preto
+       sem criar o quadrado.
     */
 
-    mix-blend-mode:screen;
+    mix-blend-mode:lighten;
 
     /*
-       Aumentamos o contraste para eliminar
-       o quadrado cinza/escuro provocado
-       pela compressão do JPG.
+       Ajuste da imagem.
     */
 
     filter:
-        brightness(1.12)
-        contrast(1.75);
+        brightness(1.10)
+        contrast(1.70);
 
     /*
-       Evita que a imagem crie uma caixa
-       visual separada.
+       NÃO usar isolation:isolate aqui.
+       Ela impediria o blend com o fundo.
     */
-
-    isolation:isolate;
 }
 
 
@@ -227,7 +219,7 @@ body{
 
 
 /* =====================================================
-   CÍRCULO DE CARREGAMENTO
+   LOADER
 ===================================================== */
 
 .loader{
@@ -241,11 +233,6 @@ body{
 
     border-top-color:#ff1744;
     border-right-color:#ff1744;
-
-    /*
-       Agora fica próximo do nome,
-       em vez de ficar muito abaixo.
-    */
 
     margin-top:72px;
 
@@ -381,11 +368,16 @@ body{
 
     display:block;
 
-    mix-blend-mode:screen;
+    /*
+       Mesmo tratamento do logo da splash.
+       Remove visualmente o quadrado preto.
+    */
+
+    mix-blend-mode:lighten;
 
     filter:
-        brightness(1.12)
-        contrast(1.75);
+        brightness(1.10)
+        contrast(1.70);
 }
 
 
@@ -497,7 +489,7 @@ body{
 
 
 /* =====================================================
-   ÍCONES DOS BOTÕES
+   ÍCONES
 ===================================================== */
 
 .btn-icon{
@@ -641,7 +633,7 @@ body{
 
 
 /* =====================================================
-   GOOGLE G REAL
+   GOOGLE G
 ===================================================== */
 
 .google-icon{
@@ -714,7 +706,9 @@ body{
     }
 
     .buttons{
+
         width:80%;
+
         max-width:330px;
 
         margin-top:30px;
@@ -724,6 +718,7 @@ body{
 
     .btn,
     .google-btn{
+
         min-height:52px;
     }
 
@@ -735,6 +730,7 @@ body{
     }
 
     .berry-logo{
+
         width:175px;
         height:175px;
     }
@@ -744,6 +740,7 @@ body{
     }
 
     .loader{
+
         width:36px;
         height:36px;
 
@@ -762,6 +759,7 @@ body{
 @media(max-width:380px){
 
     .berry-logo{
+
         width:175px;
         height:175px;
     }
@@ -771,6 +769,7 @@ body{
     }
 
     .loader{
+
         width:36px;
         height:36px;
 
@@ -778,6 +777,7 @@ body{
     }
 
     .login-logo{
+
         width:155px;
         height:155px;
     }
@@ -791,7 +791,9 @@ body{
     }
 
     .buttons{
+
         width:82%;
+
         max-width:310px;
 
         gap:13px;
@@ -799,7 +801,9 @@ body{
 
     .btn,
     .google-btn{
+
         min-height:52px;
+
         font-size:17px;
     }
 
@@ -812,30 +816,19 @@ body{
 
 @media(min-height:800px){
 
-    /*
-       Antes estava 220px e deixava o logo
-       muito grande/baixo.
-    */
-
     .berry-logo{
+
         width:205px;
         height:205px;
     }
 
-    /*
-       Subimos ainda mais o conjunto
-       nos celulares altos.
-    */
-
     .splash-content{
+
         transform:translateY(-65px);
     }
 
-    /*
-       Círculo menor e mais próximo.
-    */
-
     .loader{
+
         width:40px;
         height:40px;
 
@@ -1154,4 +1147,4 @@ function googleLogin(){
 
 
 </body>
-              </html>
+</html>
