@@ -14,10 +14,6 @@
 
 <style>
 
-/* =====================================================
-   CONFIGURAÇÃO GERAL
-===================================================== */
-
 *{
     margin:0;
     padding:0;
@@ -37,18 +33,11 @@ body{
     color:white;
 }
 
-
-/* =====================================================
-   TELAS
-===================================================== */
-
 .screen{
     position:absolute;
     inset:0;
-
     width:100%;
     height:100vh;
-
     min-height:100vh;
 
     display:flex;
@@ -64,7 +53,6 @@ body{
 ===================================================== */
 
 #splash{
-
     position:absolute;
     inset:0;
 
@@ -82,21 +70,12 @@ body{
 }
 
 #splash.hidden{
-
     opacity:0;
-
     visibility:hidden;
-
     pointer-events:none;
 }
 
-
-/* =====================================================
-   PEQUENA DECORAÇÃO VERMELHA
-===================================================== */
-
 #splash::after{
-
     content:"";
 
     position:absolute;
@@ -124,88 +103,45 @@ body{
     z-index:0;
 }
 
-
-/* =====================================================
-   CONTEÚDO SPLASH
-===================================================== */
-
 .splash-content{
-
     position:relative;
-
     z-index:2;
 
     width:100%;
 
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
 
     transform:translateY(-65px);
 }
 
-
-/* =====================================================
-   LOGO SPLASH
-===================================================== */
-
 .berry-logo{
-
     width:205px;
     height:205px;
 
     object-fit:contain;
-
     display:block;
 
-    /*
-       IMPORTANTE:
-       A imagem é JPG com fundo preto.
-       "lighten" elimina visualmente o preto
-       sem criar o quadrado.
-    */
-
     mix-blend-mode:lighten;
-
-    /*
-       Ajuste da imagem.
-    */
 
     filter:
         brightness(1.10)
         contrast(1.70);
-
-    /*
-       NÃO usar isolation:isolate aqui.
-       Ela impediria o blend com o fundo.
-    */
 }
 
-
-/* =====================================================
-   NOME BERRYANIME
-===================================================== */
-
 .logo-name{
-
     margin-top:2px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     font-size:43px;
-
     font-weight:900;
 
     letter-spacing:-2px;
-
     line-height:1;
 }
 
@@ -217,13 +153,7 @@ body{
     color:#ffffff;
 }
 
-
-/* =====================================================
-   LOADER
-===================================================== */
-
 .loader{
-
     width:40px;
     height:40px;
 
@@ -236,12 +166,10 @@ body{
 
     margin-top:72px;
 
-    animation:
-        spin .8s linear infinite;
+    animation:spin .8s linear infinite;
 }
 
 @keyframes spin{
-
     0%{
         transform:rotate(0deg);
     }
@@ -249,16 +177,14 @@ body{
     100%{
         transform:rotate(360deg);
     }
-
 }
 
 
 /* =====================================================
-   LOGIN
+   LOGIN SCREEN
 ===================================================== */
 
 #login{
-
     background:
 
         radial-gradient(
@@ -283,7 +209,6 @@ body{
         30px;
 
     opacity:0;
-
     visibility:hidden;
 
     transform:translateX(20px);
@@ -295,21 +220,12 @@ body{
 }
 
 #login.show{
-
     opacity:1;
-
     visibility:visible;
-
     transform:translateX(0);
 }
 
-
-/* =====================================================
-   DECORAÇÃO
-===================================================== */
-
 .background-glow{
-
     position:absolute;
 
     width:320px;
@@ -330,48 +246,26 @@ body{
     pointer-events:none;
 }
 
-
-/* =====================================================
-   CONTEÚDO LOGIN
-===================================================== */
-
 .login-content{
-
     position:relative;
-
     z-index:2;
 
     width:100%;
-
     max-width:430px;
 
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
 
     margin-top:5px;
 }
 
-
-/* =====================================================
-   LOGO LOGIN
-===================================================== */
-
 .login-logo{
-
     width:190px;
     height:190px;
 
     object-fit:contain;
-
     display:block;
-
-    /*
-       Mesmo tratamento do logo da splash.
-       Remove visualmente o quadrado preto.
-    */
 
     mix-blend-mode:lighten;
 
@@ -380,17 +274,10 @@ body{
         contrast(1.70);
 }
 
-
-/* =====================================================
-   NOME
-===================================================== */
-
 .login-brand{
-
     margin-top:-8px;
 
     font-size:43px;
-
     font-weight:900;
 
     letter-spacing:-2px;
@@ -404,19 +291,12 @@ body{
     color:white;
 }
 
-
-/* =====================================================
-   DESCRIÇÃO
-===================================================== */
-
 .subtitle{
-
     margin-top:17px;
 
     text-align:center;
 
     font-size:18px;
-
     line-height:1.45;
 
     color:#eeeeee;
@@ -424,41 +304,25 @@ body{
     max-width:330px;
 }
 
-
-/* =====================================================
-   BOTÕES
-===================================================== */
-
 .buttons{
-
     width:82%;
-
     max-width:360px;
 
     margin-top:58px;
 
     display:flex;
-
     flex-direction:column;
 
     gap:18px;
 }
 
-
-/* =====================================================
-   BOTÕES PRINCIPAIS
-===================================================== */
-
 .btn{
-
     width:100%;
-
     min-height:58px;
 
     border-radius:14px;
 
     font-size:19px;
-
     font-weight:800;
 
     letter-spacing:.4px;
@@ -468,9 +332,7 @@ body{
     font-family:Arial, sans-serif;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     gap:12px;
@@ -481,42 +343,26 @@ body{
 }
 
 .btn:active{
-
     transform:scale(.97);
-
     opacity:.85;
 }
 
-
-/* =====================================================
-   ÍCONES
-===================================================== */
-
 .btn-icon{
-
     width:23px;
     height:23px;
 
     flex:none;
 
     stroke:currentColor;
-
     fill:none;
 
     stroke-width:2.2;
 
     stroke-linecap:round;
-
     stroke-linejoin:round;
 }
 
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
 .login-btn{
-
     background:transparent;
 
     color:#ff1744;
@@ -524,13 +370,7 @@ body{
     border:2px solid #ff1744;
 }
 
-
-/* =====================================================
-   REGISTRAR
-===================================================== */
-
 .register-btn{
-
     background:
         linear-gradient(
             90deg,
@@ -543,42 +383,28 @@ body{
     border:0;
 }
 
-
-/* =====================================================
-   OU
-===================================================== */
-
 .or{
-
     width:100%;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     gap:16px;
-
-    margin:0;
 }
 
 .or::before,
 .or::after{
-
     content:"";
 
     height:1px;
-
     flex:1;
 
     background:#383838;
 }
 
 .or span{
-
     font-size:16px;
-
     font-weight:700;
 
     color:#999999;
@@ -590,27 +416,20 @@ body{
 ===================================================== */
 
 .google-btn{
-
     width:100%;
-
     min-height:58px;
 
     border:0;
-
     border-radius:13px;
 
     background:white;
-
     color:#333333;
 
     font-size:18px;
-
     font-weight:600;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     gap:14px;
@@ -625,36 +444,25 @@ body{
 }
 
 .google-btn:active{
-
     transform:scale(.97);
-
     opacity:.85;
 }
 
-
-/* =====================================================
-   GOOGLE G
-===================================================== */
-
 .google-icon{
-
     width:25px;
     height:25px;
 
     display:block;
-
     flex:none;
 }
 
 
 /* =====================================================
-   DECORAÇÕES LOGIN
+   DECORAÇÕES
 ===================================================== */
 
 .decor{
-
     position:absolute;
-
     z-index:1;
 
     border-radius:50%;
@@ -663,7 +471,6 @@ body{
 }
 
 .decor.one{
-
     width:100px;
     height:100px;
 
@@ -672,7 +479,6 @@ body{
 }
 
 .decor.two{
-
     width:70px;
     height:70px;
 
@@ -682,7 +488,7 @@ body{
 
 
 /* =====================================================
-   TELAS PEQUENAS
+   RESPONSIVO
 ===================================================== */
 
 @media(max-height:700px){
@@ -706,9 +512,7 @@ body{
     }
 
     .buttons{
-
         width:80%;
-
         max-width:330px;
 
         margin-top:30px;
@@ -718,19 +522,14 @@ body{
 
     .btn,
     .google-btn{
-
         min-height:52px;
     }
-
-
-    /* SPLASH */
 
     .splash-content{
         transform:translateY(-35px);
     }
 
     .berry-logo{
-
         width:175px;
         height:175px;
     }
@@ -740,7 +539,6 @@ body{
     }
 
     .loader{
-
         width:36px;
         height:36px;
 
@@ -748,18 +546,11 @@ body{
 
         border-width:4px;
     }
-
 }
-
-
-/* =====================================================
-   CELULARES PEQUENOS
-===================================================== */
 
 @media(max-width:380px){
 
     .berry-logo{
-
         width:175px;
         height:175px;
     }
@@ -769,7 +560,6 @@ body{
     }
 
     .loader{
-
         width:36px;
         height:36px;
 
@@ -777,7 +567,6 @@ body{
     }
 
     .login-logo{
-
         width:155px;
         height:155px;
     }
@@ -791,9 +580,7 @@ body{
     }
 
     .buttons{
-
         width:82%;
-
         max-width:310px;
 
         gap:13px;
@@ -801,52 +588,39 @@ body{
 
     .btn,
     .google-btn{
-
         min-height:52px;
-
         font-size:17px;
     }
-
 }
-
-
-/* =====================================================
-   CELULARES ALTOS
-===================================================== */
 
 @media(min-height:800px){
 
     .berry-logo{
-
         width:205px;
         height:205px;
     }
 
     .splash-content{
-
         transform:translateY(-65px);
     }
 
     .loader{
-
         width:40px;
         height:40px;
 
         margin-top:72px;
     }
-
 }
 
 </style>
 
 </head>
 
-
 <body>
 
 
 <!-- ===================================================
-     SPLASH SCREEN
+     SPLASH
 =================================================== -->
 
 <section
@@ -891,19 +665,12 @@ body{
 
     <div class="decor two"></div>
 
-
     <div class="login-content">
-
-
-        <!-- LOGO -->
 
         <img
             src="BerryAnime_logo_leve.jpg"
             class="login-logo"
             alt="BerryAnime">
-
-
-        <!-- NOME -->
 
         <div class="login-brand">
 
@@ -912,9 +679,6 @@ body{
 
         </div>
 
-
-        <!-- DESCRIÇÃO -->
-
         <p class="subtitle">
 
             Assista aos seus animes
@@ -922,22 +686,19 @@ body{
 
         </p>
 
-
-        <!-- BOTÕES -->
-
         <div class="buttons">
 
 
             <!-- LOGIN -->
 
             <button
+                type="button"
                 class="btn login-btn"
-                onclick="login()">
+                id="loginButton">
 
                 <svg
                     class="btn-icon"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
+                    viewBox="0 0 24 24">
 
                     <circle
                         cx="12"
@@ -959,13 +720,13 @@ body{
             <!-- REGISTRAR -->
 
             <button
+                type="button"
                 class="btn register-btn"
-                onclick="register()">
+                id="registerButton">
 
                 <svg
                     class="btn-icon"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true">
+                    viewBox="0 0 24 24">
 
                     <circle
                         cx="9"
@@ -1004,13 +765,13 @@ body{
             <!-- GOOGLE -->
 
             <button
+                type="button"
                 class="google-btn"
-                onclick="googleLogin()">
+                id="googleButton">
 
                 <svg
                     class="google-icon"
-                    viewBox="0 0 48 48"
-                    aria-hidden="true">
+                    viewBox="0 0 48 48">
 
                     <path
                         fill="#4285F4"
@@ -1038,7 +799,6 @@ body{
 
             </button>
 
-
         </div>
 
     </div>
@@ -1047,10 +807,6 @@ body{
 
 
 <script type="module">
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 import {
     auth
@@ -1061,23 +817,86 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
+const splash =
+    document.getElementById("splash");
+
+const loginScreen =
+    document.getElementById("login");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const registerButton =
+    document.getElementById("registerButton");
+
+const googleButton =
+    document.getElementById("googleButton");
+
+
 /* =====================================================
-   VERIFICAR USUÁRIO
+   ESTADO
 ===================================================== */
 
-let usuarioAutenticado = false;
+let authChecked = false;
+
+let splashFinished = false;
+
+let redirected = false;
+
+
+/* =====================================================
+   MOSTRAR LOGIN
+===================================================== */
+
+function showLogin(){
+
+    if(redirected){
+        return;
+    }
+
+    splash.classList.add("hidden");
+
+    loginScreen.classList.add("show");
+
+}
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
 
 onAuthStateChanged(
     auth,
     function(user){
 
+        authChecked = true;
+
+
         if(user){
 
-            usuarioAutenticado = true;
+            /*
+             * Utilizador autenticado:
+             * não mostramos a tela de login.
+             */
+
+            redirected = true;
 
             window.location.replace(
                 "home.html"
             );
+
+            return;
+
+        }
+
+
+        /*
+         * Utilizador não autenticado.
+         */
+
+        if(splashFinished){
+
+            showLogin();
 
         }
 
@@ -1086,65 +905,82 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   SPLASH → LOGIN
+   SPLASH
 ===================================================== */
 
-setTimeout(function(){
+setTimeout(
+    function(){
 
-    if(usuarioAutenticado){
-        return;
-    }
+        splashFinished = true;
 
-    document
-        .getElementById("splash")
-        .classList
-        .add("hidden");
 
-    document
-        .getElementById("login")
-        .classList
-        .add("show");
+        /*
+         * Só mostra o login depois
+         * do Firebase terminar a verificação.
+         */
 
-},3000);
+        if(authChecked){
+
+            showLogin();
+
+        }
+
+    },
+    3000
+);
 
 
 /* =====================================================
    LOGIN
 ===================================================== */
 
-function login(){
+loginButton.addEventListener(
+    "click",
+    function(){
 
-    window.location.href =
-        "login.html";
+        window.location.href =
+            "login.html";
 
-}
+    }
+);
 
 
 /* =====================================================
    REGISTRAR
 ===================================================== */
 
-function register(){
+registerButton.addEventListener(
+    "click",
+    function(){
 
-    window.location.href =
-        "register.html";
+        window.location.href =
+            "register.html";
 
-}
+    }
+);
 
 
 /* =====================================================
    GOOGLE
 ===================================================== */
 
-function googleLogin(){
+googleButton.addEventListener(
+    "click",
+    function(){
 
-    window.location.href =
-        "login.html";
+        /*
+         * O fluxo Google continua no login.html,
+         * onde o Firebase executa a autenticação.
+         */
 
-}
+        window.location.href =
+            "login.html";
+
+    }
+);
 
 </script>
 
 
 </body>
-</html>
+          </html>
