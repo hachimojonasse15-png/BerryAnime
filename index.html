@@ -1,5 +1,3 @@
-index.html
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -66,10 +64,17 @@ body{
 ===================================================== */
 
 #splash{
+
+    position:absolute;
+    inset:0;
+
     background:#050505;
+
     justify-content:center;
 
     z-index:10;
+
+    overflow:hidden;
 
     transition:
         opacity .5s ease,
@@ -77,42 +82,115 @@ body{
 }
 
 #splash.hidden{
+
     opacity:0;
+
     visibility:hidden;
+
     pointer-events:none;
 }
 
 
 /* =====================================================
-   LOGO SPLASH
+   PEQUENA DECORAÇÃO VERMELHA NO FUNDO
+   Fica bem discreta, como na imagem de referência.
 ===================================================== */
 
-.splash-content{
-    width:100%;
+#splash::after{
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    content:"";
 
-    transform:translateY(25px);
+    position:absolute;
+
+    width:230px;
+    height:230px;
+
+    right:-105px;
+    bottom:-125px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,23,68,.22) 0%,
+            rgba(255,23,68,.10) 38%,
+            rgba(255,23,68,0) 72%
+        );
+
+    filter:blur(8px);
+
+    pointer-events:none;
+
+    z-index:0;
 }
 
 
-/*
-   A imagem é JPG e possui fundo preto.
-   screen faz o preto desaparecer sobre
-   o fundo escuro da aplicação.
-*/
+/* =====================================================
+   CONTEÚDO DA SPLASH
+===================================================== */
+
+.splash-content{
+
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    /*
+       Sobe o conjunto inteiro.
+    */
+
+    transform:translateY(-55px);
+}
+
+
+/* =====================================================
+   LOGO DA SPLASH
+===================================================== */
 
 .berry-logo{
-    width:210px;
-    height:210px;
+
+    width:205px;
+    height:205px;
 
     object-fit:contain;
+
     display:block;
 
+    /*
+       O JPG possui fundo preto.
+       SCREEN faz o preto desaparecer
+       contra o fundo preto da splash.
+    */
+
     mix-blend-mode:screen;
+
+    /*
+       Aumentamos o contraste para eliminar
+       o quadrado cinza/escuro provocado
+       pela compressão do JPG.
+    */
+
+    filter:
+        brightness(1.12)
+        contrast(1.75);
+
+    /*
+       Evita que a imagem crie uma caixa
+       visual separada.
+    */
+
+    isolation:isolate;
 }
 
 
@@ -121,16 +199,21 @@ body{
 ===================================================== */
 
 .logo-name{
-    margin-top:5px;
+
+    margin-top:2px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     font-size:43px;
+
     font-weight:900;
 
     letter-spacing:-2px;
+
     line-height:1;
 }
 
@@ -144,23 +227,30 @@ body{
 
 
 /* =====================================================
-   LOADER
+   CÍRCULO DE CARREGAMENTO
 ===================================================== */
 
 .loader{
-    width:55px;
-    height:55px;
+
+    width:40px;
+    height:40px;
 
     border-radius:50%;
 
-    border:5px solid rgba(255,23,68,.18);
+    border:4px solid rgba(255,23,68,.16);
 
     border-top-color:#ff1744;
     border-right-color:#ff1744;
 
-    margin-top:105px;
+    /*
+       Agora fica próximo do nome,
+       em vez de ficar muito abaixo.
+    */
 
-    animation:spin .8s linear infinite;
+    margin-top:72px;
+
+    animation:
+        spin .8s linear infinite;
 }
 
 @keyframes spin{
@@ -291,11 +381,11 @@ body{
 
     display:block;
 
-    /*
-      Remove visualmente o fundo preto
-      do JPG.
-    */
     mix-blend-mode:screen;
+
+    filter:
+        brightness(1.12)
+        contrast(1.75);
 }
 
 
@@ -550,9 +640,9 @@ body{
 }
 
 
-/*
-   Google G multicolorido
-*/
+/* =====================================================
+   GOOGLE G REAL
+===================================================== */
 
 .google-icon{
 
@@ -566,7 +656,7 @@ body{
 
 
 /* =====================================================
-   DECORAÇÕES
+   DECORAÇÕES LOGIN
 ===================================================== */
 
 .decor{
@@ -637,6 +727,31 @@ body{
         min-height:52px;
     }
 
+
+    /* SPLASH */
+
+    .splash-content{
+        transform:translateY(-35px);
+    }
+
+    .berry-logo{
+        width:175px;
+        height:175px;
+    }
+
+    .logo-name{
+        font-size:36px;
+    }
+
+    .loader{
+        width:36px;
+        height:36px;
+
+        margin-top:55px;
+
+        border-width:4px;
+    }
+
 }
 
 
@@ -647,8 +762,8 @@ body{
 @media(max-width:380px){
 
     .berry-logo{
-        width:180px;
-        height:180px;
+        width:175px;
+        height:175px;
     }
 
     .logo-name{
@@ -656,9 +771,10 @@ body{
     }
 
     .loader{
-        width:45px;
-        height:45px;
-        margin-top:85px;
+        width:36px;
+        height:36px;
+
+        margin-top:58px;
     }
 
     .login-logo{
@@ -696,13 +812,34 @@ body{
 
 @media(min-height:800px){
 
+    /*
+       Antes estava 220px e deixava o logo
+       muito grande/baixo.
+    */
+
     .berry-logo{
-        width:220px;
-        height:220px;
+        width:205px;
+        height:205px;
     }
 
+    /*
+       Subimos ainda mais o conjunto
+       nos celulares altos.
+    */
+
+    .splash-content{
+        transform:translateY(-65px);
+    }
+
+    /*
+       Círculo menor e mais próximo.
+    */
+
     .loader{
-        margin-top:110px;
+        width:40px;
+        height:40px;
+
+        margin-top:72px;
     }
 
 }
@@ -877,8 +1014,6 @@ body{
                 class="google-btn"
                 onclick="googleLogin()">
 
-                <!-- Google G multicolorido -->
-
                 <svg
                     class="google-icon"
                     viewBox="0 0 48 48"
@@ -1019,4 +1154,4 @@ function googleLogin(){
 
 
 </body>
-      </html>
+              </html>
