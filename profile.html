@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
 
@@ -11,155 +11,125 @@
                maximum-scale=1.0,
                user-scalable=no">
 
-<title>BerryAnime - Perfil</title>
+<title>BerryAnime - Profile</title>
 
 <style>
-
-/* =====================================================
-   BASE
-===================================================== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-html,
 body{
-    width:100%;
-    min-height:100%;
     background:#080808;
     color:white;
+    min-height:100vh;
+    padding:20px 16px 40px;
 }
 
-body{
-    padding-bottom:40px;
+.profile{
+    width:100%;
+    max-width:430px;
+    margin:auto;
 }
 
+/* =========================
+   TOP
+========================= */
 
-/* =====================================================
-   TOPO
-===================================================== */
-
-.topbar{
-
-    height:70px;
+.top{
+    height:48px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
-    padding:0 18px;
-
-    background:#080808;
+    margin-bottom:25px;
 }
 
 .top-button{
-
-    width:42px;
-    height:42px;
+    width:40px;
+    height:40px;
 
     border:0;
-
     background:transparent;
-
     color:white;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     cursor:pointer;
 }
 
 .top-button svg{
-
-    width:27px;
-    height:27px;
-
-    stroke:currentColor;
+    width:24px;
+    height:24px;
 
     fill:none;
+    stroke:currentColor;
 
     stroke-width:2;
 
     stroke-linecap:round;
-
     stroke-linejoin:round;
 }
 
 
-/* =====================================================
-   PERFIL
-===================================================== */
-
-.profile{
-
-    width:100%;
-
-    max-width:600px;
-
-    margin:0 auto;
-
-    padding:18px 20px 40px;
-}
-
-
-/* =====================================================
-   CABEÇALHO DO PERFIL
-===================================================== */
+/* =========================
+   PROFILE HEADER
+========================= */
 
 .profile-header{
-
     display:flex;
-
+    flex-direction:column;
     align-items:center;
 
-    gap:20px;
+    text-align:center;
 
-    margin-top:20px;
-
-    margin-bottom:28px;
+    margin-bottom:25px;
 }
 
 
-/* =====================================================
-   FOTO
-===================================================== */
+/* =========================
+   USER ICON
+   SAME STYLE AS MORE MENU
+========================= */
 
 .avatar{
-
-    width:116px;
-
-    height:116px;
-
-    min-width:116px;
+    width:92px;
+    height:92px;
 
     border-radius:50%;
 
-    overflow:hidden;
+    background:#151515;
 
-    background:#252525;
-
-    border:1px solid #333;
+    border:1px solid #292929;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
+
+    overflow:hidden;
+}
+
+.avatar svg{
+    width:45px;
+    height:45px;
+
+    fill:none;
+    stroke:#888;
+
+    stroke-width:1.8;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
 
 .avatar img{
-
     width:100%;
-
     height:100%;
 
     object-fit:cover;
@@ -167,211 +137,178 @@ body{
     display:block;
 }
 
-.default-avatar{
 
-    width:100%;
-
-    height:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#292929;
-}
-
-.default-avatar svg{
-
-    width:68px;
-
-    height:68px;
-
-    stroke:#777;
-
-    fill:none;
-
-    stroke-width:1.5;
-
-    stroke-linecap:round;
-
-    stroke-linejoin:round;
-}
-
-
-/* =====================================================
-   INFORMAÇÕES
-===================================================== */
-
-.profile-info{
-
-    min-width:0;
-
-    flex:1;
-}
+/* =========================
+   NAME
+========================= */
 
 .profile-name{
+    margin-top:16px;
 
-    font-size:27px;
+    font-size:23px;
 
     font-weight:800;
 
-    margin-bottom:7px;
+    max-width:330px;
 
     white-space:nowrap;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
 }
 
+
+/* =========================
+   EMAIL
+========================= */
+
 .profile-email{
+    margin-top:6px;
 
-    color:#999;
+    color:#888;
 
-    font-size:14px;
+    font-size:13px;
 
-    line-height:1.4;
+    max-width:330px;
 
     word-break:break-word;
 }
 
 
-/* =====================================================
-   BOTÃO EDITAR
-===================================================== */
+/* =========================
+   EDIT
+========================= */
 
 .edit-button{
+    margin-top:17px;
 
-    width:100%;
-
-    height:50px;
+    width:130px;
+    height:43px;
 
     border:0;
 
-    border-radius:12px;
+    border-radius:10px;
 
-    background:white;
+    background:#191919;
 
-    color:#111;
+    color:white;
 
-    font-size:15px;
+    font-size:14px;
 
-    font-weight:800;
+    font-weight:700;
 
     cursor:pointer;
-
-    margin-bottom:25px;
 
     transition:.15s;
 }
 
 .edit-button:active{
-
-    transform:scale(.98);
+    transform:scale(.97);
 }
 
 
-/* =====================================================
-   BIO
-===================================================== */
+/* =========================
+   ACCOUNT INFO
+========================= */
 
-.bio-card{
+.info-list{
+    margin-top:30px;
 
-    background:#151515;
-
-    border:1px solid #202020;
-
-    border-radius:14px;
-
-    padding:17px;
-
-    margin-bottom:18px;
+    border-top:1px solid #202020;
 }
 
-.bio-title{
+.info-item{
+    min-height:58px;
 
-    font-size:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-    font-weight:800;
-
-    margin-bottom:8px;
+    border-bottom:1px solid #202020;
 }
 
-.bio-text{
-
-    color:#999;
-
-    font-size:14px;
-
-    line-height:1.5;
-}
-
-
-/* =====================================================
-   ESTATÍSTICAS
-===================================================== */
-
-.stats{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:12px;
-
-    margin-bottom:30px;
-}
-
-.stat-card{
-
-    background:#151515;
-
-    border:1px solid #202020;
-
-    border-radius:14px;
-
-    padding:17px;
-}
-
-.stat-title{
-
-    font-size:15px;
-
-    font-weight:800;
-
-    margin-bottom:7px;
-}
-
-.stat-value{
-
-    color:#999;
-
+.info-label{
+    color:#aaa;
     font-size:14px;
 }
 
+.info-value{
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+}
 
-/* =====================================================
-   FAVORITOS
-===================================================== */
+
+/* =========================
+   FAVORITES
+========================= */
 
 .section-title{
+    margin-top:32px;
 
-    font-size:21px;
+    margin-bottom:14px;
+
+    font-size:18px;
 
     font-weight:800;
-
-    margin-bottom:16px;
 }
 
 .empty{
+    min-height:100px;
 
-    min-height:150px;
+    border-radius:12px;
 
     background:#111;
 
-    border-radius:14px;
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:13px;
+
+    padding:20px;
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout-button{
+
+    width:100%;
+
+    height:48px;
+
+    margin-top:30px;
+
+    border:1px solid #292929;
+
+    border-radius:10px;
+
+    background:#151515;
+
+    color:#ff1744;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    min-height:80vh;
 
     display:flex;
 
@@ -379,140 +316,29 @@ body{
 
     justify-content:center;
 
-    text-align:center;
-
-    padding:20px;
-
-    color:#777;
+    color:#888;
 
     font-size:14px;
 }
 
 
-/* =====================================================
-   COMENTÁRIOS
-===================================================== */
-
-.comments{
-
-    margin-top:32px;
-}
-
-
-/* =====================================================
-   CARREGANDO
-===================================================== */
-
-.loading{
-
-    min-height:70vh;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:#999;
-
-    font-size:15px;
-}
-
-
-/* =====================================================
-   ERRO
-===================================================== */
-
-.error{
-
-    text-align:center;
-
-    padding:50px 20px;
-
-    color:#ff6b81;
-
-    font-size:15px;
-}
-
-
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
-@media(max-width:500px){
+@media(max-width:380px){
 
-    .topbar{
-
-        height:64px;
-
-        padding:0 14px;
-    }
-
-    .profile{
-
-        padding:
-
-            12px
-            16px
-            35px;
-    }
-
-    .profile-header{
-
-        gap:16px;
-
-        margin-top:18px;
+    body{
+        padding-left:14px;
+        padding-right:14px;
     }
 
     .avatar{
-
-        width:96px;
-
-        height:96px;
-
-        min-width:96px;
-    }
-
-    .profile-name{
-
-        font-size:23px;
-    }
-
-    .profile-email{
-
-        font-size:13px;
-    }
-
-    .section-title{
-
-        font-size:20px;
-    }
-
-}
-
-
-/* =====================================================
-   CELULARES PEQUENOS
-===================================================== */
-
-@media(max-width:360px){
-
-    .profile-header{
-
-        gap:13px;
-    }
-
-    .avatar{
-
         width:86px;
-
         height:86px;
-
-        min-width:86px;
     }
 
     .profile-name{
-
         font-size:21px;
     }
 
@@ -526,86 +352,14 @@ body{
 <body>
 
 
-<!-- ===================================================
-     TOPO
-=================================================== -->
-
-<header class="topbar">
-
-    <!-- VOLTAR -->
-
-    <button
-        class="top-button"
-        onclick="voltar()"
-        aria-label="Voltar">
-
-        <svg viewBox="0 0 24 24">
-
-            <path d="M19 12H5"></path>
-
-            <path d="M12 19l-7-7 7-7"></path>
-
-        </svg>
-
-    </button>
-
-
-    <!-- PARTILHAR -->
-
-    <button
-        class="top-button"
-        onclick="partilhar()"
-        aria-label="Partilhar">
-
-        <svg viewBox="0 0 24 24">
-
-            <circle
-                cx="18"
-                cy="5"
-                r="2.5">
-            </circle>
-
-            <circle
-                cx="6"
-                cy="12"
-                r="2.5">
-            </circle>
-
-            <circle
-                cx="18"
-                cy="19"
-                r="2.5">
-            </circle>
-
-            <path d="M8.2 10.8l7.5-4.4"></path>
-
-            <path d="M8.2 13.2l7.5 4.4"></path>
-
-        </svg>
-
-    </button>
-
-</header>
-
-
-
-<!-- ===================================================
-     CONTEÚDO
-=================================================== -->
-
-<main id="profileContent">
+<div id="app">
 
     <div class="loading">
-        Carregando perfil...
+        Loading...
     </div>
 
-</main>
+</div>
 
-
-
-<!-- ===================================================
-     FIREBASE
-=================================================== -->
 
 <script type="module">
 
@@ -614,27 +368,26 @@ import {
 } from "./firebase.js";
 
 import {
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-const profileContent =
-    document.getElementById("profileContent");
+const app =
+    document.getElementById("app");
 
 
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
+/* =========================
+   ESCAPE HTML
+========================= */
 
-function escaparHTML(texto){
+function escapeHTML(text){
 
-    if(!texto){
-
+    if(!text){
         return "";
-
     }
 
-    return String(texto)
+    return String(text)
 
         .replace(/&/g,"&amp;")
 
@@ -645,51 +398,92 @@ function escaparHTML(texto){
         .replace(/"/g,"&quot;")
 
         .replace(/'/g,"&#039;");
+
 }
 
 
-/* =====================================================
-   DATA DA CONTA
-===================================================== */
+/* =========================
+   DATE
+========================= */
 
-function formatarData(data){
+function formatDate(date){
 
-    if(!data){
-
-        return "Data desconhecida";
-
+    if(!date){
+        return "Unknown";
     }
 
-    const d =
-        new Date(data);
+    return new Date(date)
+        .toLocaleDateString(
+            "en-US",
+            {
+                day:"2-digit",
+                month:"short",
+                year:"numeric"
+            }
+        );
 
-    return d.toLocaleDateString(
-        "pt-BR",
-        {
-            day:"2-digit",
-            month:"2-digit",
-            year:"numeric"
-        }
-    );
 }
 
 
-/* =====================================================
-   AVATAR
-===================================================== */
+/* =========================
+   USER ICON
+========================= */
 
-function criarAvatar(usuario){
+function defaultAvatar(){
 
-    if(usuario.photoURL){
+    return `
 
-        return `
+        <div class="avatar">
+
+            <svg viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="4">
+                </circle>
+
+                <path
+                    d="M4 21c0-4 3.5-7 8-7s8 3 8 7">
+                </path>
+
+            </svg>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function showProfile(user){
+
+    const name =
+        user.displayName ||
+        user.email?.split("@")[0] ||
+        "User";
+
+    const email =
+        user.email ||
+        "No email";
+
+
+    let avatar;
+
+
+    if(user.photoURL){
+
+        avatar = `
 
             <div class="avatar">
 
                 <img
-                    src="${escaparHTML(usuario.photoURL)}"
-                    alt="Foto de perfil"
-                >
+                    src="${escapeHTML(user.photoURL)}"
+                    alt="Profile">
 
             </div>
 
@@ -697,206 +491,215 @@ function criarAvatar(usuario){
 
     }
 
+    else{
 
-    return `
+        avatar =
+            defaultAvatar();
 
-        <div class="avatar">
+    }
 
-            <div class="default-avatar">
 
-                <svg viewBox="0 0 24 24">
+    app.innerHTML = `
 
-                    <circle
-                        cx="12"
-                        cy="8"
-                        r="4">
-                    </circle>
+        <main class="profile">
 
-                    <path
-                        d="M4 21c0-4 3.5-7 8-7s8 3 8 7">
-                    </path>
 
-                </svg>
+            <!-- TOP -->
+
+            <div class="top">
+
+
+                <button
+                    class="top-button"
+                    onclick="goBack()"
+                    aria-label="Back">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M19 12H5"></path>
+
+                        <path d="M12 19l-7-7 7-7"></path>
+
+                    </svg>
+
+                </button>
+
+
+                <button
+                    class="top-button"
+                    onclick="shareProfile()"
+                    aria-label="Share">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="18"
+                            cy="5"
+                            r="2.5">
+                        </circle>
+
+                        <circle
+                            cx="6"
+                            cy="12"
+                            r="2.5">
+                        </circle>
+
+                        <circle
+                            cx="18"
+                            cy="19"
+                            r="2.5">
+                        </circle>
+
+                        <path d="M8.2 10.8l7.5-4.4"></path>
+
+                        <path d="M8.2 13.2l7.5 4.4"></path>
+
+                    </svg>
+
+                </button>
 
             </div>
 
-        </div>
 
-    `;
-
-}
-
-
-/* =====================================================
-   MOSTRAR PERFIL
-===================================================== */
-
-function mostrarPerfil(usuario){
-
-    const nome =
-        usuario.displayName ||
-        usuario.email?.split("@")[0] ||
-        "Utilizador";
-
-    const email =
-        usuario.email ||
-        "E-mail não disponível";
-
-    const data =
-        usuario.metadata?.creationTime;
-
-
-    profileContent.innerHTML = `
-
-        <div class="profile">
-
-
-            <!-- CABEÇALHO -->
+            <!-- PROFILE HEADER -->
 
             <div class="profile-header">
 
-                ${criarAvatar(usuario)}
+                ${avatar}
 
 
-                <div class="profile-info">
+                <div class="profile-name">
 
-                    <div class="profile-name">
-
-                        ${escaparHTML(nome)}
-
-                    </div>
-
-                    <div class="profile-email">
-
-                        ${escaparHTML(email)}
-
-                    </div>
+                    ${escapeHTML(name)}
 
                 </div>
+
+
+                <div class="profile-email">
+
+                    ${escapeHTML(email)}
+
+                </div>
+
+
+                <button
+                    class="edit-button"
+                    onclick="editProfile()">
+
+                    Edit
+
+                </button>
 
             </div>
 
 
-            <!-- EDITAR -->
+            <!-- ACCOUNT INFO -->
+
+            <div class="info-list">
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Account
+                    </span>
+
+                    <span class="info-value">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Member since
+                    </span>
+
+                    <span class="info-value">
+
+                        ${formatDate(
+                            user.metadata?.creationTime
+                        )}
+
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Favorites
+                    </span>
+
+                    <span class="info-value">
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Comments
+                    </span>
+
+                    <span class="info-value">
+                        0
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FAVORITES -->
+
+            <div class="section-title">
+
+                Favorites
+
+            </div>
+
+
+            <div class="empty">
+
+                Your favorite anime will appear here.
+
+            </div>
+
+
+            <!-- LOGOUT -->
 
             <button
-                class="edit-button"
-                onclick="editarPerfil()">
+                class="logout-button"
+                onclick="logout()">
 
-                Editar perfil
+                Log out
 
             </button>
 
 
-            <!-- BIO -->
-
-            <div class="bio-card">
-
-                <div class="bio-title">
-
-                    Biografia
-
-                </div>
-
-                <div class="bio-text">
-
-                    Ainda não adicionaste uma biografia.
-
-                </div>
-
-            </div>
-
-
-            <!-- ESTATÍSTICAS -->
-
-            <div class="stats">
-
-                <div class="stat-card">
-
-                    <div class="stat-title">
-
-                        Favoritos
-
-                    </div>
-
-                    <div class="stat-value">
-
-                        Nenhum favorito
-
-                    </div>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-title">
-
-                        Membro desde
-
-                    </div>
-
-                    <div class="stat-value">
-
-                        ${formatarData(data)}
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- FAVORITOS -->
-
-            <div class="section-title">
-
-                Favoritos
-
-            </div>
-
-            <div class="empty">
-
-                Ainda não tens animes favoritos.
-
-            </div>
-
-
-            <!-- COMENTÁRIOS -->
-
-            <div class="comments">
-
-                <div class="section-title">
-
-                    Últimos comentários
-
-                </div>
-
-                <div class="empty">
-
-                    Ainda não tens comentários.
-
-                </div>
-
-            </div>
-
-
-        </div>
+        </main>
 
     `;
 
 }
 
 
-/* =====================================================
-   AUTENTICAÇÃO
-===================================================== */
+/* =========================
+   AUTH
+========================= */
 
 onAuthStateChanged(
     auth,
-    function(usuario){
+    function(user){
 
-        if(!usuario){
+        if(!user){
 
             window.location.href =
                 "index.html";
@@ -905,28 +708,31 @@ onAuthStateChanged(
 
         }
 
-        mostrarPerfil(usuario);
+        showProfile(user);
 
     }
 );
 
 
-/* =====================================================
-   VOLTAR
-===================================================== */
+/* =========================
+   BACK
+========================= */
 
-window.voltar = function(){
+window.goBack =
+function(){
 
-    window.history.back();
+    window.location.href =
+        "home.html";
 
 };
 
 
-/* =====================================================
-   EDITAR PERFIL
-===================================================== */
+/* =========================
+   EDIT
+========================= */
 
-window.editarPerfil = function(){
+window.editProfile =
+function(){
 
     window.location.href =
         "edit-profile.html";
@@ -934,32 +740,29 @@ window.editarPerfil = function(){
 };
 
 
-/* =====================================================
-   PARTILHAR
-===================================================== */
+/* =========================
+   SHARE
+========================= */
 
-window.partilhar = async function(){
-
-    const dados = {
-
-        title:"Meu perfil BerryAnime",
-
-        text:"Confira meu perfil no BerryAnime.",
-
-        url:window.location.href
-
-    };
-
+window.shareProfile =
+async function(){
 
     try{
 
-        if(
-            navigator.share
-        ){
+        if(navigator.share){
 
-            await navigator.share(
-                dados
-            );
+            await navigator.share({
+
+                title:
+                    "BerryAnime Profile",
+
+                text:
+                    "Check out my BerryAnime profile.",
+
+                url:
+                    window.location.href
+
+            });
 
         }
 
@@ -970,7 +773,7 @@ window.partilhar = async function(){
             );
 
             alert(
-                "Link do perfil copiado!"
+                "Profile link copied."
             );
 
         }
@@ -985,9 +788,50 @@ window.partilhar = async function(){
 
 };
 
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logout =
+async function(){
+
+    const confirmLogout =
+        confirm(
+            "Do you want to log out?"
+        );
+
+    if(!confirmLogout){
+
+        return;
+
+    }
+
+
+    try{
+
+        await signOut(auth);
+
+        window.location.href =
+            "index.html";
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert(
+            "Unable to log out."
+        );
+
+    }
+
+};
+
 </script>
 
 
 </body>
 
-  </html>
+</html>
