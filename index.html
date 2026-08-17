@@ -1,4 +1,4 @@
-index.html — BerryAnime
+index.html
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -66,9 +66,7 @@ body{
 ===================================================== */
 
 #splash{
-
     background:#050505;
-
     justify-content:center;
 
     z-index:10;
@@ -79,48 +77,42 @@ body{
 }
 
 #splash.hidden{
-
     opacity:0;
-
     visibility:hidden;
-
     pointer-events:none;
 }
 
 
 /* =====================================================
-   LOGO DA SPLASH
+   LOGO SPLASH
 ===================================================== */
 
 .splash-content{
-
     width:100%;
 
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     justify-content:center;
 
     transform:translateY(25px);
 }
 
 
-/* =====================================================
-   MORANGO
-===================================================== */
+/*
+   A imagem é JPG e possui fundo preto.
+   screen faz o preto desaparecer sobre
+   o fundo escuro da aplicação.
+*/
 
 .berry-logo{
-
-    width:235px;
-
-    height:235px;
+    width:210px;
+    height:210px;
 
     object-fit:contain;
-
     display:block;
+
+    mix-blend-mode:screen;
 }
 
 
@@ -129,21 +121,16 @@ body{
 ===================================================== */
 
 .logo-name{
-
     margin-top:5px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     font-size:43px;
-
     font-weight:900;
 
     letter-spacing:-2px;
-
     line-height:1;
 }
 
@@ -157,13 +144,11 @@ body{
 
 
 /* =====================================================
-   CÍRCULO DE CARREGAMENTO
+   LOADER
 ===================================================== */
 
 .loader{
-
     width:55px;
-
     height:55px;
 
     border-radius:50%;
@@ -171,15 +156,12 @@ body{
     border:5px solid rgba(255,23,68,.18);
 
     border-top-color:#ff1744;
-
     border-right-color:#ff1744;
 
     margin-top:105px;
 
-    animation:
-        spin .8s linear infinite;
+    animation:spin .8s linear infinite;
 }
-
 
 @keyframes spin{
 
@@ -246,7 +228,7 @@ body{
 
 
 /* =====================================================
-   DECORAÇÃO DE FUNDO
+   DECORAÇÃO
 ===================================================== */
 
 .background-glow{
@@ -254,7 +236,6 @@ body{
     position:absolute;
 
     width:320px;
-
     height:320px;
 
     border-radius:50%;
@@ -267,7 +248,6 @@ body{
         );
 
     top:-100px;
-
     right:-120px;
 
     pointer-events:none;
@@ -304,16 +284,23 @@ body{
 
 .login-logo{
 
-    width:230px;
-
-    height:230px;
+    width:190px;
+    height:190px;
 
     object-fit:contain;
+
+    display:block;
+
+    /*
+      Remove visualmente o fundo preto
+      do JPG.
+    */
+    mix-blend-mode:screen;
 }
 
 
 /* =====================================================
-   TÍTULO LOGIN
+   NOME
 ===================================================== */
 
 .login-brand{
@@ -362,24 +349,22 @@ body{
 
 .buttons{
 
-    width:88%;
+    width:82%;
 
     max-width:360px;
 
-    margin-top:45px;
+    margin-top:58px;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:16px;
-
-    align-items:center;
+    gap:18px;
 }
 
 
 /* =====================================================
-   BOTÃO LOGIN / REGISTRAR
+   BOTÕES PRINCIPAIS
 ===================================================== */
 
 .btn{
@@ -388,13 +373,13 @@ body{
 
     min-height:58px;
 
-    border-radius:12px;
+    border-radius:14px;
 
     font-size:19px;
 
     font-weight:800;
 
-    letter-spacing:.3px;
+    letter-spacing:.4px;
 
     cursor:pointer;
 
@@ -422,7 +407,30 @@ body{
 
 
 /* =====================================================
-   BOTÃO LOGIN
+   ÍCONES DOS BOTÕES
+===================================================== */
+
+.btn-icon{
+
+    width:23px;
+    height:23px;
+
+    flex:none;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2.2;
+
+    stroke-linecap:round;
+
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   LOGIN
 ===================================================== */
 
 .login-btn{
@@ -436,7 +444,7 @@ body{
 
 
 /* =====================================================
-   BOTÃO REGISTRAR
+   REGISTRAR
 ===================================================== */
 
 .register-btn{
@@ -468,7 +476,7 @@ body{
 
     justify-content:center;
 
-    gap:14px;
+    gap:16px;
 
     margin:0;
 }
@@ -507,11 +515,11 @@ body{
 
     border:0;
 
-    border-radius:12px;
+    border-radius:13px;
 
     background:white;
 
-    color:#222222;
+    color:#333333;
 
     font-size:18px;
 
@@ -527,7 +535,7 @@ body{
 
     cursor:pointer;
 
-    font-family:Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 
     transition:
         transform .15s ease,
@@ -542,27 +550,18 @@ body{
 }
 
 
-/* =====================================================
-   ÍCONE GOOGLE
-===================================================== */
+/*
+   Google G multicolorido
+*/
 
 .google-icon{
 
-    width:24px;
+    width:25px;
+    height:25px;
 
-    height:24px;
+    display:block;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:24px;
-
-    font-weight:900;
-
-    color:#4285f4;
+    flex:none;
 }
 
 
@@ -584,22 +583,18 @@ body{
 .decor.one{
 
     width:100px;
-
     height:100px;
 
     left:-55px;
-
     bottom:-30px;
 }
 
 .decor.two{
 
     width:70px;
-
     height:70px;
 
     right:-35px;
-
     bottom:100px;
 }
 
@@ -611,45 +606,35 @@ body{
 @media(max-height:700px){
 
     #login{
-
         padding-top:25px;
-
     }
 
     .login-logo{
-
-        width:170px;
-
-        height:170px;
+        width:150px;
+        height:150px;
     }
 
     .login-brand{
-
         font-size:35px;
     }
 
     .subtitle{
-
         font-size:16px;
-
         margin-top:10px;
     }
 
     .buttons{
+        width:80%;
+        max-width:330px;
 
         margin-top:30px;
 
-        gap:13px;
-
-        width:86%;
-
-        max-width:330px;
+        gap:14px;
     }
 
     .btn,
     .google-btn{
-
-        min-height:54px;
+        min-height:52px;
     }
 
 }
@@ -662,66 +647,44 @@ body{
 @media(max-width:380px){
 
     .berry-logo{
-
-        width:190px;
-
-        height:190px;
+        width:180px;
+        height:180px;
     }
 
     .logo-name{
-
         font-size:36px;
     }
 
     .loader{
-
         width:45px;
-
         height:45px;
-
         margin-top:85px;
     }
 
     .login-logo{
-
-        width:180px;
-
-        height:180px;
+        width:155px;
+        height:155px;
     }
 
     .login-brand{
-
         font-size:36px;
     }
 
     .subtitle{
-
         font-size:16px;
     }
 
     .buttons{
-
-        width:84%;
-
-        max-width:315px;
-
-        margin-top:32px;
+        width:82%;
+        max-width:310px;
 
         gap:13px;
     }
 
-    .btn{
-
-        min-height:53px;
-
-        font-size:17px;
-    }
-
+    .btn,
     .google-btn{
-
-        min-height:53px;
-
-        font-size:16px;
+        min-height:52px;
+        font-size:17px;
     }
 
 }
@@ -734,14 +697,11 @@ body{
 @media(min-height:800px){
 
     .berry-logo{
-
-        width:250px;
-
-        height:250px;
+        width:220px;
+        height:220px;
     }
 
     .loader{
-
         margin-top:110px;
     }
 
@@ -772,13 +732,8 @@ body{
 
         <div class="logo-name">
 
-            <span class="berry">
-                BERRY
-            </span>
-
-            <span class="anime">
-                ANIME
-            </span>
+            <span class="berry">BERRY</span>
+            <span class="anime">ANIME</span>
 
         </div>
 
@@ -790,7 +745,6 @@ body{
     </div>
 
 </section>
-
 
 
 <!-- ===================================================
@@ -811,7 +765,7 @@ body{
     <div class="login-content">
 
 
-        <!-- MORANGO -->
+        <!-- LOGO -->
 
         <img
             src="BerryAnime_logo_leve.jpg"
@@ -823,13 +777,8 @@ body{
 
         <div class="login-brand">
 
-            <span class="berry">
-                BERRY
-            </span>
-
-            <span class="anime">
-                ANIME
-            </span>
+            <span class="berry">BERRY</span>
+            <span class="anime">ANIME</span>
 
         </div>
 
@@ -855,7 +804,23 @@ body{
                 class="btn login-btn"
                 onclick="login()">
 
-                👤
+                <svg
+                    class="btn-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <circle
+                        cx="12"
+                        cy="8"
+                        r="4">
+                    </circle>
+
+                    <path
+                        d="M4 21c0-4 3.5-7 8-7s8 3 8 7">
+                    </path>
+
+                </svg>
+
                 <span>LOGIN</span>
 
             </button>
@@ -867,7 +832,31 @@ body{
                 class="btn register-btn"
                 onclick="register()">
 
-                👤+
+                <svg
+                    class="btn-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true">
+
+                    <circle
+                        cx="9"
+                        cy="8"
+                        r="4">
+                    </circle>
+
+                    <path
+                        d="M2 21c0-4 3-7 7-7">
+                    </path>
+
+                    <path
+                        d="M19 14v7">
+                    </path>
+
+                    <path
+                        d="M15.5 17.5h7">
+                    </path>
+
+                </svg>
+
                 <span>REGISTRAR</span>
 
             </button>
@@ -888,9 +877,34 @@ body{
                 class="google-btn"
                 onclick="googleLogin()">
 
-                <span class="google-icon">
-                    G
-                </span>
+                <!-- Google G multicolorido -->
+
+                <svg
+                    class="google-icon"
+                    viewBox="0 0 48 48"
+                    aria-hidden="true">
+
+                    <path
+                        fill="#4285F4"
+                        d="M47.5 24.5c0-1.7-.2-3.4-.5-5H24v9.5h13.2c-.6 3-2.3 5.5-4.9 7.2v6h7.9c4.6-4.2 7.3-10.4 7.3-17.7z">
+                    </path>
+
+                    <path
+                        fill="#34A853"
+                        d="M24 48c6.5 0 12-2.1 16-5.7l-7.9-6c-2.1 1.4-4.8 2.3-8.1 2.3-6.2 0-11.5-4.2-13.4-9.9H2.5v6.2C6.4 42.6 14.6 48 24 48z">
+                    </path>
+
+                    <path
+                        fill="#FBBC05"
+                        d="M10.6 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7v-6.2H2.5C.9 16.3 0 20 0 24s.9 7.7 2.5 10.9l8.1-6.2z">
+                    </path>
+
+                    <path
+                        fill="#EA4335"
+                        d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C36 2.3 30.5 0 24 0 14.6 0 6.4 5.4 2.5 13.1l8.1 6.2C12.5 13.7 17.8 9.5 24 9.5z">
+                    </path>
+
+                </svg>
 
                 <span>Entrar com Google</span>
 
@@ -902,7 +916,6 @@ body{
     </div>
 
 </section>
-
 
 
 <script type="module">
@@ -921,7 +934,7 @@ import {
 
 
 /* =====================================================
-   VERIFICAR USUÁRIO JÁ AUTENTICADO
+   VERIFICAR USUÁRIO
 ===================================================== */
 
 let usuarioAutenticado = false;
@@ -945,7 +958,7 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   TROCA SPLASH → LOGIN
+   SPLASH → LOGIN
 ===================================================== */
 
 setTimeout(function(){
@@ -968,7 +981,7 @@ setTimeout(function(){
 
 
 /* =====================================================
-   BOTÃO LOGIN
+   LOGIN
 ===================================================== */
 
 function login(){
@@ -980,7 +993,7 @@ function login(){
 
 
 /* =====================================================
-   BOTÃO REGISTRAR
+   REGISTRAR
 ===================================================== */
 
 function register(){
