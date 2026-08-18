@@ -6,209 +6,249 @@
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width,
-             initial-scale=1.0">
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>BerryAnime - Login</title>
-
 
 <style>
 
 *{
-
     margin:0;
     padding:0;
-
     box-sizing:border-box;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-
     min-height:100vh;
-
     background:#080808;
-
     color:white;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
-    padding:
-        25px
-        18px;
-
+    padding:20px;
 }
-
 
 .login{
-
     width:100%;
-
     max-width:420px;
-
     text-align:center;
-
 }
 
 
+/* SETA */
+
+.back-arrow{
+    position:fixed;
+
+    top:22px;
+    left:20px;
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:100;
+}
+
+.back-arrow svg{
+    width:32px;
+    height:32px;
+
+    fill:none;
+    stroke:white;
+
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* LOGO */
+
 .logo{
-
-    width:115px;
-
-    height:115px;
+    width:105px;
+    height:105px;
 
     object-fit:contain;
 
-    margin-bottom:10px;
-
+    margin-bottom:8px;
 }
 
+
+/* MARCA */
 
 .brand{
-
-    font-size:35px;
-
+    font-size:32px;
     font-weight:900;
 
-    margin-bottom:8px;
-
+    margin-bottom:6px;
 }
-
 
 .berry{
-
     color:#ff1744;
-
 }
-
 
 .anime{
-
     color:white;
-
 }
-
 
 .subtitle{
-
     color:#999;
 
-    font-size:14px;
+    font-size:15px;
 
-    margin-bottom:28px;
-
+    margin-bottom:24px;
 }
 
 
+/* INPUT */
+
+.input-box{
+    position:relative;
+
+    width:82%;
+
+    margin:0 auto 11px;
+}
+
 .input{
-
     width:100%;
+    height:50px;
 
-    height:56px;
-
-    margin-bottom:13px;
-
-    padding:
-        0
-        16px;
+    padding:0 48px 0 15px;
 
     background:#151515;
-
     color:white;
 
-    border:
-        1px solid
-        #303030;
+    border:1px solid #303030;
 
-    border-radius:12px;
+    border-radius:11px;
 
     outline:none;
 
     font-size:15px;
-
 }
-
 
 .input:focus{
-
-    border-color:
-        #ff1744;
-
+    border-color:#ff1744;
 }
 
 
-.login-button{
+/* OLHO */
 
-    width:100%;
+.password-toggle{
+    position:absolute;
 
-    height:57px;
+    right:14px;
+    top:50%;
 
-    margin-top:5px;
+    transform:translateY(-50%);
+
+    width:24px;
+    height:24px;
 
     border:0;
 
-    border-radius:12px;
+    background:transparent;
+
+    color:#aaa;
+
+    padding:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+}
+
+.password-toggle:hover{
+    color:white;
+}
+
+.password-toggle svg{
+
+    width:21px;
+    height:21px;
+
+    fill:none;
+
+    stroke:currentColor;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* BOTÃO */
+
+.login-button{
+
+    width:82%;
+    height:50px;
+
+    margin:6px auto 0;
+
+    display:block;
+
+    border:2px solid #ff1744;
+
+    border-radius:11px;
 
     background:#ff1744;
 
     color:white;
 
-    font-size:16px;
+    font-size:15px;
 
-    font-weight:bold;
+    font-weight:700;
 
     cursor:pointer;
-
 }
-
 
 .login-button:active{
-
     transform:scale(.98);
-
 }
-
 
 .login-button:disabled{
-
     opacity:.6;
-
     cursor:not-allowed;
-
 }
 
+
+/* MENSAGEM */
 
 .message{
-
     display:none;
 
-    margin-top:17px;
+    width:82%;
 
-    font-size:14px;
+    margin:14px auto 0;
 
+    font-size:13px;
 }
 
+
+/* REGISTER */
 
 .register-text{
 
-    margin-top:25px;
+    margin-top:20px;
 
     color:#888;
 
-    font-size:14px;
-
+    font-size:13px;
 }
-
 
 .register-link{
 
@@ -217,21 +257,34 @@ body{
     text-decoration:none;
 
     font-weight:bold;
-
 }
 
 
-.back{
+@media(max-width:500px){
 
-    display:inline-block;
+    .back-arrow{
+        top:18px;
+        left:17px;
+    }
 
-    margin-top:22px;
+    .logo{
+        width:95px;
+        height:95px;
+    }
 
-    color:#ff1744;
+    .brand{
+        font-size:30px;
+    }
 
-    text-decoration:none;
+    .subtitle{
+        font-size:14px;
+        margin-bottom:22px;
+    }
 
-    font-size:14px;
+    .input,
+    .login-button{
+        height:49px;
+    }
 
 }
 
@@ -239,112 +292,134 @@ body{
 
 </head>
 
-
 <body>
+
+
+<!-- SETA VOLTAR -->
+
+<a
+href="index.html"
+class="back-arrow"
+aria-label="Voltar">
+
+<svg viewBox="0 0 24 24">
+
+<path d="M19 12H5"></path>
+
+<path d="M12 19L5 12L12 5"></path>
+
+</svg>
+
+</a>
 
 
 <div class="login">
 
 
-    <img
-        src="BerryAnime_logo_leve.jpg"
-        class="logo"
-        alt="BerryAnime">
+<img
+src="BerryAnime_logo_leve.jpg"
+class="logo"
+alt="BerryAnime">
 
 
-    <div class="brand">
+<div class="brand">
 
-        <span class="berry">
-            BERRY
-        </span>
+<span class="berry">BERRY</span><span class="anime">ANIME</span>
 
-        <span class="anime">
-            ANIME
-        </span>
-
-    </div>
+</div>
 
 
-    <div class="subtitle">
+<div class="subtitle">
 
-        Entre na sua conta
+Entre na sua conta
 
-    </div>
-
-
-    <form id="loginForm">
+</div>
 
 
-        <input
-            id="email"
-            class="input"
-            type="email"
-            placeholder="E-mail"
-            autocomplete="email"
-            required>
+<form id="loginForm">
 
 
-        <input
-            id="senha"
-            class="input"
-            type="password"
-            placeholder="Senha"
-            autocomplete="current-password"
-            required>
+<div class="input-box">
+
+<input
+id="email"
+class="input"
+type="email"
+placeholder="E-mail"
+autocomplete="email"
+required>
+
+</div>
 
 
-        <button
-            type="submit"
-            class="login-button"
-            id="loginButton">
+<div class="input-box">
 
-            ENTRAR
-
-        </button>
-
-
-    </form>
+<input
+id="senha"
+class="input"
+type="password"
+placeholder="Password"
+autocomplete="current-password"
+required>
 
 
-    <div
-        id="message"
-        class="message">
-    </div>
+<button
+type="button"
+class="password-toggle"
+id="toggleSenha"
+aria-label="Mostrar password">
+
+<svg viewBox="0 0 24 24">
+
+<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+
+<circle cx="12" cy="12" r="3"></circle>
+
+</svg>
+
+</button>
+
+</div>
 
 
-    <div class="register-text">
+<button
+type="submit"
+class="login-button"
+id="loginButton">
 
-        Ainda não tem uma conta?
+LOGIN
 
-        <a
-            href="register.html"
-            class="register-link">
-
-            Registrar
-
-        </a>
-
-    </div>
+</button>
 
 
-    <a
-        href="index.html"
-        class="back">
+</form>
 
-        ← Voltar
 
-    </a>
+<div
+id="message"
+class="message">
+</div>
+
+
+<div class="register-text">
+
+Ainda não tem uma conta?
+
+<a
+href="register.html"
+class="register-link">
+
+Register
+
+</a>
+
+</div>
 
 
 </div>
 
 
 <script type="module">
-
-
-/* =====================================================
-   FIREBASE
-===================================================== */
 
 import {
     auth
@@ -356,31 +431,75 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
 const form =
-    document.getElementById(
-        "loginForm"
-    );
+    document.getElementById("loginForm");
 
 
 const message =
-    document.getElementById(
-        "message"
-    );
+    document.getElementById("message");
 
 
 const button =
-    document.getElementById(
-        "loginButton"
-    );
+    document.getElementById("loginButton");
 
 
-/* =====================================================
-   MENSAGEM
-===================================================== */
+const senha =
+    document.getElementById("senha");
+
+
+const toggleSenha =
+    document.getElementById("toggleSenha");
+
+
+/* MOSTRAR / OCULTAR PASSWORD */
+
+toggleSenha.addEventListener(
+    "click",
+    function(){
+
+        if(senha.type === "password"){
+
+            senha.type = "text";
+
+            toggleSenha.innerHTML = `
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M3 3L21 21"></path>
+
+                <path d="M10.6 10.6A2 2 0 0 0 13.4 13.4"></path>
+
+                <path d="M9.9 5.1A10.8 10.8 0 0 1 12 5c6.5 0 10 7 10 7a18.5 18.5 0 0 1-3.1 4.1"></path>
+
+                <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.8 10.8 0 0 0 4.1-.8"></path>
+
+            </svg>
+
+            `;
+
+        }else{
+
+            senha.type = "password";
+
+            toggleSenha.innerHTML = `
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+
+                <circle cx="12" cy="12" r="3"></circle>
+
+            </svg>
+
+            `;
+
+        }
+
+    }
+);
+
+
+/* MENSAGEM */
 
 function mostrarMensagem(
     texto,
@@ -390,22 +509,18 @@ function mostrarMensagem(
     message.style.display =
         "block";
 
-
     message.textContent =
         texto;
 
-
     message.style.color =
         sucesso
-            ? "#4cff88"
-            : "#ff6b81";
+        ? "#4cff88"
+        : "#ff6b81";
 
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/* LOGIN */
 
 form.addEventListener(
     "submit",
@@ -416,15 +531,15 @@ form.addEventListener(
 
         const email =
             document
-                .getElementById("email")
-                .value
-                .trim();
+            .getElementById("email")
+            .value
+            .trim();
 
 
         const senha =
             document
-                .getElementById("senha")
-                .value;
+            .getElementById("senha")
+            .value;
 
 
         button.disabled =
@@ -432,7 +547,7 @@ form.addEventListener(
 
 
         button.textContent =
-            "ENTRANDO...";
+            "LOGIN...";
 
 
         try{
@@ -462,7 +577,6 @@ form.addEventListener(
 
         }
 
-
         catch(error){
 
             console.log(
@@ -472,7 +586,7 @@ form.addEventListener(
 
 
             let texto =
-                "E-mail ou senha incorretos.";
+                "E-mail ou password incorretos.";
 
 
             if(
@@ -485,17 +599,15 @@ form.addEventListener(
 
             }
 
-
             else if(
                 error.code ===
                 "auth/wrong-password"
             ){
 
                 texto =
-                    "Senha incorreta.";
+                    "Password incorreto.";
 
             }
-
 
             else if(
                 error.code ===
@@ -503,10 +615,9 @@ form.addEventListener(
             ){
 
                 texto =
-                    "E-mail ou senha incorretos.";
+                    "E-mail ou password incorretos.";
 
             }
-
 
             else if(
                 error.code ===
@@ -517,7 +628,6 @@ form.addEventListener(
                     "E-mail inválido.";
 
             }
-
 
             else if(
                 error.code ===
@@ -540,7 +650,7 @@ form.addEventListener(
 
 
             button.textContent =
-                "ENTRAR";
+                "LOGIN";
 
         }
 
@@ -549,7 +659,5 @@ form.addEventListener(
 
 </script>
 
-
 </body>
-
     </html>
