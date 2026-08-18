@@ -15,6 +15,10 @@
 
 <style>
 
+/* =====================================================
+   BASE
+===================================================== */
+
 *{
     margin:0;
     padding:0;
@@ -29,183 +33,260 @@ body{
 }
 
 body{
-    background:#090909;
+    background:
+        radial-gradient(circle at 50% 18%,
+            rgba(255,23,68,.09) 0,
+            rgba(255,23,68,0) 28%),
+        #090b0f;
+
     color:white;
-    padding-bottom:75px;
+
+    padding-bottom:88px;
+
+    overflow-x:hidden;
 }
 
-/* =====================================================
-   TOPO
-===================================================== */
 
-.header{
-    height:55px;
+/* pequenos pontos decorativos */
 
-    display:flex;
-    align-items:center;
+body::before,
+body::after{
+    content:"";
+    position:fixed;
 
-    padding:0 15px;
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#ff1744;
+
+    opacity:.45;
+
+    z-index:-1;
 }
+
+body::before{
+    top:220px;
+    left:10%;
+    box-shadow:
+        65px 25px 0 rgba(255,23,68,.45),
+        430px 10px 0 rgba(255,23,68,.35);
+}
+
+body::after{
+    right:8%;
+    top:245px;
+
+    width:6px;
+    height:6px;
+}
+
 
 /* =====================================================
    CONTEÚDO
 ===================================================== */
 
 .content{
-    padding:10px 14px;
-}
-
-/* =====================================================
-   PERFIL / BOAS-VINDAS
-===================================================== */
-
-.profile-header{
     width:100%;
+    max-width:520px;
+
+    margin:0 auto;
+
+    padding:34px 14px 30px;
 
     display:flex;
     flex-direction:column;
     align-items:center;
-
-    text-align:center;
-
-    padding:8px 0 20px;
 }
 
-.profile-avatar{
-    width:70px;
-    height:70px;
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.berry-circle{
+
+    width:82px;
+    height:82px;
 
     border-radius:50%;
 
+    border:1px solid #ff1744;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     overflow:hidden;
 
-    background:#191919;
+    margin-bottom:18px;
 
-    border:2px solid #ff1744;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,23,68,.12),
+            #111 70%
+        );
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    margin-bottom:12px;
+    box-shadow:
+        0 0 20px rgba(255,23,68,.16);
 }
 
-.profile-avatar img{
-    width:100%;
-    height:100%;
+.berry-circle img{
 
-    object-fit:cover;
+    width:62px;
+    height:62px;
 
-    display:none;
+    object-fit:contain;
+
+    display:block;
+
+    mix-blend-mode:lighten;
 }
 
-.profile-avatar-default{
-    width:100%;
-    height:100%;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.profile-avatar-default svg{
-    width:36px;
-    height:36px;
-
-    stroke:#ff1744;
-    fill:none;
-
-    stroke-width:1.8;
-
-    stroke-linecap:round;
-    stroke-linejoin:round;
-}
+/* =====================================================
+   BEM-VINDO
+===================================================== */
 
 .welcome{
-    font-size:20px;
-    font-weight:700;
+
+    text-align:center;
+
+    font-size:27px;
+
+    font-weight:800;
+
+    line-height:1.2;
 
     color:white;
+
+    margin-bottom:7px;
 }
 
 .welcome .red{
     color:#ff1744;
 }
 
-.profile-name{
-    margin-top:7px;
 
-    font-size:15px;
-    font-weight:600;
+/* =====================================================
+   NOME
+===================================================== */
 
-    color:#fff;
+.user-name{
 
-    max-width:90%;
+    text-align:center;
 
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    font-size:18px;
+
+    font-weight:700;
+
+    color:white;
+
+    margin-top:4px;
 }
 
-.profile-email{
-    margin-top:4px;
 
-    font-size:12px;
+/* =====================================================
+   EMAIL
+===================================================== */
+
+.user-email{
+
+    text-align:center;
+
+    font-size:14px;
 
     color:#999;
 
+    margin-top:4px;
+
     max-width:90%;
 
-    white-space:nowrap;
     overflow:hidden;
+
     text-overflow:ellipsis;
+
+    white-space:nowrap;
 }
+
 
 /* =====================================================
    CAIXA DE OPÇÕES
 ===================================================== */
 
 .menu-box{
+
     width:100%;
 
-    background:#191919;
+    margin-top:30px;
 
-    border-radius:13px;
+    background:
+        linear-gradient(
+            145deg,
+            #18191c,
+            #111214
+        );
 
-    padding:4px 0;
+    border:1px solid #303136;
 
-    margin-top:5px;
+    border-radius:20px;
+
+    padding:0;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.25);
 }
+
 
 /* =====================================================
    ITEM
 ===================================================== */
 
 .menu-item{
-    min-height:58px;
+
+    width:100%;
+
+    min-height:76px;
 
     display:flex;
 
     align-items:center;
 
-    padding:7px 14px;
+    padding:10px 17px;
 
     cursor:pointer;
 
-    transition:.15s;
+    transition:
+        background .15s ease,
+        transform .15s ease;
+
+    position:relative;
+}
+
+.menu-item + .menu-item{
+    border-top:1px solid #292a2e;
 }
 
 .menu-item:active{
-    background:#242424;
+
+    background:#222326;
+
+    transform:scale(.99);
 }
+
 
 /* =====================================================
    ÍCONE
 ===================================================== */
 
 .menu-icon{
-    width:40px;
-    height:40px;
+
+    width:45px;
+    height:45px;
 
     display:flex;
 
@@ -213,89 +294,142 @@ body{
     justify-content:center;
 
     flex-shrink:0;
-
-    color:#ff1744;
 }
 
 .menu-icon svg{
-    width:23px;
-    height:23px;
 
-    stroke:currentColor;
+    width:27px;
+    height:27px;
+
+    stroke:#ff1744;
 
     fill:none;
 
-    stroke-width:1.9;
+    stroke-width:2;
 
     stroke-linecap:round;
+
     stroke-linejoin:round;
 }
+
 
 /* =====================================================
    TEXTO
 ===================================================== */
 
 .menu-text{
-    margin-left:10px;
+
+    margin-left:14px;
+
+    min-width:0;
+
+    flex:1;
 }
 
 .menu-title{
-    font-size:15px;
 
-    font-weight:700;
+    font-size:17px;
 
-    color:#ff1744;
+    font-weight:600;
+
+    color:white;
 }
 
 .menu-sub{
-    color:#999;
 
-    font-size:11px;
+    font-size:13px;
 
-    margin-top:3px;
+    color:#929292;
+
+    margin-top:4px;
+
+    line-height:1.2;
 }
+
+
+/* =====================================================
+   SETA DOS ITENS
+===================================================== */
+
+.menu-item::after{
+
+    content:"";
+
+    width:8px;
+    height:8px;
+
+    border-top:2px solid #ddd;
+    border-right:2px solid #ddd;
+
+    transform:rotate(45deg);
+
+    margin-left:10px;
+
+    flex-shrink:0;
+}
+
+
+/* =====================================================
+   SAIR
+===================================================== */
+
+.menu-item.logout-item .menu-icon svg{
+    stroke:#ff1744;
+}
+
+.menu-item.logout-item .menu-title{
+    color:white;
+}
+
 
 /* =====================================================
    VERSÃO
 ===================================================== */
 
 .version{
+
     text-align:center;
 
-    margin-top:28px;
+    margin-top:25px;
 
     color:#777;
 
-    font-size:12px;
+    font-size:13px;
 }
+
 
 /* =====================================================
    MENU INFERIOR
 ===================================================== */
 
 .bottom-menu{
+
     position:fixed;
 
-    bottom:0;
     left:0;
     right:0;
+    bottom:0;
 
-    height:66px;
+    height:76px;
 
-    background:#101010;
+    background:
+        rgba(19,20,23,.97);
 
-    border-top:1px solid #222;
+    border-top:1px solid #292a2e;
 
     display:flex;
 
-    justify-content:space-around;
-
     align-items:center;
 
+    justify-content:space-around;
+
     z-index:100;
+
+    backdrop-filter:blur(10px);
 }
 
 .menu-nav{
+
     flex:1;
 
     height:100%;
@@ -308,18 +442,19 @@ body{
 
     justify-content:center;
 
-    gap:3px;
+    gap:5px;
 
-    color:#777;
+    color:#858589;
 
     cursor:pointer;
 
-    font-size:11px;
+    transition:.15s ease;
 }
 
 .menu-nav svg{
-    width:20px;
-    height:20px;
+
+    width:27px;
+    height:27px;
 
     stroke:currentColor;
 
@@ -328,16 +463,28 @@ body{
     stroke-width:2;
 
     stroke-linecap:round;
+
     stroke-linejoin:round;
 }
 
-.menu-nav.active{
-    color:white;
+.menu-nav span{
+
+    font-size:12px;
+
+    font-weight:500;
 }
 
-.menu-nav span{
-    font-size:11px;
+.menu-nav.active{
+
+    color:#ff1744;
 }
+
+.menu-nav.active svg{
+
+    stroke-width:2.4;
+
+}
+
 
 /* =====================================================
    CELULARES PEQUENOS
@@ -345,26 +492,89 @@ body{
 
 @media(max-width:380px){
 
+    .content{
+
+        padding-top:28px;
+
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .berry-circle{
+
+        width:76px;
+        height:76px;
+
+        margin-bottom:16px;
+    }
+
+    .berry-circle img{
+
+        width:58px;
+        height:58px;
+    }
+
     .welcome{
-        font-size:19px;
+
+        font-size:25px;
     }
 
-    .profile-name{
-        font-size:14px;
+    .user-name{
+
+        font-size:17px;
     }
 
-    .profile-email{
-        font-size:11px;
+    .user-email{
+
+        font-size:13px;
+    }
+
+    .menu-box{
+
+        margin-top:27px;
+
+        border-radius:18px;
+    }
+
+    .menu-item{
+
+        min-height:72px;
+
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .menu-icon{
+
+        width:42px;
+        height:42px;
+    }
+
+    .menu-icon svg{
+
+        width:25px;
+        height:25px;
+    }
+
+    .menu-text{
+
+        margin-left:11px;
     }
 
     .menu-title{
-        font-size:14px;
+
+        font-size:16px;
     }
 
     .menu-sub{
-        font-size:10px;
+
+        font-size:12px;
     }
 
+    .bottom-menu{
+
+        height:72px;
+    }
 }
 
 </style>
@@ -375,13 +585,6 @@ body{
 
 
 <!-- =====================================================
-     TOPO
-===================================================== -->
-
-<header class="header"></header>
-
-
-<!-- =====================================================
      CONTEÚDO
 ===================================================== -->
 
@@ -389,69 +592,52 @@ body{
 
 
     <!-- =================================================
-         PERFIL
+         LOGO DO BERRY
     ================================================== -->
 
-    <div class="profile-header">
+    <div class="berry-circle">
+
+        <img
+            src="BerryAnime_logo_leve.jpg"
+            alt="BerryAnime">
+
+    </div>
 
 
-        <!-- ÚNICO ÍCONE BERRY -->
+    <!-- =================================================
+         BEM-VINDO
+    ================================================== -->
 
-        <div class="profile-avatar">
+    <div class="welcome">
 
-            <img
-                id="avatarImage"
-                src=""
-                alt="Perfil">
+        Bem-vindo(a)
+        <span class="red">de volta!</span>
 
-            <div
-                id="avatarDefault"
-                class="profile-avatar-default">
-
-                <img
-                    src="BerryAnime_logo_leve.jpg"
-                    alt="BerryAnime"
-                    style="
-                        width:100%;
-                        height:100%;
-                        object-fit:cover;
-                        display:block;
-                    ">
-
-            </div>
-
-        </div>
+    </div>
 
 
-        <!-- BOAS-VINDAS -->
+    <!-- =================================================
+         NOME
+    ================================================== -->
 
-        <div class="welcome">
+    <div
+        id="userName"
+        class="user-name">
 
-            Bem-vindo(a) <span class="red">de volta</span>
+        Carregando...
 
-        </div>
-
-
-        <!-- NOME -->
-
-        <div
-            id="accountName"
-            class="profile-name">
-
-            Carregando...
-
-        </div>
+    </div>
 
 
-        <!-- EMAIL -->
+    <!-- =================================================
+         EMAIL
+    ================================================== -->
 
-        <div
-            id="accountEmail"
-            class="profile-email">
+    <div
+        id="userEmail"
+        class="user-email">
 
-            ...
-
-        </div>
+        ...
 
     </div>
 
@@ -551,16 +737,18 @@ body{
 
                 <svg viewBox="0 0 24 24">
 
-                    <path
-                        d="M3 12a9 9 0 1 0 3-6.7">
-                    </path>
-
-                    <path
-                        d="M3 4v5h5">
-                    </path>
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="8">
+                    </circle>
 
                     <path
                         d="M12 7v5l3 2">
+                    </path>
+
+                    <path
+                        d="M4 5l-1 4 4 1">
                     </path>
 
                 </svg>
@@ -585,7 +773,7 @@ body{
         <!-- SAIR -->
 
         <div
-            class="menu-item"
+            class="menu-item logout-item"
             id="logoutButton">
 
             <div class="menu-icon">
@@ -593,7 +781,7 @@ body{
                 <svg viewBox="0 0 24 24">
 
                     <path
-                        d="M9 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4">
+                        d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5">
                     </path>
 
                     <path
@@ -631,7 +819,10 @@ body{
 
     <div class="version">
 
-        Versão 1.0
+        BerryAnime<br>
+        <span style="font-size:12px;color:#666;">
+            VERSÃO 1.0
+        </span>
 
     </div>
 
@@ -747,23 +938,20 @@ onAuthStateChanged(
 
         if(!user){
 
-            window.location.href =
-                "index.html";
+            window.location.replace(
+                "index.html"
+            );
 
             return;
 
         }
 
 
-        /* EMAIL */
-
         document
-        .getElementById("accountEmail")
+        .getElementById("userEmail")
         .textContent =
             user.email || "Sem e-mail";
 
-
-        /* NOME */
 
         let nome =
             user.displayName;
@@ -779,41 +967,55 @@ onAuthStateChanged(
 
 
         document
-        .getElementById("accountName")
+        .getElementById("userName")
         .textContent =
             nome || "Usuário";
-
-
-        /* FOTO DO GOOGLE */
-
-        if(user.photoURL){
-
-            const imagem =
-                document.getElementById(
-                    "avatarImage"
-                );
-
-            imagem.src =
-                user.photoURL;
-
-            imagem.style.display =
-                "block";
-
-            document
-            .getElementById(
-                "avatarDefault"
-            )
-            .style.display =
-                "none";
-
-        }
 
     }
 );
 
 
 /* =====================================================
-   SAIR
+   EDITAR PERFIL
+===================================================== */
+
+window.editarPerfil =
+function(){
+
+    window.location.href =
+        "perfil.html";
+
+};
+
+
+/* =====================================================
+   CONFIGURAÇÕES
+===================================================== */
+
+window.configuracoes =
+function(){
+
+    window.location.href =
+        "configuracoes.html";
+
+};
+
+
+/* =====================================================
+   HISTÓRICO
+===================================================== */
+
+window.historico =
+function(){
+
+    window.location.href =
+        "historico.html";
+
+};
+
+
+/* =====================================================
+   SAIR DA CONTA
 ===================================================== */
 
 document
@@ -822,9 +1024,12 @@ document
     "click",
     async function(){
 
-        if(!confirm(
-            "Deseja sair da sua conta?"
-        )){
+        const confirmar =
+            confirm(
+                "Deseja sair da sua conta?"
+            );
+
+        if(!confirmar){
             return;
         }
 
@@ -832,14 +1037,15 @@ document
 
             await signOut(auth);
 
-            window.location.href =
-                "index.html";
+            window.location.replace(
+                "index.html"
+            );
 
         }
 
         catch(error){
 
-            console.log(error);
+            console.error(error);
 
             alert(
                 "Não foi possível sair da conta."
@@ -850,42 +1056,8 @@ document
     }
 );
 
-
-/* =====================================================
-   OPÇÕES
-===================================================== */
-
-window.editarPerfil =
-function(){
-
-    alert(
-        "Meu perfil será adicionado no próximo passo."
-    );
-
-};
-
-
-window.configuracoes =
-function(){
-
-    alert(
-        "Configurações serão adicionadas no próximo passo."
-    );
-
-};
-
-
-window.historico =
-function(){
-
-    alert(
-        "Histórico será adicionado no próximo passo."
-    );
-
-};
-
 </script>
 
-</body>
 
- </html>
+</body>
+  </html>
