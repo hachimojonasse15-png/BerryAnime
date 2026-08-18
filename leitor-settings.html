@@ -11,13 +11,9 @@
                maximum-scale=1.0,
                user-scalable=no">
 
-<title>BerryAnime - Configurações do leitor</title>
+<title>BerryAnime - Leitor</title>
 
 <style>
-
-/* =====================================================
-   BASE
-===================================================== */
 
 *{
     margin:0;
@@ -39,23 +35,29 @@ body{
 
 
 /* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content{
+    width:100%;
+    max-width:680px;
+    margin:0 auto;
+    padding:22px 23px 40px;
+}
+
+
+/* =====================================================
    TOPO
 ===================================================== */
 
 .header{
-
-    height:70px;
-
+    height:55px;
     display:flex;
     align-items:center;
-
-    padding:0 20px;
-
-    gap:18px;
+    margin-bottom:24px;
 }
 
-.back-button{
-
+.back{
     width:42px;
     height:42px;
 
@@ -64,116 +66,94 @@ body{
     justify-content:center;
 
     cursor:pointer;
-
     color:white;
 }
 
-.back-button svg{
-
-    width:27px;
-    height:27px;
+.back svg{
+    width:29px;
+    height:29px;
 
     stroke:currentColor;
-
     fill:none;
 
     stroke-width:2;
-
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
 .header-title{
-
-    font-size:24px;
-
+    margin-left:18px;
+    font-size:27px;
     font-weight:700;
 }
 
 
 /* =====================================================
-   CONTEÚDO
+   CABEÇALHO DA PÁGINA
 ===================================================== */
 
-.content{
-
-    width:100%;
-    max-width:680px;
-
-    margin:0 auto;
-
-    padding:20px 22px 50px;
-}
-
-
-/* =====================================================
-   TÍTULO DA SECÇÃO
-===================================================== */
-
-.section-title{
-
+.page-title{
     display:flex;
-
     align-items:center;
 
-    gap:18px;
-
-    margin-bottom:22px;
-
-    padding:5px 4px;
+    min-height:58px;
+    margin-bottom:10px;
 }
 
-.section-icon{
-
-    width:42px;
-    height:42px;
+.page-icon{
+    width:48px;
+    height:48px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     flex-shrink:0;
 }
 
-.section-icon svg{
-
-    width:29px;
-    height:29px;
+.page-icon svg{
+    width:31px;
+    height:31px;
 
     stroke:#ff1744;
-
     fill:none;
 
     stroke-width:2;
-
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
-.section-title span{
+.page-title-text{
+    margin-left:20px;
 
     font-size:20px;
-
     font-weight:700;
-
-    color:white;
 }
 
 
 /* =====================================================
-   OPÇÃO
+   CAIXA
+===================================================== */
+
+.settings-box{
+    width:100%;
+    margin-top:5px;
+}
+
+
+/* =====================================================
+   ITEM
 ===================================================== */
 
 .setting{
+    width:100%;
 
-    min-height:82px;
+    min-height:86px;
 
     display:flex;
-
     align-items:center;
 
-    padding:12px 4px;
+    padding:13px 8px;
 
     cursor:pointer;
 
@@ -183,8 +163,11 @@ body{
 }
 
 .setting:active{
-
     background:#181818;
+}
+
+.setting + .setting{
+    border-top:1px solid #222;
 }
 
 
@@ -193,12 +176,10 @@ body{
 ===================================================== */
 
 .setting-icon{
-
-    width:52px;
-    height:52px;
+    width:48px;
+    height:48px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -206,12 +187,10 @@ body{
 }
 
 .setting-icon svg{
-
     width:29px;
     height:29px;
 
     stroke:#ff1744;
-
     fill:none;
 
     stroke-width:2;
@@ -226,27 +205,24 @@ body{
 ===================================================== */
 
 .setting-info{
-
     flex:1;
-
     min-width:0;
 
-    margin-left:18px;
+    margin-left:20px;
 
-    padding-right:12px;
+    padding-right:10px;
 }
 
 .setting-title{
-
-    font-size:18px;
-
+    font-size:19px;
     font-weight:700;
 
     color:white;
+
+    line-height:1.25;
 }
 
 .setting-sub{
-
     margin-top:5px;
 
     font-size:14px;
@@ -258,37 +234,17 @@ body{
 
 
 /* =====================================================
-   SETA
+   VALOR
 ===================================================== */
 
-.arrow{
+.select-value{
+    color:#aaa;
 
-    width:25px;
-    height:25px;
+    font-size:14px;
 
-    display:flex;
+    white-space:nowrap;
 
-    align-items:center;
-    justify-content:center;
-
-    color:#777;
-
-    flex-shrink:0;
-}
-
-.arrow svg{
-
-    width:19px;
-    height:19px;
-
-    stroke:currentColor;
-
-    fill:none;
-
-    stroke-width:2;
-
-    stroke-linecap:round;
-    stroke-linejoin:round;
+    margin-left:8px;
 }
 
 
@@ -297,184 +253,89 @@ body{
 ===================================================== */
 
 .switch{
+    position:relative;
 
     width:48px;
-    height:28px;
+    height:27px;
 
-    border-radius:20px;
+    flex-shrink:0;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+
+    inset:0;
 
     background:#555;
 
-    position:relative;
-
-    flex-shrink:0;
+    border-radius:30px;
 
     transition:.2s;
+
+    cursor:pointer;
 }
 
-.switch::after{
-
+.slider:before{
     content:"";
 
     position:absolute;
 
-    width:22px;
-    height:22px;
+    width:23px;
+    height:23px;
 
-    top:3px;
-    left:3px;
+    left:2px;
+    top:2px;
+
+    background:#ddd;
 
     border-radius:50%;
-
-    background:#bbb;
 
     transition:.2s;
 }
 
-.switch.active{
-
+.switch input:checked + .slider{
     background:#ff1744;
 }
 
-.switch.active::after{
-
-    left:23px;
-
+.switch input:checked + .slider:before{
+    transform:translateX(21px);
     background:white;
 }
 
 
 /* =====================================================
-   SEPARADOR
-===================================================== */
-
-.separator{
-
-    height:1px;
-
-    background:#202020;
-
-    margin:3px 0;
-}
-
-
-/* =====================================================
-   MODAL DE ESCOLHA
-===================================================== */
-
-.choice-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.65);
-
-    display:none;
-
-    align-items:flex-end;
-
-    justify-content:center;
-
-    z-index:500;
-}
-
-.choice-overlay.show{
-
-    display:flex;
-}
-
-.choice-box{
-
-    width:100%;
-
-    max-width:680px;
-
-    background:#181818;
-
-    border-radius:20px 20px 0 0;
-
-    padding:20px;
-
-}
-
-.choice-title{
-
-    font-size:19px;
-
-    font-weight:700;
-
-    margin-bottom:15px;
-}
-
-.choice-item{
-
-    padding:16px 10px;
-
-    border-radius:10px;
-
-    color:white;
-
-    font-size:16px;
-
-    cursor:pointer;
-}
-
-.choice-item:active{
-
-    background:#292929;
-}
-
-.choice-item.selected{
-
-    color:#ff1744;
-
-    font-weight:700;
-}
-
-
-/* =====================================================
-   PEQUENOS
+   RESPONSIVO
 ===================================================== */
 
 @media(max-width:380px){
 
-    .header{
-
-        padding:0 15px;
-
-        gap:14px;
-    }
-
-    .header-title{
-
-        font-size:21px;
-    }
-
     .content{
-
         padding-left:16px;
         padding-right:16px;
     }
 
-    .section-title span{
-
-        font-size:18px;
+    .header-title{
+        font-size:25px;
     }
 
     .setting-title{
-
-        font-size:17px;
+        font-size:18px;
     }
 
     .setting-sub{
-
         font-size:13px;
     }
 
     .setting-info{
+        margin-left:15px;
+    }
 
-        margin-left:13px;
+    .select-value{
+        font-size:13px;
     }
 
 }
@@ -483,396 +344,391 @@ body{
 
 </head>
 
+
 <body>
 
-
-<!-- =====================================================
-     TOPO
-===================================================== -->
-
-<header class="header">
-
-    <div
-        class="back-button"
-        onclick="voltar()">
-
-        <svg viewBox="0 0 24 24">
-
-            <path d="M19 12H5"></path>
-
-            <path d="M12 19l-7-7 7-7"></path>
-
-        </svg>
-
-    </div>
-
-    <div class="header-title">
-        Configurações do leitor
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     CONTEÚDO
-===================================================== -->
 
 <main class="content">
 
 
-    <!-- TÍTULO -->
-
-    <div class="section-title">
-
-        <div class="section-icon">
-
-            <svg viewBox="0 0 24 24">
-
-                <circle
-                    cx="12"
-                    cy="12"
-                    r="8">
-                </circle>
-
-                <path
-                    d="M8 12h8">
-                </path>
-
-                <path
-                    d="M12 8v8">
-                </path>
-
-            </svg>
-
-        </div>
-
-        <span>
-            Configurações do leitor
-        </span>
-
-    </div>
-
-
     <!-- =================================================
-         DIREÇÃO DA LEITURA
+         TOPO
     ================================================== -->
 
-    <div
-        class="setting"
-        onclick="abrirDirecao()">
-
-        <div class="setting-icon">
-
-            <svg viewBox="0 0 24 24">
-
-                <path d="M4 7h12"></path>
-
-                <path d="M4 12h8"></path>
-
-                <path d="M4 17h12"></path>
-
-                <path d="M19 8l3 4-3 4"></path>
-
-            </svg>
-
-        </div>
-
-        <div class="setting-info">
-
-            <div class="setting-title">
-                Direção da leitura
-            </div>
-
-            <div
-                class="setting-sub"
-                id="directionText">
-
-                Esquerda para direita
-
-            </div>
-
-        </div>
-
-        <div class="arrow">
-
-            <svg viewBox="0 0 24 24">
-
-                <path d="M9 18l6-6-6-6"></path>
-
-            </svg>
-
-        </div>
-
-    </div>
-
-
-    <div class="separator"></div>
-
-
-    <!-- =================================================
-         ANIMAÇÃO
-    ================================================== -->
-
-    <div
-        class="setting"
-        onclick="alternarAnimacao()">
-
-        <div class="setting-icon">
-
-            <svg viewBox="0 0 24 24">
-
-                <path
-                    d="M4 7h16">
-                </path>
-
-                <path
-                    d="M4 12h16">
-                </path>
-
-                <path
-                    d="M4 17h16">
-                </path>
-
-                <path
-                    d="M9 4l3 3-3 3">
-                </path>
-
-            </svg>
-
-        </div>
-
-        <div class="setting-info">
-
-            <div class="setting-title">
-                Animação das páginas
-            </div>
-
-            <div
-                class="setting-sub"
-                id="animationText">
-
-                Animação suave ao mudar de página
-
-            </div>
-
-        </div>
+    <header class="header">
 
         <div
-            class="switch"
-            id="animationSwitch">
-        </div>
-
-    </div>
-
-
-    <div class="separator"></div>
-
-
-    <!-- =================================================
-         PÁGINAS NUMERADAS
-    ================================================== -->
-
-    <div
-        class="setting"
-        onclick="alternarNumeracao()">
-
-        <div class="setting-icon">
+            class="back"
+            onclick="voltar()">
 
             <svg viewBox="0 0 24 24">
 
-                <path
-                    d="M5 5h2v14">
-                </path>
+                <path d="M19 12H5"></path>
 
-                <path
-                    d="M4 7h3">
-                </path>
-
-                <path
-                    d="M4 17h3">
-                </path>
-
-                <path
-                    d="M12 7h7">
-                </path>
-
-                <path
-                    d="M12 12h7">
-                </path>
-
-                <path
-                    d="M12 17h7">
-                </path>
+                <path d="M12 19l-7-7 7-7"></path>
 
             </svg>
 
         </div>
 
-        <div class="setting-info">
 
-            <div class="setting-title">
-                Páginas numeradas
-            </div>
+        <div class="header-title">
 
-            <div
-                class="setting-sub"
-                id="numberText">
-
-                Mostrar o número de cada página
-
-            </div>
+            Configurações do Leitor
 
         </div>
+
+    </header>
+
+
+    <!-- =================================================
+         TÍTULO
+    ================================================== -->
+
+    <div class="page-title">
+
+        <div class="page-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M5 4h14v16H5z"></path>
+
+                <path d="M8 8h8"></path>
+
+                <path d="M8 12h8"></path>
+
+                <path d="M8 16h5"></path>
+
+            </svg>
+
+        </div>
+
+
+        <div class="page-title-text">
+
+            Reader settings
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         CONFIGURAÇÕES
+    ================================================== -->
+
+    <div class="settings-box">
+
+
+        <!-- MODO DE LEITURA -->
 
         <div
-            class="switch"
-            id="numberSwitch">
-        </div>
+            class="setting"
+            onclick="escolherModo()">
 
-    </div>
+            <div class="setting-icon">
 
+                <svg viewBox="0 0 24 24">
 
-    <div class="separator"></div>
+                    <path d="M5 4h14v16H5z"></path>
 
+                    <path d="M8 8h8"></path>
 
-    <!-- =================================================
-         MODO DE PÁGINA
-    ================================================== -->
+                    <path d="M8 12h8"></path>
 
-    <div
-        class="setting"
-        onclick="abrirModoPagina()">
+                    <path d="M8 16h5"></path>
 
-        <div class="setting-icon">
+                </svg>
 
-            <svg viewBox="0 0 24 24">
-
-                <rect
-                    x="4"
-                    y="4"
-                    width="7"
-                    height="16">
-                </rect>
-
-                <rect
-                    x="13"
-                    y="4"
-                    width="7"
-                    height="16">
-                </rect>
-
-            </svg>
-
-        </div>
-
-        <div class="setting-info">
-
-            <div class="setting-title">
-                Modo de página
             </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Modo de leitura
+
+                </div>
+
+                <div class="setting-sub">
+
+                    Escolha como os capítulos serão exibidos
+
+                </div>
+
+            </div>
+
 
             <div
-                class="setting-sub"
-                id="pageModeText">
+                class="select-value"
+                id="readerModeValue">
 
-                Página única
+                Página
 
             </div>
 
         </div>
 
-        <div class="arrow">
 
-            <svg viewBox="0 0 24 24">
+        <!-- DIREÇÃO -->
 
-                <path d="M9 18l6-6-6-6"></path>
+        <div
+            class="setting"
+            onclick="escolherDirecao()">
 
-            </svg>
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 12h16"></path>
+
+                    <path d="M8 8l-4 4 4 4"></path>
+
+                    <path d="M16 8l4 4-4 4"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Direção de leitura
+
+                </div>
+
+                <div class="setting-sub">
+
+                    Defina a direção usada pelo leitor
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="select-value"
+                id="directionValue">
+
+                Vertical
+
+            </div>
 
         </div>
+
+
+        <!-- ZOOM -->
+
+        <div
+            class="setting"
+            onclick="escolherZoom()">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="10.5"
+                        cy="10.5"
+                        r="6.5">
+                    </circle>
+
+                    <path d="M16 16l5 5"></path>
+
+                    <path d="M10.5 7.5v6"></path>
+
+                    <path d="M7.5 10.5h6"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Zoom das páginas
+
+                </div>
+
+                <div class="setting-sub">
+
+                    Ajuste o tamanho das páginas no leitor
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="select-value"
+                id="zoomValue">
+
+                100%
+
+            </div>
+
+        </div>
+
+
+        <!-- QUALIDADE -->
+
+        <div
+            class="setting"
+            onclick="escolherQualidade()">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 5h16v14H4z"></path>
+
+                    <path d="M7 16l4-5 3 3 2-2 3 4"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Qualidade das imagens
+
+                </div>
+
+                <div class="setting-sub">
+
+                    Qualidade usada para carregar as páginas
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="select-value"
+                id="imageQualityValue">
+
+                Automática
+
+            </div>
+
+        </div>
+
+
+        <!-- CARREGAMENTO -->
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M12 3v12"></path>
+
+                    <path d="M7 10l5 5 5-5"></path>
+
+                    <path d="M5 21h14"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Carregamento automático
+
+                </div>
+
+                <div
+                    class="setting-sub"
+                    id="preloadText">
+
+                    Próximas páginas serão carregadas automaticamente
+
+                </div>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="preload"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- SALVAR POSIÇÃO -->
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M5 4h14v17l-7-4-7 4z"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Salvar posição de leitura
+
+                </div>
+
+                <div
+                    class="setting-sub"
+                    id="positionText">
+
+                    Sua posição será salva automaticamente
+
+                </div>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="savePosition"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
 
     </div>
 
 </main>
 
 
-<!-- =====================================================
-     ESCOLHA DA DIREÇÃO
-===================================================== -->
-
-<div
-    class="choice-overlay"
-    id="directionOverlay"
-    onclick="fecharEscolha(event)">
-
-    <div class="choice-box">
-
-        <div class="choice-title">
-            Direção da leitura
-        </div>
-
-        <div
-            class="choice-item"
-            id="leftRightOption"
-            onclick="selecionarDirecao('ltr')">
-
-            Esquerda para direita
-
-        </div>
-
-        <div
-            class="choice-item"
-            id="rightLeftOption"
-            onclick="selecionarDirecao('rtl')">
-
-            Direita para esquerda
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     ESCOLHA DO MODO
-===================================================== -->
-
-<div
-    class="choice-overlay"
-    id="pageModeOverlay"
-    onclick="fecharEscolha(event)">
-
-    <div class="choice-box">
-
-        <div class="choice-title">
-            Modo de página
-        </div>
-
-        <div
-            class="choice-item"
-            id="singlePageOption"
-            onclick="selecionarModo('single')">
-
-            Página única
-
-        </div>
-
-        <div
-            class="choice-item"
-            id="doublePageOption"
-            onclick="selecionarModo('double')">
-
-            Duas páginas
-
-        </div>
-
-    </div>
-
-</div>
-
-
 <script>
+
 
 /* =====================================================
    VOLTAR
@@ -887,93 +743,51 @@ function voltar(){
 
 
 /* =====================================================
-   CARREGAR CONFIGURAÇÕES
+   MODO DE LEITURA
 ===================================================== */
 
-let direcao =
-    localStorage.getItem(
-        "berry_reader_direction"
-    ) || "ltr";
+function escolherModo(){
 
+    const atual =
+        localStorage.getItem(
+            "berryanime_reader_mode"
+        ) || "Página";
 
-let animacao =
-    localStorage.getItem(
-        "berry_reader_animation"
-    ) !== "false";
-
-
-let numeracao =
-    localStorage.getItem(
-        "berry_reader_numbers"
-    ) === "true";
-
-
-let modoPagina =
-    localStorage.getItem(
-        "berry_reader_page_mode"
-    ) || "single";
-
-
-function atualizarTela(){
-
-    /* DIREÇÃO */
-
-    document
-    .getElementById("directionText")
-    .textContent =
-        direcao === "ltr"
-        ? "Esquerda para direita"
-        : "Direita para esquerda";
-
-
-    /* ANIMAÇÃO */
-
-    const animationSwitch =
-        document.getElementById(
-            "animationSwitch"
+    const escolha =
+        prompt(
+            "Modo de leitura:\n\n" +
+            "Página\n" +
+            "Contínuo",
+            atual
         );
 
-    animationSwitch.classList.toggle(
-        "active",
-        animacao
+    if(!escolha){
+        return;
+    }
+
+    const valores = [
+        "Página",
+        "Contínuo"
+    ];
+
+    if(!valores.includes(escolha)){
+
+        alert(
+            "Escolha Página ou Contínuo."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "berryanime_reader_mode",
+        escolha
     );
 
     document
-    .getElementById("animationText")
+    .getElementById("readerModeValue")
     .textContent =
-        animacao
-        ? "Animação suave ao mudar de página"
-        : "Animação das páginas desativada";
-
-
-    /* NUMERAÇÃO */
-
-    const numberSwitch =
-        document.getElementById(
-            "numberSwitch"
-        );
-
-    numberSwitch.classList.toggle(
-        "active",
-        numeracao
-    );
-
-    document
-    .getElementById("numberText")
-    .textContent =
-        numeracao
-        ? "Os números das páginas estão visíveis"
-        : "Mostrar o número de cada página";
-
-
-    /* MODO */
-
-    document
-    .getElementById("pageModeText")
-    .textContent =
-        modoPagina === "single"
-        ? "Página única"
-        : "Duas páginas";
+        escolha;
 
 }
 
@@ -982,175 +796,241 @@ function atualizarTela(){
    DIREÇÃO
 ===================================================== */
 
-function abrirDirecao(){
+function escolherDirecao(){
 
-    document
-    .getElementById(
-        "directionOverlay"
-    )
-    .classList.add("show");
+    const atual =
+        localStorage.getItem(
+            "berryanime_reader_direction"
+        ) || "Vertical";
 
-    atualizarEscolhas();
-
-}
-
-
-function selecionarDirecao(valor){
-
-    direcao = valor;
-
-    localStorage.setItem(
-        "berry_reader_direction",
-        direcao
-    );
-
-    document
-    .getElementById(
-        "directionOverlay"
-    )
-    .classList.remove("show");
-
-    atualizarTela();
-
-}
-
-
-/* =====================================================
-   ANIMAÇÃO
-===================================================== */
-
-function alternarAnimacao(){
-
-    animacao = !animacao;
-
-    localStorage.setItem(
-        "berry_reader_animation",
-        animacao
-    );
-
-    atualizarTela();
-
-}
-
-
-/* =====================================================
-   NUMERAÇÃO
-===================================================== */
-
-function alternarNumeracao(){
-
-    numeracao = !numeracao;
-
-    localStorage.setItem(
-        "berry_reader_numbers",
-        numeracao
-    );
-
-    atualizarTela();
-
-}
-
-
-/* =====================================================
-   MODO DE PÁGINA
-===================================================== */
-
-function abrirModoPagina(){
-
-    document
-    .getElementById(
-        "pageModeOverlay"
-    )
-    .classList.add("show");
-
-    atualizarEscolhas();
-
-}
-
-
-function selecionarModo(valor){
-
-    modoPagina = valor;
-
-    localStorage.setItem(
-        "berry_reader_page_mode",
-        modoPagina
-    );
-
-    document
-    .getElementById(
-        "pageModeOverlay"
-    )
-    .classList.remove("show");
-
-    atualizarTela();
-
-}
-
-
-/* =====================================================
-   ESCOLHAS
-===================================================== */
-
-function atualizarEscolhas(){
-
-    document
-    .getElementById(
-        "leftRightOption"
-    )
-    .classList.toggle(
-        "selected",
-        direcao === "ltr"
-    );
-
-
-    document
-    .getElementById(
-        "rightLeftOption"
-    )
-    .classList.toggle(
-        "selected",
-        direcao === "rtl"
-    );
-
-
-    document
-    .getElementById(
-        "singlePageOption"
-    )
-    .classList.toggle(
-        "selected",
-        modoPagina === "single"
-    );
-
-
-    document
-    .getElementById(
-        "doublePageOption"
-    )
-    .classList.toggle(
-        "selected",
-        modoPagina === "double"
-    );
-
-}
-
-
-/* =====================================================
-   FECHAR ESCOLHA
-===================================================== */
-
-function fecharEscolha(event){
-
-    if(
-        event.target.classList.contains(
-            "choice-overlay"
-        )
-    ){
-
-        event.target.classList.remove(
-            "show"
+    const escolha =
+        prompt(
+            "Direção de leitura:\n\n" +
+            "Vertical\n" +
+            "Horizontal",
+            atual
         );
+
+    if(!escolha){
+        return;
+    }
+
+    const valores = [
+        "Vertical",
+        "Horizontal"
+    ];
+
+    if(!valores.includes(escolha)){
+
+        alert(
+            "Escolha Vertical ou Horizontal."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "berryanime_reader_direction",
+        escolha
+    );
+
+    document
+    .getElementById("directionValue")
+    .textContent =
+        escolha;
+
+}
+
+
+/* =====================================================
+   ZOOM
+===================================================== */
+
+function escolherZoom(){
+
+    const atual =
+        localStorage.getItem(
+            "berryanime_reader_zoom"
+        ) || "100%";
+
+    const escolha =
+        prompt(
+            "Zoom das páginas:\n\n" +
+            "80%\n" +
+            "100%\n" +
+            "120%\n" +
+            "150%",
+            atual
+        );
+
+    if(!escolha){
+        return;
+    }
+
+    const valores = [
+        "80%",
+        "100%",
+        "120%",
+        "150%"
+    ];
+
+    if(!valores.includes(escolha)){
+
+        alert(
+            "Escolha um valor válido."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "berryanime_reader_zoom",
+        escolha
+    );
+
+    document
+    .getElementById("zoomValue")
+    .textContent =
+        escolha;
+
+}
+
+
+/* =====================================================
+   QUALIDADE
+===================================================== */
+
+function escolherQualidade(){
+
+    const atual =
+        localStorage.getItem(
+            "berryanime_reader_quality"
+        ) || "Automática";
+
+    const escolha =
+        prompt(
+            "Qualidade das imagens:\n\n" +
+            "Automática\n" +
+            "Alta\n" +
+            "Média\n" +
+            "Baixa",
+            atual
+        );
+
+    if(!escolha){
+        return;
+    }
+
+    const valores = [
+        "Automática",
+        "Alta",
+        "Média",
+        "Baixa"
+    ];
+
+    if(!valores.includes(escolha)){
+
+        alert(
+            "Escolha uma qualidade válida."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "berryanime_reader_quality",
+        escolha
+    );
+
+    document
+    .getElementById("imageQualityValue")
+    .textContent =
+        escolha;
+
+}
+
+
+/* =====================================================
+   TOGGLES
+===================================================== */
+
+const toggleIds = [
+    "preload",
+    "savePosition"
+];
+
+
+toggleIds.forEach(
+    function(id){
+
+        const elemento =
+            document.getElementById(id);
+
+        const salvo =
+            localStorage.getItem(
+                "berryanime_" + id
+            );
+
+        if(salvo !== null){
+
+            elemento.checked =
+                salvo === "true";
+
+        }
+
+
+        elemento.addEventListener(
+            "change",
+            function(){
+
+                localStorage.setItem(
+                    "berryanime_" + id,
+                    elemento.checked
+                );
+
+                atualizarTexto(id);
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   TEXTOS
+===================================================== */
+
+function atualizarTexto(id){
+
+    if(id === "preload"){
+
+        document
+        .getElementById("preloadText")
+        .textContent =
+            document
+            .getElementById("preload")
+            .checked
+
+            ? "Próximas páginas serão carregadas automaticamente"
+
+            : "As próximas páginas não serão carregadas automaticamente";
+
+    }
+
+
+    if(id === "savePosition"){
+
+        document
+        .getElementById("positionText")
+        .textContent =
+            document
+            .getElementById("savePosition")
+            .checked
+
+            ? "Sua posição será salva automaticamente"
+
+            : "Sua posição não será salva";
 
     }
 
@@ -1158,14 +1038,79 @@ function fecharEscolha(event){
 
 
 /* =====================================================
-   INICIALIZAR
+   CARREGAR VALORES
 ===================================================== */
 
-atualizarTela();
+const modoSalvo =
+    localStorage.getItem(
+        "berryanime_reader_mode"
+    );
+
+if(modoSalvo){
+
+    document
+    .getElementById("readerModeValue")
+    .textContent =
+        modoSalvo;
+
+}
+
+
+const direcaoSalva =
+    localStorage.getItem(
+        "berryanime_reader_direction"
+    );
+
+if(direcaoSalva){
+
+    document
+    .getElementById("directionValue")
+    .textContent =
+        direcaoSalva;
+
+}
+
+
+const zoomSalvo =
+    localStorage.getItem(
+        "berryanime_reader_zoom"
+    );
+
+if(zoomSalvo){
+
+    document
+    .getElementById("zoomValue")
+    .textContent =
+        zoomSalvo;
+
+}
+
+
+const qualidadeSalva =
+    localStorage.getItem(
+        "berryanime_reader_quality"
+    );
+
+if(qualidadeSalva){
+
+    document
+    .getElementById("imageQualityValue")
+    .textContent =
+        qualidadeSalva;
+
+}
+
+
+toggleIds.forEach(
+    function(id){
+
+        atualizarTexto(id);
+
+    }
+);
 
 </script>
 
 
 </body>
-
 </html>
