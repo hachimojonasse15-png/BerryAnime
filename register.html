@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BerryAnime - Registrar</title>
+<title>BerryAnime - Register</title>
 
 <style>
 
@@ -23,7 +23,7 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:25px 18px;
+    padding:20px;
 }
 
 .auth{
@@ -32,17 +32,43 @@ body{
     text-align:center;
 }
 
+/* SETA VOLTAR */
+
+.back-arrow{
+    position:fixed;
+    top:22px;
+    left:20px;
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+}
+
+.back-arrow svg{
+    width:32px;
+    height:32px;
+    fill:none;
+    stroke:white;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* LOGO */
+
 .logo{
-    width:125px;
-    height:125px;
+    width:105px;
+    height:105px;
     object-fit:contain;
-    margin-bottom:12px;
+    margin-bottom:8px;
 }
 
 .brand{
-    font-size:36px;
+    font-size:32px;
     font-weight:900;
-    margin-bottom:8px;
+    margin-bottom:6px;
 }
 
 .berry{
@@ -55,45 +81,96 @@ body{
 
 .subtitle{
     color:#999;
-    font-size:14px;
-    margin-bottom:30px;
+    font-size:15px;
+    margin-bottom:24px;
+}
+
+/* CAMPOS */
+
+.input-box{
+    position:relative;
+    width:82%;
+    margin:0 auto 11px;
 }
 
 .input{
     width:100%;
-    height:56px;
-    margin-bottom:13px;
-
-    padding:0 16px;
+    height:50px;
+    padding:0 48px 0 15px;
 
     background:#151515;
     color:white;
 
     border:1px solid #303030;
-    border-radius:12px;
+    border-radius:11px;
 
     outline:none;
     font-size:15px;
+}
+
+.input:not([type="password"]){
+    padding-right:15px;
 }
 
 .input:focus{
     border-color:#ff1744;
 }
 
-.register-button{
-    width:100%;
-    height:57px;
+/* ÍCONE DO OLHO */
+
+.password-toggle{
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:24px;
+    height:24px;
 
     border:0;
-    border-radius:12px;
+    background:transparent;
+
+    color:#aaa;
+    padding:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+}
+
+.password-toggle:hover{
+    color:white;
+}
+
+.password-toggle svg{
+    width:21px;
+    height:21px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* BOTÃO */
+
+.register-button{
+    width:82%;
+    height:50px;
+
+    margin:6px auto 0;
+    display:block;
+
+    border:2px solid #ff1744;
+    border-radius:11px;
 
     background:#ff1744;
     color:white;
 
-    font-size:16px;
-    font-weight:bold;
-
-    margin-top:5px;
+    font-size:15px;
+    font-weight:700;
 
     cursor:pointer;
 }
@@ -102,29 +179,59 @@ body{
     transform:scale(.98);
 }
 
+.register-button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+/* MENSAGEM */
+
 .message{
     display:none;
-    margin-top:18px;
-    font-size:14px;
+    width:82%;
+    margin:14px auto 0;
+    font-size:13px;
 }
+
+/* LOGIN */
 
 .login-text{
-    margin-top:25px;
+    margin-top:20px;
     color:#888;
-    font-size:14px;
+    font-size:13px;
 }
 
-.login-link,
-.back{
+.login-link{
     color:#ff1744;
     text-decoration:none;
     font-weight:bold;
 }
 
-.back{
-    display:inline-block;
-    margin-top:22px;
-    font-size:14px;
+@media(max-width:500px){
+
+    .back-arrow{
+        top:18px;
+        left:17px;
+    }
+
+    .logo{
+        width:95px;
+        height:95px;
+    }
+
+    .brand{
+        font-size:30px;
+    }
+
+    .subtitle{
+        font-size:14px;
+        margin-bottom:22px;
+    }
+
+    .input,
+    .register-button{
+        height:49px;
+    }
 }
 
 </style>
@@ -132,103 +239,126 @@ body{
 
 <body>
 
+<a
+href="index.html"
+class="back-arrow"
+aria-label="Voltar">
+
+<svg viewBox="0 0 24 24">
+<path d="M19 12H5"></path>
+<path d="M12 19L5 12L12 5"></path>
+</svg>
+
+</a>
+
+
 <div class="auth">
 
-    <img
-        src="BerryAnime_logo_leve.jpg"
-        class="logo"
-        alt="BerryAnime"
-    >
-
-    <div class="brand">
-        <span class="berry">BERRY</span><span class="anime">ANIME</span>
-    </div>
-
-    <div class="subtitle">
-        Crie sua conta
-    </div>
+<img
+src="BerryAnime_logo_leve.jpg"
+class="logo"
+alt="BerryAnime">
 
 
-    <form id="registerForm">
-
-        <input
-            id="nome"
-            class="input"
-            type="text"
-            placeholder="Nome"
-            autocomplete="name"
-            required
-        >
-
-        <input
-            id="email"
-            class="input"
-            type="email"
-            placeholder="E-mail"
-            autocomplete="email"
-            required
-        >
-
-        <input
-            id="senha"
-            class="input"
-            type="password"
-            placeholder="Senha"
-            autocomplete="new-password"
-            minlength="6"
-            required
-        >
-
-        <input
-            id="confirmarSenha"
-            class="input"
-            type="password"
-            placeholder="Confirmar senha"
-            autocomplete="new-password"
-            minlength="6"
-            required
-        >
-
-        <button
-            type="submit"
-            class="register-button"
-            id="registerButton">
-
-            REGISTRAR
-
-        </button>
-
-    </form>
+<div class="brand">
+<span class="berry">BERRY</span><span class="anime">ANIME</span>
+</div>
 
 
-    <div
-        id="message"
-        class="message">
-    </div>
+<div class="subtitle">
+Crie sua conta
+</div>
 
 
-    <div class="login-text">
+<form id="registerForm">
 
-        Já tem uma conta?
+<div class="input-box">
 
-        <a
-            href="login.html"
-            class="login-link">
+<input
+id="nome"
+class="input"
+type="text"
+placeholder="Nome de usuário"
+autocomplete="username"
+required>
 
-            Entrar
-
-        </a>
-
-    </div>
+</div>
 
 
-    <a
-        href="index.html"
-        class="back">
+<div class="input-box">
 
-        ← Voltar
+<input
+id="email"
+class="input"
+type="email"
+placeholder="E-mail"
+autocomplete="email"
+required>
 
-    </a>
+</div>
+
+
+<div class="input-box">
+
+<input
+id="senha"
+class="input"
+type="password"
+placeholder="Password"
+autocomplete="new-password"
+minlength="6"
+required>
+
+<button
+type="button"
+class="password-toggle"
+id="toggleSenha"
+aria-label="Mostrar password">
+
+<svg viewBox="0 0 24 24">
+
+<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+
+<circle cx="12" cy="12" r="3"></circle>
+
+</svg>
+
+</button>
+
+</div>
+
+
+<button
+type="submit"
+class="register-button"
+id="registerButton">
+
+REGISTER
+
+</button>
+
+</form>
+
+
+<div
+id="message"
+class="message">
+</div>
+
+
+<div class="login-text">
+
+Já tem uma conta?
+
+<a
+href="login.html"
+class="login-link">
+
+Login
+
+</a>
+
+</div>
 
 </div>
 
@@ -254,6 +384,62 @@ const message =
 const button =
     document.getElementById("registerButton");
 
+const senha =
+    document.getElementById("senha");
+
+const toggleSenha =
+    document.getElementById("toggleSenha");
+
+
+/* MOSTRAR / OCULTAR PASSWORD */
+
+toggleSenha.addEventListener(
+    "click",
+    function(){
+
+        if(senha.type === "password"){
+
+            senha.type = "text";
+
+            toggleSenha.innerHTML = `
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M3 3L21 21"></path>
+
+                <path d="M10.6 10.6A2 2 0 0 0 13.4 13.4"></path>
+
+                <path d="M9.9 5.1A10.8 10.8 0 0 1 12 5c6.5 0 10 7 10 7a18.5 18.5 0 0 1-3.1 4.1"></path>
+
+                <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.8 10.8 0 0 0 4.1-.8"></path>
+
+            </svg>
+
+            `;
+
+        }else{
+
+            senha.type = "password";
+
+            toggleSenha.innerHTML = `
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path>
+
+                <circle cx="12" cy="12" r="3"></circle>
+
+            </svg>
+
+            `;
+
+        }
+
+    }
+);
+
+
+/* MENSAGEM */
 
 function mostrarMensagem(
     texto,
@@ -270,6 +456,8 @@ function mostrarMensagem(
 }
 
 
+/* REGISTRO */
+
 form.addEventListener(
     "submit",
     async function(event){
@@ -278,42 +466,29 @@ form.addEventListener(
 
 
         const nome =
-            document.getElementById("nome")
+            document
+            .getElementById("nome")
             .value
             .trim();
 
 
         const email =
-            document.getElementById("email")
+            document
+            .getElementById("email")
             .value
             .trim();
 
 
         const senha =
-            document.getElementById("senha")
+            document
+            .getElementById("senha")
             .value;
-
-
-        const confirmar =
-            document.getElementById("confirmarSenha")
-            .value;
-
-
-        if(senha !== confirmar){
-
-            mostrarMensagem(
-                "As senhas não coincidem."
-            );
-
-            return;
-
-        }
 
 
         button.disabled = true;
 
         button.textContent =
-            "CRIANDO CONTA...";
+            "CRIANDO...";
 
 
         try{
@@ -335,7 +510,7 @@ form.addEventListener(
 
 
             mostrarMensagem(
-                "Account created successfully.!",
+                "Conta criada com sucesso!",
                 true
             );
 
@@ -347,7 +522,7 @@ form.addEventListener(
                         "home.html";
 
                 },
-                2000
+                1500
             );
 
 
@@ -397,7 +572,7 @@ form.addEventListener(
             button.disabled = false;
 
             button.textContent =
-                "REGISTRAR";
+                "REGISTER";
 
         }
 
