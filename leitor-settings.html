@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>BerryAnime - Configurações do leitor</title>
+
+<style>
+
+/* =====================================================
+   BASE
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#090909;
+    color:white;
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.header{
+
+    height:70px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 20px;
+
+    gap:18px;
+}
+
+.back-button{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    color:white;
+}
+
+.back-button svg{
+
+    width:27px;
+    height:27px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.header-title{
+
+    font-size:24px;
+
+    font-weight:700;
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content{
+
+    width:100%;
+    max-width:680px;
+
+    margin:0 auto;
+
+    padding:20px 22px 50px;
+}
+
+
+/* =====================================================
+   TÍTULO DA SECÇÃO
+===================================================== */
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:22px;
+
+    padding:5px 4px;
+}
+
+.section-icon{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.section-icon svg{
+
+    width:29px;
+    height:29px;
+
+    stroke:#ff1744;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.section-title span{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:white;
+}
+
+
+/* =====================================================
+   OPÇÃO
+===================================================== */
+
+.setting{
+
+    min-height:82px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:12px 4px;
+
+    cursor:pointer;
+
+    border-radius:12px;
+
+    transition:.15s;
+}
+
+.setting:active{
+
+    background:#181818;
+}
+
+
+/* =====================================================
+   ÍCONE
+===================================================== */
+
+.setting-icon{
+
+    width:52px;
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.setting-icon svg{
+
+    width:29px;
+    height:29px;
+
+    stroke:#ff1744;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   TEXTO
+===================================================== */
+
+.setting-info{
+
+    flex:1;
+
+    min-width:0;
+
+    margin-left:18px;
+
+    padding-right:12px;
+}
+
+.setting-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:white;
+}
+
+.setting-sub{
+
+    margin-top:5px;
+
+    font-size:14px;
+
+    color:#999;
+
+    line-height:1.35;
+}
+
+
+/* =====================================================
+   SETA
+===================================================== */
+
+.arrow{
+
+    width:25px;
+    height:25px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#777;
+
+    flex-shrink:0;
+}
+
+.arrow svg{
+
+    width:19px;
+    height:19px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   SWITCH
+===================================================== */
+
+.switch{
+
+    width:48px;
+    height:28px;
+
+    border-radius:20px;
+
+    background:#555;
+
+    position:relative;
+
+    flex-shrink:0;
+
+    transition:.2s;
+}
+
+.switch::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:22px;
+    height:22px;
+
+    top:3px;
+    left:3px;
+
+    border-radius:50%;
+
+    background:#bbb;
+
+    transition:.2s;
+}
+
+.switch.active{
+
+    background:#ff1744;
+}
+
+.switch.active::after{
+
+    left:23px;
+
+    background:white;
+}
+
+
+/* =====================================================
+   SEPARADOR
+===================================================== */
+
+.separator{
+
+    height:1px;
+
+    background:#202020;
+
+    margin:3px 0;
+}
+
+
+/* =====================================================
+   MODAL DE ESCOLHA
+===================================================== */
+
+.choice-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:none;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    z-index:500;
+}
+
+.choice-overlay.show{
+
+    display:flex;
+}
+
+.choice-box{
+
+    width:100%;
+
+    max-width:680px;
+
+    background:#181818;
+
+    border-radius:20px 20px 0 0;
+
+    padding:20px;
+
+}
+
+.choice-title{
+
+    font-size:19px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+.choice-item{
+
+    padding:16px 10px;
+
+    border-radius:10px;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+.choice-item:active{
+
+    background:#292929;
+}
+
+.choice-item.selected{
+
+    color:#ff1744;
+
+    font-weight:700;
+}
+
+
+/* =====================================================
+   PEQUENOS
+===================================================== */
+
+@media(max-width:380px){
+
+    .header{
+
+        padding:0 15px;
+
+        gap:14px;
+    }
+
+    .header-title{
+
+        font-size:21px;
+    }
+
+    .content{
+
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .section-title span{
+
+        font-size:18px;
+    }
+
+    .setting-title{
+
+        font-size:17px;
+    }
+
+    .setting-sub{
+
+        font-size:13px;
+    }
+
+    .setting-info{
+
+        margin-left:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
+<header class="header">
+
+    <div
+        class="back-button"
+        onclick="voltar()">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M19 12H5"></path>
+
+            <path d="M12 19l-7-7 7-7"></path>
+
+        </svg>
+
+    </div>
+
+    <div class="header-title">
+        Configurações do leitor
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main class="content">
+
+
+    <!-- TÍTULO -->
+
+    <div class="section-title">
+
+        <div class="section-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="8">
+                </circle>
+
+                <path
+                    d="M8 12h8">
+                </path>
+
+                <path
+                    d="M12 8v8">
+                </path>
+
+            </svg>
+
+        </div>
+
+        <span>
+            Configurações do leitor
+        </span>
+
+    </div>
+
+
+    <!-- =================================================
+         DIREÇÃO DA LEITURA
+    ================================================== -->
+
+    <div
+        class="setting"
+        onclick="abrirDirecao()">
+
+        <div class="setting-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M4 7h12"></path>
+
+                <path d="M4 12h8"></path>
+
+                <path d="M4 17h12"></path>
+
+                <path d="M19 8l3 4-3 4"></path>
+
+            </svg>
+
+        </div>
+
+        <div class="setting-info">
+
+            <div class="setting-title">
+                Direção da leitura
+            </div>
+
+            <div
+                class="setting-sub"
+                id="directionText">
+
+                Esquerda para direita
+
+            </div>
+
+        </div>
+
+        <div class="arrow">
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M9 18l6-6-6-6"></path>
+
+            </svg>
+
+        </div>
+
+    </div>
+
+
+    <div class="separator"></div>
+
+
+    <!-- =================================================
+         ANIMAÇÃO
+    ================================================== -->
+
+    <div
+        class="setting"
+        onclick="alternarAnimacao()">
+
+        <div class="setting-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <path
+                    d="M4 7h16">
+                </path>
+
+                <path
+                    d="M4 12h16">
+                </path>
+
+                <path
+                    d="M4 17h16">
+                </path>
+
+                <path
+                    d="M9 4l3 3-3 3">
+                </path>
+
+            </svg>
+
+        </div>
+
+        <div class="setting-info">
+
+            <div class="setting-title">
+                Animação das páginas
+            </div>
+
+            <div
+                class="setting-sub"
+                id="animationText">
+
+                Animação suave ao mudar de página
+
+            </div>
+
+        </div>
+
+        <div
+            class="switch"
+            id="animationSwitch">
+        </div>
+
+    </div>
+
+
+    <div class="separator"></div>
+
+
+    <!-- =================================================
+         PÁGINAS NUMERADAS
+    ================================================== -->
+
+    <div
+        class="setting"
+        onclick="alternarNumeracao()">
+
+        <div class="setting-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <path
+                    d="M5 5h2v14">
+                </path>
+
+                <path
+                    d="M4 7h3">
+                </path>
+
+                <path
+                    d="M4 17h3">
+                </path>
+
+                <path
+                    d="M12 7h7">
+                </path>
+
+                <path
+                    d="M12 12h7">
+                </path>
+
+                <path
+                    d="M12 17h7">
+                </path>
+
+            </svg>
+
+        </div>
+
+        <div class="setting-info">
+
+            <div class="setting-title">
+                Páginas numeradas
+            </div>
+
+            <div
+                class="setting-sub"
+                id="numberText">
+
+                Mostrar o número de cada página
+
+            </div>
+
+        </div>
+
+        <div
+            class="switch"
+            id="numberSwitch">
+        </div>
+
+    </div>
+
+
+    <div class="separator"></div>
+
+
+    <!-- =================================================
+         MODO DE PÁGINA
+    ================================================== -->
+
+    <div
+        class="setting"
+        onclick="abrirModoPagina()">
+
+        <div class="setting-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <rect
+                    x="4"
+                    y="4"
+                    width="7"
+                    height="16">
+                </rect>
+
+                <rect
+                    x="13"
+                    y="4"
+                    width="7"
+                    height="16">
+                </rect>
+
+            </svg>
+
+        </div>
+
+        <div class="setting-info">
+
+            <div class="setting-title">
+                Modo de página
+            </div>
+
+            <div
+                class="setting-sub"
+                id="pageModeText">
+
+                Página única
+
+            </div>
+
+        </div>
+
+        <div class="arrow">
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M9 18l6-6-6-6"></path>
+
+            </svg>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     ESCOLHA DA DIREÇÃO
+===================================================== -->
+
+<div
+    class="choice-overlay"
+    id="directionOverlay"
+    onclick="fecharEscolha(event)">
+
+    <div class="choice-box">
+
+        <div class="choice-title">
+            Direção da leitura
+        </div>
+
+        <div
+            class="choice-item"
+            id="leftRightOption"
+            onclick="selecionarDirecao('ltr')">
+
+            Esquerda para direita
+
+        </div>
+
+        <div
+            class="choice-item"
+            id="rightLeftOption"
+            onclick="selecionarDirecao('rtl')">
+
+            Direita para esquerda
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ESCOLHA DO MODO
+===================================================== -->
+
+<div
+    class="choice-overlay"
+    id="pageModeOverlay"
+    onclick="fecharEscolha(event)">
+
+    <div class="choice-box">
+
+        <div class="choice-title">
+            Modo de página
+        </div>
+
+        <div
+            class="choice-item"
+            id="singlePageOption"
+            onclick="selecionarModo('single')">
+
+            Página única
+
+        </div>
+
+        <div
+            class="choice-item"
+            id="doublePageOption"
+            onclick="selecionarModo('double')">
+
+            Duas páginas
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+function voltar(){
+
+    window.location.href =
+        "configuracoes.html";
+
+}
+
+
+/* =====================================================
+   CARREGAR CONFIGURAÇÕES
+===================================================== */
+
+let direcao =
+    localStorage.getItem(
+        "berry_reader_direction"
+    ) || "ltr";
+
+
+let animacao =
+    localStorage.getItem(
+        "berry_reader_animation"
+    ) !== "false";
+
+
+let numeracao =
+    localStorage.getItem(
+        "berry_reader_numbers"
+    ) === "true";
+
+
+let modoPagina =
+    localStorage.getItem(
+        "berry_reader_page_mode"
+    ) || "single";
+
+
+function atualizarTela(){
+
+    /* DIREÇÃO */
+
+    document
+    .getElementById("directionText")
+    .textContent =
+        direcao === "ltr"
+        ? "Esquerda para direita"
+        : "Direita para esquerda";
+
+
+    /* ANIMAÇÃO */
+
+    const animationSwitch =
+        document.getElementById(
+            "animationSwitch"
+        );
+
+    animationSwitch.classList.toggle(
+        "active",
+        animacao
+    );
+
+    document
+    .getElementById("animationText")
+    .textContent =
+        animacao
+        ? "Animação suave ao mudar de página"
+        : "Animação das páginas desativada";
+
+
+    /* NUMERAÇÃO */
+
+    const numberSwitch =
+        document.getElementById(
+            "numberSwitch"
+        );
+
+    numberSwitch.classList.toggle(
+        "active",
+        numeracao
+    );
+
+    document
+    .getElementById("numberText")
+    .textContent =
+        numeracao
+        ? "Os números das páginas estão visíveis"
+        : "Mostrar o número de cada página";
+
+
+    /* MODO */
+
+    document
+    .getElementById("pageModeText")
+    .textContent =
+        modoPagina === "single"
+        ? "Página única"
+        : "Duas páginas";
+
+}
+
+
+/* =====================================================
+   DIREÇÃO
+===================================================== */
+
+function abrirDirecao(){
+
+    document
+    .getElementById(
+        "directionOverlay"
+    )
+    .classList.add("show");
+
+    atualizarEscolhas();
+
+}
+
+
+function selecionarDirecao(valor){
+
+    direcao = valor;
+
+    localStorage.setItem(
+        "berry_reader_direction",
+        direcao
+    );
+
+    document
+    .getElementById(
+        "directionOverlay"
+    )
+    .classList.remove("show");
+
+    atualizarTela();
+
+}
+
+
+/* =====================================================
+   ANIMAÇÃO
+===================================================== */
+
+function alternarAnimacao(){
+
+    animacao = !animacao;
+
+    localStorage.setItem(
+        "berry_reader_animation",
+        animacao
+    );
+
+    atualizarTela();
+
+}
+
+
+/* =====================================================
+   NUMERAÇÃO
+===================================================== */
+
+function alternarNumeracao(){
+
+    numeracao = !numeracao;
+
+    localStorage.setItem(
+        "berry_reader_numbers",
+        numeracao
+    );
+
+    atualizarTela();
+
+}
+
+
+/* =====================================================
+   MODO DE PÁGINA
+===================================================== */
+
+function abrirModoPagina(){
+
+    document
+    .getElementById(
+        "pageModeOverlay"
+    )
+    .classList.add("show");
+
+    atualizarEscolhas();
+
+}
+
+
+function selecionarModo(valor){
+
+    modoPagina = valor;
+
+    localStorage.setItem(
+        "berry_reader_page_mode",
+        modoPagina
+    );
+
+    document
+    .getElementById(
+        "pageModeOverlay"
+    )
+    .classList.remove("show");
+
+    atualizarTela();
+
+}
+
+
+/* =====================================================
+   ESCOLHAS
+===================================================== */
+
+function atualizarEscolhas(){
+
+    document
+    .getElementById(
+        "leftRightOption"
+    )
+    .classList.toggle(
+        "selected",
+        direcao === "ltr"
+    );
+
+
+    document
+    .getElementById(
+        "rightLeftOption"
+    )
+    .classList.toggle(
+        "selected",
+        direcao === "rtl"
+    );
+
+
+    document
+    .getElementById(
+        "singlePageOption"
+    )
+    .classList.toggle(
+        "selected",
+        modoPagina === "single"
+    );
+
+
+    document
+    .getElementById(
+        "doublePageOption"
+    )
+    .classList.toggle(
+        "selected",
+        modoPagina === "double"
+    );
+
+}
+
+
+/* =====================================================
+   FECHAR ESCOLHA
+===================================================== */
+
+function fecharEscolha(event){
+
+    if(
+        event.target.classList.contains(
+            "choice-overlay"
+        )
+    ){
+
+        event.target.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIALIZAR
+===================================================== */
+
+atualizarTela();
+
+</script>
+
+
+</body>
+
+</html>
