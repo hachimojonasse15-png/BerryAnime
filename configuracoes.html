@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -31,315 +30,317 @@ body{
 body{
     background:#090909;
     color:white;
-    padding-bottom:30px;
+    padding-bottom:80px;
 }
 
-
-/* =====================================================
-   TOPO
-===================================================== */
-
-.header{
-
-    height:70px;
-
+.content{
+    width:100%;
+    max-width:680px;
+    margin:0 auto;
+    padding:52px 23px 30px;
     display:flex;
+    flex-direction:column;
     align-items:center;
-
-    padding:0 20px;
-
-    gap:18px;
 }
 
-.back-button{
-
-    width:42px;
-    height:42px;
-
+.berry-circle{
+    width:88px;
+    height:88px;
+    border-radius:50%;
+    border:2px solid #ff1744;
     display:flex;
     align-items:center;
     justify-content:center;
+    overflow:hidden;
+    margin-bottom:30px;
+    background:#111;
+    box-shadow:0 0 18px rgba(255,23,68,.18);
+}
 
-    cursor:pointer;
+.berry-circle img{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+    display:block;
+    mix-blend-mode:lighten;
+}
 
+.welcome{
+    text-align:center;
+    font-size:30px;
+    font-weight:800;
+    line-height:1.2;
     color:white;
+    margin-bottom:8px;
 }
 
-.back-button svg{
-
-    width:28px;
-    height:28px;
-
-    stroke:currentColor;
-    fill:none;
-
-    stroke-width:2;
-
-    stroke-linecap:round;
-    stroke-linejoin:round;
+.welcome .red{
+    color:#ff1744;
 }
 
-.header-title{
-
-    font-size:24px;
+.user-name{
+    text-align:center;
+    font-size:20px;
     font-weight:700;
-
     color:white;
+    margin-top:25px;
 }
 
+.user-email{
+    text-align:center;
+    font-size:15px;
+    color:#999;
+    margin-top:7px;
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
 
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
-.content{
-
+.menu-box{
     width:100%;
-    max-width:680px;
-
-    margin:0 auto;
-
-    padding:18px 22px 40px;
-}
-
-
-/* =====================================================
-   SEÇÃO
-===================================================== */
-
-.section-title{
-
-    color:#777;
-
-    font-size:12px;
-    font-weight:700;
-
-    text-transform:uppercase;
-
-    margin:12px 5px 8px;
-}
-
-
-/* =====================================================
-   CAIXA
-===================================================== */
-
-.settings-box{
-
-    width:100%;
-
+    margin-top:52px;
     background:#151515;
-
-    border:1px solid #282828;
-
-    border-radius:18px;
-
+    border:1px solid #303030;
+    border-radius:22px;
     overflow:hidden;
 }
 
-
-/* =====================================================
-   ITEM
-===================================================== */
-
-.setting-item{
-
-    min-height:76px;
-
+.menu-item{
+    width:100%;
+    min-height:98px;
     display:flex;
-
     align-items:center;
-
-    padding:12px 18px;
-
+    padding:16px 30px;
     cursor:pointer;
-
-    transition:.15s;
+    transition:background .15s ease, transform .15s ease;
 }
 
-.setting-item + .setting-item{
-
-    border-top:1px solid #292929;
+.menu-item + .menu-item{
+    border-top:1px solid #303030;
 }
 
-.setting-item:active{
-
-    background:#222;
+.menu-item:active{
+    background:#252525;
+    transform:scale(.995);
 }
 
-
-/* =====================================================
-   ÍCONE
-===================================================== */
-
-.setting-icon{
-
-    width:44px;
-    height:44px;
-
-    flex-shrink:0;
-
+.menu-icon{
+    width:48px;
+    height:48px;
     display:flex;
     align-items:center;
     justify-content:center;
+    flex-shrink:0;
 }
 
-.setting-icon svg{
-
-    width:25px;
-    height:25px;
-
+.menu-icon svg{
+    width:30px;
+    height:30px;
     stroke:#ff1744;
-
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
-
-/* =====================================================
-   TEXTO
-===================================================== */
-
-.setting-text{
-
-    margin-left:15px;
-
+.menu-text{
+    margin-left:20px;
     min-width:0;
 }
 
-.setting-title{
-
-    font-size:16px;
-
+.menu-title{
+    font-size:20px;
     font-weight:700;
-
     color:white;
 }
 
-.setting-sub{
-
-    margin-top:4px;
-
-    font-size:12px;
-
-    color:#888;
+.menu-sub{
+    font-size:15px;
+    color:#999;
+    margin-top:6px;
 }
 
+.version{
+    text-align:center;
+    margin-top:47px;
+    color:#777;
+    font-size:15px;
+    line-height:1.45;
+}
 
-/* =====================================================
-   SETA
-===================================================== */
-
-.setting-arrow{
-
-    margin-left:auto;
-
-    color:#666;
-
+.bottom-menu{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:68px;
+    background:#101010;
+    border-top:1px solid #222;
     display:flex;
+    justify-content:space-around;
     align-items:center;
+    z-index:100;
 }
 
-.setting-arrow svg{
+.menu-nav{
+    flex:1;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    text-align:center;
+    font-size:12px;
+    color:#777;
+    cursor:pointer;
+    transition:.2s;
+}
 
-    width:20px;
-    height:20px;
-
+.menu-nav svg{
+    width:21px;
+    height:21px;
     stroke:currentColor;
-
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
-
-/* =====================================================
-   RODAPÉ
-===================================================== */
-
-.footer{
-
-    text-align:center;
-
-    margin-top:45px;
-
-    color:#666;
-
-    font-size:13px;
+.menu-nav span{
+    font-size:12px;
 }
 
-.footer strong{
-
-    display:block;
-
+.menu-nav.active{
     color:white;
-
-    font-size:13px;
-
-    margin-bottom:5px;
 }
 
+.menu-nav:active{
+    color:white;
+}
 
-/* =====================================================
-   CELULARES PEQUENOS
-===================================================== */
+@media(max-width:600px){
+
+    .content{
+        padding-top:52px;
+        padding-left:23px;
+        padding-right:23px;
+    }
+
+    .berry-circle{
+        width:88px;
+        height:88px;
+    }
+
+    .berry-circle img{
+        width:70px;
+        height:70px;
+    }
+
+    .welcome{
+        font-size:30px;
+    }
+
+    .user-name{
+        font-size:20px;
+    }
+
+    .user-email{
+        font-size:15px;
+    }
+
+    .menu-box{
+        margin-top:52px;
+    }
+
+    .menu-item{
+        min-height:98px;
+        padding-left:30px;
+        padding-right:20px;
+    }
+
+    .menu-title{
+        font-size:20px;
+    }
+
+    .menu-sub{
+        font-size:15px;
+    }
+
+    .bottom-menu{
+        height:66px;
+    }
+
+    .menu-nav svg{
+        width:20px;
+        height:20px;
+    }
+
+    .menu-nav span{
+        font-size:11px;
+    }
+}
 
 @media(max-width:380px){
 
-    .header{
-
-        padding:0 15px;
-
-        gap:14px;
-    }
-
-    .header-title{
-
-        font-size:21px;
-    }
-
     .content{
-
+        padding-top:40px;
         padding-left:16px;
         padding-right:16px;
     }
 
-    .setting-item{
-
-        min-height:70px;
-
-        padding:10px 14px;
+    .berry-circle{
+        width:80px;
+        height:80px;
+        margin-bottom:25px;
     }
 
-    .setting-title{
-
-        font-size:15px;
+    .berry-circle img{
+        width:63px;
+        height:63px;
     }
 
-    .setting-sub{
-
-        font-size:11px;
+    .welcome{
+        font-size:26px;
     }
 
-    .setting-icon{
-
-        width:40px;
-        height:40px;
+    .user-name{
+        font-size:19px;
+        margin-top:20px;
     }
 
-    .setting-icon svg{
-
-        width:23px;
-        height:23px;
+    .user-email{
+        font-size:14px;
     }
 
+    .menu-box{
+        margin-top:38px;
+        border-radius:20px;
+    }
+
+    .menu-item{
+        min-height:82px;
+        padding-left:20px;
+        padding-right:15px;
+    }
+
+    .menu-title{
+        font-size:18px;
+    }
+
+    .menu-sub{
+        font-size:13px;
+    }
+
+    .menu-text{
+        margin-left:15px;
+    }
+
+    .menu-icon svg{
+        width:28px;
+        height:28px;
+    }
 }
 
 </style>
@@ -348,341 +349,396 @@ body{
 
 <body>
 
-
-<!-- =====================================================
-     TOPO
-===================================================== -->
-
-<header class="header">
-
-    <div
-        class="back-button"
-        onclick="voltar()">
-
-        <svg viewBox="0 0 24 24">
-
-            <path d="M19 12H5"></path>
-
-            <path d="M12 19l-7-7 7-7"></path>
-
-        </svg>
-
-    </div>
-
-
-    <div class="header-title">
-
-        Configurações
-
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     CONTEÚDO
-===================================================== -->
-
 <main class="content">
 
+    <div class="berry-circle">
 
-    <div class="section-title">
-
-        BerryAnime
+        <img
+            src="BerryAnime_logo_leve.jpg"
+            alt="BerryAnime">
 
     </div>
 
+    <div class="welcome">
 
-    <div class="settings-box">
+        Bem-vindo(a)
+        <span class="red">de volta!</span>
+
+    </div>
+
+    <div
+        id="userName"
+        class="user-name">
+
+        Carregando...
+
+    </div>
+
+    <div
+        id="userEmail"
+        class="user-email">
+
+        ...
+
+    </div>
+
+    <div class="menu-box">
 
 
-        <!-- PLAYER -->
+        <!-- MEU PERFIL -->
 
         <div
-            class="setting-item"
-            onclick="playerSettings()">
+            class="menu-item"
+            onclick="window.location.href='perfil.html'">
 
-            <div class="setting-icon">
+            <div class="menu-icon">
 
                 <svg viewBox="0 0 24 24">
 
+                    <circle
+                        cx="12"
+                        cy="7"
+                        r="3.5">
+                    </circle>
+
                     <path
-                        d="M8 5l11 7-11 7z">
+                        d="M5 20c.5-3.5 3-6 7-6s6.5 2.5 7 6">
                     </path>
 
                 </svg>
 
             </div>
 
-            <div class="setting-text">
+            <div class="menu-text">
 
-                <div class="setting-title">
-
-                    Configurações do player
-
+                <div class="menu-title">
+                    Meu perfil
                 </div>
 
-                <div class="setting-sub">
-
-                    Reprodução e qualidade dos vídeos
-
+                <div class="menu-sub">
+                    Gerencie seu perfil
                 </div>
-
-            </div>
-
-            <div class="setting-arrow">
-
-                <svg viewBox="0 0 24 24">
-
-                    <path d="M9 18l6-6-6-6"></path>
-
-                </svg>
 
             </div>
 
         </div>
 
 
-        <!-- LEITOR -->
+        <!-- CONFIGURAÇÕES DO PLAYER -->
 
         <div
-            class="setting-item"
-            onclick="readerSettings()">
+            class="menu-item"
+            onclick="window.location.href='player-settings.html'">
 
-            <div class="setting-icon">
-
-                <svg viewBox="0 0 24 24">
-
-                    <path d="M4 5h16v14H4z"></path>
-
-                    <path d="M8 9h8"></path>
-
-                    <path d="M8 13h6"></path>
-
-                </svg>
-
-            </div>
-
-            <div class="setting-text">
-
-                <div class="setting-title">
-
-                    Configurações do leitor
-
-                </div>
-
-                <div class="setting-sub">
-
-                    Ajustes para leitura de mangás
-
-                </div>
-
-            </div>
-
-            <div class="setting-arrow">
-
-                <svg viewBox="0 0 24 24">
-
-                    <path d="M9 18l6-6-6-6"></path>
-
-                </svg>
-
-            </div>
-
-        </div>
-
-
-        <!-- APARÊNCIA -->
-
-        <div
-            class="setting-item"
-            onclick="aparencia()">
-
-            <div class="setting-icon">
+            <div class="menu-icon">
 
                 <svg viewBox="0 0 24 24">
 
                     <circle
                         cx="12"
                         cy="12"
-                        r="4">
+                        r="3">
                     </circle>
 
-                    <path d="M12 2v2"></path>
-                    <path d="M12 20v2"></path>
-                    <path d="M2 12h2"></path>
-                    <path d="M20 12h2"></path>
-
-                    <path d="M4.9 4.9l1.4 1.4"></path>
-                    <path d="M17.7 17.7l1.4 1.4"></path>
-
-                    <path d="M19.1 4.9l-1.4 1.4"></path>
-                    <path d="M6.3 17.7l-1.4 1.4"></path>
+                    <path
+                        d="M19 13.5v-3l-2-.6a6.5 6.5 0 0 0-.7-1.6l.9-1.9-2.1-2.1-1.9.9a6.5 6.5 0 0 0-1.6-.7L11 2.5H8l-.6 2a6.5 6.5 0 0 0-1.6.7l-1.9-.9-2.1 2.1.9 1.9a6.5 6.5 0 0 0 .7 1.6l-2 .6v3l2 .6a6.5 6.5 0 0 0 .7 1.6l-.9 1.9 2.1 2.1 1.9-.9a6.5 6.5 0 0 0 1.6.7l.6 2h3l.6-2a6.5 6.5 0 0 0 1.6-.7l1.9.9 2.1-2.1-.9-1.9a6.5 6.5 0 0 0 .7-1.6z">
+                    </path>
 
                 </svg>
 
             </div>
 
-            <div class="setting-text">
+            <div class="menu-text">
 
-                <div class="setting-title">
-
-                    Aparência
-
+                <div class="menu-title">
+                    Configurações do Player
                 </div>
 
-                <div class="setting-sub">
-
-                    Tema e aparência do BerryAnime
-
+                <div class="menu-sub">
+                    Ajustes de reprodução e vídeo
                 </div>
-
-            </div>
-
-            <div class="setting-arrow">
-
-                <svg viewBox="0 0 24 24">
-
-                    <path d="M9 18l6-6-6-6"></path>
-
-                </svg>
 
             </div>
 
         </div>
 
 
-        <!-- SOBRE -->
+        <!-- HISTÓRICO -->
 
         <div
-            class="setting-item"
-            onclick="sobre()">
+            class="menu-item"
+            onclick="window.location.href='historico.html'">
 
-            <div class="setting-icon">
+            <div class="menu-icon">
 
                 <svg viewBox="0 0 24 24">
 
                     <circle
                         cx="12"
                         cy="12"
-                        r="9">
+                        r="8">
                     </circle>
 
-                    <path d="M12 10v6"></path>
+                    <path
+                        d="M12 7v5l3 2">
+                    </path>
 
-                    <circle
-                        cx="12"
-                        cy="7"
-                        r=".7"
-                        fill="#ff1744"
-                        stroke="none">
-                    </circle>
+                    <path
+                        d="M4 5l-1 4 4 1">
+                    </path>
 
                 </svg>
 
             </div>
 
-            <div class="setting-text">
+            <div class="menu-text">
 
-                <div class="setting-title">
-
-                    Sobre o BerryAnime
-
+                <div class="menu-title">
+                    Histórico
                 </div>
 
-                <div class="setting-sub">
-
-                    Informações sobre o aplicativo
-
+                <div class="menu-sub">
+                    Continue de onde parou
                 </div>
-
-            </div>
-
-            <div class="setting-arrow">
-
-                <svg viewBox="0 0 24 24">
-
-                    <path d="M9 18l6-6-6-6"></path>
-
-                </svg>
 
             </div>
 
         </div>
 
 
+        <!-- SAIR -->
+
+        <div
+            class="menu-item logout-item"
+            id="logoutButton">
+
+            <div class="menu-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5">
+                    </path>
+
+                    <path
+                        d="M14 8l5 4-5 4">
+                    </path>
+
+                    <path
+                        d="M19 12H9">
+                    </path>
+
+                </svg>
+
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-title">
+                    Sair da conta
+                </div>
+
+                <div class="menu-sub">
+                    Encerrar sessão no BerryAnime
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
+    <div class="version">
 
-    <div class="footer">
-
-        <strong>BerryAnime</strong>
-
-        VERSÃO 1.0
+        <div>BerryAnime</div>
+        <div>VERSÃO 1.0</div>
 
     </div>
-
 
 </main>
 
 
-<script>
+<!-- MENU INFERIOR -->
+
+<div class="bottom-menu">
 
 
-/* =====================================================
-   VOLTAR
-===================================================== */
+    <!-- INÍCIO -->
 
-function voltar(){
+    <div
+        class="menu-nav"
+        onclick="window.location.href='home.html'">
 
-    window.location.href =
-        "mais.html";
+        <svg viewBox="0 0 24 24">
 
-}
+            <path d="M3 11l9-8 9 8"></path>
 
+            <path d="M5 10v10h14V10"></path>
 
-/* =====================================================
-   OPÇÕES
-===================================================== */
+        </svg>
 
-function playerSettings(){
+        <span>Início</span>
 
-    alert(
-        "As configurações do player serão adicionadas."
-    );
-
-}
+    </div>
 
 
-function readerSettings(){
+    <!-- MANGÁS -->
 
-    alert(
-        "As configurações do leitor serão adicionadas."
-    );
+    <div
+        class="menu-nav"
+        onclick="window.location.href='mangas.html'">
 
-}
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 4h7v16H4z"></path>
+
+            <path d="M13 4h7v16h-7z"></path>
+
+            <path d="M6 7h3M6 10h3M15 7h3M15 10h3"></path>
+
+        </svg>
+
+        <span>Mangás</span>
+
+    </div>
 
 
-function aparencia(){
+    <!-- FAVORITOS -->
 
-    alert(
-        "As opções de aparência serão adicionadas."
-    );
+    <div
+        class="menu-nav"
+        onclick="window.location.href='favoritos.html'">
 
-}
+        <svg viewBox="0 0 24 24">
+
+            <path
+                d="M20.8 8.6c0 5.5-8.8 11-8.8 11S3.2 14.1 3.2 8.6A4.6 4.6 0 0 1 12 6.4a4.6 4.6 0 0 1 8.8 2.2z">
+            </path>
+
+        </svg>
+
+        <span>Favoritos</span>
+
+    </div>
 
 
-function sobre(){
+    <!-- MAIS -->
 
-    alert(
-        "BerryAnime — Versão 1.0"
-    );
+    <div
+        class="menu-nav active"
+        onclick="window.location.href='mais.html'">
 
-}
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 6h16"></path>
+
+            <path d="M4 12h16"></path>
+
+            <path d="M4 18h16"></path>
+
+        </svg>
+
+        <span>Mais</span>
+
+    </div>
+
+</div>
+
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(!user){
+
+            window.location.replace(
+                "index.html"
+            );
+
+            return;
+        }
+
+
+        document
+        .getElementById("userEmail")
+        .textContent =
+            user.email || "Sem e-mail";
+
+
+        let nome =
+            user.displayName;
+
+
+        if(!nome && user.email){
+
+            nome =
+                user.email.split("@")[0];
+
+        }
+
+
+        document
+        .getElementById("userName")
+        .textContent =
+            nome || "Usuário";
+
+    }
+);
+
+
+document
+.getElementById("logoutButton")
+.addEventListener(
+    "click",
+    async function(){
+
+        const confirmar =
+            confirm(
+                "Deseja sair da sua conta?"
+            );
+
+        if(!confirmar){
+            return;
+        }
+
+
+        try{
+
+            await signOut(auth);
+
+            window.location.replace(
+                "index.html"
+            );
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            alert(
+                "Não foi possível sair da conta."
+            );
+
+        }
+
+    }
+);
 
 </script>
 
 
 </body>
-
-  </html>
+</html>
