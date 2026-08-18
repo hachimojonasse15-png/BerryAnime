@@ -946,4 +946,45 @@ function escolherQualidade(){
         escolha
     );
 
-    document.get
+    document.getElementById(
+        "qualityValue"
+    ).textContent =
+        escolha;
+
+}
+
+
+/* =====================================================
+   CARREGAR QUALIDADE
+===================================================== */
+
+const qualidadeSalva =
+    localStorage.getItem(
+        "berryanime_quality"
+    );
+
+if(qualidadeSalva){
+
+    document.getElementById(
+        "qualityValue"
+    ).textContent =
+        qualidadeSalva;
+
+}
+
+
+/* =====================================================
+   ATUALIZAR TEXTOS INICIAIS
+===================================================== */
+
+ids.forEach(function(id){
+
+    atualizarTexto(id);
+
+});
+
+
+</script>
+
+</body>
+  </html>
