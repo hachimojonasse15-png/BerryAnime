@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
+<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
-
-<title>BerryAnime</title>
-
-<style>
+<title>BerryAnime</title><style>
 
 *{
     margin:0;
@@ -448,6 +440,11 @@ body{
     opacity:.85;
 }
 
+.google-btn:disabled{
+    opacity:.65;
+    cursor:wait;
+}
+
 .google-icon{
     width:25px;
     height:25px;
@@ -612,208 +609,174 @@ body{
     }
 }
 
-</style>
-
-</head>
-
-<body>
-
-
-<!-- ===================================================
-     SPLASH
-=================================================== -->
-
-<section
+</style></head><body><section
     id="splash"
-    class="screen">
+    class="screen"><div class="splash-content">
 
-    <div class="splash-content">
+    <img
+        src="BerryAnime_logo_leve.jpg"
+        class="berry-logo"
+        alt="BerryAnime">
 
-        <img
-            src="BerryAnime_logo_leve.jpg"
-            class="berry-logo"
-            alt="BerryAnime">
+    <div class="logo-name">
 
-        <div class="logo-name">
-
-            <span class="berry">BERRY</span>
-            <span class="anime">ANIME</span>
-
-        </div>
-
-        <div
-            class="loader"
-            aria-label="Carregando">
-        </div>
+        <span class="berry">BERRY</span>
+        <span class="anime">ANIME</span>
 
     </div>
 
-</section>
+    <div
+        class="loader"
+        aria-label="Carregando">
+    </div>
 
+</div>
 
-<!-- ===================================================
-     LOGIN SCREEN
-=================================================== -->
-
-<section
+</section><section
     id="login"
-    class="screen">
+    class="screen"><div class="background-glow"></div>
 
-    <div class="background-glow"></div>
+<div class="decor one"></div>
 
-    <div class="decor one"></div>
+<div class="decor two"></div>
 
-    <div class="decor two"></div>
+<div class="login-content">
 
-    <div class="login-content">
+    <img
+        src="BerryAnime_logo_leve.jpg"
+        class="login-logo"
+        alt="BerryAnime">
 
-        <img
-            src="BerryAnime_logo_leve.jpg"
-            class="login-logo"
-            alt="BerryAnime">
+    <div class="login-brand">
 
-        <div class="login-brand">
-
-            <span class="berry">BERRY</span>
-            <span class="anime">ANIME</span>
-
-        </div>
-
-        <p class="subtitle">
-
-            Assista aos seus animes
-            favoritos em um só lugar!
-
-        </p>
-
-        <div class="buttons">
-
-
-            <!-- LOGIN -->
-
-            <button
-                type="button"
-                class="btn login-btn"
-                id="loginButton">
-
-                <svg
-                    class="btn-icon"
-                    viewBox="0 0 24 24">
-
-                    <circle
-                        cx="12"
-                        cy="8"
-                        r="4">
-                    </circle>
-
-                    <path
-                        d="M4 21c0-4 3.5-7 8-7s8 3 8 7">
-                    </path>
-
-                </svg>
-
-                <span>LOGIN</span>
-
-            </button>
-
-
-            <!-- REGISTRAR -->
-
-            <button
-                type="button"
-                class="btn register-btn"
-                id="registerButton">
-
-                <svg
-                    class="btn-icon"
-                    viewBox="0 0 24 24">
-
-                    <circle
-                        cx="9"
-                        cy="8"
-                        r="4">
-                    </circle>
-
-                    <path
-                        d="M2 21c0-4 3-7 7-7">
-                    </path>
-
-                    <path
-                        d="M19 14v7">
-                    </path>
-
-                    <path
-                        d="M15.5 17.5h7">
-                    </path>
-
-                </svg>
-
-                <span>REGISTRAR</span>
-
-            </button>
-
-
-            <!-- OU -->
-
-            <div class="or">
-
-                <span>OU</span>
-
-            </div>
-
-
-            <!-- GOOGLE -->
-
-            <button
-                type="button"
-                class="google-btn"
-                id="googleButton">
-
-                <svg
-                    class="google-icon"
-                    viewBox="0 0 48 48">
-
-                    <path
-                        fill="#4285F4"
-                        d="M47.5 24.5c0-1.7-.2-3.4-.5-5H24v9.5h13.2c-.6 3-2.3 5.5-4.9 7.2v6h7.9c4.6-4.2 7.3-10.4 7.3-17.7z">
-                    </path>
-
-                    <path
-                        fill="#34A853"
-                        d="M24 48c6.5 0 12-2.1 16-5.7l-7.9-6c-2.1 1.4-4.8 2.3-8.1 2.3-6.2 0-11.5-4.2-13.4-9.9H2.5v6.2C6.4 42.6 14.6 48 24 48z">
-                    </path>
-
-                    <path
-                        fill="#FBBC05"
-                        d="M10.6 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7v-6.2H2.5C.9 16.3 0 20 0 24s.9 7.7 2.5 10.9l8.1-6.2z">
-                    </path>
-
-                    <path
-                        fill="#EA4335"
-                        d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C36 2.3 30.5 0 24 0 14.6 0 6.4 5.4 2.5 13.1l8.1 6.2C12.5 13.7 17.8 9.5 24 9.5z">
-                    </path>
-
-                </svg>
-
-                <span>Entrar com Google</span>
-
-            </button>
-
-        </div>
+        <span class="berry">BERRY</span>
+        <span class="anime">ANIME</span>
 
     </div>
 
-</section>
+    <p class="subtitle">
+
+        Assista aos seus animes
+        favoritos em um só lugar!
+
+    </p>
+
+    <div class="buttons">
+
+        <button
+            type="button"
+            class="btn login-btn"
+            id="loginButton">
+
+            <svg
+                class="btn-icon"
+                viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="4">
+                </circle>
+
+                <path
+                    d="M4 21c0-4 3.5-7 8-7s8 3 8 7">
+                </path>
+
+            </svg>
+
+            <span>LOGIN</span>
+
+        </button>
 
 
-<script type="module">
+        <button
+            type="button"
+            class="btn register-btn"
+            id="registerButton">
+
+            <svg
+                class="btn-icon"
+                viewBox="0 0 24 24">
+
+                <circle
+                    cx="9"
+                    cy="8"
+                    r="4">
+                </circle>
+
+                <path
+                    d="M2 21c0-4 3-7 7-7">
+                </path>
+
+                <path
+                    d="M19 14v7">
+                </path>
+
+                <path
+                    d="M15.5 17.5h7">
+                </path>
+
+            </svg>
+
+            <span>REGISTRAR</span>
+
+        </button>
+
+
+        <div class="or">
+            <span>OU</span>
+        </div>
+
+
+        <button
+            type="button"
+            class="google-btn"
+            id="googleButton">
+
+            <svg
+                class="google-icon"
+                viewBox="0 0 48 48">
+
+                <path
+                    fill="#4285F4"
+                    d="M47.5 24.5c0-1.7-.2-3.4-.5-5H24v9.5h13.2c-.6 3-2.3 5.5-4.9 7.2v6h7.9c4.6-4.2 7.3-10.4 7.3-17.7z">
+                </path>
+
+                <path
+                    fill="#34A853"
+                    d="M24 48c6.5 0 12-2.1 16-5.7l-7.9-6c-2.1 1.4-4.8 2.3-8.1 2.3-6.2 0-11.5-4.2-13.4-9.9H2.5v6.2C6.4 42.6 14.6 48 24 48z">
+                </path>
+
+                <path
+                    fill="#FBBC05"
+                    d="M10.6 28.7c-.5-1.4-.8-2.9-.8-4.7s.3-3.3.8-4.7v-6.2H2.5C.9 16.3 0 20 0 24s.9 7.7 2.5 10.9l8.1-6.2z">
+                </path>
+
+                <path
+                    fill="#EA4335"
+                    d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C36 2.3 30.5 0 24 0 14.6 0 6.4 5.4 2.5 13.1l8.1 6.2C12.5 13.7 17.8 9.5 24 9.5z">
+                </path>
+
+            </svg>
+
+            <span>Entrar com Google</span>
+
+        </button>
+
+    </div>
+
+</div>
+
+</section><script type="module">
 
 import {
     auth
 } from "./firebase.js";
 
 import {
-    onAuthStateChanged
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
@@ -832,10 +795,6 @@ const registerButton =
 const googleButton =
     document.getElementById("googleButton");
 
-
-/* =====================================================
-   ESTADO
-===================================================== */
 
 let authChecked = false;
 
@@ -857,12 +816,11 @@ function showLogin(){
     splash.classList.add("hidden");
 
     loginScreen.classList.add("show");
-
 }
 
 
 /* =====================================================
-   AUTH STATE
+   FIREBASE AUTH
 ===================================================== */
 
 onAuthStateChanged(
@@ -871,13 +829,7 @@ onAuthStateChanged(
 
         authChecked = true;
 
-
         if(user){
-
-            /*
-             * Utilizador autenticado:
-             * não mostramos a tela de login.
-             */
 
             redirected = true;
 
@@ -886,13 +838,7 @@ onAuthStateChanged(
             );
 
             return;
-
         }
-
-
-        /*
-         * Utilizador não autenticado.
-         */
 
         if(splashFinished){
 
@@ -912,12 +858,6 @@ setTimeout(
     function(){
 
         splashFinished = true;
-
-
-        /*
-         * Só mostra o login depois
-         * do Firebase terminar a verificação.
-         */
 
         if(authChecked){
 
@@ -946,7 +886,7 @@ loginButton.addEventListener(
 
 
 /* =====================================================
-   REGISTRAR
+   REGISTRO
 ===================================================== */
 
 registerButton.addEventListener(
@@ -966,21 +906,73 @@ registerButton.addEventListener(
 
 googleButton.addEventListener(
     "click",
-    function(){
+    async function(){
 
-        /*
-         * O fluxo Google continua no login.html,
-         * onde o Firebase executa a autenticação.
-         */
+        if(redirected){
+            return;
+        }
 
-        window.location.href =
-            "login.html";
+        googleButton.disabled = true;
+
+        const provider =
+            new GoogleAuthProvider();
+
+
+        provider.setCustomParameters({
+            prompt: "select_account"
+        });
+
+
+        try{
+
+            const result =
+                await signInWithPopup(
+                    auth,
+                    provider
+                );
+
+
+            if(result.user){
+
+                redirected = true;
+
+                window.location.replace(
+                    "home.html"
+                );
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Erro no login Google:",
+                error
+            );
+
+
+            if(
+                error.code !==
+                "auth/popup-closed-by-user"
+            ){
+
+                alert(
+                    "Não foi possível entrar com Google."
+                );
+
+            }
+
+
+            googleButton.disabled = false;
+
+        }
 
     }
 );
 
 </script>
 
-
 </body>
-          </html>
+
+</html>
