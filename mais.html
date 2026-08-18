@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -34,75 +33,44 @@ body{
     padding-bottom:80px;
 }
 
-
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
 .content{
     width:100%;
     max-width:680px;
     margin:0 auto;
-
     padding:52px 23px 30px;
-
     display:flex;
     flex-direction:column;
     align-items:center;
 }
 
-
-/* =====================================================
-   LOGO
-===================================================== */
-
 .berry-circle{
     width:88px;
     height:88px;
-
     border-radius:50%;
-
     border:2px solid #ff1744;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     overflow:hidden;
-
     margin-bottom:30px;
-
     background:#111;
-
-    box-shadow:
-        0 0 18px rgba(255,23,68,.18);
+    box-shadow:0 0 18px rgba(255,23,68,.18);
 }
 
 .berry-circle img{
     width:70px;
     height:70px;
-
     object-fit:contain;
     display:block;
-
     mix-blend-mode:lighten;
 }
 
-
-/* =====================================================
-   BEM-VINDO
-===================================================== */
-
 .welcome{
     text-align:center;
-
     font-size:30px;
     font-weight:800;
-
     line-height:1.2;
-
     color:white;
-
     margin-bottom:8px;
 }
 
@@ -110,133 +78,71 @@ body{
     color:#ff1744;
 }
 
-
-/* =====================================================
-   NOME
-===================================================== */
-
 .user-name{
     text-align:center;
-
     font-size:20px;
     font-weight:700;
-
     color:white;
-
     margin-top:25px;
 }
 
-
-/* =====================================================
-   EMAIL
-===================================================== */
-
 .user-email{
     text-align:center;
-
     font-size:15px;
-
     color:#999;
-
     margin-top:7px;
-
     max-width:100%;
-
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
 }
 
-
-/* =====================================================
-   CAIXA DE OPÇÕES
-===================================================== */
-
 .menu-box{
     width:100%;
-
     margin-top:52px;
-
     background:#151515;
-
     border:1px solid #303030;
-
     border-radius:22px;
-
     overflow:hidden;
 }
 
-
-/* =====================================================
-   ITEM
-===================================================== */
-
 .menu-item{
     width:100%;
-
     min-height:98px;
-
     display:flex;
     align-items:center;
-
     padding:16px 30px;
-
     cursor:pointer;
-
-    transition:
-        background .15s ease,
-        transform .15s ease;
+    transition:background .15s ease, transform .15s ease;
 }
-
-
-/* LINHAS ENTRE OS ITENS */
 
 .menu-item + .menu-item{
     border-top:1px solid #303030;
 }
-
-
-/* TOQUE BRANCO */
 
 .menu-item:active{
     background:#252525;
     transform:scale(.995);
 }
 
-
-/* =====================================================
-   ÍCONE
-===================================================== */
-
 .menu-icon{
     width:48px;
     height:48px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     flex-shrink:0;
 }
 
 .menu-icon svg{
     width:30px;
     height:30px;
-
     stroke:#ff1744;
-
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
     stroke-linejoin:round;
 }
-
-
-/* =====================================================
-   TEXTO
-===================================================== */
 
 .menu-text{
     margin-left:20px;
@@ -245,98 +151,59 @@ body{
 
 .menu-title{
     font-size:20px;
-
     font-weight:700;
-
     color:white;
 }
 
 .menu-sub{
     font-size:15px;
-
     color:#999;
-
     margin-top:6px;
 }
 
-
-/* =====================================================
-   VERSÃO
-===================================================== */
-
 .version{
     text-align:center;
-
     margin-top:47px;
-
     color:#777;
-
     font-size:15px;
-
     line-height:1.45;
 }
 
-
-/* =====================================================
-   MENU INFERIOR
-===================================================== */
-
 .bottom-menu{
     position:fixed;
-
     bottom:0;
     left:0;
     right:0;
-
     height:68px;
-
     background:#101010;
-
     border-top:1px solid #222;
-
     display:flex;
-
     justify-content:space-around;
-
     align-items:center;
-
     z-index:100;
 }
 
 .menu-nav{
     flex:1;
-
     height:100%;
-
     display:flex;
     flex-direction:column;
-
     align-items:center;
     justify-content:center;
-
     gap:4px;
-
     text-align:center;
-
     font-size:12px;
-
     color:#777;
-
     cursor:pointer;
-
     transition:.2s;
 }
 
 .menu-nav svg{
     width:21px;
     height:21px;
-
     stroke:currentColor;
-
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
     stroke-linejoin:round;
 }
@@ -345,24 +212,13 @@ body{
     font-size:12px;
 }
 
-
-/* PÁGINA ATIVA = BRANCO */
-
 .menu-nav.active{
     color:white;
 }
 
-
-/* TOQUE = BRANCO */
-
 .menu-nav:active{
     color:white;
 }
-
-
-/* =====================================================
-   CELULARES
-===================================================== */
 
 @media(max-width:600px){
 
@@ -400,7 +256,6 @@ body{
 
     .menu-item{
         min-height:98px;
-
         padding-left:30px;
         padding-right:20px;
     }
@@ -494,9 +349,7 @@ body{
 
 <body>
 
-
 <main class="content">
-
 
     <div class="berry-circle">
 
@@ -506,41 +359,30 @@ body{
 
     </div>
 
-
     <div class="welcome">
-
         Bem-vindo(a)
         <span class="red">de volta!</span>
-
     </div>
-
 
     <div
         id="userName"
         class="user-name">
-
         Carregando...
-
     </div>
-
 
     <div
         id="userEmail"
         class="user-email">
-
         ...
-
     </div>
 
-
     <div class="menu-box">
-
 
         <!-- MEU PERFIL -->
 
         <div
             class="menu-item"
-            onclick="editarPerfil()">
+            onclick="window.location.href='perfil.html'">
 
             <div class="menu-icon">
 
@@ -579,7 +421,7 @@ body{
 
         <div
             class="menu-item"
-            onclick="configuracoes()">
+            onclick="window.location.href='configuracoes.html'">
 
             <div class="menu-icon">
 
@@ -618,7 +460,7 @@ body{
 
         <div
             class="menu-item"
-            onclick="historico()">
+            onclick="window.location.href='historico.html'">
 
             <div class="menu-icon">
 
@@ -699,23 +541,17 @@ body{
 
     </div>
 
-
     <div class="version">
-
         <div>BerryAnime</div>
         <div>VERSÃO 1.0</div>
-
     </div>
 
 </main>
 
 
-<!-- =====================================================
-     MENU INFERIOR — IGUAL AO HOME
-===================================================== -->
+<!-- MENU INFERIOR -->
 
 <div class="bottom-menu">
-
 
     <!-- INÍCIO -->
 
@@ -725,13 +561,9 @@ body{
 
         <svg viewBox="0 0 24 24">
 
-            <path
-                d="M3 11l9-8 9 8">
-            </path>
+            <path d="M3 11l9-8 9 8"></path>
 
-            <path
-                d="M5 10v10h14V10">
-            </path>
+            <path d="M5 10v10h14V10"></path>
 
         </svg>
 
@@ -748,17 +580,11 @@ body{
 
         <svg viewBox="0 0 24 24">
 
-            <path
-                d="M4 4h7v16H4z">
-            </path>
+            <path d="M4 4h7v16H4z"></path>
 
-            <path
-                d="M13 4h7v16h-7z">
-            </path>
+            <path d="M13 4h7v16h-7z"></path>
 
-            <path
-                d="M6 7h3M6 10h3M15 7h3M15 10h3">
-            </path>
+            <path d="M6 7h3M6 10h3M15 7h3M15 10h3"></path>
 
         </svg>
 
@@ -807,15 +633,11 @@ body{
 </div>
 
 
-<!-- =====================================================
-     FIREBASE
-===================================================== -->
+<!-- FIREBASE -->
 
 <script type="module">
 
-import {
-    auth
-} from "./firebase.js";
+import { auth } from "./firebase.js";
 
 import {
     onAuthStateChanged,
@@ -829,14 +651,10 @@ onAuthStateChanged(
 
         if(!user){
 
-            window.location.replace(
-                "index.html"
-            );
+            window.location.replace("index.html");
 
             return;
-
         }
-
 
         document
         .getElementById("userEmail")
@@ -844,15 +662,13 @@ onAuthStateChanged(
             user.email || "Sem e-mail";
 
 
-        let nome =
-            user.displayName;
+        let nome = user.displayName;
 
 
         if(!nome && user.email){
 
             nome =
-                user.email
-                .split("@")[0];
+                user.email.split("@")[0];
 
         }
 
@@ -864,33 +680,6 @@ onAuthStateChanged(
 
     }
 );
-
-
-window.editarPerfil =
-function(){
-
-    window.location.href =
-        "perfil.html";
-
-};
-
-
-window.configuracoes =
-function(){
-
-    window.location.href =
-        "configuracoes.html";
-
-};
-
-
-window.historico =
-function(){
-
-    window.location.href =
-        "historico.html";
-
-};
 
 
 document
@@ -933,6 +722,5 @@ document
 
 </script>
 
-
 </body>
- </html>
+      </html>
