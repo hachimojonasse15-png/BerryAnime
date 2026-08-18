@@ -15,10 +15,6 @@
 
 <style>
 
-/* =====================================================
-   BASE
-===================================================== */
-
 *{
     margin:0;
     padding:0;
@@ -44,32 +40,28 @@ body{
 ===================================================== */
 
 .header{
-
     height:65px;
 
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
 
     padding:0 15px;
 }
 
 .logo{
-
-    width:40px;
-    height:40px;
+    width:42px;
+    height:42px;
 
     border-radius:50%;
-
     overflow:hidden;
 }
 
 .logo img{
-
     width:100%;
     height:100%;
-
     object-fit:cover;
+    display:block;
 }
 
 
@@ -78,39 +70,45 @@ body{
 ===================================================== */
 
 .content{
-
     padding:10px 14px;
 }
 
 
 /* =====================================================
-   VERIFICAÇÃO
+   BEM-VINDO
 ===================================================== */
 
-.verify{
-
-    width:100%;
-
-    background:#e84d51;
-
-    border-radius:12px;
-
-    min-height:48px;
-
-    padding:10px 14px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
+.welcome{
     text-align:center;
+    margin:5px 0 18px;
+}
 
-    font-size:13px;
-    font-weight:bold;
+.welcome-icon{
+    width:42px;
+    height:42px;
 
-    margin-bottom:12px;
+    border-radius:50%;
+    overflow:hidden;
 
-    cursor:pointer;
+    margin:0 auto 8px;
+}
+
+.welcome-icon img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.welcome-title{
+    font-size:18px;
+    font-weight:700;
+}
+
+.welcome-sub{
+    color:#999;
+    font-size:12px;
+    margin-top:5px;
 }
 
 
@@ -119,10 +117,9 @@ body{
 ===================================================== */
 
 .account{
-
     width:100%;
 
-    min-height:86px;
+    min-height:78px;
 
     background:#191919;
 
@@ -131,7 +128,6 @@ body{
     padding:10px 12px;
 
     display:flex;
-
     align-items:center;
 
     margin-bottom:12px;
@@ -143,9 +139,8 @@ body{
 ===================================================== */
 
 .avatar{
-
-    width:62px;
-    height:62px;
+    width:58px;
+    height:58px;
 
     flex-shrink:0;
 
@@ -154,7 +149,6 @@ body{
     background:#303030;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -162,33 +156,27 @@ body{
 }
 
 .avatar img{
-
     width:100%;
     height:100%;
 
     object-fit:cover;
-
     display:none;
 }
 
 .avatar-default{
-
     width:100%;
     height:100%;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 }
 
 .avatar-default svg{
-
-    width:35px;
-    height:35px;
+    width:32px;
+    height:32px;
 
     stroke:#999;
-
     fill:none;
 
     stroke-width:1.7;
@@ -199,113 +187,60 @@ body{
 
 
 /* =====================================================
-   INFORMAÇÕES DA CONTA
+   INFORMAÇÕES
 ===================================================== */
 
 .account-info{
-
     flex:1;
-
     min-width:0;
 
-    margin-left:13px;
+    margin-left:12px;
 }
 
 .account-name{
-
-    font-size:18px;
-
+    font-size:16px;
     font-weight:700;
 
     white-space:nowrap;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
 }
 
 .account-email{
-
     margin-top:4px;
 
     color:#999;
-
-    font-size:13px;
+    font-size:12px;
 
     white-space:nowrap;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
 }
 
 
 /* =====================================================
-   SAIR
-===================================================== */
-
-.logout{
-
-    width:40px;
-    height:40px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    color:#ddd;
-}
-
-.logout svg{
-
-    width:25px;
-    height:25px;
-
-    stroke:currentColor;
-
-    fill:none;
-
-    stroke-width:2;
-
-    stroke-linecap:round;
-    stroke-linejoin:round;
-}
-
-
-/* =====================================================
-   CAIXA DE OPÇÕES
+   OPÇÕES
 ===================================================== */
 
 .menu-box{
-
     width:100%;
 
     background:#191919;
 
     border-radius:13px;
 
-    padding:5px 0;
+    padding:3px 0;
 
-    margin-bottom:22px;
+    margin-bottom:18px;
 }
 
-
-/* =====================================================
-   ITEM
-===================================================== */
-
 .menu-item{
-
-    min-height:62px;
+    min-height:57px;
 
     display:flex;
-
     align-items:center;
 
-    padding:8px 14px;
+    padding:7px 13px;
 
     cursor:pointer;
 
@@ -313,22 +248,14 @@ body{
 }
 
 .menu-item:active{
-
     background:#242424;
 }
 
-
-/* =====================================================
-   ÍCONE
-===================================================== */
-
 .menu-icon{
-
-    width:42px;
-    height:42px;
+    width:38px;
+    height:38px;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -336,12 +263,10 @@ body{
 }
 
 .menu-icon svg{
-
-    width:26px;
-    height:26px;
+    width:23px;
+    height:23px;
 
     stroke:white;
-
     fill:none;
 
     stroke-width:1.8;
@@ -350,85 +275,61 @@ body{
     stroke-linejoin:round;
 }
 
-
-/* =====================================================
-   TEXTO
-===================================================== */
-
 .menu-text{
-
-    margin-left:11px;
+    margin-left:10px;
 }
 
 .menu-title{
-
-    font-size:16px;
-
+    font-size:15px;
     font-weight:700;
 }
 
 .menu-sub{
-
     color:#999;
-
-    font-size:12px;
-
-    margin-top:4px;
-}
-
-
-/* =====================================================
-   REDES SOCIAIS
-===================================================== */
-
-.socials{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:17px;
-
+    font-size:11px;
     margin-top:3px;
 }
 
-.social{
 
-    width:52px;
-    height:52px;
+/* =====================================================
+   SAIR
+===================================================== */
 
-    border-radius:50%;
+.logout-item{
+    color:#ff1744;
+}
 
-    background:white;
-
-    color:#111;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:21px;
-
-    font-weight:bold;
-
-    cursor:pointer;
+.logout-item svg{
+    stroke:#ff1744;
 }
 
 
 /* =====================================================
-   VERSÃO
+   RODAPÉ
 ===================================================== */
 
-.version{
-
+.footer{
     text-align:center;
+    margin-top:25px;
+}
 
-    margin-top:28px;
+.footer-brand{
+    font-size:14px;
+    font-weight:800;
+}
 
-    color:#999;
+.footer-brand .berry{
+    color:#ff1744;
+}
 
-    font-size:13px;
+.footer-brand .anime{
+    color:white;
+}
+
+.version{
+    color:#777;
+    font-size:11px;
+    margin-top:5px;
 }
 
 
@@ -437,7 +338,6 @@ body{
 ===================================================== */
 
 .bottom-menu{
-
     position:fixed;
 
     bottom:0;
@@ -451,26 +351,20 @@ body{
     border-top:1px solid #222;
 
     display:flex;
-
     justify-content:space-around;
-
     align-items:center;
 
     z-index:100;
 }
 
 .menu-nav{
-
     flex:1;
-
     height:100%;
 
     display:flex;
-
     flex-direction:column;
 
     align-items:center;
-
     justify-content:center;
 
     gap:3px;
@@ -483,12 +377,10 @@ body{
 }
 
 .menu-nav svg{
-
     width:20px;
     height:20px;
 
     stroke:currentColor;
-
     fill:none;
 
     stroke-width:2;
@@ -498,12 +390,10 @@ body{
 }
 
 .menu-nav.active{
-
     color:white;
 }
 
 .menu-nav span{
-
     font-size:11px;
 }
 
@@ -515,19 +405,19 @@ body{
 @media(max-width:380px){
 
     .account-name{
-        font-size:17px;
-    }
-
-    .account-email{
-        font-size:12px;
-    }
-
-    .menu-title{
         font-size:15px;
     }
 
-    .menu-sub{
+    .account-email{
         font-size:11px;
+    }
+
+    .menu-title{
+        font-size:14px;
+    }
+
+    .menu-sub{
+        font-size:10px;
     }
 
 }
@@ -563,25 +453,34 @@ body{
 <main class="content">
 
 
-    <!-- VERIFICAÇÃO -->
+    <!-- BEM-VINDO -->
 
-    <div
-        class="verify"
-        id="verifyButton">
+    <div class="welcome">
 
-        Verifique sua conta para personalização e comentários! ›
+        <div class="welcome-icon">
+
+            <img
+                src="BerryAnime_logo_leve.jpg"
+                alt="BerryAnime">
+
+        </div>
+
+        <div class="welcome-title">
+            Bem-vindo(a) de volta
+        </div>
+
+        <div
+            id="welcomeEmail"
+            class="welcome-sub">
+            ...
+        </div>
 
     </div>
 
 
-    <!-- =================================================
-         CONTA
-    ================================================== -->
+    <!-- CONTA -->
 
     <div class="account">
-
-
-        <!-- AVATAR -->
 
         <div class="avatar">
 
@@ -613,8 +512,6 @@ body{
         </div>
 
 
-        <!-- NOME E EMAIL -->
-
         <div class="account-info">
 
             <div
@@ -635,42 +532,15 @@ body{
 
         </div>
 
-
-        <!-- SAIR -->
-
-        <div
-            class="logout"
-            id="logoutButton">
-
-            <svg viewBox="0 0 24 24">
-
-                <path
-                    d="M9 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4">
-                </path>
-
-                <path
-                    d="M14 8l5 4-5 4">
-                </path>
-
-                <path
-                    d="M19 12H9">
-                </path>
-
-            </svg>
-
-        </div>
-
     </div>
 
 
-    <!-- =================================================
-         OPÇÕES
-    ================================================== -->
+    <!-- OPÇÕES -->
 
     <div class="menu-box">
 
 
-        <!-- EDITAR PERFIL -->
+        <!-- MEU PERFIL -->
 
         <div
             class="menu-item"
@@ -697,11 +567,11 @@ body{
             <div class="menu-text">
 
                 <div class="menu-title">
-                    Editar perfil
+                    Meu perfil
                 </div>
 
                 <div class="menu-sub">
-                    Deixe sua conta do seu jeito
+                    Edite suas informações
                 </div>
 
             </div>
@@ -748,18 +618,24 @@ body{
         </div>
 
 
-        <!-- FAVORITOS -->
+        <!-- HISTÓRICO -->
 
         <div
             class="menu-item"
-            onclick="favoritos()">
+            onclick="historico()">
 
             <div class="menu-icon">
 
                 <svg viewBox="0 0 24 24">
 
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="8">
+                    </circle>
+
                     <path
-                        d="M20.8 8.6c0 5.5-8.8 11-8.8 11S3.2 14.1 3.2 8.6A4.6 4.6 0 0 1 12 6.4a4.6 4.6 0 0 1 8.8 2.2z">
+                        d="M12 7v5l3 2">
                     </path>
 
                 </svg>
@@ -769,11 +645,52 @@ body{
             <div class="menu-text">
 
                 <div class="menu-title">
-                    Favoritos
+                    Histórico
                 </div>
 
                 <div class="menu-sub">
-                    Seus animes favoritos
+                    Continue de onde parou
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAIR -->
+
+        <div
+            class="menu-item logout-item"
+            onclick="sair()">
+
+            <div class="menu-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M9 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4">
+                    </path>
+
+                    <path
+                        d="M14 8l5 4-5 4">
+                    </path>
+
+                    <path
+                        d="M19 12H9">
+                    </path>
+
+                </svg>
+
+            </div>
+
+            <div class="menu-text">
+
+                <div class="menu-title">
+                    Sair da conta
+                </div>
+
+                <div class="menu-sub">
+                    Encerrar sessão
                 </div>
 
             </div>
@@ -783,42 +700,19 @@ body{
     </div>
 
 
-    <!-- =================================================
-         REDES
-    ================================================== -->
+    <!-- RODAPÉ -->
 
-    <div class="socials">
+    <div class="footer">
 
-        <div
-            class="social"
-            onclick="abrirLink()">
+        <div class="footer-brand">
 
-            🔗
+            <span class="berry">BERRY</span><span class="anime">ANIME</span>
 
         </div>
 
-        <div
-            class="social"
-            onclick="abrirTikTok()">
-
-            ♪
-
+        <div class="version">
+            VERSÃO 1.0
         </div>
-
-        <div
-            class="social"
-            onclick="abrirX()">
-
-            X
-
-        </div>
-
-    </div>
-
-
-    <div class="version">
-
-        BERRYANIME — VERSÃO 1.0
 
     </div>
 
@@ -830,7 +724,6 @@ body{
 ===================================================== -->
 
 <nav class="bottom-menu">
-
 
     <div
         class="menu-nav"
@@ -936,17 +829,24 @@ onAuthStateChanged(
 
         /* EMAIL */
 
+        const email =
+            user.email || "Sem e-mail";
+
         document
         .getElementById("accountEmail")
         .textContent =
-            user.email || "Sem e-mail";
+            email;
+
+        document
+        .getElementById("welcomeEmail")
+        .textContent =
+            email;
 
 
         /* NOME */
 
         let nome =
             user.displayName;
-
 
         if(!nome && user.email){
 
@@ -956,14 +856,13 @@ onAuthStateChanged(
 
         }
 
-
         document
         .getElementById("accountName")
         .textContent =
             nome || "Usuário";
 
 
-        /* FOTO DO GOOGLE */
+        /* FOTO */
 
         if(user.photoURL){
 
@@ -995,39 +894,35 @@ onAuthStateChanged(
    SAIR
 ===================================================== */
 
-document
-.getElementById("logoutButton")
-.addEventListener(
-    "click",
-    async function(){
+window.sair =
+async function(){
 
-        if(!confirm(
-            "Deseja sair da sua conta?"
-        )){
-            return;
-        }
+    if(!confirm(
+        "Deseja sair da sua conta?"
+    )){
+        return;
+    }
 
-        try{
+    try{
 
-            await signOut(auth);
+        await signOut(auth);
 
-            window.location.href =
-                "index.html";
-
-        }
-
-        catch(error){
-
-            console.log(error);
-
-            alert(
-                "Não foi possível sair da conta."
-            );
-
-        }
+        window.location.href =
+            "index.html";
 
     }
-);
+
+    catch(error){
+
+        console.log(error);
+
+        alert(
+            "Não foi possível sair da conta."
+        );
+
+    }
+
+};
 
 
 /* =====================================================
@@ -1038,7 +933,7 @@ window.editarPerfil =
 function(){
 
     alert(
-        "Editar perfil será adicionado no próximo passo."
+        "Meu perfil será adicionado no próximo passo."
     );
 
 };
@@ -1054,40 +949,11 @@ function(){
 };
 
 
-window.favoritos =
-function(){
-
-    window.location.href =
-        "favoritos.html";
-
-};
-
-
-window.abrirLink =
+window.historico =
 function(){
 
     alert(
-        "Link do BerryAnime será adicionado depois."
-    );
-
-};
-
-
-window.abrirTikTok =
-function(){
-
-    alert(
-        "TikTok do BerryAnime será adicionado depois."
-    );
-
-};
-
-
-window.abrirX =
-function(){
-
-    alert(
-        "X do BerryAnime será adicionado depois."
+        "Histórico será adicionado no próximo passo."
     );
 
 };
@@ -1095,4 +961,5 @@ function(){
 </script>
 
 </body>
+
   </html>
