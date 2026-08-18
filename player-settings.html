@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>BerryAnime - Player</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#090909;
+    color:white;
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content{
+
+    width:100%;
+    max-width:680px;
+
+    margin:0 auto;
+
+    padding:22px 23px 40px;
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.header{
+
+    height:55px;
+
+    display:flex;
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.back{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    color:white;
+}
+
+.back svg{
+
+    width:29px;
+    height:29px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.header-title{
+
+    margin-left:18px;
+
+    font-size:27px;
+
+    font-weight:700;
+}
+
+
+/* =====================================================
+   TÍTULO DA PÁGINA
+===================================================== */
+
+.page-title{
+
+    display:flex;
+    align-items:center;
+
+    min-height:58px;
+
+    margin-bottom:12px;
+}
+
+.page-icon{
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.page-icon svg{
+
+    width:31px;
+    height:31px;
+
+    stroke:#ff1744;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.page-title-text{
+
+    margin-left:20px;
+
+    font-size:20px;
+
+    font-weight:700;
+}
+
+
+/* =====================================================
+   OPÇÕES
+===================================================== */
+
+.settings-box{
+
+    width:100%;
+
+    margin-top:5px;
+}
+
+.setting{
+
+    width:100%;
+
+    min-height:86px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:13px 8px;
+
+    cursor:pointer;
+
+    border-radius:12px;
+
+    transition:.15s;
+}
+
+.setting:active{
+
+    background:#181818;
+}
+
+
+/* =====================================================
+   ÍCONE
+===================================================== */
+
+.setting-icon{
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.setting-icon svg{
+
+    width:29px;
+    height:29px;
+
+    stroke:#ff1744;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   TEXTO
+===================================================== */
+
+.setting-info{
+
+    flex:1;
+
+    min-width:0;
+
+    margin-left:20px;
+
+    padding-right:10px;
+}
+
+.setting-title{
+
+    font-size:19px;
+
+    font-weight:700;
+
+    color:white;
+
+    line-height:1.25;
+}
+
+.setting-sub{
+
+    margin-top:5px;
+
+    font-size:14px;
+
+    color:#999;
+
+    line-height:1.35;
+}
+
+
+/* =====================================================
+   TOGGLE
+===================================================== */
+
+.switch{
+
+    position:relative;
+
+    width:48px;
+    height:27px;
+
+    flex-shrink:0;
+}
+
+.switch input{
+
+    display:none;
+}
+
+.slider{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#555;
+
+    border-radius:30px;
+
+    transition:.2s;
+
+    cursor:pointer;
+}
+
+.slider:before{
+
+    content:"";
+
+    position:absolute;
+
+    width:23px;
+    height:23px;
+
+    left:2px;
+    top:2px;
+
+    background:#ddd;
+
+    border-radius:50%;
+
+    transition:.2s;
+}
+
+.switch input:checked + .slider{
+
+    background:#ff1744;
+}
+
+.switch input:checked + .slider:before{
+
+    transform:translateX(21px);
+
+    background:white;
+}
+
+
+/* =====================================================
+   SEPARADORES
+===================================================== */
+
+.setting + .setting{
+
+    border-top:1px solid #222;
+}
+
+
+/* =====================================================
+   SELEÇÃO
+===================================================== */
+
+.select-value{
+
+    color:#aaa;
+
+    font-size:14px;
+
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:380px){
+
+    .content{
+
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .header-title{
+
+        font-size:25px;
+    }
+
+    .setting-title{
+
+        font-size:18px;
+    }
+
+    .setting-sub{
+
+        font-size:13px;
+    }
+
+    .setting-info{
+
+        margin-left:15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="content">
+
+
+    <!-- =================================================
+         TOPO
+    ================================================== -->
+
+    <header class="header">
+
+        <div
+            class="back"
+            onclick="voltar()">
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M19 12H5"></path>
+
+                <path d="M12 19l-7-7 7-7"></path>
+
+            </svg>
+
+        </div>
+
+
+        <div class="header-title">
+
+            Configurações do Player
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         TÍTULO
+    ================================================== -->
+
+    <div class="page-title">
+
+        <div class="page-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="3">
+                </circle>
+
+                <path
+                    d="M19 13.5v-3l-2-.6a6.5 6.5 0 0 0-.7-1.6l.9-1.9-2.1-2.1-1.9.9a6.5 6.5 0 0 0-1.6-.7L11 2.5H8l-.6 2a6.5 6.5 0 0 0-1.6.7l-1.9-.9-2.1 2.1.9 1.9a6.5 6.5 0 0 0-.7 1.6l-2 .6v3l2 .6a6.5 6.5 0 0 0 .7 1.6l-.9 1.9 2.1 2.1 1.9-.9a6.5 6.5 0 0 0 1.6.7l.6 2h3l.6-2a6.5 6.5 0 0 0 1.6-.7l1.9.9 2.1-2.1-.9-1.9a6.5 6.5 0 0 0 .7-1.6z">
+                </path>
+
+            </svg>
+
+        </div>
+
+
+        <div class="page-title-text">
+
+            Player settings
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         CONFIGURAÇÕES
+    ================================================== -->
+
+    <div class="settings-box">
+
+
+        <!-- GESTOS -->
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M7 11V6a2 2 0 0 1 4 0v5">
+                    </path>
+
+                    <path
+                        d="M11 10V4a2 2 0 0 1 4 0v7">
+                    </path>
+
+                    <path
+                        d="M15 10V6a2 2 0 0 1 4 0v8">
+                    </path>
+
+                    <path
+                        d="M7 10l-2-2a2 2 0 0 0-3 3l5 7a5 5 0 0 0 4 2h3a5 5 0 0 0 5-5">
+                    </path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Ativar gestos no Player
+
+                </div>
+
+                <div
+                    class="setting-sub"
+                    id="gestureText">
+
+                    Gestos de brilho e volume estão ativos
+
+                </div>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="gestures"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- BRILHO -->
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="4">
+                    </circle>
+
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+
+                    <path d="M4.9 4.9l1.4 1.4"></path>
+                    <path d="M17.7 17.7l1.4 1.4"></path>
+                    <path d="M19.1 4.9l-1.4 1.4"></path>
+                    <path d="M6.3 17.7l-1.4 1.4"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Salvar brilho dos gestos
+
+                </div>
+
+                <div
+                    class="setting-sub"
+                    id="brightnessText">
+
+                    Brilho será mantido entre os vídeos
+
+                </div>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="brightness">
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- PRÓXIMO EPISÓDIO -->
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M6 4v16l12-8z"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Próximo episódio automático
+
+                </div>
+
+                <div
+                    class="setting-sub"
+                    id="nextText">
+
+                    O próximo episódio será reproduzido automaticamente
+
+                </div>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="nextEpisode"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- REPRODUÇÃO -->
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M8 5v14l11-7z"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Reprodução automática
+
+                </div>
+
+                <div
+                    class="setting-sub">
+
+                    Iniciar o vídeo automaticamente ao abrir
+
+                </div>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="autoplay"
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- QUALIDADE -->
+
+        <div
+            class="setting"
+            onclick="escolherQualidade()">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M4 5h16v14H4z">
+                    </path>
+
+                    <path
+                        d="M8 9h8M8 13h5">
+                    </path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Qualidade preferida
+
+                </div>
+
+                <div class="setting-sub">
+
+                    Qualidade usada pelo Player
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="select-value"
+                id="qualityValue">
+
+                Automática
+
+            </div>
+
+        </div>
+
+
+        <!-- LEGENDAS -->
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="14"
+                        rx="2">
+                    </rect>
+
+                    <path d="M7 14h4"></path>
+
+                    <path d="M13 14h4"></path>
+
+                </svg>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-title">
+
+                    Legendas automáticas
+
+                </div>
+
+                <div class="setting-sub">
+
+                    Ativar legendas quando disponíveis
+
+                </div>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="subtitles"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+function voltar(){
+
+    window.location.href =
+        "configuracoes.html";
+
+}
+
+
+/* =====================================================
+   CONFIGURAÇÕES SALVAS
+===================================================== */
+
+const ids = [
+
+    "gestures",
+    "brightness",
+    "nextEpisode",
+    "autoplay",
+    "subtitles"
+
+];
+
+
+ids.forEach(function(id){
+
+    const elemento =
+        document.getElementById(id);
+
+    const salvo =
+        localStorage.getItem(
+            "berryanime_" + id
+        );
+
+    if(salvo !== null){
+
+        elemento.checked =
+            salvo === "true";
+
+    }
+
+
+    elemento.addEventListener(
+        "change",
+        function(){
+
+            localStorage.setItem(
+                "berryanime_" + id,
+                elemento.checked
+            );
+
+            atualizarTexto(id);
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   TEXTOS DOS TOGGLES
+===================================================== */
+
+function atualizarTexto(id){
+
+    if(id === "gestures"){
+
+        document.getElementById(
+            "gestureText"
+        ).textContent =
+            document.getElementById("gestures").checked
+            ? "Gestos de brilho e volume estão ativos"
+            : "Gestos de brilho e volume estão desativados";
+
+    }
+
+
+    if(id === "brightness"){
+
+        document.getElementById(
+            "brightnessText"
+        ).textContent =
+            document.getElementById("brightness").checked
+            ? "Brilho será mantido entre os vídeos"
+            : "Brilho não será salvo";
+
+    }
+
+
+    if(id === "nextEpisode"){
+
+        document.getElementById(
+            "nextText"
+        ).textContent =
+            document.getElementById("nextEpisode").checked
+            ? "O próximo episódio será reproduzido automaticamente"
+            : "O próximo episódio não será reproduzido automaticamente";
+
+    }
+
+}
+
+
+/* =====================================================
+   QUALIDADE
+===================================================== */
+
+function escolherQualidade(){
+
+    const atual =
+        localStorage.getItem(
+            "berryanime_quality"
+        ) || "Automática";
+
+    const escolha =
+        prompt(
+            "Qualidade preferida:\n\n" +
+            "Automática\n" +
+            "1080p\n" +
+            "720p\n" +
+            "480p",
+            atual
+        );
+
+    if(!escolha){
+        return;
+    }
+
+    const valores = [
+        "Automática",
+        "1080p",
+        "720p",
+        "480p"
+    ];
+
+    if(!valores.includes(escolha)){
+        alert("Escolha uma qualidade válida.");
+        return;
+    }
+
+    localStorage.setItem(
+        "berryanime_quality",
+        escolha
+    );
+
+    document.get
