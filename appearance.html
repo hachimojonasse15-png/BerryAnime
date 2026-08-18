@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>BerryAnime - Aparência</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#090909;
+    color:white;
+}
+
+.content{
+    width:100%;
+    max-width:680px;
+    margin:0 auto;
+    padding:22px 23px 40px;
+}
+
+.header{
+    height:55px;
+    display:flex;
+    align-items:center;
+    margin-bottom:24px;
+}
+
+.back{
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+    color:white;
+}
+
+.back svg{
+    width:29px;
+    height:29px;
+
+    stroke:currentColor;
+    fill:none;
+
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.header-title{
+    margin-left:18px;
+    font-size:27px;
+    font-weight:700;
+}
+
+.page-title{
+    display:flex;
+    align-items:center;
+
+    min-height:58px;
+    margin-bottom:10px;
+}
+
+.page-icon{
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.page-icon svg{
+    width:31px;
+    height:31px;
+
+    stroke:#ff1744;
+    fill:none;
+
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.page-title-text{
+    margin-left:20px;
+
+    font-size:20px;
+    font-weight:700;
+}
+
+.settings-box{
+    width:100%;
+    margin-top:5px;
+}
+
+.setting{
+    width:100%;
+    min-height:86px;
+
+    display:flex;
+    align-items:center;
+
+    padding:13px 8px;
+
+    cursor:pointer;
+
+    border-radius:12px;
+
+    transition:.15s;
+}
+
+.setting:active{
+    background:#181818;
+}
+
+.setting + .setting{
+    border-top:1px solid #222;
+}
+
+.setting-icon{
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.setting-icon svg{
+    width:29px;
+    height:29px;
+
+    stroke:#ff1744;
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.setting-info{
+    flex:1;
+    min-width:0;
+
+    margin-left:20px;
+
+    padding-right:10px;
+}
+
+.setting-title{
+    font-size:19px;
+    font-weight:700;
+
+    color:white;
+}
+
+.setting-sub{
+    margin-top:5px;
+
+    font-size:14px;
+    color:#999;
+
+    line-height:1.35;
+}
+
+.select-value{
+    color:#aaa;
+
+    font-size:14px;
+
+    white-space:nowrap;
+}
+
+/* SWITCH */
+
+.switch{
+    position:relative;
+
+    width:48px;
+    height:27px;
+
+    flex-shrink:0;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+
+    inset:0;
+
+    background:#555;
+
+    border-radius:30px;
+
+    transition:.2s;
+}
+
+.slider:before{
+    content:"";
+
+    position:absolute;
+
+    width:23px;
+    height:23px;
+
+    left:2px;
+    top:2px;
+
+    background:#ddd;
+
+    border-radius:50%;
+
+    transition:.2s;
+}
+
+.switch input:checked + .slider{
+    background:#ff1744;
+}
+
+.switch input:checked + .slider:before{
+    transform:translateX(21px);
+    background:white;
+}
+
+/* PREVIEW */
+
+.preview{
+    margin-top:28px;
+
+    width:100%;
+
+    background:#151515;
+
+    border:1px solid #303030;
+
+    border-radius:20px;
+
+    padding:20px;
+}
+
+.preview-title{
+    font-size:16px;
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+.preview-card{
+    width:100%;
+    height:85px;
+
+    border-radius:14px;
+
+    background:#202020;
+
+    display:flex;
+    align-items:center;
+
+    padding:14px;
+}
+
+.preview-circle{
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    border:2px solid #ff1744;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.preview-circle svg{
+    width:27px;
+    height:27px;
+
+    stroke:#ff1744;
+    fill:none;
+
+    stroke-width:2;
+}
+
+.preview-text{
+    margin-left:15px;
+}
+
+.preview-main{
+    font-size:17px;
+    font-weight:700;
+}
+
+.preview-sub{
+    margin-top:5px;
+
+    font-size:13px;
+    color:#999;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:380px){
+
+    .content{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .header-title{
+        font-size:25px;
+    }
+
+    .setting-title{
+        font-size:18px;
+    }
+
+    .setting-sub{
+        font-size:13px;
+    }
+
+    .setting-info{
+        margin-left:15px;
+    }
+
+    .select-value{
+        font-size:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="content">
+
+
+<!-- TOPO -->
+
+<header class="header">
+
+    <div
+        class="back"
+        onclick="voltar()">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M19 12H5"></path>
+
+            <path d="M12 19l-7-7 7-7"></path>
+
+        </svg>
+
+    </div>
+
+
+    <div class="header-title">
+
+        Aparência
+
+    </div>
+
+</header>
+
+
+<!-- TÍTULO -->
+
+<div class="page-title">
+
+    <div class="page-icon">
+
+        <svg viewBox="0 0 24 24">
+
+            <circle
+                cx="12"
+                cy="12"
+                r="4">
+            </circle>
+
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+
+            <path d="M4.9 4.9l1.4 1.4"></path>
+            <path d="M17.7 17.7l1.4 1.4"></path>
+
+            <path d="M19.1 4.9l-1.4 1.4"></path>
+            <path d="M6.3 17.7l-1.4 1.4"></path>
+
+        </svg>
+
+    </div>
+
+
+    <div class="page-title-text">
+
+        Personalização
+
+    </div>
+
+</div>
+
+
+<!-- CONFIGURAÇÕES -->
+
+<div class="settings-box">
+
+
+<!-- TEMA -->
+
+<div
+    class="setting"
+    onclick="escolherTema()">
+
+    <div class="setting-icon">
+
+        <svg viewBox="0 0 24 24">
+
+            <path
+                d="M21 12.8A8.5 8.5 0 1 1 11.2 3
+                   6.5 6.5 0 0 0 21 12.8z">
+            </path>
+
+        </svg>
+
+    </div>
+
+
+    <div class="setting-info">
+
+        <div class="setting-title">
+
+            Tema
+
+        </div>
+
+        <div class="setting-sub">
+
+            Escolha o estilo visual do BerryAnime
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="select-value"
+        id="themeValue">
+
+        Escuro
+
+    </div>
+
+</div>
+
+
+<!-- COR -->
+
+<div
+    class="setting"
+    onclick="escolherCor()">
+
+    <div class="setting-icon">
+
+        <svg viewBox="0 0 24 24">
+
+            <circle
+                cx="12"
+                cy="12"
+                r="8">
+            </circle>
+
+            <path d="M8 12h8"></path>
+
+        </svg>
+
+    </div>
+
+
+    <div class="setting-info">
+
+        <div class="setting-title">
+
+            Cor de destaque
+
+        </div>
+
+        <div class="setting-sub">
+
+            Personalize a cor principal do aplicativo
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="select-value"
+        id="colorValue">
+
+        Vermelho
+
+    </div>
+
+</div>
+
+
+<!-- TAMANHO -->
+
+<div
+    class="setting"
+    onclick="escolherTamanho()">
+
+    <div class="setting-icon">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 4h6"></path>
+            <path d="M4 4v6"></path>
+
+            <path d="M20 20h-6"></path>
+            <path d="M20 20v-6"></path>
+
+            <path d="M4 20h6"></path>
+            <path d="M4 20v-6"></path>
+
+            <path d="M20 4h-6"></path>
+            <path d="M20 4v6"></path>
+
+        </svg>
+
+    </div>
+
+
+    <div class="setting-info">
+
+        <div class="setting-title">
+
+            Tamanho da interface
+
+        </div>
+
+        <div class="setting-sub">
+
+            Ajuste o tamanho dos elementos da interface
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="select-value"
+        id="sizeValue">
+
+        Normal
+
+    </div>
+
+</div>
+
+
+<!-- ANIMAÇÕES -->
+
+<div class="setting">
+
+    <div class="setting-icon">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 12h16"></path>
+
+            <path d="M7 8l-3 4 3 4"></path>
+
+            <path d="M17 8l3 4-3 4"></path>
+
+        </svg>
+
+    </div>
+
+
+    <div class="setting-info">
+
+        <div class="setting-title">
+
+            Animações
+
+        </div>
+
+        <div
+            class="setting-sub"
+            id="animationText">
+
+            Animações da interface estão ativadas
+
+        </div>
+
+    </div>
+
+
+    <label class="switch">
+
+        <input
+            type="checkbox"
+            id="animations"
+            checked>
+
+        <span class="slider"></span>
+
+    </label>
+
+</div>
+
+
+</div>
+
+
+<!-- PREVIEW -->
+
+<div class="preview">
+
+    <div class="preview-title">
+
+        Pré-visualização
+
+    </div>
+
+
+    <div class="preview-card">
+
+        <div class="preview-circle">
+
+            <svg viewBox="0 0 24 24">
+
+                <path
+                    d="M12 3v18">
+                </path>
+
+                <path
+                    d="M3 12h18">
+                </path>
+
+            </svg>
+
+        </div>
+
+
+        <div class="preview-text">
+
+            <div class="preview-main">
+
+                BerryAnime
+
+            </div>
+
+            <div class="preview-sub">
+
+                Sua interface personalizada
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+function voltar(){
+
+    window.location.href =
+        "configuracoes.html";
+
+}
+
+
+/* =====================================================
+   TEMA
+===================================================== */
+
+function escolherTema(){
+
+    const atual =
+        localStorage.getItem(
+            "berryanime_theme"
+        ) || "Escuro";
+
+    const escolha =
+        prompt(
+            "Tema:\n\n" +
+            "Escuro\n" +
+            "Claro",
+            atual
+        );
+
+    if(!escolha){
+        return;
+    }
+
+    const valores = [
+        "Escuro",
+        "Claro"
+    ];
+
+    if(!valores.includes(escolha)){
+
+        alert(
+            "Escolha Escuro ou Claro."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "berryanime_theme",
+        escolha
+    );
+
+    document
+    .getElementById("themeValue")
+    .textContent =
+        escolha;
+
+}
+
+
+/* =====================================================
+   COR
+===================================================== */
+
+function escolherCor(){
+
+    const atual =
+        localStorage.getItem(
+            "berryanime_color"
+        ) || "Vermelho";
+
+    const escolha =
+        prompt(
+            "Cor de destaque:\n\n" +
+            "Vermelho\n" +
+            "Roxo\n" +
+            "Azul\n" +
+            "Verde",
+            atual
+        );
+
+    if(!escolha){
+        return;
+    }
+
+    const valores = [
+        "Vermelho",
+        "Roxo",
+        "Azul",
+        "Verde"
+    ];
+
+    if(!valores.includes(escolha)){
+
+        alert(
+            "Escolha uma cor válida."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "berryanime_color",
+        escolha
+    );
+
+    document
+    .getElementById("colorValue")
+    .textContent =
+        escolha;
+
+}
+
+
+/* =====================================================
+   TAMANHO
+===================================================== */
+
+function escolherTamanho(){
+
+    const atual =
+        localStorage.getItem(
+            "berryanime_interface_size"
+        ) || "Normal";
+
+    const escolha =
+        prompt(
+            "Tamanho da interface:\n\n" +
+            "Pequeno\n" +
+            "Normal\n" +
+            "Grande",
+            atual
+        );
+
+    if(!escolha){
+        return;
+    }
+
+    const valores = [
+        "Pequeno",
+        "Normal",
+        "Grande"
+    ];
+
+    if(!valores.includes(escolha)){
+
+        alert(
+            "Escolha um tamanho válido."
+        );
+
+        return;
+    }
+
+    localStorage.setItem(
+        "berryanime_interface_size",
+        escolha
+    );
+
+    document
+    .getElementById("sizeValue")
+    .textContent =
+        escolha;
+
+}
+
+
+/* =====================================================
+   ANIMAÇÕES
+===================================================== */
+
+const animation =
+    document.getElementById(
+        "animations"
+    );
+
+
+const salvo =
+    localStorage.getItem(
+        "berryanime_animations"
+    );
+
+
+if(salvo !== null){
+
+    animation.checked =
+        salvo === "true";
+
+}
+
+
+animation.addEventListener(
+    "change",
+    function(){
+
+        localStorage.setItem(
+            "berryanime_animations",
+            animation.checked
+        );
+
+        atualizarAnimacao();
+
+    }
+);
+
+
+function atualizarAnimacao(){
+
+    document
+    .getElementById("animationText")
+    .textContent =
+        animation.checked
+
+        ? "Animações da interface estão ativadas"
+
+        : "Animações da interface estão desativadas";
+
+}
+
+
+/* =====================================================
+   CARREGAR VALORES
+===================================================== */
+
+const temaSalvo =
+    localStorage.getItem(
+        "berryanime_theme"
+    );
+
+if(temaSalvo){
+
+    document
+    .getElementById("themeValue")
+    .textContent =
+        temaSalvo;
+
+}
+
+
+const corSalva =
+    localStorage.getItem(
+        "berryanime_color"
+    );
+
+if(corSalva){
+
+    document
+    .getElementById("colorValue")
+    .textContent =
+        corSalva;
+
+}
+
+
+const tamanhoSalvo =
+    localStorage.getItem(
+        "berryanime_interface_size"
+    );
+
+if(tamanhoSalvo){
+
+    document
+    .getElementById("sizeValue")
+    .textContent =
+        tamanhoSalvo;
+
+}
+
+
+atualizarAnimacao();
+
+</script>
+
+
+</body>
+
+  </html>
