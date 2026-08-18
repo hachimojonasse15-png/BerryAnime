@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>BerryAnime - Sobre</title>
+
+<style>
+
+/* =====================================================
+   BASE
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#090909;
+    color:white;
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.header{
+
+    height:70px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 20px;
+
+    gap:18px;
+}
+
+.back-button{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.back-button svg{
+
+    width:27px;
+    height:27px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.header-title{
+
+    font-size:24px;
+
+    font-weight:700;
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content{
+
+    width:100%;
+    max-width:680px;
+
+    margin:0 auto;
+
+    padding:25px 22px 50px;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo-area{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    margin-bottom:35px;
+}
+
+.berry-circle{
+
+    width:88px;
+    height:88px;
+
+    border-radius:50%;
+
+    border:2px solid #ff1744;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:#111;
+
+    box-shadow:
+        0 0 18px rgba(255,23,68,.18);
+
+    margin-bottom:18px;
+}
+
+.berry-circle img{
+
+    width:70px;
+    height:70px;
+
+    object-fit:contain;
+
+    display:block;
+
+    mix-blend-mode:lighten;
+}
+
+.logo-name{
+
+    font-size:22px;
+
+    font-weight:800;
+}
+
+.logo-name .red{
+
+    color:#ff1744;
+}
+
+
+/* =====================================================
+   DESCRIÇÃO
+===================================================== */
+
+.description{
+
+    text-align:center;
+
+    color:#999;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    margin-top:8px;
+}
+
+
+/* =====================================================
+   SEÇÕES
+===================================================== */
+
+.section{
+
+    width:100%;
+
+    margin-top:28px;
+
+    padding:4px 0;
+}
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:17px;
+
+    margin-bottom:12px;
+}
+
+.section-icon{
+
+    width:43px;
+    height:43px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.section-icon svg{
+
+    width:28px;
+    height:28px;
+
+    stroke:#ff1744;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.section-title span{
+
+    font-size:19px;
+
+    font-weight:700;
+}
+
+.section-text{
+
+    color:#999;
+
+    font-size:14px;
+
+    line-height:1.55;
+
+    padding-left:60px;
+}
+
+
+/* =====================================================
+   LISTA
+===================================================== */
+
+.info-list{
+
+    margin-top:8px;
+}
+
+.info-item{
+
+    min-height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:10px 4px;
+
+    border-bottom:1px solid #202020;
+}
+
+.info-item:last-child{
+
+    border-bottom:none;
+}
+
+.info-icon{
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.info-icon svg{
+
+    width:27px;
+    height:27px;
+
+    stroke:#ff1744;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.info-text{
+
+    margin-left:15px;
+
+    min-width:0;
+}
+
+.info-title{
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:white;
+}
+
+.info-sub{
+
+    margin-top:4px;
+
+    color:#999;
+
+    font-size:13px;
+
+    line-height:1.4;
+}
+
+
+/* =====================================================
+   POLÍTICA
+===================================================== */
+
+.policy{
+
+    width:100%;
+
+    margin-top:28px;
+
+    background:#151515;
+
+    border:1px solid #292929;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+.policy:active{
+
+    background:#202020;
+
+    transform:scale(.995);
+}
+
+.policy-icon{
+
+    width:45px;
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.policy-icon svg{
+
+    width:27px;
+    height:27px;
+
+    stroke:#ff1744;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.policy-text{
+
+    flex:1;
+
+    margin-left:14px;
+}
+
+.policy-title{
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:white;
+}
+
+.policy-sub{
+
+    margin-top:4px;
+
+    font-size:13px;
+
+    color:#999;
+}
+
+.policy-arrow{
+
+    width:25px;
+
+    color:#777;
+}
+
+.policy-arrow svg{
+
+    width:18px;
+    height:18px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   VERSÃO
+===================================================== */
+
+.version{
+
+    text-align:center;
+
+    margin-top:38px;
+
+    color:#777;
+
+    font-size:14px;
+
+    line-height:1.5;
+}
+
+.version strong{
+
+    color:white;
+}
+
+
+/* =====================================================
+   CELULARES PEQUENOS
+===================================================== */
+
+@media(max-width:380px){
+
+    .header{
+
+        padding:0 15px;
+
+        gap:14px;
+    }
+
+    .header-title{
+
+        font-size:21px;
+    }
+
+    .content{
+
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .berry-circle{
+
+        width:80px;
+        height:80px;
+    }
+
+    .berry-circle img{
+
+        width:63px;
+        height:63px;
+    }
+
+    .logo-name{
+
+        font-size:20px;
+    }
+
+    .section-title span{
+
+        font-size:18px;
+    }
+
+    .section-text{
+
+        padding-left:60px;
+
+        font-size:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
+<header class="header">
+
+    <div
+        class="back-button"
+        onclick="voltar()">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M19 12H5"></path>
+
+            <path d="M12 19l-7-7 7-7"></path>
+
+        </svg>
+
+    </div>
+
+    <div class="header-title">
+        Sobre o BerryAnime
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main class="content">
+
+
+    <!-- =================================================
+         LOGO
+    ================================================== -->
+
+    <div class="logo-area">
+
+        <div class="berry-circle">
+
+            <img
+                src="BerryAnime_logo_leve.jpg"
+                alt="BerryAnime">
+
+        </div>
+
+        <div class="logo-name">
+
+            <span class="red">BERRY</span>ANIME
+
+        </div>
+
+        <div class="description">
+
+            Uma plataforma criada para organizar,
+            descobrir e acompanhar seus animes
+            em um só lugar.
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SOBRE
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <div class="section-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="9">
+                    </circle>
+
+                    <path d="M12 10v6"></path>
+
+                    <circle
+                        cx="12"
+                        cy="7"
+                        r=".7"
+                        fill="#ff1744">
+                    </circle>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Sobre o BerryAnime
+            </span>
+
+        </div>
+
+        <div class="section-text">
+
+            O BerryAnime é um projeto focado em
+            anime, mangás e entretenimento.
+            Estamos construindo uma experiência
+            simples, rápida e confortável para
+            encontrar seus títulos favoritos.
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         REPRODUÇÃO
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <div class="section-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M8 5v14l11-7z"></path>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Reprodução de vídeos
+            </span>
+
+        </div>
+
+        <div class="section-text">
+
+            Para a reprodução dos vídeos,
+            o BerryAnime utilizará um player
+            compatível com HTML5, permitindo
+            reproduzir conteúdos de vídeo
+            diretamente no navegador.
+
+            <br><br>
+
+            Conforme o projeto evoluir, poderão
+            ser adicionados recursos como
+            seleção de qualidade, legendas,
+            controle de velocidade e suporte
+            a diferentes formatos de vídeo.
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         TECNOLOGIAS
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <div class="section-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M4 5h16v14H4z"></path>
+
+                    <path d="M8 9l3 3-3 3"></path>
+
+                    <path d="M13 15h3"></path>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Tecnologias utilizadas
+            </span>
+
+        </div>
+
+
+        <div class="info-list">
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M4 5h16v14H4z"></path>
+
+                        <path d="M8 9l3 3-3 3"></path>
+
+                        <path d="M13 15h3"></path>
+
+                    </svg>
+
+                </div>
+
+                <div class="info-text">
+
+                    <div class="info-title">
+                        HTML, CSS e JavaScript
+                    </div>
+
+                    <div class="info-sub">
+                        Estrutura, design e funcionamento
+                        da plataforma.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="9">
+                        </circle>
+
+                        <path d="M8 12h8"></path>
+
+                        <path d="M12 8v8"></path>
+
+                    </svg>
+
+                </div>
+
+                <div class="info-text">
+
+                    <div class="info-title">
+                        Jikan API
+                    </div>
+
+                    <div class="info-sub">
+                        Informações e dados de anime
+                        utilizados pelo BerryAnime.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"></path>
+
+                        <path d="M9 12l2 2 4-4"></path>
+
+                    </svg>
+
+                </div>
+
+                <div class="info-text">
+
+                    <div class="info-title">
+                        Firebase
+                    </div>
+
+                    <div class="info-sub">
+                        Autenticação e recursos
+                        relacionados às contas.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect
+                            x="4"
+                            y="4"
+                            width="16"
+                            height="16"
+                            rx="2">
+                        </rect>
+
+                        <path d="M8 9h8"></path>
+
+                        <path d="M8 13h8"></path>
+
+                        <path d="M8 17h5"></path>
+
+                    </svg>
+
+                </div>
+
+                <div class="info-text">
+
+                    <div class="info-title">
+                        GitHub
+                    </div>
+
+                    <div class="info-sub">
+                        Hospedagem e desenvolvimento
+                        do projeto web.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         FUTURO
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <div class="section-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M12 3v18"></path>
+
+                    <path d="M3 12h18"></path>
+
+                    <path d="M5 5l14 14"></path>
+
+                    <path d="M19 5L5 19"></path>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Melhorias futuras
+            </span>
+
+        </div>
+
+        <div class="section-text">
+
+            O BerryAnime continuará recebendo
+            melhorias. Entre os recursos que
+            poderão ser adicionados estão:
+
+            <br><br>
+
+            • Melhorias no player de vídeo<br>
+            • Legendas e seleção de qualidade<br>
+            • Histórico de reprodução<br>
+            • Continuação de onde parou<br>
+            • Mais opções para o leitor de mangás<br>
+            • Melhor organização dos animes<br>
+            • Melhor desempenho e estabilidade<br>
+            • Novos recursos para personalização
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         POLÍTICA DE PRIVACIDADE
+    ================================================== -->
+
+    <div
+        class="policy"
+        onclick="abrirPrivacidade()">
+
+        <div class="policy-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <path
+                    d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z">
+                </path>
+
+                <path
+                    d="M9 12l2 2 4-4">
+                </path>
+
+            </svg>
+
+        </div>
+
+        <div class="policy-text">
+
+            <div class="policy-title">
+                Política de Privacidade
+            </div>
+
+            <div class="policy-sub">
+                Saiba como seus dados são tratados
+                no BerryAnime.
+            </div>
+
+        </div>
+
+        <div class="policy-arrow">
+
+            <svg viewBox="0 0 24 24">
+
+                <path d="M9 18l6-6-6-6"></path>
+
+            </svg>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         VERSÃO
+    ================================================== -->
+
+    <div class="version">
+
+        <strong>BerryAnime</strong>
+
+        <br>
+
+        VERSÃO 1.0
+
+    </div>
+
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+function voltar(){
+
+    window.location.href =
+        "configuracoes.html";
+
+}
+
+
+/* =====================================================
+   PRIVACIDADE
+===================================================== */
+
+function abrirPrivacidade(){
+
+    window.location.href =
+        "privacidade.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
