@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -22,8 +21,7 @@
     font-family:Arial,Helvetica,sans-serif;
 }
 
-html,
-body{
+html,body{
     width:100%;
     min-height:100%;
 }
@@ -47,21 +45,17 @@ body{
 
 .header{
     height:55px;
-
     display:flex;
     align-items:center;
-
     margin-bottom:25px;
 }
 
 .back{
     width:42px;
     height:42px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     color:white;
     cursor:pointer;
 }
@@ -69,10 +63,8 @@ body{
 .back svg{
     width:29px;
     height:29px;
-
     stroke:currentColor;
     fill:none;
-
     stroke-width:2;
     stroke-linecap:round;
     stroke-linejoin:round;
@@ -80,7 +72,6 @@ body{
 
 .header-title{
     margin-left:18px;
-
     font-size:27px;
     font-weight:700;
 }
@@ -92,116 +83,124 @@ body{
 
 .profile-card{
     width:100%;
-
     background:#151515;
-
     border:1px solid #303030;
-
     border-radius:24px;
-
     padding:28px 22px;
-
     text-align:center;
+}
+
+.avatar-area{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 .avatar{
     width:105px;
     height:105px;
-
-    margin:0 auto;
-
     border-radius:50%;
-
     border:2px solid #ff1744;
-
     background:#111;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     overflow:hidden;
-
-    box-shadow:
-        0 0 22px rgba(255,23,68,.18);
+    box-shadow:0 0 22px rgba(255,23,68,.18);
+    cursor:pointer;
+    position:relative;
 }
 
 .avatar img{
     width:82px;
     height:82px;
-
-    object-fit:contain;
-
+    object-fit:cover;
     mix-blend-mode:lighten;
+}
+
+.avatar-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    transition:.2s;
+}
+
+.avatar:active .avatar-overlay{
+    opacity:1;
+}
+
+.avatar-overlay svg{
+    width:30px;
+    height:30px;
+    stroke:white;
+    fill:none;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.avatar-help{
+    margin-top:10px;
+    color:#888;
+    font-size:13px;
+}
+
+.file-input{
+    display:none;
+}
+
+.remove-avatar{
+    margin-top:9px;
+    border:0;
+    background:transparent;
+    color:#ff1744;
+    font-size:13px;
+    cursor:pointer;
 }
 
 .user-name{
     margin-top:18px;
-
     font-size:25px;
     font-weight:800;
 }
 
 .user-email{
     margin-top:7px;
-
     color:#999;
-
     font-size:14px;
-
     word-break:break-word;
 }
 
 .account-label{
     display:inline-block;
-
     margin-top:14px;
-
     padding:6px 12px;
-
     border-radius:20px;
-
     background:#211014;
-
     color:#ff1744;
-
     font-size:12px;
-
     font-weight:700;
 }
 
-
-/* =====================================================
-   BOTÃO
-===================================================== */
-
 .primary-button{
     width:100%;
-
     margin-top:20px;
-
     min-height:52px;
-
     border:0;
-
     border-radius:14px;
-
     background:#ff1744;
-
     color:white;
-
     font-size:16px;
-
     font-weight:700;
-
     cursor:pointer;
-
-    transition:.15s;
 }
 
 .primary-button:active{
     transform:scale(.98);
-
     background:#e9143d;
 }
 
@@ -212,36 +211,22 @@ body{
 
 .section{
     width:100%;
-
     background:#151515;
-
     border:1px solid #303030;
-
     border-radius:20px;
-
     padding:20px;
-
     margin-top:16px;
 }
 
 .section-title{
     font-size:18px;
-
     font-weight:700;
-
     margin-bottom:13px;
 }
 
-
-/* =====================================================
-   INFORMAÇÕES
-===================================================== */
-
 .info-row{
     min-height:60px;
-
     display:flex;
-
     align-items:center;
 }
 
@@ -252,110 +237,74 @@ body{
 .info-icon{
     width:40px;
     height:40px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     flex-shrink:0;
 }
 
 .info-icon svg{
     width:24px;
     height:24px;
-
     stroke:#ff1744;
-
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
     stroke-linejoin:round;
 }
 
 .info-text{
     flex:1;
-
     min-width:0;
-
     margin-left:13px;
 }
 
 .info-label{
     color:#777;
-
     font-size:12px;
-
     margin-bottom:4px;
 }
 
 .info-value{
     color:white;
-
     font-size:14px;
-
     word-break:break-word;
 }
 
 .copy-button{
     border:0;
-
     background:#222;
-
     color:#aaa;
-
     border-radius:9px;
-
     padding:8px 10px;
-
     cursor:pointer;
-
     font-size:12px;
-}
-
-.copy-button:active{
-    color:white;
 }
 
 
 /* =====================================================
-   DANGER
+   SAIR
 ===================================================== */
 
 .danger{
     margin-top:16px;
-
     width:100%;
-
     background:#151515;
-
     border:1px solid #303030;
-
     border-radius:20px;
-
     overflow:hidden;
 }
 
 .danger-button{
     width:100%;
-
     min-height:70px;
-
     padding:15px 20px;
-
     border:0;
-
     background:transparent;
-
     color:#ff1744;
-
     display:flex;
-
     align-items:center;
-
     cursor:pointer;
-
     text-align:left;
 }
 
@@ -366,7 +315,6 @@ body{
 .danger-icon{
     width:42px;
     height:42px;
-
     display:flex;
     align-items:center;
     justify-content:center;
@@ -375,13 +323,9 @@ body{
 .danger-icon svg{
     width:26px;
     height:26px;
-
     stroke:#ff1744;
-
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
     stroke-linejoin:round;
 }
@@ -392,15 +336,12 @@ body{
 
 .danger-title{
     font-size:16px;
-
     font-weight:700;
 }
 
 .danger-sub{
     margin-top:4px;
-
     color:#888;
-
     font-size:13px;
 }
 
@@ -411,20 +352,12 @@ body{
 
 .footer{
     text-align:center;
-
     margin-top:30px;
-
     color:#666;
-
     font-size:13px;
-
     line-height:1.6;
 }
 
-
-/* =====================================================
-   RESPONSIVO
-===================================================== */
 
 @media(max-width:380px){
 
@@ -458,7 +391,6 @@ body{
     .section{
         padding:17px;
     }
-
 }
 
 </style>
@@ -467,7 +399,6 @@ body{
 
 
 <body>
-
 
 <main class="content">
 
@@ -478,42 +409,75 @@ body{
 
 <header class="header">
 
-    <div
-        class="back"
-        onclick="voltar()">
+    <div class="back" onclick="voltar()">
 
         <svg viewBox="0 0 24 24">
 
             <path d="M19 12H5"></path>
-
             <path d="M12 19l-7-7 7-7"></path>
 
         </svg>
 
     </div>
 
-
     <div class="header-title">
-
         Meu Perfil
-
     </div>
 
 </header>
 
 
 <!-- =====================================================
-     CARTÃO DO PERFIL
+     PERFIL
 ===================================================== -->
 
 <section class="profile-card">
 
+    <div class="avatar-area">
 
-    <div class="avatar">
+        <!-- CAMPO OCULTO DA GALERIA -->
 
-        <img
-            src="BerryAnime_logo_leve.jpg"
-            alt="BerryAnime">
+        <input
+            type="file"
+            id="avatarInput"
+            class="file-input"
+            accept="image/*">
+
+        <!-- AVATAR -->
+
+        <div
+            class="avatar"
+            id="avatarButton">
+
+            <img
+                id="avatarImage"
+                src="BerryAnime_logo_leve.jpg"
+                alt="Foto de perfil">
+
+            <div class="avatar-overlay">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+
+                </svg>
+
+            </div>
+
+        </div>
+
+        <div class="avatar-help">
+            Toque na imagem para escolher da galeria
+        </div>
+
+        <button
+            class="remove-avatar"
+            id="removeAvatarButton">
+
+            Restaurar avatar do BerryAnime
+
+        </button>
 
     </div>
 
@@ -537,9 +501,7 @@ body{
 
 
     <div class="account-label">
-
         CONTA BERRYANIME
-
     </div>
 
 
@@ -551,21 +513,17 @@ body{
 
     </button>
 
-
 </section>
 
 
 <!-- =====================================================
-     INFORMAÇÕES DA CONTA
+     INFORMAÇÕES
 ===================================================== -->
 
 <section class="section">
 
-
     <div class="section-title">
-
         Informações da conta
-
     </div>
 
 
@@ -585,21 +543,16 @@ body{
                     rx="2">
                 </rect>
 
-                <path
-                    d="M3 7l9 6 9-6">
-                </path>
+                <path d="M3 7l9 6 9-6"></path>
 
             </svg>
 
         </div>
 
-
         <div class="info-text">
 
             <div class="info-label">
-
                 E-mail
-
             </div>
 
             <div
@@ -630,20 +583,16 @@ body{
                 </circle>
 
                 <path d="M8 12h8"></path>
-
                 <path d="M12 8v8"></path>
 
             </svg>
 
         </div>
 
-
         <div class="info-text">
 
             <div class="info-label">
-
                 ID da conta
-
             </div>
 
             <div
@@ -656,7 +605,6 @@ body{
 
         </div>
 
-
         <button
             class="copy-button"
             onclick="copiarID()">
@@ -668,7 +616,7 @@ body{
     </div>
 
 
-    <!-- CRIAÇÃO -->
+    <!-- DATA -->
 
     <div class="info-row">
 
@@ -685,22 +633,17 @@ body{
                 </rect>
 
                 <path d="M8 3v4"></path>
-
                 <path d="M16 3v4"></path>
-
                 <path d="M4 10h16"></path>
 
             </svg>
 
         </div>
 
-
         <div class="info-text">
 
             <div class="info-label">
-
                 Conta criada em
-
             </div>
 
             <div
@@ -715,77 +658,55 @@ body{
 
     </div>
 
-
 </section>
 
 
 <!-- =====================================================
-     CONTA
+     SAIR
 ===================================================== -->
 
 <section class="danger">
 
-
     <button
         class="danger-button"
         onclick="sairDaConta()">
-
 
         <div class="danger-icon">
 
             <svg viewBox="0 0 24 24">
 
                 <path
-                    d="M10 5H5a2 2 0 0 0-2 2v10
-                       a2 2 0 0 0 2 2h5">
+                    d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5">
                 </path>
 
-                <path
-                    d="M14 8l5 4-5 4">
-                </path>
-
-                <path
-                    d="M19 12H9">
-                </path>
+                <path d="M14 8l5 4-5 4"></path>
+                <path d="M19 12H9"></path>
 
             </svg>
 
         </div>
 
-
         <div class="danger-text">
 
             <div class="danger-title">
-
                 Sair da conta
-
             </div>
 
             <div class="danger-sub">
-
                 Encerrar sua sessão no BerryAnime
-
             </div>
 
         </div>
 
-
     </button>
-
 
 </section>
 
 
-<!-- =====================================================
-     RODAPÉ
-===================================================== -->
-
 <div class="footer">
 
     BerryAnime<br>
-
     Perfil da conta<br>
-
     Versão 1.0
 
 </div>
@@ -809,12 +730,161 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-/* =====================================================
-   USUÁRIO
-===================================================== */
-
 let usuarioAtual = null;
 
+
+/* =====================================================
+   AVATAR
+===================================================== */
+
+const avatarInput =
+    document.getElementById("avatarInput");
+
+const avatarButton =
+    document.getElementById("avatarButton");
+
+const avatarImage =
+    document.getElementById("avatarImage");
+
+const removeAvatarButton =
+    document.getElementById("removeAvatarButton");
+
+
+const AVATAR_KEY =
+    "berryanime_profile_avatar";
+
+
+/* Abrir galeria */
+
+avatarButton.addEventListener(
+    "click",
+    function(){
+
+        avatarInput.click();
+
+    }
+);
+
+
+/* =====================================================
+   CARREGAR AVATAR SALVO
+===================================================== */
+
+const avatarSalvo =
+    localStorage.getItem(
+        AVATAR_KEY
+    );
+
+if(avatarSalvo){
+
+    avatarImage.src =
+        avatarSalvo;
+
+}
+
+
+/* =====================================================
+   ESCOLHER IMAGEM
+===================================================== */
+
+avatarInput.addEventListener(
+    "change",
+    function(event){
+
+        const arquivo =
+            event.target.files[0];
+
+
+        if(!arquivo){
+
+            return;
+
+        }
+
+
+        if(!arquivo.type.startsWith("image/")){
+
+            alert(
+                "Escolha uma imagem válida."
+            );
+
+            return;
+
+        }
+
+
+        const leitor =
+            new FileReader();
+
+
+        leitor.onload =
+        function(e){
+
+            const imagem =
+                e.target.result;
+
+
+            avatarImage.src =
+                imagem;
+
+
+            try{
+
+                localStorage.setItem(
+                    AVATAR_KEY,
+                    imagem
+                );
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+                alert(
+                    "A imagem é muito grande para ser guardada neste dispositivo. Escolha uma imagem menor."
+                );
+
+            }
+
+        };
+
+
+        leitor.readAsDataURL(
+            arquivo
+        );
+
+    }
+);
+
+
+/* =====================================================
+   RESTAURAR AVATAR
+===================================================== */
+
+removeAvatarButton.addEventListener(
+    "click",
+    function(){
+
+        localStorage.removeItem(
+            AVATAR_KEY
+        );
+
+
+        avatarImage.src =
+            "BerryAnime_logo_leve.jpg";
+
+
+        avatarInput.value =
+            "";
+
+    }
+);
+
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 onAuthStateChanged(
     auth,
@@ -831,7 +901,8 @@ onAuthStateChanged(
         }
 
 
-        usuarioAtual = user;
+        usuarioAtual =
+            user;
 
 
         let nome =
@@ -873,15 +944,16 @@ onAuthStateChanged(
             user.uid;
 
 
-        /* DATA DE CRIAÇÃO */
-
-        if(user.metadata &&
-           user.metadata.creationTime){
+        if(
+            user.metadata &&
+            user.metadata.creationTime
+        ){
 
             const data =
                 new Date(
                     user.metadata.creationTime
                 );
+
 
             document
             .getElementById("createdInfo")
@@ -890,7 +962,9 @@ onAuthStateChanged(
                     "pt-BR"
                 );
 
-        }else{
+        }
+
+        else{
 
             document
             .getElementById("createdInfo")
@@ -935,8 +1009,7 @@ async function(){
 
 
     const nomeAtual =
-        usuarioAtual.displayName ||
-        "";
+        usuarioAtual.displayName || "";
 
 
     const novoNome =
@@ -1034,9 +1107,9 @@ async function(){
 
     try{
 
-        await navigator
-            .clipboard
-            .writeText(id);
+        await navigator.clipboard.writeText(
+            id
+        );
 
         alert(
             "ID copiado!"
@@ -1101,7 +1174,6 @@ async function(){
 
 </script>
 
-
 </body>
 
-          </html>
+      </html>
