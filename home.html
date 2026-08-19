@@ -607,8 +607,7 @@ section{
 
 function abrirPerfil(){
 
-    window.location.href =
-        "perfil.html";
+    window.location.href = "perfil.html";
 
 }
 
@@ -619,24 +618,18 @@ function abrirPerfil(){
 
 function abrirPesquisa(){
 
-    alert(
-        "A pesquisa ainda está sendo preparada."
-    );
+    alert("A pesquisa ainda está sendo preparada.");
 
 }
 
 
 /* =====================================================
-   CHAVE DO PERFIL
+   FOTO DE PERFIL
 ===================================================== */
 
 const AVATAR_KEY =
     "berryanime_profile_avatar";
 
-
-/* =====================================================
-   CARREGAR FOTO
-===================================================== */
 
 function carregarFotoPerfil(){
 
@@ -671,7 +664,6 @@ function carregarFotoPerfil(){
             "none";
 
     }
-
     else{
 
         profileImage.removeAttribute(
@@ -696,45 +688,73 @@ function carregarFotoPerfil(){
 const app =
     document.getElementById("app");
 
+
 const API =
     "https://api.jikan.moe/v4";
 
 
-async function api(url){
+/* =====================================================
+   CACHE
+===================================================== */
 
-    try{
+const CACHE_PREFIX =
+    "berryanime_jikan_";
 
-        const res =
-            await fetch(
-                API + url
-            );
 
-        if(!res.ok){
+const CACHE_TIME =
+    15 * 60 * 1000;
 
-            throw new Error(
-                "Erro na API: " +
-                res.status
-            );
 
-        }
+/* =====================================================
+   CONTROLE DE REQUISIÇÕES
+===================================================== */
 
-        const data =
-            await res.json();
+/*
+   Não fazemos dezenas de requisições ao mesmo tempo.
 
-        return data.data || [];
+   Uma nova requisição só começa depois de um
+   pequeno intervalo.
 
-    }
+   Isso evita sobrecarregar a Jikan e reduz
+   bastante os erros 429.
+*/
 
-    catch(e){
+let ultimaRequisicao =
+    0;
 
-        console.log(
-            "Erro:",
-            e
+
+const INTERVALO_API =
+    450;
+
+
+async function controlarVelocidade(){
+
+    const agora =
+        Date.now();
+
+
+    const passou =
+        agora - ultimaRequisicao;
+
+
+    const espera =
+        Math.max(
+            0,
+            INTERVALO_API - passou
         );
 
-        return [];
+
+    if(espera > 0){
+
+        await esperar(
+            espera
+        );
 
     }
+
+
+    ultimaRequisicao =
+        Date.now();
 
 }
 
@@ -757,75 +777,411 @@ function esperar(ms){
 
 
 /* =====================================================
-   ANIMES JÁ USADOS
+   CACHE KEY
 ===================================================== */
 
-const animesUsados =
-    new Set();
+function cacheKey(url){
 
-
-/* =====================================================
-   VERIFICAR ANIME
-===================================================== */
-
-function animeDisponivel(anime){
-
-    if(
-        !anime ||
-        !anime.mal_id
-    ){
-
-        return false;
-
-    }
-
-    return !animesUsados.has(
-        anime.mal_id
+    return (
+        CACHE_PREFIX +
+        encodeURIComponent(url)
     );
 
 }
 
 
 /* =====================================================
-   PEGAR ANIMES SEM REPETIR
+   LER CACHE
 ===================================================== */
 
-function pegarSemRepetir(
-    lista,
-    quantidade
-){
+function lerCache(url){
 
-    const resultado = [];
+    try{
 
-    for(
-        const anime of lista
-    ){
+        const chave =
+            cacheKey(url);
 
-        if(
-            animeDisponivel(anime)
-        ){
 
-            resultado.push(
-                anime
+        const salvo =
+            localStorage.getItem(
+                chave
             );
 
-            animesUsados.add(
-                anime.mal_id
-            );
+
+        if(!salvo){
+
+            return null;
 
         }
 
+
+        const objeto =
+            JSON.parse(
+                salvo
+            );
+
+
         if(
-            resultado.length >= quantidade
+            !objeto ||
+            !objeto.time ||
+            !Array.isArray(objeto.data)
         ){
 
-            break;
+            return null;
+
+        }
+
+
+        const idade =
+            Date.now() -
+            objeto.time;
+
+
+        if(
+            idade > CACHE_TIME
+        ){
+
+            localStorage.removeItem(
+                chave
+            );
+
+            return null;
+
+        }
+
+
+        return objeto.data;
+
+    }
+    catch(error){
+
+        console.warn(
+            "Erro ao ler cache:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   SALVAR CACHE
+===================================================== */
+
+function salvarCache(
+    url,
+    data
+){
+
+    try{
+
+        localStorage.setItem(
+
+            cacheKey(url),
+
+            JSON.stringify({
+
+                time:
+                    Date.now(),
+
+                data:
+                    data
+
+            })
+
+        );
+
+    }
+    catch(error){
+
+        console.warn(
+            "Não foi possível salvar cache:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   API
+===================================================== */
+
+async function api(
+    url,
+    tentativas = 3
+){
+
+    /*
+       Primeiro tenta o cache.
+    */
+
+    const cache =
+        lerCache(url);
+
+
+    if(cache){
+
+        console.log(
+            "Jikan CACHE:",
+            url
+        );
+
+        return cache;
+
+    }
+
+
+    /*
+       Requisição real.
+    */
+
+    for(
+        let tentativa = 1;
+        tentativa <= tentativas;
+        tentativa++
+    ){
+
+        try{
+
+            await controlarVelocidade();
+
+
+            console.log(
+                "Jikan:",
+                url,
+                "tentativa:",
+                tentativa
+            );
+
+
+            const controller =
+                new AbortController();
+
+
+            const timeout =
+                setTimeout(
+                    () =>
+                        controller.abort(),
+                    12000
+                );
+
+
+            const response =
+                await fetch(
+
+                    API + url,
+
+                    {
+                        method:
+                            "GET",
+
+                        signal:
+                            controller.signal,
+
+                        headers:{
+                            "Accept":
+                                "application/json"
+                        }
+
+                    }
+
+                );
+
+
+            clearTimeout(
+                timeout
+            );
+
+
+            /*
+               Rate limit.
+            */
+
+            if(
+                response.status === 429
+            ){
+
+                console.warn(
+                    "Jikan 429:",
+                    url
+                );
+
+
+                if(
+                    tentativa < tentativas
+                ){
+
+                    await esperar(
+                        1800 *
+                        tentativa
+                    );
+
+                    continue;
+
+                }
+
+
+                return [];
+
+            }
+
+
+            /*
+               Servidor indisponível.
+            */
+
+            if(
+                response.status === 503
+            ){
+
+                console.warn(
+                    "Jikan 503:",
+                    url
+                );
+
+
+                if(
+                    tentativa < tentativas
+                ){
+
+                    await esperar(
+                        2000
+                    );
+
+                    continue;
+
+                }
+
+
+                return [];
+
+            }
+
+
+            if(
+                !response.ok
+            ){
+
+                throw new Error(
+                    "HTTP " +
+                    response.status
+                );
+
+            }
+
+
+            const json =
+                await response.json();
+
+
+            const dados =
+                Array.isArray(
+                    json.data
+                )
+                    ? json.data
+                    : [];
+
+
+            salvarCache(
+                url,
+                dados
+            );
+
+
+            return dados;
+
+        }
+        catch(error){
+
+            console.warn(
+                "Erro Jikan:",
+                url,
+                error
+            );
+
+
+            if(
+                tentativa < tentativas
+            ){
+
+                await esperar(
+                    1200 *
+                    tentativa
+                );
+
+            }
 
         }
 
     }
 
-    return resultado;
+
+    return [];
+
+}
+
+
+/* =====================================================
+   IMAGEM
+===================================================== */
+
+function imagemAnime(anime){
+
+    return (
+
+        anime?.images?.webp
+            ?.large_image_url ||
+
+        anime?.images?.jpg
+            ?.large_image_url ||
+
+        anime?.images?.webp
+            ?.image_url ||
+
+        anime?.images?.jpg
+            ?.image_url ||
+
+        ""
+
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escapar(texto){
+
+    return String(
+        texto || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
@@ -836,12 +1192,34 @@ function pegarSemRepetir(
 
 function smallCard(anime){
 
+    if(
+        !anime ||
+        !anime.mal_id
+    ){
+
+        return "";
+
+    }
+
+
     const image =
-        anime.images?.jpg?.large_image_url ||
-        anime.images?.jpg?.image_url ||
-        anime.images?.webp?.large_image_url ||
-        anime.images?.webp?.image_url ||
-        "";
+        imagemAnime(anime);
+
+
+    if(!image){
+
+        return "";
+
+    }
+
+
+    const title =
+        escapar(
+            anime.title ||
+            anime.title_english ||
+            "Anime"
+        );
+
 
     return `
 
@@ -851,7 +1229,7 @@ function smallCard(anime){
 
             <img
                 src="${image}"
-                alt="${anime.title || "Anime"}"
+                alt="${title}"
                 loading="lazy">
 
         </div>
@@ -862,19 +1240,7 @@ function smallCard(anime){
 
 
 /* =====================================================
-   ABRIR DETALHES
-===================================================== */
-
-function abrirAnime(id){
-
-    window.location.href =
-        "detalhes.html?id=" + id;
-
-}
-
-
-/* =====================================================
-   CARD DE EPISÓDIO
+   CARD EPISÓDIO
 ===================================================== */
 
 function episodeCard(
@@ -882,12 +1248,34 @@ function episodeCard(
     index
 ){
 
+    if(
+        !anime ||
+        !anime.mal_id
+    ){
+
+        return "";
+
+    }
+
+
     const image =
-        anime.images?.jpg?.large_image_url ||
-        anime.images?.jpg?.image_url ||
-        anime.images?.webp?.large_image_url ||
-        anime.images?.webp?.image_url ||
-        "";
+        imagemAnime(anime);
+
+
+    if(!image){
+
+        return "";
+
+    }
+
+
+    const title =
+        escapar(
+            anime.title ||
+            anime.title_english ||
+            "Novo episódio"
+        );
+
 
     return `
 
@@ -897,11 +1285,11 @@ function episodeCard(
 
             <img
                 src="${image}"
-                alt="${anime.title || "Anime"}"
+                alt="${title}"
                 loading="lazy">
 
             <div class="badge">
-                Dublado
+                Novo
             </div>
 
             <div class="episode-shadow"></div>
@@ -909,7 +1297,7 @@ function episodeCard(
             <div class="episode-text">
 
                 <div class="episode-title">
-                    ${anime.title || "Novo episódio"}
+                    ${title}
                 </div>
 
                 <div class="episode-sub">
@@ -926,61 +1314,609 @@ function episodeCard(
 
 
 /* =====================================================
-   CRIAR SECÇÃO
+   ABRIR DETALHES
 ===================================================== */
 
-function section(
-    name,
-    content
-){
+function abrirAnime(id){
 
-    return `
+    if(!id){
 
-        <section>
+        return;
 
-            <div class="title-section">
-                ${name}
-            </div>
+    }
 
-            <div class="container">
-                ${content}
-            </div>
 
-        </section>
-
-    `;
+    window.location.href =
+        "detalhes.html?id=" +
+        id;
 
 }
 
 
 /* =====================================================
-   MOSTRAR CÍRCULO
+   REMOVER REPETIDOS
 ===================================================== */
 
-function mostrarLoader(){
+function removerDuplicados(
+    lista
+){
 
-    app.innerHTML = `
+    const mapa =
+        new Map();
 
-        <div class="home-loader">
 
-            <div class="loader-circle"></div>
+    for(
+        const anime of
+        (lista || [])
+    ){
+
+        if(
+            anime &&
+            anime.mal_id &&
+            !mapa.has(
+                anime.mal_id
+            )
+        ){
+
+            mapa.set(
+                anime.mal_id,
+                anime
+            );
+
+        }
+
+    }
+
+
+    return Array.from(
+        mapa.values()
+    );
+
+}
+
+
+/* =====================================================
+   PEGAR ANIMES
+===================================================== */
+
+function pegarAnimes(
+    lista,
+    quantidade
+){
+
+    return removerDuplicados(
+        lista
+    ).slice(
+        0,
+        quantidade
+    );
+
+}
+
+
+/* =====================================================
+   SEÇÃO
+===================================================== */
+
+function criarSecao(
+    id,
+    nome
+){
+
+    const section =
+        document.createElement(
+            "section"
+        );
+
+
+    section.id =
+        id;
+
+
+    section.innerHTML = `
+
+        <div class="title-section">
+            ${escapar(nome)}
+        </div>
+
+        <div class="container">
+
+            <div
+                class="section-loading"
+                style="
+                    color:#666;
+                    padding:20px 0;
+                    font-size:14px;
+                ">
+
+                Carregando...
+
+            </div>
 
         </div>
 
     `;
 
+
+    app.appendChild(
+        section
+    );
+
+
+    return section;
+
 }
 
 
 /* =====================================================
-   ESCONDER CÍRCULO
+   CRIAR ESTRUTURA
 ===================================================== */
 
-function esconderLoader(){
+function criarEstrutura(){
 
     app.innerHTML = "";
 
+
+    criarSecao(
+        "em-alta",
+        "Em Alta"
+    );
+
+
+    criarSecao(
+        "novos-episodios",
+        "Novos episódios"
+    );
+
+
+    criarSecao(
+        "bem-avaliados",
+        "Mais bem avaliados"
+    );
+
+
+    criarSecao(
+        "acao",
+        "Ação"
+    );
+
+
+    criarSecao(
+        "comedia",
+        "Comédia"
+    );
+
+
+    criarSecao(
+        "shounen",
+        "Shounen"
+    );
+
+
+    criarSecao(
+        "slice-life",
+        "Slice of Life"
+    );
+
+
+    criarSecao(
+        "voce-vai-amar",
+        "Você vai amar"
+    );
+
+
+    criarSecao(
+        "lancamentos",
+        "Lançamentos"
+    );
+
+
+    criarSecao(
+        "romance",
+        "Romance"
+    );
+
+
+    criarSecao(
+        "fantasia",
+        "Fantasia"
+    );
+
+
+    criarSecao(
+        "talvez",
+        "Talvez você goste"
+    );
+
+
+    criarSecao(
+        "curtidos",
+        "Os mais curtidos de hoje!"
+    );
+
 }
+
+
+/* =====================================================
+   ATUALIZAR SEÇÃO
+===================================================== */
+
+function atualizarSecao(
+    id,
+    lista,
+    quantidade = 12,
+    episodios = false
+){
+
+    const section =
+        document.getElementById(
+            id
+        );
+
+
+    if(!section){
+
+        return;
+
+    }
+
+
+    const container =
+        section.querySelector(
+            ".container"
+        );
+
+
+    const animes =
+        pegarAnimes(
+            lista,
+            quantidade
+        );
+
+
+    if(
+        !animes.length
+    ){
+
+        container.innerHTML = `
+
+            <div
+                style="
+                    color:#555;
+                    padding:18px 0;
+                    font-size:14px;
+                ">
+
+                Não foi possível carregar esta seção.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    if(episodios){
+
+        container.innerHTML =
+            animes
+                .map(
+                    (
+                        anime,
+                        index
+                    ) =>
+                        episodeCard(
+                            anime,
+                            index
+                        )
+                )
+                .join("");
+
+    }
+    else{
+
+        container.innerHTML =
+            animes
+                .map(
+                    smallCard
+                )
+                .join("");
+
+    }
+
+}
+
+
+/* =====================================================
+   CONFIGURAÇÃO DAS SEÇÕES
+===================================================== */
+
+/*
+   SOMENTE UMA página por requisição.
+
+   Isso é proposital.
+
+   Não vamos buscar 2, 3 ou 4 páginas de cada
+   categoria porque isso multiplicaria as
+   requisições e poderia causar 429.
+*/
+
+const secoes = [
+
+    {
+        id:
+            "em-alta",
+
+        nome:
+            "Em Alta",
+
+        url:
+            "/top/anime?filter=bypopularity&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "novos-episodios",
+
+        nome:
+            "Novos episódios",
+
+        url:
+            "/seasons/now?page=1",
+
+        quantidade:
+            10,
+
+        episodios:
+            true
+    },
+
+
+    {
+        id:
+            "bem-avaliados",
+
+        nome:
+            "Mais bem avaliados",
+
+        url:
+            "/top/anime?filter=airing&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "acao",
+
+        nome:
+            "Ação",
+
+        url:
+            "/anime?genres=1&order_by=score&sort=desc&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "comedia",
+
+        nome:
+            "Comédia",
+
+        url:
+            "/anime?genres=4&order_by=score&sort=desc&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "shounen",
+
+        nome:
+            "Shounen",
+
+        url:
+            "/anime?genres=27&order_by=popularity&sort=asc&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "slice-life",
+
+        nome:
+            "Slice of Life",
+
+        url:
+            "/anime?genres=36&order_by=score&sort=desc&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "voce-vai-amar",
+
+        nome:
+            "Você vai amar",
+
+        url:
+            "/top/anime?filter=favorite&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "lancamentos",
+
+        nome:
+            "Lançamentos",
+
+        url:
+            "/seasons/upcoming?page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "romance",
+
+        nome:
+            "Romance",
+
+        url:
+            "/anime?genres=22&order_by=score&sort=desc&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "fantasia",
+
+        nome:
+            "Fantasia",
+
+        url:
+            "/anime?genres=10&order_by=score&sort=desc&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "talvez",
+
+        nome:
+            "Talvez você goste",
+
+        url:
+            "/anime?order_by=popularity&sort=asc&page=1",
+
+        quantidade:
+            12
+    },
+
+
+    {
+        id:
+            "curtidos",
+
+        nome:
+            "Os mais curtidos de hoje!",
+
+        url:
+            "/anime?order_by=favorites&sort=desc&page=1",
+
+        quantidade:
+            12
+    }
+
+];
+
+
+/* =====================================================
+   CARREGAR UMA SEÇÃO
+===================================================== */
+
+async function carregarSecao(
+    config
+){
+
+    const dados =
+        await api(
+            config.url
+        );
+
+
+    atualizarSecao(
+
+        config.id,
+
+        dados,
+
+        config.quantidade,
+
+        config.episodios === true
+
+    );
+
+
+    return dados;
+
+}
+
+
+/* =====================================================
+   FILA DE REQUISIÇÕES
+===================================================== */
+
+/*
+   Aqui está uma das mudanças mais importantes.
+
+   As seções são carregadas aos poucos.
+
+   A Home NÃO espera todas as APIs terminarem.
+
+   Cada seção aparece assim que sua própria
+   requisição termina.
+*/
+
+async function carregarFila(){
+
+    for(
+        const config of secoes
+    ){
+
+        carregarSecao(
+            config
+        );
+
+        /*
+           Pequeno intervalo antes de iniciar
+           a próxima.
+
+           Isso mantém a Jikan tranquila.
+        */
+
+        await esperar(
+            500
+        );
+
+    }
+
+}
+
 
 /* =====================================================
    CARREGAR HOME
@@ -988,488 +1924,35 @@ function esconderLoader(){
 
 async function loadAnime(){
 
-    mostrarLoader();
+    criarEstrutura();
 
-    const inicio =
-        Date.now();
 
-    try{
+    /*
+       Primeiro tentamos carregar Em Alta.
 
-        animesUsados.clear();
+       Essa seção é a primeira coisa que o usuário
+       deve ver.
+    */
 
+    const primeira =
+        secoes[0];
 
-        /* =================================================
-           1. EM ALTA
-        ================================================= */
 
-        const popular =
-            await api(
-                "/top/anime?filter=bypopularity"
-            );
+    await carregarSecao(
+        primeira
+    );
 
-        await esperar(400);
 
+    /*
+       Depois iniciamos todas as outras
+       progressivamente.
+    */
 
-        /* =================================================
-           2. NOVOS EPISÓDIOS
-        ================================================= */
-
-        const airing =
-            await api(
-                "/seasons/now"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           3. MAIS BEM AVALIADOS
-        ================================================= */
-
-        const avaliados =
-            await api(
-                "/top/anime?filter=favorite"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           4. AÇÃO
-        ================================================= */
-
-        const action =
-            await api(
-                "/anime?genres=1&order_by=score&sort=desc"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           5. COMÉDIA
-        ================================================= */
-
-        const comedy =
-            await api(
-                "/anime?genres=4&order_by=score&sort=desc"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           6. SHOUNEN
-        ================================================= */
-
-        const shounen =
-            await api(
-                "/anime?genres=27&order_by=popularity&sort=asc"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           7. SLICE OF LIFE
-        ================================================= */
-
-        const sliceLife =
-            await api(
-                "/anime?genres=36&order_by=score&sort=desc"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           8. ROMANCE
-        ================================================= */
-
-        const romance =
-            await api(
-                "/anime?genres=22&order_by=score&sort=desc"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           9. FANTASIA
-        ================================================= */
-
-        const fantasy =
-            await api(
-                "/anime?genres=10&order_by=score&sort=desc"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           10. RECOMENDADOS
-        ================================================= */
-
-        const recomendados =
-            await api(
-                "/anime?order_by=popularity&sort=asc"
-            );
-
-        await esperar(400);
-
-
-        /* =================================================
-           11. MAIS CURTIDOS
-        ================================================= */
-
-        const maisCurtidos =
-            await api(
-                "/anime?order_by=favorites&sort=desc"
-            );
-
-
-        const tempoPassado =
-            Date.now() - inicio;
-
-        const restante =
-            Math.max(
-                0,
-                2000 - tempoPassado
-            );
-
-        await esperar(
-            restante
-        );
-
-
-        app.innerHTML = "";
-
-        animesUsados.clear();
-
-
-        /* =================================================
-           1. EM ALTA
-        ================================================= */
-
-        const emAlta =
-            pegarSemRepetir(
-                popular,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Em Alta",
-                emAlta
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           2. NOVOS EPISÓDIOS
-        ================================================= */
-
-        const novosEpisodios =
-            pegarSemRepetir(
-                airing,
-                10
-            );
-
-        app.innerHTML +=
-            section(
-                "Novos episódios",
-                novosEpisodios
-                    .map(episodeCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           3. MAIS BEM AVALIADOS
-        ================================================= */
-
-        const maisBemAvaliados =
-            pegarSemRepetir(
-                avaliados,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Mais bem avaliados",
-                maisBemAvaliados
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           4. AÇÃO
-        ================================================= */
-
-        const acao =
-            pegarSemRepetir(
-                action,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Ação",
-                acao
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           5. COMÉDIA
-        ================================================= */
-
-        const comedia =
-            pegarSemRepetir(
-                comedy,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Comédia",
-                comedia
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           6. SHOUNEN
-        ================================================= */
-
-        const shounenLista =
-            pegarSemRepetir(
-                shounen,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Shounen",
-                shounenLista
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           7. SLICE OF LIFE
-        ================================================= */
-
-        const slice =
-            pegarSemRepetir(
-                sliceLife,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Slice of Life",
-                slice
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           8. VOCÊ VAI AMAR
-        ================================================= */
-
-        const voceVaiAmar =
-            pegarSemRepetir(
-                avaliados,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Você vai amar",
-                voceVaiAmar
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           9. LANÇAMENTOS
-        ================================================= */
-
-        const lancamento =
-            pegarSemRepetir(
-                airing,
-                1
-            );
-
-        app.innerHTML +=
-            section(
-                "Lançamentos",
-                lancamento
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           10. ROMANCE
-        ================================================= */
-
-        const romanceLista =
-            pegarSemRepetir(
-                romance,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Romance",
-                romanceLista
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           11. FANTASIA
-        ================================================= */
-
-        const fantasia =
-            pegarSemRepetir(
-                fantasy,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Fantasia",
-                fantasia
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           12. TALVEZ VOCÊ GOSTE
-        ================================================= */
-
-        const talvez =
-            pegarSemRepetir(
-                recomendados,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Talvez você goste",
-                talvez
-                    .map(smallCard)
-                    .join("")
-            );
-
-
-        /* =================================================
-           13. OS MAIS CURTIDOS
-        ================================================= */
-
-        const curtidos =
-            pegarSemRepetir(
-                maisCurtidos,
-                12
-            );
-
-        app.innerHTML +=
-            section(
-                "Os mais curtidos de hoje!",
-                curtidos
-                    .map(smallCard)
-                    .join("")
-            );
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Erro ao carregar a Home:",
-            error
-        );
-
-        app.innerHTML = `
-
-            <div style="
-                text-align:center;
-                padding:40px 20px;
-                color:#aaa;
-            ">
-
-                Não foi possível carregar
-                os animes.
-
-                <br><br>
-
-                Tente novamente.
-
-            </div>
-
-        `;
-
-    }
+    carregarFilaRestante();
 
 }
 
 
 /* =====================================================
-   INICIALIZAÇÃO
-===================================================== */
-
-carregarFotoPerfil();
-
-loadAnime();
-
-
-/* =====================================================
-   ATUALIZAR FOTO QUANDO VOLTAR
-===================================================== */
-
-window.addEventListener(
-    "pageshow",
-    function(){
-
-        carregarFotoPerfil();
-
-    }
-);
-
-
-/* =====================================================
-   STORAGE
-===================================================== */
-
-window.addEventListener(
-    "storage",
-    function(event){
-
-        if(
-            event.key === AVATAR_KEY
-        ){
-
-            carregarFotoPerfil();
-
-        }
-
-    }
-);
-
-</script>
-
-</body>
-
-</html>      
+   RESTANTE DA HOME
+==============================
