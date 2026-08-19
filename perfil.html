@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -21,7 +22,8 @@
     font-family:Arial,Helvetica,sans-serif;
 }
 
-html,body{
+html,
+body{
     width:100%;
     min-height:100%;
 }
@@ -78,7 +80,7 @@ body{
 
 
 /* =====================================================
-   PERFIL
+   CARTÃO
 ===================================================== */
 
 .profile-card{
@@ -89,6 +91,11 @@ body{
     padding:28px 22px;
     text-align:center;
 }
+
+
+/* =====================================================
+   AVATAR
+===================================================== */
 
 .avatar-area{
     display:flex;
@@ -112,15 +119,17 @@ body{
 }
 
 .avatar img{
-    width:82px;
-    height:82px;
+    width:100%;
+    height:100%;
     object-fit:cover;
-    mix-blend-mode:lighten;
+    display:block;
+    border-radius:50%;
 }
 
 .avatar-overlay{
     position:absolute;
     inset:0;
+    border-radius:50%;
     background:rgba(0,0,0,.55);
     display:flex;
     align-items:center;
@@ -129,6 +138,7 @@ body{
     transition:.2s;
 }
 
+.avatar:hover .avatar-overlay,
 .avatar:active .avatar-overlay{
     opacity:1;
 }
@@ -161,6 +171,11 @@ body{
     font-size:13px;
     cursor:pointer;
 }
+
+
+/* =====================================================
+   USUÁRIO
+===================================================== */
 
 .user-name{
     margin-top:18px;
@@ -379,11 +394,6 @@ body{
         height:90px;
     }
 
-    .avatar img{
-        width:70px;
-        height:70px;
-    }
-
     .user-name{
         font-size:23px;
     }
@@ -391,12 +401,12 @@ body{
     .section{
         padding:17px;
     }
+
 }
 
 </style>
 
 </head>
-
 
 <body>
 
@@ -409,7 +419,9 @@ body{
 
 <header class="header">
 
-    <div class="back" onclick="voltar()">
+    <div
+        class="back"
+        onclick="voltar()">
 
         <svg viewBox="0 0 24 24">
 
@@ -435,15 +447,12 @@ body{
 
     <div class="avatar-area">
 
-        <!-- CAMPO OCULTO DA GALERIA -->
-
         <input
             type="file"
             id="avatarInput"
             class="file-input"
             accept="image/*">
 
-        <!-- AVATAR -->
 
         <div
             class="avatar"
@@ -467,9 +476,11 @@ body{
 
         </div>
 
+
         <div class="avatar-help">
             Toque na imagem para escolher da galeria
         </div>
+
 
         <button
             class="remove-avatar"
@@ -734,27 +745,76 @@ let usuarioAtual = null;
 
 
 /* =====================================================
-   AVATAR
+   MESMA CHAVE DA HOME
 ===================================================== */
-
-const avatarInput =
-    document.getElementById("avatarInput");
-
-const avatarButton =
-    document.getElementById("avatarButton");
-
-const avatarImage =
-    document.getElementById("avatarImage");
-
-const removeAvatarButton =
-    document.getElementById("removeAvatarButton");
-
 
 const AVATAR_KEY =
     "berryanime_profile_avatar";
 
 
-/* Abrir galeria */
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const avatarInput =
+    document.getElementById(
+        "avatarInput"
+    );
+
+const avatarButton =
+    document.getElementById(
+        "avatarButton"
+    );
+
+const avatarImage =
+    document.getElementById(
+        "avatarImage"
+    );
+
+const removeAvatarButton =
+    document.getElementById(
+        "removeAvatarButton"
+    );
+
+
+/* =====================================================
+   CARREGAR AVATAR
+===================================================== */
+
+function carregarAvatar(){
+
+    const avatarSalvo =
+        localStorage.getItem(
+            AVATAR_KEY
+        );
+
+
+    if(
+        avatarSalvo &&
+        avatarSalvo.trim() !== ""
+    ){
+
+        avatarImage.src =
+            avatarSalvo;
+
+    }
+
+    else{
+
+        avatarImage.src =
+            "BerryAnime_logo_leve.jpg";
+
+    }
+
+}
+
+
+carregarAvatar();
+
+
+/* =====================================================
+   ABRIR GALERIA
+===================================================== */
 
 avatarButton.addEventListener(
     "click",
@@ -764,23 +824,6 @@ avatarButton.addEventListener(
 
     }
 );
-
-
-/* =====================================================
-   CARREGAR AVATAR SALVO
-===================================================== */
-
-const avatarSalvo =
-    localStorage.getItem(
-        AVATAR_KEY
-    );
-
-if(avatarSalvo){
-
-    avatarImage.src =
-        avatarSalvo;
-
-}
 
 
 /* =====================================================
@@ -802,7 +845,11 @@ avatarInput.addEventListener(
         }
 
 
-        if(!arquivo.type.startsWith("image/")){
+        if(
+            !arquivo.type.startsWith(
+                "image/"
+            )
+        ){
 
             alert(
                 "Escolha uma imagem válida."
@@ -842,7 +889,7 @@ avatarInput.addEventListener(
                 console.error(error);
 
                 alert(
-                    "A imagem é muito grande para ser guardada neste dispositivo. Escolha uma imagem menor."
+                    "A imagem é muito grande. Escolha uma imagem menor."
                 );
 
             }
@@ -909,7 +956,10 @@ onAuthStateChanged(
             user.displayName;
 
 
-        if(!nome && user.email){
+        if(
+            !nome &&
+            user.email
+        ){
 
             nome =
                 user.email
@@ -1057,7 +1107,7 @@ async function(){
         await updateProfile(
             usuarioAtual,
             {
-                displayName: nome
+                displayName:nome
             }
         );
 
