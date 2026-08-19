@@ -180,6 +180,7 @@ body{
     background:#171717;
     position:relative;
     box-shadow:0 4px 12px rgba(0,0,0,.35);
+    flex-shrink:0;
 }
 
 .anime-card img{
@@ -190,7 +191,7 @@ body{
 }
 
 /* =====================================================
-   EPISÓDIOS
+   NOVOS EPISÓDIOS
 ===================================================== */
 
 .episode-card{
@@ -200,6 +201,7 @@ body{
     overflow:hidden;
     position:relative;
     box-shadow:0 4px 12px rgba(0,0,0,.35);
+    flex-shrink:0;
 }
 
 .episode-card img{
@@ -254,32 +256,62 @@ body{
 }
 
 /* =====================================================
-   CÍRCULO DE CARREGAMENTO
+   LANÇAMENTO ESPECIAL
 ===================================================== */
 
-.home-loader{
-    min-height:220px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.release-card{
+    margin:0 15px;
+    height:190px;
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    background:#151515;
 }
 
-.loader-circle{
-    width:40px;
-    height:40px;
-    border:3px solid #292929;
-    border-top-color:#ff1744;
-    border-right-color:#ff1744;
-    border-radius:50%;
-    animation:berrySpin .8s linear infinite;
+.release-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-@keyframes berrySpin{
+.release-gradient{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            to right,
+            rgba(0,0,0,.88),
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.05)
+        );
+}
 
-    to{
-        transform:rotate(360deg);
-    }
+.release-info{
+    position:absolute;
+    left:18px;
+    bottom:18px;
+    right:18px;
+}
 
+.release-label{
+    display:inline-block;
+    background:#ff1744;
+    padding:5px 9px;
+    border-radius:5px;
+    font-size:10px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.release-title{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.release-sub{
+    margin-top:5px;
+    color:#ddd;
+    font-size:12px;
 }
 
 /* =====================================================
@@ -401,6 +433,15 @@ section{
         height:165px;
     }
 
+    .release-card{
+        margin:0 14px;
+        height:180px;
+    }
+
+    .release-title{
+        font-size:18px;
+    }
+
     .bottom-menu{
         height:66px;
     }
@@ -465,6 +506,8 @@ section{
 
     <div class="header-icons">
 
+        <!-- PESQUISA -->
+
         <div
             class="header-button"
             onclick="abrirPesquisa()">
@@ -484,6 +527,9 @@ section{
             </svg>
 
         </div>
+
+
+        <!-- PERFIL -->
 
         <div
             class="profile-button"
@@ -596,10 +642,9 @@ section{
 
     </div>
 
-</div>
+                      </div>
 
-
-<script>
+      <script>
 
 /* =====================================================
    PERFIL
@@ -607,7 +652,8 @@ section{
 
 function abrirPerfil(){
 
-    window.location.href = "perfil.html";
+    window.location.href =
+        "perfil.html";
 
 }
 
@@ -618,13 +664,15 @@ function abrirPerfil(){
 
 function abrirPesquisa(){
 
-    alert("A pesquisa ainda está sendo preparada.");
+    alert(
+        "A pesquisa ainda está sendo preparada."
+    );
 
 }
 
 
 /* =====================================================
-   FOTO DE PERFIL
+   FOTO DO PERFIL
 ===================================================== */
 
 const AVATAR_KEY =
@@ -664,6 +712,7 @@ function carregarFotoPerfil(){
             "none";
 
     }
+
     else{
 
         profileImage.removeAttribute(
@@ -682,110 +731,98 @@ function carregarFotoPerfil(){
 
 
 /* =====================================================
-   API JIKAN
+   API
 ===================================================== */
 
 const app =
     document.getElementById("app");
 
-
 const API =
     "https://api.jikan.moe/v4";
+
+
+async function api(url){
+
+    try{
+
+        const res =
+            await fetch(
+                API + url
+            );
+
+
+        if(!res.ok){
+
+            throw new Error(
+                "HTTP " + res.status
+            );
+
+        }
+
+
+        const data =
+            await res.json();
+
+
+        return data.data || [];
+
+    }
+
+    catch(error){
+
+        console.log(
+            "Jikan:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
 
 
 /* =====================================================
    CACHE
 ===================================================== */
 
-const CACHE_PREFIX =
-    "berryanime_jikan_";
+const CACHE_KEY =
+    "berryanime_home_cache_v4";
 
 
 const CACHE_TIME =
-    15 * 60 * 1000;
+    1000 * 60 * 30;
 
 
 /* =====================================================
-   CONTROLE DE REQUISIÇÕES
+   SALVAR CACHE
 ===================================================== */
 
-/*
-   Não fazemos dezenas de requisições ao mesmo tempo.
+function salvarCache(dados){
 
-   Uma nova requisição só começa depois de um
-   pequeno intervalo.
+    try{
 
-   Isso evita sobrecarregar a Jikan e reduz
-   bastante os erros 429.
-*/
+        localStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify({
 
-let ultimaRequisicao =
-    0;
+                time:Date.now(),
 
+                data:dados
 
-const INTERVALO_API =
-    450;
-
-
-async function controlarVelocidade(){
-
-    const agora =
-        Date.now();
-
-
-    const passou =
-        agora - ultimaRequisicao;
-
-
-    const espera =
-        Math.max(
-            0,
-            INTERVALO_API - passou
-        );
-
-
-    if(espera > 0){
-
-        await esperar(
-            espera
+            })
         );
 
     }
 
+    catch(error){
 
-    ultimaRequisicao =
-        Date.now();
+        console.log(
+            "Erro no cache:",
+            error
+        );
 
-}
-
-
-/* =====================================================
-   ESPERAR
-===================================================== */
-
-function esperar(ms){
-
-    return new Promise(
-        resolve =>
-            setTimeout(
-                resolve,
-                ms
-            )
-    );
-
-}
-
-
-/* =====================================================
-   CACHE KEY
-===================================================== */
-
-function cacheKey(url){
-
-    return (
-        CACHE_PREFIX +
-        encodeURIComponent(url)
-    );
+    }
 
 }
 
@@ -794,17 +831,13 @@ function cacheKey(url){
    LER CACHE
 ===================================================== */
 
-function lerCache(url){
+function lerCache(){
 
     try{
 
-        const chave =
-            cacheKey(url);
-
-
         const salvo =
             localStorage.getItem(
-                chave
+                CACHE_KEY
             );
 
 
@@ -823,27 +856,8 @@ function lerCache(url){
 
         if(
             !objeto ||
-            !objeto.time ||
-            !Array.isArray(objeto.data)
+            !objeto.data
         ){
-
-            return null;
-
-        }
-
-
-        const idade =
-            Date.now() -
-            objeto.time;
-
-
-        if(
-            idade > CACHE_TIME
-        ){
-
-            localStorage.removeItem(
-                chave
-            );
 
             return null;
 
@@ -853,12 +867,8 @@ function lerCache(url){
         return objeto.data;
 
     }
-    catch(error){
 
-        console.warn(
-            "Erro ao ler cache:",
-            error
-        );
+    catch(error){
 
         return null;
 
@@ -868,320 +878,29 @@ function lerCache(url){
 
 
 /* =====================================================
-   SALVAR CACHE
-===================================================== */
-
-function salvarCache(
-    url,
-    data
-){
-
-    try{
-
-        localStorage.setItem(
-
-            cacheKey(url),
-
-            JSON.stringify({
-
-                time:
-                    Date.now(),
-
-                data:
-                    data
-
-            })
-
-        );
-
-    }
-    catch(error){
-
-        console.warn(
-            "Não foi possível salvar cache:",
-            error
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   API
-===================================================== */
-
-async function api(
-    url,
-    tentativas = 3
-){
-
-    /*
-       Primeiro tenta o cache.
-    */
-
-    const cache =
-        lerCache(url);
-
-
-    if(cache){
-
-        console.log(
-            "Jikan CACHE:",
-            url
-        );
-
-        return cache;
-
-    }
-
-
-    /*
-       Requisição real.
-    */
-
-    for(
-        let tentativa = 1;
-        tentativa <= tentativas;
-        tentativa++
-    ){
-
-        try{
-
-            await controlarVelocidade();
-
-
-            console.log(
-                "Jikan:",
-                url,
-                "tentativa:",
-                tentativa
-            );
-
-
-            const controller =
-                new AbortController();
-
-
-            const timeout =
-                setTimeout(
-                    () =>
-                        controller.abort(),
-                    12000
-                );
-
-
-            const response =
-                await fetch(
-
-                    API + url,
-
-                    {
-                        method:
-                            "GET",
-
-                        signal:
-                            controller.signal,
-
-                        headers:{
-                            "Accept":
-                                "application/json"
-                        }
-
-                    }
-
-                );
-
-
-            clearTimeout(
-                timeout
-            );
-
-
-            /*
-               Rate limit.
-            */
-
-            if(
-                response.status === 429
-            ){
-
-                console.warn(
-                    "Jikan 429:",
-                    url
-                );
-
-
-                if(
-                    tentativa < tentativas
-                ){
-
-                    await esperar(
-                        1800 *
-                        tentativa
-                    );
-
-                    continue;
-
-                }
-
-
-                return [];
-
-            }
-
-
-            /*
-               Servidor indisponível.
-            */
-
-            if(
-                response.status === 503
-            ){
-
-                console.warn(
-                    "Jikan 503:",
-                    url
-                );
-
-
-                if(
-                    tentativa < tentativas
-                ){
-
-                    await esperar(
-                        2000
-                    );
-
-                    continue;
-
-                }
-
-
-                return [];
-
-            }
-
-
-            if(
-                !response.ok
-            ){
-
-                throw new Error(
-                    "HTTP " +
-                    response.status
-                );
-
-            }
-
-
-            const json =
-                await response.json();
-
-
-            const dados =
-                Array.isArray(
-                    json.data
-                )
-                    ? json.data
-                    : [];
-
-
-            salvarCache(
-                url,
-                dados
-            );
-
-
-            return dados;
-
-        }
-        catch(error){
-
-            console.warn(
-                "Erro Jikan:",
-                url,
-                error
-            );
-
-
-            if(
-                tentativa < tentativas
-            ){
-
-                await esperar(
-                    1200 *
-                    tentativa
-                );
-
-            }
-
-        }
-
-    }
-
-
-    return [];
-
-}
-
-
-/* =====================================================
-   IMAGEM
+   CAPA
 ===================================================== */
 
 function imagemAnime(anime){
 
     return (
-
-        anime?.images?.webp
-            ?.large_image_url ||
-
-        anime?.images?.jpg
-            ?.large_image_url ||
-
-        anime?.images?.webp
-            ?.image_url ||
-
-        anime?.images?.jpg
-            ?.image_url ||
-
+        anime?.images?.jpg?.large_image_url ||
+        anime?.images?.jpg?.image_url ||
+        anime?.images?.jpg?.small_image_url ||
         ""
-
     );
 
 }
 
 
 /* =====================================================
-   ESCAPAR HTML
+   ID
 ===================================================== */
 
-function escapar(texto){
+function animeId(anime){
 
-    return String(
-        texto || ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+    return anime?.mal_id ||
+           null;
 
 }
 
@@ -1192,16 +911,6 @@ function escapar(texto){
 
 function smallCard(anime){
 
-    if(
-        !anime ||
-        !anime.mal_id
-    ){
-
-        return "";
-
-    }
-
-
     const image =
         imagemAnime(anime);
 
@@ -1211,14 +920,6 @@ function smallCard(anime){
         return "";
 
     }
-
-
-    const title =
-        escapar(
-            anime.title ||
-            anime.title_english ||
-            "Anime"
-        );
 
 
     return `
@@ -1229,7 +930,7 @@ function smallCard(anime){
 
             <img
                 src="${image}"
-                alt="${title}"
+                alt="${anime.title || "Anime"}"
                 loading="lazy">
 
         </div>
@@ -1240,23 +941,10 @@ function smallCard(anime){
 
 
 /* =====================================================
-   CARD EPISÓDIO
+   CARD DE EPISÓDIO
 ===================================================== */
 
-function episodeCard(
-    anime,
-    index
-){
-
-    if(
-        !anime ||
-        !anime.mal_id
-    ){
-
-        return "";
-
-    }
-
+function episodeCard(anime,index){
 
     const image =
         imagemAnime(anime);
@@ -1269,14 +957,6 @@ function episodeCard(
     }
 
 
-    const title =
-        escapar(
-            anime.title ||
-            anime.title_english ||
-            "Novo episódio"
-        );
-
-
     return `
 
         <div
@@ -1285,7 +965,7 @@ function episodeCard(
 
             <img
                 src="${image}"
-                alt="${title}"
+                alt="${anime.title || "Novo episódio"}"
                 loading="lazy">
 
             <div class="badge">
@@ -1297,11 +977,11 @@ function episodeCard(
             <div class="episode-text">
 
                 <div class="episode-title">
-                    ${title}
+                    ${anime.title || "Novo episódio"}
                 </div>
 
                 <div class="episode-sub">
-                    ${index + 1}. Novo episódio
+                    ${index + 1}. Episódio recente
                 </div>
 
             </div>
@@ -1327,1129 +1007,692 @@ function abrirAnime(id){
 
 
     window.location.href =
-        "detalhes.html?id=" +
-        id;
+        "detalhes.html?id=" + id;
 
 }
 
 
 /* =====================================================
-   REMOVER REPETIDOS
+   SECÇÃO NORMAL
 ===================================================== */
 
-function removerDuplicados(
-    lista
+function section(
+    nome,
+    lista,
+    usados
 ){
+
+    if(
+        !lista ||
+        !lista.length
+    ){
+
+        return "";
+
+    }
+
+
+    const selecionados = [];
+
+
+    for(
+        const anime of lista
+    ){
+
+        const id =
+            animeId(anime);
+
+
+        if(
+            !id ||
+            usados.has(id)
+        ){
+
+            continue;
+
+        }
+
+
+        usados.add(id);
+
+        selecionados.push(
+            anime
+        );
+
+
+        if(
+            selecionados.length >= 10
+        ){
+
+            break;
+
+        }
+
+    }
+
+
+    if(
+        !selecionados.length
+    ){
+
+        return "";
+
+    }
+
+
+    return `
+
+        <section>
+
+            <div class="title-section">
+                ${nome}
+            </div>
+
+            <div class="container">
+
+                ${selecionados
+                    .map(smallCard)
+                    .join("")}
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =====================================================
+   SECÇÃO DE EPISÓDIOS
+===================================================== */
+
+function episodeSection(
+    nome,
+    lista,
+    usados
+){
+
+    if(
+        !lista ||
+        !lista.length
+    ){
+
+        return "";
+
+    }
+
+
+    const selecionados = [];
+
+
+    for(
+        const anime of lista
+    ){
+
+        const id =
+            animeId(anime);
+
+
+        if(
+            !id ||
+            usados.has(id)
+        ){
+
+            continue;
+
+        }
+
+
+        usados.add(id);
+
+        selecionados.push(
+            anime
+        );
+
+
+        if(
+            selecionados.length >= 8
+        ){
+
+            break;
+
+        }
+
+    }
+
+
+    if(
+        !selecionados.length
+    ){
+
+        return "";
+
+    }
+
+
+    return `
+
+        <section>
+
+            <div class="title-section">
+                ${nome}
+            </div>
+
+            <div class="container">
+
+                ${selecionados
+                    .map(
+                        (anime,index) =>
+                            episodeCard(
+                                anime,
+                                index
+                            )
+                    )
+                    .join("")}
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =====================================================
+   LANÇAMENTO
+===================================================== */
+
+function releaseSection(
+    anime,
+    usados
+){
+
+    if(!anime){
+
+        return "";
+
+    }
+
+
+    const id =
+        animeId(anime);
+
+
+    if(
+        !id ||
+        usados.has(id)
+    ){
+
+        return "";
+
+    }
+
+
+    usados.add(id);
+
+
+    const image =
+        imagemAnime(anime);
+
+
+    if(!image){
+
+        return "";
+
+    }
+
+
+    return `
+
+        <section>
+
+            <div class="title-section">
+                Lançamentos
+            </div>
+
+            <div
+                class="release-card"
+                onclick="abrirAnime(${id})">
+
+                <img
+                    src="${image}"
+                    alt="${anime.title || "Lançamento"}">
+
+                <div class="release-gradient"></div>
+
+                <div class="release-info">
+
+                    <div class="release-label">
+                        DESTAQUE
+                    </div>
+
+                    <div class="release-title">
+                        ${anime.title || "Novo lançamento"}
+                    </div>
+
+                    <div class="release-sub">
+                        Acompanhe o lançamento no BerryAnime
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ENCONTRAR POR GÉNERO
+===================================================== */
+
+function porGenero(
+    lista,
+    genero
+){
+
+    return lista.filter(
+        anime => {
+
+            const genres =
+                anime.genres || [];
+
+
+            return genres.some(
+                g =>
+                    String(
+                        g.name
+                    ).toLowerCase()
+                    ===
+                    genero.toLowerCase()
+            );
+
+        }
+    );
+
+}
+
+<script>
+
+/* =====================================================
+   CONSTRUIR HOME
+===================================================== */
+
+function construirHome(dados){
+
+    const usados =
+        new Set();
+
+
+    const popular =
+        dados.popular || [];
+
+
+    const airing =
+        dados.airing || [];
+
+
+    const score =
+        dados.score || [];
+
+
+    /*
+     * Juntamos as listas para aumentar
+     * a variedade disponível para os géneros.
+     */
+
+    const universo = [
+        ...popular,
+        ...airing,
+        ...score
+    ];
+
+
+    /*
+     * Remover duplicados do universo
+     */
 
     const mapa =
         new Map();
 
 
-    for(
-        const anime of
-        (lista || [])
-    ){
+    universo.forEach(
+        anime => {
 
-        if(
-            anime &&
-            anime.mal_id &&
-            !mapa.has(
+            if(
+                anime &&
                 anime.mal_id
-            )
-        ){
+            ){
 
-            mapa.set(
-                anime.mal_id,
-                anime
-            );
+                mapa.set(
+                    anime.mal_id,
+                    anime
+                );
+
+            }
 
         }
-
-    }
-
-
-    return Array.from(
-        mapa.values()
     );
 
-}
 
-
-/* =====================================================
-   PEGAR ANIMES
-===================================================== */
-
-function pegarAnimes(
-    lista,
-    quantidade
-){
-
-    return removerDuplicados(
-        lista
-    ).slice(
-        0,
-        quantidade
-    );
-
-}
-
-
-/* =====================================================
-   SEÇÃO
-===================================================== */
-
-function criarSecao(
-    id,
-    nome
-){
-
-    const section =
-        document.createElement(
-            "section"
+    const todos =
+        Array.from(
+            mapa.values()
         );
 
 
-    section.id =
-        id;
-
-
-    section.innerHTML = `
-
-        <div class="title-section">
-            ${escapar(nome)}
-        </div>
-
-        <div class="container">
-
-            <div
-                class="section-loading"
-                style="
-                    color:#666;
-                    padding:20px 0;
-                    font-size:14px;
-                ">
-
-                Carregando...
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    app.appendChild(
-        section
-    );
-
-
-    return section;
-
-}
-
-
-/* =====================================================
-   CRIAR ESTRUTURA
-===================================================== */
-
-function criarEstrutura(){
-
-    app.innerHTML = "";
-
-
-    criarSecao(
-        "em-alta",
-        "Em Alta"
-    );
-
-
-    criarSecao(
-        "novos-episodios",
-        "Novos episódios"
-    );
-
-
-    criarSecao(
-        "bem-avaliados",
-        "Mais bem avaliados"
-    );
-
-
-    criarSecao(
-        "acao",
-        "Ação"
-    );
-
-
-    criarSecao(
-        "comedia",
-        "Comédia"
-    );
-
-
-    criarSecao(
-        "shounen",
-        "Shounen"
-    );
-
-
-    criarSecao(
-        "slice-life",
-        "Slice of Life"
-    );
-
-
-    criarSecao(
-        "voce-vai-amar",
-        "Você vai amar"
-    );
-
-
-    criarSecao(
-        "lancamentos",
-        "Lançamentos"
-    );
-
-
-    criarSecao(
-        "romance",
-        "Romance"
-    );
-
-
-    criarSecao(
-        "fantasia",
-        "Fantasia"
-    );
-
-
-    criarSecao(
-        "talvez",
-        "Talvez você goste"
-    );
-
-
-    criarSecao(
-        "curtidos",
-        "Os mais curtidos de hoje!"
-    );
-
-}
-
-
-/* =====================================================
-   ATUALIZAR SEÇÃO
-===================================================== */
-
-function atualizarSecao(
-    id,
-    lista,
-    quantidade = 12,
-    episodios = false
-){
-
-    const section =
-        document.getElementById(
-            id
-        );
-
-
-    if(!section){
-
-        return;
-
-    }
-
-
-    const container =
-        section.querySelector(
-            ".container"
-        );
-
-
-    const animes =
-        pegarAnimes(
-            lista,
-            quantidade
-        );
-
-
-    if(
-        !animes.length
-    ){
-
-        container.innerHTML = `
-
-            <div
-                style="
-                    color:#555;
-                    padding:18px 0;
-                    font-size:14px;
-                ">
-
-                Não foi possível carregar esta seção.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    if(episodios){
-
-        container.innerHTML =
-            animes
-                .map(
-                    (
-                        anime,
-                        index
-                    ) =>
-                        episodeCard(
-                            anime,
-                            index
-                        )
-                )
-                .join("");
-
-    }
-    else{
-
-        container.innerHTML =
-            animes
-                .map(
-                    smallCard
-                )
-                .join("");
-
-    }
-
-}
-
-
-/* =====================================================
-   CONFIGURAÇÃO DAS SEÇÕES
-===================================================== */
-
-/*
-   SOMENTE UMA página por requisição.
-
-   Isso é proposital.
-
-   Não vamos buscar 2, 3 ou 4 páginas de cada
-   categoria porque isso multiplicaria as
-   requisições e poderia causar 429.
-*/
-
-const secoes = [
-
-    {
-        id:
-            "em-alta",
-
-        nome:
-            "Em Alta",
-
-        url:
-            "/top/anime?filter=bypopularity&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "novos-episodios",
-
-        nome:
-            "Novos episódios",
-
-        url:
-            "/seasons/now?page=1",
-
-        quantidade:
-            10,
-
-        episodios:
-            true
-    },
-
-
-    {
-        id:
-            "bem-avaliados",
-
-        nome:
-            "Mais bem avaliados",
-
-        url:
-            "/top/anime?filter=airing&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "acao",
-
-        nome:
-            "Ação",
-
-        url:
-            "/anime?genres=1&order_by=score&sort=desc&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "comedia",
-
-        nome:
-            "Comédia",
-
-        url:
-            "/anime?genres=4&order_by=score&sort=desc&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "shounen",
-
-        nome:
-            "Shounen",
-
-        url:
-            "/anime?genres=27&order_by=popularity&sort=asc&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "slice-life",
-
-        nome:
-            "Slice of Life",
-
-        url:
-            "/anime?genres=36&order_by=score&sort=desc&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "voce-vai-amar",
-
-        nome:
-            "Você vai amar",
-
-        url:
-            "/top/anime?filter=favorite&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "lancamentos",
-
-        nome:
-            "Lançamentos",
-
-        url:
-            "/seasons/upcoming?page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "romance",
-
-        nome:
-            "Romance",
-
-        url:
-            "/anime?genres=22&order_by=score&sort=desc&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "fantasia",
-
-        nome:
-            "Fantasia",
-
-        url:
-            "/anime?genres=10&order_by=score&sort=desc&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "talvez",
-
-        nome:
-            "Talvez você goste",
-
-        url:
-            "/anime?order_by=popularity&sort=asc&page=1",
-
-        quantidade:
-            12
-    },
-
-
-    {
-        id:
-            "curtidos",
-
-        nome:
-            "Os mais curtidos de hoje!",
-
-        url:
-            "/anime?order_by=favorites&sort=desc&page=1",
-
-        quantidade:
-            12
-    }
-
-];
-
-
-/* =====================================================
-   CARREGAR UMA SEÇÃO
-===================================================== */
-
-async function carregarSecao(
-    config
-){
-
-    const dados =
-        await api(
-            config.url
-        );
-
-
-    atualizarSecao(
-
-        config.id,
-
-        dados,
-
-        config.quantidade,
-
-        config.episodios === true
-
-    );
-
-
-    return dados;
-
-}
-
-
-/* =====================================================
-   FILA DE REQUISIÇÕES
-===================================================== */
-
-/*
-   Aqui está uma das mudanças mais importantes.
-
-   As seções são carregadas aos poucos.
-
-   A Home NÃO espera todas as APIs terminarem.
-
-   Cada seção aparece assim que sua própria
-   requisição termina.
-*/
-
-async function carregarFila(){
-
-    for(
-        const config of secoes
-    ){
-
-        carregarSecao(
-            config
-        );
-
-        /*
-           Pequeno intervalo antes de iniciar
-           a próxima.
-
-           Isso mantém a Jikan tranquila.
-        */
-
-        await esperar(
-            500
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   CARREGAR HOME
-===================================================== */
-
-async function loadAnime(){
-
-    criarEstrutura();
-
-
-    /*
-       Primeiro tentamos carregar Em Alta.
-
-       Essa seção é a primeira coisa que o usuário
-       deve ver.
-    */
-
-    const primeira =
-        secoes[0];
-
-
-    await carregarSecao(
-        primeira
-    );
-
-
-    /*
-       Depois iniciamos todas as outras
-       progressivamente.
-    */
-
-    carregarFilaRestante();
-
-}
-
-
-/* =====================================================
-   RESTANTE DA HOME
-===================================================== */
-
-
-/* =====================================================
-   FUNÇÃO PARA PEGAR ANIMES
-   Cada seção pode usar os seus próprios animes.
-===================================================== */
-
-function pegarAnimes(lista, quantidade = 12){
-
-    if(!Array.isArray(lista)){
-        return [];
-    }
-
-    return lista
-        .filter(anime =>
-            anime &&
-            anime.mal_id &&
-            anime.images
-        )
-        .slice(0, quantidade);
-
-}
-
-
-/* =====================================================
-   CRIAR UMA SEÇÃO
-===================================================== */
-
-function criarSecao(
-    titulo,
-    lista,
-    quantidade = 12,
-    tipo = "normal"
-){
-
-    const animes =
-        pegarAnimes(
-            lista,
-            quantidade
-        );
-
-
-    if(animes.length === 0){
-
-        return `
-            <section>
-
-                <div class="title-section">
-                    ${titulo}
-                </div>
-
-                <div class="container">
-
-                    <div style="
-                        color:#666;
-                        padding:15px 0;
-                        font-size:14px;
-                    ">
-                        Nenhum anime disponível.
-                    </div>
-
-                </div>
-
-            </section>
-        `;
-
-    }
-
-
-    let conteudo = "";
-
-
-    if(tipo === "episode"){
-
-        conteudo =
-            animes
-                .map(
-                    (anime,index) =>
-                        episodeCard(
-                            anime,
-                            index
-                        )
-                )
-                .join("");
-
-    }
-
-    else{
-
-        conteudo =
-            animes
-                .map(
-                    smallCard
-                )
-                .join("");
-
-    }
-
-
-    return section(
-        titulo,
-        conteudo
-    );
-
-}
-
-
-/* =====================================================
-   MOSTRAR HOME
-===================================================== */
-
-async function mostrarHome(
-    popular,
-    airing,
-    avaliados,
-    action,
-    comedy,
-    shounen,
-    sliceLife,
-    romance,
-    fantasy,
-    recomendados,
-    maisCurtidos
-){
-
-    app.innerHTML = "";
+    let html = "";
 
 
     /* =================================================
-       EM ALTA
+       1. EM ALTA
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
-            "Em Alta",
+    html +=
+        section(
+            "Em alta",
             popular,
-            12
+            usados
         );
 
 
     /* =================================================
-       NOVOS EPISÓDIOS
+       2. NOVOS EPISÓDIOS
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        episodeSection(
             "Novos episódios",
             airing,
-            10,
-            "episode"
+            usados
         );
 
 
     /* =================================================
-       MAIS BEM AVALIADOS
+       3. MAIS BEM AVALIADOS
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Mais bem avaliados",
-            avaliados,
-            12
+            score,
+            usados
         );
 
 
     /* =================================================
-       AÇÃO
+       4. AÇÃO
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Ação",
-            action,
-            12
+            porGenero(
+                todos,
+                "Action"
+            ),
+            usados
         );
 
 
     /* =================================================
-       COMÉDIA
+       5. COMÉDIA
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Comédia",
-            comedy,
-            12
+            porGenero(
+                todos,
+                "Comedy"
+            ),
+            usados
         );
 
 
     /* =================================================
-       SHOUNEN
+       6. SHOUNEN
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Shounen",
-            shounen,
-            12
+            porGenero(
+                todos,
+                "Shounen"
+            ),
+            usados
         );
 
 
     /* =================================================
-       SLICE OF LIFE
+       7. SLICE OF LIFE
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Slice of Life",
-            sliceLife,
-            12
+            porGenero(
+                todos,
+                "Slice of Life"
+            ),
+            usados
         );
 
 
     /* =================================================
-       VOCÊ VAI AMAR
+       8. VOCÊ VAI AMAR
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Você vai amar",
-            avaliados,
-            12
+            popular.slice(10,25),
+            usados
         );
 
 
     /* =================================================
-       LANÇAMENTOS
+       9. LANÇAMENTO
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
-            "Lançamentos",
-            airing,
-            12
+    /*
+     * Apenas UM anime.
+     *
+     * O anime escolhido muda conforme
+     * os dados recebidos da temporada.
+     */
+
+    const lancamento =
+        airing.find(
+            anime =>
+                anime &&
+                anime.mal_id &&
+                !usados.has(
+                    anime.mal_id
+                )
+        )
+        ||
+        score.find(
+            anime =>
+                anime &&
+                anime.mal_id &&
+                !usados.has(
+                    anime.mal_id
+                )
+        );
+
+
+    html +=
+        releaseSection(
+            lancamento,
+            usados
         );
 
 
     /* =================================================
-       ROMANCE
+       10. ROMANCE
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Romance",
-            romance,
-            12
+            porGenero(
+                todos,
+                "Romance"
+            ),
+            usados
         );
 
 
     /* =================================================
-       FANTASIA
+       11. FANTASIA
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Fantasia",
-            fantasy,
-            12
+            porGenero(
+                todos,
+                "Fantasy"
+            ),
+            usados
         );
 
 
     /* =================================================
-       TALVEZ VOCÊ GOSTE
+       12. TALVEZ VOCÊ GOSTE
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Talvez você goste",
-            recomendados,
-            12
+            score.slice(12,30),
+            usados
         );
 
 
     /* =================================================
-       OS MAIS CURTIDOS
+       13. OS MAIS CURTIDOS DE HOJE
     ================================================= */
 
-    app.innerHTML +=
-        criarSecao(
+    html +=
+        section(
             "Os mais curtidos de hoje!",
-            maisCurtidos,
-            12
+            dados.favorites || [],
+            usados
         );
+
+
+    /*
+     * Se não conseguiu absolutamente nada
+     */
+
+    if(!html){
+
+        html = `
+
+            <div style="
+                text-align:center;
+                padding:60px 20px;
+                color:#888;
+            ">
+
+                Não foi possível carregar
+                os animes agora.
+
+            </div>
+
+        `;
+
+    }
+
+
+    app.innerHTML =
+        html;
 
 }
 
 
 /* =====================================================
-   CARREGAR HOME
+   BUSCAR DADOS DA API
 ===================================================== */
 
-async function loadAnime(){
-
-    mostrarLoader();
-
+async function atualizarHome(){
 
     try{
 
         /*
-         * Fazemos as requisições em paralelo.
+         * Apenas 3 pedidos.
          *
-         * Antes estavam sendo feitas uma por uma.
-         * Isso deixava a Home muito lenta.
+         * Eles acontecem simultaneamente.
          */
 
         const resultados =
-            await Promise.allSettled([
+            await Promise.all([
 
                 api(
-                    "/top/anime?filter=bypopularity"
+                    "/top/anime?filter=bypopularity&limit=25"
                 ),
 
                 api(
-                    "/seasons/now"
+                    "/seasons/now?limit=25"
                 ),
 
                 api(
-                    "/top/anime?filter=favorite"
-                ),
-
-                api(
-                    "/anime?genres=1&order_by=score&sort=desc"
-                ),
-
-                api(
-                    "/anime?genres=4&order_by=score&sort=desc"
-                ),
-
-                api(
-                    "/anime?genres=27&order_by=popularity&sort=asc"
-                ),
-
-                api(
-                    "/anime?genres=36&order_by=score&sort=desc"
-                ),
-
-                api(
-                    "/anime?genres=22&order_by=score&sort=desc"
-                ),
-
-                api(
-                    "/anime?genres=10&order_by=score&sort=desc"
-                ),
-
-                api(
-                    "/anime?order_by=popularity&sort=asc"
-                ),
-
-                api(
-                    "/anime?order_by=favorites&sort=desc"
+                    "/anime?order_by=score&sort=desc&limit=25"
                 )
 
             ]);
 
 
-        /*
-         * Se alguma requisição falhar,
-         * as outras continuam funcionando.
-         */
+        const dados = {
 
-        function resultado(
-            indice
-        ){
+            popular:
+                resultados[0],
 
-            const item =
-                resultados[indice];
+            airing:
+                resultados[1],
 
-            if(
-                item &&
-                item.status === "fulfilled" &&
-                Array.isArray(item.value)
-            ){
+            score:
+                resultados[2],
 
-                return item.value;
+            favorites:
+                resultados[0]
 
-            }
-
-            console.warn(
-                "Uma seção da Home não carregou:",
-                indice,
-                item
-            );
-
-            return [];
-
-        }
-
-
-        const popular =
-            resultado(0);
-
-        const airing =
-            resultado(1);
-
-        const avaliados =
-            resultado(2);
-
-        const action =
-            resultado(3);
-
-        const comedy =
-            resultado(4);
-
-        const shounen =
-            resultado(5);
-
-        const sliceLife =
-            resultado(6);
-
-        const romance =
-            resultado(7);
-
-        const fantasy =
-            resultado(8);
-
-        const recomendados =
-            resultado(9);
-
-        const maisCurtidos =
-            resultado(10);
+        };
 
 
         /*
-         * Mostra a Home imediatamente
-         * quando os resultados chegam.
+         * Guardar para a próxima entrada.
          */
 
-        await mostrarHome(
+        salvarCache(
+            dados
+        );
 
-            popular,
-            airing,
-            avaliados,
-            action,
-            comedy,
-            shounen,
-            sliceLife,
-            romance,
-            fantasy,
-            recomendados,
-            maisCurtidos
 
+        /*
+         * Atualiza a Home.
+         */
+
+        construirHome(
+            dados
         );
 
     }
 
     catch(error){
 
-        console.error(
-            "Erro ao carregar a Home:",
+        console.log(
+            "Erro ao atualizar:",
             error
         );
-
-
-        app.innerHTML = `
-
-            <div style="
-                text-align:center;
-                padding:50px 20px;
-                color:#aaa;
-            ">
-
-                <div style="
-                    font-size:18px;
-                    color:white;
-                    margin-bottom:12px;
-                ">
-                    Não foi possível carregar os animes.
-                </div>
-
-                <div style="
-                    font-size:14px;
-                ">
-                    Verifique sua conexão e tente novamente.
-                </div>
-
-                <button
-                    onclick="loadAnime()"
-                    style="
-                        margin-top:20px;
-                        padding:12px 22px;
-                        border:0;
-                        border-radius:8px;
-                        background:#ff1744;
-                        color:white;
-                        font-weight:bold;
-                        cursor:pointer;
-                    "
-                >
-                    Tentar novamente
-                </button>
-
-            </div>
-
-        `;
 
     }
 
@@ -2457,16 +1700,69 @@ async function loadAnime(){
 
 
 /* =====================================================
-   INICIALIZAÇÃO
+   INICIALIZAÇÃO RÁPIDA
 ===================================================== */
 
-carregarFotoPerfil();
+function iniciarHome(){
 
-loadAnime();
+    carregarFotoPerfil();
+
+
+    /*
+     * PRIMEIRO:
+     * tenta mostrar o cache imediatamente.
+     */
+
+    const cache =
+        lerCache();
+
+
+    if(cache){
+
+        construirHome(
+            cache
+        );
+
+    }
+
+    else{
+
+        /*
+         * Primeira entrada:
+         * colocamos apenas uma pequena
+         * estrutura visual enquanto chegam
+         * os primeiros dados.
+         */
+
+        app.innerHTML = `
+
+            <div style="
+                padding:25px 15px;
+                color:#777;
+                font-size:13px;
+            ">
+                BerryAnime
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+     * SEGUNDO:
+     * atualiza a API em segundo plano.
+     *
+     * A Home não fica bloqueada esperando.
+     */
+
+    atualizarHome();
+
+}
 
 
 /* =====================================================
-   ATUALIZAR FOTO AO VOLTAR
+   VOLTAR PARA A HOME
 ===================================================== */
 
 window.addEventListener(
@@ -2475,12 +1771,29 @@ window.addEventListener(
 
         carregarFotoPerfil();
 
+        /*
+         * Se já temos cache,
+         * mostra imediatamente.
+         */
+
+        const cache =
+            lerCache();
+
+
+        if(cache){
+
+            construirHome(
+                cache
+            );
+
+        }
+
     }
 );
 
 
 /* =====================================================
-   ATUALIZAR FOTO ENTRE ABAS/PÁGINAS
+   FOTO ALTERADA
 ===================================================== */
 
 window.addEventListener(
@@ -2488,7 +1801,8 @@ window.addEventListener(
     function(event){
 
         if(
-            event.key === AVATAR_KEY
+            event.key ===
+            AVATAR_KEY
         ){
 
             carregarFotoPerfil();
@@ -2498,8 +1812,15 @@ window.addEventListener(
     }
 );
 
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+iniciarHome();
+
 </script>
 
 </body>
-      
-</html>
+
+</html>            
