@@ -100,7 +100,7 @@ body{
 }
 
 /* =====================================================
-   PERFIL
+   PERFIL CIRCULAR
 ===================================================== */
 
 .profile-button{
@@ -254,7 +254,7 @@ body{
 }
 
 /* =====================================================
-   LOADER
+   CÍRCULO DE CARREGAMENTO
 ===================================================== */
 
 .home-loader{
@@ -465,8 +465,6 @@ section{
 
     <div class="header-icons">
 
-        <!-- PESQUISA -->
-
         <div
             class="header-button"
             onclick="abrirPesquisa()">
@@ -486,9 +484,6 @@ section{
             </svg>
 
         </div>
-
-
-        <!-- PERFIL -->
 
         <div
             class="profile-button"
@@ -550,7 +545,6 @@ section{
 
     </div>
 
-
     <div
         class="menu-item"
         onclick="window.location.href='mangas.html'">
@@ -567,7 +561,6 @@ section{
 
     </div>
 
-
     <div
         class="menu-item"
         onclick="window.location.href='favoritos.html'">
@@ -583,7 +576,6 @@ section{
         <span>Favoritos</span>
 
     </div>
-
 
     <div
         class="menu-item"
@@ -713,7 +705,6 @@ async function api(url){
                 API + url
             );
 
-
         if(!res.ok){
 
             throw new Error(
@@ -723,10 +714,8 @@ async function api(url){
 
         }
 
-
         const data =
             await res.json();
-
 
         return data.data || [];
 
@@ -804,7 +793,6 @@ function pegarSemRepetir(
 
     const resultado = [];
 
-
     for(
         const anime of lista
     ){
@@ -823,7 +811,6 @@ function pegarSemRepetir(
 
         }
 
-
         if(
             resultado.length >= quantidade
         ){
@@ -834,11 +821,9 @@ function pegarSemRepetir(
 
     }
 
-
     return resultado;
 
 }
-
 
 /* =====================================================
    CARD NORMAL
@@ -852,7 +837,6 @@ function smallCard(anime){
         anime.images?.webp?.large_image_url ||
         anime.images?.webp?.image_url ||
         "";
-
 
     return `
 
@@ -899,7 +883,6 @@ function episodeCard(
         anime.images?.webp?.large_image_url ||
         anime.images?.webp?.image_url ||
         "";
-
 
     return `
 
@@ -966,7 +949,7 @@ function section(
 
 
 /* =====================================================
-   CÍRCULO DE CARREGAMENTO
+   MOSTRAR CÍRCULO
 ===================================================== */
 
 function mostrarLoader(){
@@ -996,33 +979,31 @@ function esconderLoader(){
 
 
 /* =====================================================
-   CARREGAMENTO DA HOME
+   CARREGAR HOME
 ===================================================== */
 
 async function loadAnime(){
 
     mostrarLoader();
 
+
     /*
-     * O círculo fica visível pelo menos 2 segundos.
+     * Guarda o momento em que começou.
+     * O círculo ficará pelo menos 2 segundos.
      */
+
     const inicio =
         Date.now();
 
 
     try{
 
-        /*
-         * Limpamos os animes anteriores.
-         */
-
         animesUsados.clear();
 
 
-        /*
-         * Fazemos as chamadas uma por uma.
-         * Entre elas existe uma pequena pausa.
-         */
+        /* =================================================
+           1. EM ALTA
+        ================================================= */
 
         const popular =
             await api(
@@ -1032,6 +1013,10 @@ async function loadAnime(){
         await esperar(400);
 
 
+        /* =================================================
+           2. NOVOS EPISÓDIOS
+        ================================================= */
+
         const airing =
             await api(
                 "/seasons/now"
@@ -1039,6 +1024,10 @@ async function loadAnime(){
 
         await esperar(400);
 
+
+        /* =================================================
+           3. MAIS BEM AVALIADOS
+        ================================================= */
 
         const avaliados =
             await api(
@@ -1048,6 +1037,10 @@ async function loadAnime(){
         await esperar(400);
 
 
+        /* =================================================
+           4. AÇÃO
+        ================================================= */
+
         const action =
             await api(
                 "/anime?genres=1&order_by=score&sort=desc"
@@ -1055,6 +1048,10 @@ async function loadAnime(){
 
         await esperar(400);
 
+
+        /* =================================================
+           5. COMÉDIA
+        ================================================= */
 
         const comedy =
             await api(
@@ -1064,6 +1061,10 @@ async function loadAnime(){
         await esperar(400);
 
 
+        /* =================================================
+           6. SHOUNEN
+        ================================================= */
+
         const shounen =
             await api(
                 "/anime?genres=27&order_by=popularity&sort=asc"
@@ -1071,6 +1072,10 @@ async function loadAnime(){
 
         await esperar(400);
 
+
+        /* =================================================
+           7. SLICE OF LIFE
+        ================================================= */
 
         const sliceLife =
             await api(
@@ -1080,6 +1085,10 @@ async function loadAnime(){
         await esperar(400);
 
 
+        /* =================================================
+           8. ROMANCE
+        ================================================= */
+
         const romance =
             await api(
                 "/anime?genres=22&order_by=score&sort=desc"
@@ -1087,6 +1096,10 @@ async function loadAnime(){
 
         await esperar(400);
 
+
+        /* =================================================
+           9. FANTASIA
+        ================================================= */
 
         const fantasy =
             await api(
@@ -1096,6 +1109,10 @@ async function loadAnime(){
         await esperar(400);
 
 
+        /* =================================================
+           10. RECOMENDADOS
+        ================================================= */
+
         const recomendados =
             await api(
                 "/anime?order_by=popularity&sort=asc"
@@ -1104,6 +1121,10 @@ async function loadAnime(){
         await esperar(400);
 
 
+        /* =================================================
+           11. MAIS CURTIDOS
+        ================================================= */
+
         const maisCurtidos =
             await api(
                 "/anime?order_by=favorites&sort=desc"
@@ -1111,7 +1132,7 @@ async function loadAnime(){
 
 
         /*
-         * Agora esperamos completar os 2 segundos.
+         * Garante os 2 segundos mínimos.
          */
 
         const tempoPassado =
@@ -1129,7 +1150,7 @@ async function loadAnime(){
 
 
         /*
-         * SOMENTE AGORA A HOME APARECE.
+         * Só agora mostramos a Home.
          */
 
         app.innerHTML = "";
@@ -1166,4 +1187,300 @@ async function loadAnime(){
                 10
             );
 
-      
+        app.innerHTML +=
+            section(
+                "Novos episódios",
+                novosEpisodios
+                    .map(episodeCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           3. MAIS BEM AVALIADOS
+        ================================================= */
+
+        const maisBemAvaliados =
+            pegarSemRepetir(
+                avaliados,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Mais bem avaliados",
+                maisBemAvaliados
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           4. AÇÃO
+        ================================================= */
+
+        const acao =
+            pegarSemRepetir(
+                action,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Ação",
+                acao
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           5. COMÉDIA
+        ================================================= */
+
+        const comedia =
+            pegarSemRepetir(
+                comedy,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Comédia",
+                comedia
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           6. SHOUNEN
+        ================================================= */
+
+        const shounenLista =
+            pegarSemRepetir(
+                shounen,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Shounen",
+                shounenLista
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           7. SLICE OF LIFE
+        ================================================= */
+
+        const slice =
+            pegarSemRepetir(
+                sliceLife,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Slice of Life",
+                slice
+                    .map(smallCard)
+                    .join("")
+            );
+
+      /* =================================================
+           8. VOCÊ VAI AMAR
+        ================================================= */
+
+        const voceVaiAmar =
+            pegarSemRepetir(
+                avaliados,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Você vai amar",
+                voceVaiAmar
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           9. LANÇAMENTOS
+        ================================================= */
+
+        const lancamento =
+            pegarSemRepetir(
+                airing,
+                1
+            );
+
+        app.innerHTML +=
+            section(
+                "Lançamentos",
+                lancamento
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           10. ROMANCE
+        ================================================= */
+
+        const romanceLista =
+            pegarSemRepetir(
+                romance,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Romance",
+                romanceLista
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           11. FANTASIA
+        ================================================= */
+
+        const fantasia =
+            pegarSemRepetir(
+                fantasy,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Fantasia",
+                fantasia
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           12. TALVEZ VOCÊ GOSTE
+        ================================================= */
+
+        const talvez =
+            pegarSemRepetir(
+                recomendados,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Talvez você goste",
+                talvez
+                    .map(smallCard)
+                    .join("")
+            );
+
+
+        /* =================================================
+           13. OS MAIS CURTIDOS
+        ================================================= */
+
+        const curtidos =
+            pegarSemRepetir(
+                maisCurtidos,
+                12
+            );
+
+        app.innerHTML +=
+            section(
+                "Os mais curtidos de hoje!",
+                curtidos
+                    .map(smallCard)
+                    .join("")
+            );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Erro ao carregar a Home:",
+            error
+        );
+
+
+        app.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:40px 20px;
+                color:#aaa;
+            ">
+
+                Não foi possível carregar
+                os animes.
+
+                <br><br>
+
+                Tente novamente.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+carregarFotoPerfil();
+
+loadAnime();
+
+
+/* =====================================================
+   ATUALIZAR FOTO QUANDO VOLTAR
+===================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        carregarFotoPerfil();
+
+    }
+);
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key === AVATAR_KEY
+        ){
+
+            carregarFotoPerfil();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
