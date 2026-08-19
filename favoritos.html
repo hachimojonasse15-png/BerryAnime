@@ -2,22 +2,17 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
 <title>BerryAnime - Favoritos</title>
 
 <style>
-
-/* =====================================================
-   BASE
-===================================================== */
 
 *{
     margin:0;
@@ -32,296 +27,146 @@ html{
 
 body{
     min-height:100vh;
-    background:
-        radial-gradient(
-            circle at 50% -20%,
-            rgba(255,23,68,.08),
-            transparent 35%
-        ),
-        #090909;
-
+    background:#090909;
     color:white;
-
-    padding-bottom:90px;
-
+    padding-bottom:85px;
     overflow-x:hidden;
 }
 
-
 /* =====================================================
-   CABEÇALHO
+   TOPO
 ===================================================== */
 
 .header{
-
     height:72px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
     padding:0 16px;
 
-    position:relative;
-
-    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-
-/* =====================================================
-   LOGO
-===================================================== */
-
 .logo{
-
-    width:43px;
-    height:43px;
+    width:42px;
+    height:42px;
 
     border-radius:50%;
-
     overflow:hidden;
 
     background:#171717;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
-
-    box-shadow:
-        0 4px 15px rgba(255,23,68,.18);
 }
 
 .logo img{
-
     width:100%;
     height:100%;
-
     object-fit:cover;
-
     display:block;
 }
 
-
-/* =====================================================
-   ÍCONES
-===================================================== */
-
 .header-icons{
-
     display:flex;
-
     align-items:center;
-
-    gap:10px;
+    gap:12px;
 }
 
 .header-button{
-
     width:42px;
     height:42px;
 
     border-radius:50%;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     cursor:pointer;
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:
-        transform .18s ease,
-        background .18s ease;
+    transition:.18s;
 }
 
 .header-button:active{
-
-    transform:scale(.90);
-
-    background:#202020;
+    background:#222;
+    transform:scale(.92);
 }
 
 .header-button svg{
-
     width:25px;
     height:25px;
 
     stroke:white;
-
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
-
     stroke-linejoin:round;
 }
-
 
 /* =====================================================
    PERFIL
 ===================================================== */
 
 .profile-button{
-
-    width:43px;
-    height:43px;
+    width:42px;
+    height:42px;
 
     border-radius:50%;
-
     overflow:hidden;
 
     background:#181818;
-
     border:1px solid #303030;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     cursor:pointer;
-
-    position:relative;
-
-    transition:
-        transform .18s ease,
-        border-color .18s ease;
-}
-
-.profile-button:active{
-
-    transform:scale(.90);
-
-    border-color:#ff1744;
+    flex-shrink:0;
 }
 
 .profile-button img{
-
     width:100%;
     height:100%;
 
     object-fit:cover;
-
     display:none;
 }
 
 .profile-button svg{
-
     width:25px;
     height:25px;
 
-    stroke:#ddd;
-
+    stroke:white;
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
-
     stroke-linejoin:round;
 }
-
-
-/* =====================================================
-   ANIMAÇÃO DO PERFIL
-===================================================== */
-
-.profile-button.animar::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:10px;
-    height:10px;
-
-    border-radius:50%;
-
-    border:2px solid #ff1744;
-
-    animation:
-        perfilRipple .55s ease-out forwards;
-}
-
-@keyframes perfilRipple{
-
-    0%{
-        width:10px;
-        height:10px;
-        opacity:.9;
-    }
-
-    100%{
-        width:75px;
-        height:75px;
-        opacity:0;
-    }
-}
-
-
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
-.main{
-
-    width:100%;
-
-    max-width:700px;
-
-    margin:0 auto;
-
-    padding:12px 15px 30px;
-}
-
 
 /* =====================================================
    TÍTULO
 ===================================================== */
 
 .page-title{
+    padding:8px 15px 15px;
 
-    font-size:30px;
-
+    font-size:27px;
     font-weight:800;
-
-    letter-spacing:-.5px;
-
-    margin-top:8px;
-
-    margin-bottom:20px;
 }
-
-.page-title .red{
-
-    color:#ff1744;
-}
-
 
 /* =====================================================
    FILTROS
 ===================================================== */
 
 .filters{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
 
-    margin-bottom:25px;
+    padding:0 15px 20px;
 
     overflow-x:auto;
-
     scrollbar-width:none;
 }
 
@@ -329,75 +174,62 @@ body{
     display:none;
 }
 
-.filter{
-
+.filter-button{
     border:0;
-
-    background:transparent;
-
-    color:#888;
-
-    font-size:16px;
-
-    font-weight:700;
 
     padding:10px 18px;
 
     border-radius:22px;
 
-    cursor:pointer;
+    background:#171717;
+    color:#999;
+
+    font-size:14px;
+    font-weight:600;
 
     white-space:nowrap;
 
-    transition:
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease;
+    cursor:pointer;
 }
 
-.filter:active{
-
-    transform:scale(.94);
-}
-
-.filter.active{
-
-    color:#111;
-
+.filter-button.active{
     background:white;
-
-    box-shadow:
-        0 4px 15px rgba(255,255,255,.08);
+    color:#111;
 }
-
 
 /* =====================================================
-   GRADE
+   CONTADOR
+===================================================== */
+
+.favorite-count{
+    color:#666;
+    font-size:12px;
+
+    padding:0 15px 14px;
+}
+
+/* =====================================================
+   GRELHA
 ===================================================== */
 
 .favorites-grid{
-
     display:grid;
 
     grid-template-columns:
-        repeat(3,1fr);
+        repeat(4,1fr);
 
     gap:14px;
 
-    width:100%;
+    padding:0 15px;
 }
-
 
 /* =====================================================
    CARD
 ===================================================== */
 
 .favorite-card{
-
-    min-width:0;
-
     position:relative;
-
+    min-width:0;
     cursor:pointer;
 
     animation:
@@ -408,24 +240,25 @@ body{
 
     from{
         opacity:0;
-        transform:translateY(15px) scale(.97);
+        transform:
+            translateY(12px)
+            scale(.96);
     }
 
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
-.poster{
-
+.favorite-poster{
     width:100%;
 
-    aspect-ratio:
-        2 / 3;
+    aspect-ratio:2 / 3;
 
-    border-radius:10px;
-
+    border-radius:9px;
     overflow:hidden;
 
     background:#171717;
@@ -433,58 +266,35 @@ body{
     position:relative;
 
     box-shadow:
-        0 5px 15px rgba(0,0,0,.35);
+        0 5px 15px
+        rgba(0,0,0,.35);
 }
 
-.poster img{
-
+.favorite-poster img{
     width:100%;
     height:100%;
 
     object-fit:cover;
-
     display:block;
-
-    transition:
-        transform .25s ease;
 }
 
-.favorite-card:active .poster img{
-
-    transform:scale(1.04);
-}
-
-
-/* =====================================================
-   SOMBRA
-===================================================== */
-
-.poster-shadow{
-
+.poster-gradient{
     position:absolute;
 
     left:0;
     right:0;
     bottom:0;
 
-    height:70px;
+    height:65px;
 
     background:
         linear-gradient(
             transparent,
-            rgba(0,0,0,.9)
+            rgba(0,0,0,.85)
         );
-
-    pointer-events:none;
 }
 
-
-/* =====================================================
-   TIPO
-===================================================== */
-
-.type-badge{
-
+.favorite-type{
     position:absolute;
 
     top:7px;
@@ -492,362 +302,203 @@ body{
 
     padding:4px 7px;
 
-    border-radius:6px;
+    border-radius:5px;
 
     background:
         rgba(0,0,0,.72);
 
-    color:#fff;
+    color:white;
 
     font-size:9px;
-
-    font-weight:700;
-
-    backdrop-filter:blur(5px);
+    font-weight:bold;
 }
 
-
-/* =====================================================
-   REMOVER
-===================================================== */
-
 .remove-favorite{
-
     position:absolute;
 
-    top:6px;
-    right:6px;
+    top:7px;
+    right:7px;
 
-    width:31px;
-    height:31px;
-
-    border-radius:50%;
+    width:28px;
+    height:28px;
 
     border:0;
+    border-radius:50%;
 
     background:
         rgba(0,0,0,.72);
 
-    color:#ff1744;
+    color:white;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     cursor:pointer;
-
     z-index:5;
-
-    backdrop-filter:blur(5px);
-
-    transition:
-        transform .15s ease,
-        background .15s ease;
-}
-
-.remove-favorite:active{
-
-    transform:scale(.82);
-
-    background:#ff1744;
-
-    color:white;
 }
 
 .remove-favorite svg{
+    width:15px;
+    height:15px;
 
-    width:17px;
-    height:17px;
-
-    stroke:currentColor;
-
+    stroke:white;
     fill:none;
-
     stroke-width:2;
-
     stroke-linecap:round;
-
     stroke-linejoin:round;
 }
 
+.favorite-name{
+    margin-top:7px;
 
-/* =====================================================
-   NOME
-===================================================== */
+    font-size:12px;
+    font-weight:600;
 
-.favorite-title{
-
-    margin-top:8px;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    color:white;
+    color:#eee;
 
     white-space:nowrap;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
 }
-
-.favorite-info{
-
-    margin-top:4px;
-
-    font-size:11px;
-
-    color:#777;
-}
-
 
 /* =====================================================
    ESTADO VAZIO
 ===================================================== */
 
-.empty{
+.empty-state{
+    min-height:
+        calc(100vh - 300px);
 
-    min-height:470px;
+    display:none;
 
-    display:flex;
+    align-items:center;
+    justify-content:center;
 
     flex-direction:column;
 
-    align-items:center;
-
-    justify-content:center;
-
     text-align:center;
 
-    padding:30px 15px;
-
-    animation:
-        emptyAppear .45s ease;
+    padding:30px;
 }
 
-@keyframes emptyAppear{
-
-    from{
-        opacity:0;
-        transform:translateY(15px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-
-/* =====================================================
-   ÍCONE VAZIO BERRY
-===================================================== */
-
-.empty-visual{
-
-    width:170px;
-
-    height:125px;
+.empty-animation{
+    width:150px;
+    height:120px;
 
     position:relative;
 
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
-.empty-berry{
-
+.empty-card{
     position:absolute;
 
-    width:76px;
-    height:76px;
+    width:64px;
+    height:90px;
 
-    border-radius:50%;
+    border-radius:10px;
 
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            #ff758f,
-            #ff1744 55%,
-            #b9002d
-        );
+    background:white;
 
     box-shadow:
-        0 12px 30px rgba(255,23,68,.25);
+        0 8px 20px
+        rgba(0,0,0,.35);
 
-    left:47px;
-    top:28px;
+    display:flex;
 
-    animation:
-        berryFloat 2.8s ease-in-out infinite;
+    align-items:center;
+    justify-content:center;
+
+    color:#111;
+
+    font-size:34px;
+    font-weight:bold;
 }
 
-.empty-berry::before,
-.empty-berry::after{
+.empty-card.left{
+    left:7px;
+    top:15px;
 
-    content:"";
-
-    position:absolute;
-
-    width:23px;
-    height:13px;
-
-    background:#47a447;
-
-    top:-6px;
-
-    border-radius:
-        100% 0 100% 0;
+    transform:rotate(-23deg);
 }
 
-.empty-berry::before{
+.empty-card.center{
+    left:43px;
+    top:3px;
 
-    left:18px;
+    transform:rotate(0deg);
 
-    transform:rotate(25deg);
+    z-index:2;
 }
 
-.empty-berry::after{
+.empty-card.right{
+    right:7px;
+    top:15px;
 
-    right:18px;
-
-    transform:rotate(-25deg);
+    transform:rotate(23deg);
 }
-
-@keyframes berryFloat{
-
-    0%,100%{
-        transform:translateY(0) rotate(-2deg);
-    }
-
-    50%{
-        transform:translateY(-9px) rotate(2deg);
-    }
-}
-
-
-/* =====================================================
-   CORAÇÕES AO REDOR
-===================================================== */
-
-.empty-heart{
-
-    position:absolute;
-
-    color:#ff1744;
-
-    opacity:.75;
-
-    font-size:28px;
-
-    animation:
-        heartFloat 2.5s ease-in-out infinite;
-}
-
-.empty-heart.one{
-
-    left:10px;
-    top:55px;
-}
-
-.empty-heart.two{
-
-    right:10px;
-    top:40px;
-
-    font-size:20px;
-
-    animation-delay:.5s;
-}
-
-.empty-heart.three{
-
-    right:25px;
-    bottom:0;
-
-    font-size:15px;
-
-    animation-delay:1s;
-}
-
-@keyframes heartFloat{
-
-    0%,100%{
-        transform:translateY(0);
-        opacity:.55;
-    }
-
-    50%{
-        transform:translateY(-8px);
-        opacity:1;
-    }
-}
-
-
-/* =====================================================
-   TEXTO VAZIO
-===================================================== */
 
 .empty-title{
-
-    font-size:22px;
-
+    font-size:21px;
     font-weight:800;
 
     margin-bottom:8px;
 }
 
-.empty-sub{
-
-    color:#888;
+.empty-text{
+    color:#777;
 
     font-size:14px;
-
     line-height:1.5;
 
-    max-width:320px;
+    max-width:300px;
 }
 
-.empty-button{
+/* =====================================================
+   TOAST
+===================================================== */
 
-    margin-top:20px;
+.toast{
+    position:fixed;
 
-    border:0;
+    left:50%;
+    bottom:85px;
 
-    background:#ff1744;
+    transform:
+        translate(-50%,20px);
 
+    background:#222;
     color:white;
 
-    border-radius:13px;
+    padding:11px 17px;
 
-    padding:13px 22px;
+    border-radius:10px;
 
-    font-size:14px;
+    font-size:13px;
 
-    font-weight:700;
+    opacity:0;
+    pointer-events:none;
 
-    cursor:pointer;
+    transition:.25s;
 
-    transition:
-        transform .15s ease,
-        background .15s ease;
+    z-index:300;
+
+    white-space:nowrap;
 }
 
-.empty-button:active{
+.toast.show{
+    opacity:1;
 
-    transform:scale(.94);
-
-    background:#dc123b;
+    transform:
+        translate(-50%,0);
 }
-
 
 /* =====================================================
    MENU INFERIOR
 ===================================================== */
 
 .bottom-menu{
-
     position:fixed;
 
     left:0;
@@ -856,24 +507,19 @@ body{
 
     height:68px;
 
-    background:
-        rgba(16,16,16,.97);
+    background:#101010;
 
-    border-top:1px solid #242424;
+    border-top:1px solid #222;
 
     display:flex;
 
     align-items:center;
-
     justify-content:space-around;
 
     z-index:100;
-
-    backdrop-filter:blur(12px);
 }
 
 .menu-item{
-
     flex:1;
 
     height:100%;
@@ -883,7 +529,6 @@ body{
     flex-direction:column;
 
     align-items:center;
-
     justify-content:center;
 
     gap:4px;
@@ -891,41 +536,28 @@ body{
     color:#666;
 
     cursor:pointer;
-
-    transition:.2s;
 }
 
 .menu-item svg{
-
-    width:22px;
-    height:22px;
+    width:21px;
+    height:21px;
 
     stroke:currentColor;
-
     fill:none;
 
     stroke-width:2;
 
     stroke-linecap:round;
-
     stroke-linejoin:round;
 }
 
 .menu-item span{
-
     font-size:11px;
 }
 
 .menu-item.active{
-
     color:white;
 }
-
-.menu-item.active svg{
-
-    stroke:#ff1744;
-}
-
 
 /* =====================================================
    RESPONSIVO
@@ -933,95 +565,48 @@ body{
 
 @media(max-width:600px){
 
-    .header{
-        height:65px;
-        padding:0 14px;
-    }
-
-    .logo{
-        width:40px;
-        height:40px;
-    }
-
-    .profile-button{
-        width:40px;
-        height:40px;
-    }
-
-    .header-button{
-        width:40px;
-        height:40px;
-    }
-
-    .main{
-        padding-left:14px;
-        padding-right:14px;
-    }
-
-    .page-title{
-        font-size:29px;
-    }
-
     .favorites-grid{
         grid-template-columns:
             repeat(3,1fr);
 
-        gap:11px;
+        gap:12px;
+
+        padding:0 14px;
     }
 
-    .favorite-title{
-        font-size:12px;
+    .page-title{
+        font-size:25px;
+        padding-left:14px;
     }
 
-    .favorite-info{
-        font-size:10px;
+    .filters{
+        padding-left:14px;
     }
 
-    .remove-favorite{
-        width:29px;
-        height:29px;
+    .favorite-count{
+        padding-left:14px;
     }
-
 }
 
 @media(max-width:380px){
 
     .favorites-grid{
+        grid-template-columns:
+            repeat(3,1fr);
+
         gap:9px;
+
+        padding:0 12px;
     }
 
-    .page-title{
-        font-size:27px;
+    .favorite-name{
+        font-size:11px;
     }
 
-    .empty{
-        min-height:430px;
-    }
-
-    .empty-visual{
-        transform:scale(.9);
-    }
-
-}
-
-
-/* =====================================================
-   ANIMAÇÃO DE REMOÇÃO
-===================================================== */
-
-.favorite-card.removing{
-
-    animation:
-        removeCard .28s ease forwards;
-}
-
-@keyframes removeCard{
-
-    to{
-        opacity:0;
-        transform:
-            scale(.75)
-            rotate(4deg);
+    .profile-button,
+    .header-button{
+        width:38px;
+        height:38px;
     }
 }
 
@@ -1029,18 +614,9 @@ body{
 
 </head>
 
-
 <body>
 
-
-<!-- =====================================================
-     CABEÇALHO
-===================================================== -->
-
 <header class="header">
-
-
-    <!-- LOGO -->
 
     <div class="logo">
 
@@ -1050,11 +626,7 @@ body{
 
     </div>
 
-
     <div class="header-icons">
-
-
-        <!-- PESQUISA -->
 
         <div
             class="header-button"
@@ -1076,12 +648,8 @@ body{
 
         </div>
 
-
-        <!-- PERFIL -->
-
         <div
             class="profile-button"
-            id="profileButton"
             onclick="abrirPerfil()">
 
             <img
@@ -1110,74 +678,88 @@ body{
 
 </header>
 
+<h1 class="page-title">
+    Favoritos
+</h1>
 
-<!-- =====================================================
-     CONTEÚDO
-===================================================== -->
+<div class="filters">
 
-<main class="main">
+    <button
+        class="filter-button active"
+        data-filter="all">
 
+        Tudo
 
-    <h1 class="page-title">
+    </button>
 
-        Meus
-        <span class="red">
-            Favoritos
-        </span>
+    <button
+        class="filter-button"
+        data-filter="anime">
 
-    </h1>
+        Animes
 
+    </button>
 
-    <!-- FILTROS -->
+    <button
+        class="filter-button"
+        data-filter="manga">
 
-    <div class="filters">
+        Mangás
 
-        <button
-            class="filter active"
-            data-filter="all">
+    </button>
 
-            Tudo
+</div>
 
-        </button>
+<div
+    id="favoriteCount"
+    class="favorite-count">
 
-        <button
-            class="filter"
-            data-filter="anime">
+    0 favoritos
 
-            Animes
+</div>
 
-        </button>
+<div
+    id="favoritesGrid"
+    class="favorites-grid">
+</div>
 
-        <button
-            class="filter"
-            data-filter="manga">
+<div
+    id="emptyState"
+    class="empty-state">
 
-            Mangás
+    <div class="empty-animation">
 
-        </button>
+        <div class="empty-card left">
+            ?
+        </div>
+
+        <div class="empty-card center">
+            ?
+        </div>
+
+        <div class="empty-card right">
+            ?
+        </div>
 
     </div>
 
-
-    <!-- FAVORITOS -->
-
-    <div
-        id="favoritesContainer"
-        class="favorites-grid">
-
+    <div class="empty-title">
+        Ainda não há favoritos
     </div>
 
-</main>
+    <div class="empty-text">
+        Adicione os animes e mangás que você
+        mais gosta aos seus favoritos.
+    </div>
 
+</div>
 
-<!-- =====================================================
-     MENU INFERIOR
-===================================================== -->
+<div
+    id="toast"
+    class="toast">
+</div>
 
-<nav class="bottom-menu">
-
-
-    <!-- INÍCIO -->
+<div class="bottom-menu">
 
     <div
         class="menu-item"
@@ -1186,19 +768,13 @@ body{
         <svg viewBox="0 0 24 24">
 
             <path d="M3 11l9-8 9 8"></path>
-
             <path d="M5 10v10h14V10"></path>
 
         </svg>
 
-        <span>
-            Início
-        </span>
+        <span>Início</span>
 
     </div>
-
-
-    <!-- MANGÁS -->
 
     <div
         class="menu-item"
@@ -1207,27 +783,16 @@ body{
         <svg viewBox="0 0 24 24">
 
             <path d="M4 4h7v16H4z"></path>
-
             <path d="M13 4h7v16h-7z"></path>
-
-            <path d="M6 7h3M6 10h3"></path>
-
-            <path d="M15 7h3M15 10h3"></path>
 
         </svg>
 
-        <span>
-            Mangás
-        </span>
+        <span>Mangás</span>
 
     </div>
 
-
-    <!-- FAVORITOS -->
-
     <div
-        class="menu-item active"
-        onclick="window.location.href='favoritos.html'">
+        class="menu-item active">
 
         <svg viewBox="0 0 24 24">
 
@@ -1237,14 +802,9 @@ body{
 
         </svg>
 
-        <span>
-            Favoritos
-        </span>
+        <span>Favoritos</span>
 
     </div>
-
-
-    <!-- MAIS -->
 
     <div
         class="menu-item"
@@ -1258,146 +818,55 @@ body{
 
         </svg>
 
-        <span>
-            Mais
-        </span>
+        <span>Mais</span>
 
     </div>
 
-</nav>
+</div>
 
+<!-- JAVASCRIPT -->
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
-<script>
-
-
-/* =====================================================
-   AVATAR DO PERFIL
-===================================================== */
-
-function carregarPerfil(){
-
-    const imagem =
-        localStorage.getItem(
-            "berryanime_profile_avatar"
-        ) ||
-        localStorage.getItem(
-            "berryanime_profile_image"
-        );
-
-
-    const img =
-        document.getElementById(
-            "profileImage"
-        );
-
-    const icon =
-        document.getElementById(
-            "profileIcon"
-        );
-
-
-    if(
-        imagem &&
-        imagem.trim() !== ""
-    ){
-
-        img.src =
-            imagem;
-
-        img.style.display =
-            "block";
-
-        icon.style.display =
-            "none";
-
-    }
-
-}
-
-
-function abrirPerfil(){
-
-    const botao =
-        document.getElementById(
-            "profileButton"
-        );
-
-
-    botao.classList.add(
-        "animar"
-    );
-
-
-    setTimeout(
-        function(){
-
-            window.location.href =
-                "perfil.html";
-
-        },
-        180
-    );
-
-}
-
-
-function abrirPesquisa(){
-
-    window.location.href =
-        "pesquisa.html";
-
-}
-
-
-/* =====================================================
-   FAVORITOS
-===================================================== */
-
-/*
-   O BerryAnime procura os favoritos
-   nesta chave:
-
-   berryanime_favorites
-
-   Formato esperado:
-
-   [
-       {
-           id: 1,
-           title: "Nome do anime",
-           image: "imagem.jpg",
-           type: "anime"
-       }
-   ]
-
-*/
-
+  <script>
 
 const FAVORITES_KEY =
     "berryanime_favorites";
 
+const PROFILE_KEY =
+    "berryanime_profile_avatar";
 
-let favoritos = [];
-
-let filtroAtual =
-    "all";
+let filtroAtual = "all";
 
 
-const container =
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const favoritesGrid =
     document.getElementById(
-        "favoritesContainer"
+        "favoritesGrid"
+    );
+
+const emptyState =
+    document.getElementById(
+        "emptyState"
+    );
+
+const favoriteCount =
+    document.getElementById(
+        "favoriteCount"
+    );
+
+const toast =
+    document.getElementById(
+        "toast"
     );
 
 
 /* =====================================================
-   CARREGAR FAVORITOS
+   LER FAVORITOS
 ===================================================== */
 
-function carregarFavoritos(){
+function obterFavoritos(){
 
     try{
 
@@ -1406,114 +875,25 @@ function carregarFavoritos(){
                 FAVORITES_KEY
             );
 
-
         if(!salvo){
 
-            favoritos = [];
-
-            return;
-
-        }
-
-
-        const dados =
-            JSON.parse(
-                salvo
-            );
-
-
-        if(Array.isArray(dados)){
-
-            favoritos =
-                dados;
-
-        }
-
-        else{
-
-            favoritos = [];
-
-        }
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Erro ao carregar favoritos:",
-            error
-        );
-
-        favoritos = [];
-
-    }
-
-}
-
-
-/* =====================================================
-   SALVAR FAVORITOS
-===================================================== */
-
-function salvarFavoritos(favoritos){
-
-    try{
-
-        localStorage.setItem(
-            "berryanime_favoritos",
-            JSON.stringify(favoritos)
-        );
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Erro ao salvar favoritos:",
-            error
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   CARREGAR FAVORITOS
-===================================================== */
-
-function carregarFavoritos(){
-
-    try{
-
-        const dados =
-            localStorage.getItem(
-                "berryanime_favoritos"
-            );
-
-        if(!dados){
-
             return [];
 
         }
 
-        const favoritos =
-            JSON.parse(dados);
+        const dados =
+            JSON.parse(salvo);
 
-        if(!Array.isArray(favoritos)){
-
-            return [];
-
-        }
-
-        return favoritos;
+        return Array.isArray(dados)
+            ? dados
+            : [];
 
     }
 
     catch(error){
 
         console.error(
-            "Erro ao carregar favoritos:",
+            "Erro ao ler favoritos:",
             error
         );
 
@@ -1525,97 +905,354 @@ function carregarFavoritos(){
 
 
 /* =====================================================
-   VERIFICAR SE É FAVORITO
+   SALVAR FAVORITOS
 ===================================================== */
 
-function ehFavorito(animeId){
+function salvarFavoritos(
+    favoritos
+){
 
-    const favoritos =
-        carregarFavoritos();
+    try{
 
-    return favoritos.some(
-        function(anime){
+        localStorage.setItem(
+            FAVORITES_KEY,
+            JSON.stringify(
+                favoritos
+            )
+        );
 
-            return String(anime.id) ===
-                   String(animeId);
+        return true;
 
-        }
-    );
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        mostrarToast(
+            "Não foi possível salvar"
+        );
+
+        return false;
+
+    }
 
 }
 
 
 /* =====================================================
-   ADICIONAR FAVORITO
+   NORMALIZAR FAVORITO
 ===================================================== */
 
-function adicionarFavorito(anime){
+function normalizarFavorito(
+    item
+){
 
-    if(!anime || !anime.mal_id){
+    if(!item){
 
-        return false;
-
-    }
-
-    let favoritos =
-        carregarFavoritos();
-
-
-    const jaExiste =
-        favoritos.some(
-            function(item){
-
-                return String(item.id) ===
-                       String(anime.mal_id);
-
-            }
-        );
-
-
-    if(jaExiste){
-
-        return false;
+        return null;
 
     }
 
-
-    const imagem =
-        anime.images?.jpg?.large_image_url ||
-        anime.images?.jpg?.image_url ||
+    const id =
+        item.id ??
+        item.mal_id ??
+        item.animeId ??
+        item.mangaId ??
         "";
 
+    const titulo =
+        item.title ??
+        item.name ??
+        item.titulo ??
+        "Sem título";
 
-    const favorito = {
+    const imagem =
+        item.image ??
+        item.image_url ??
+        item.poster ??
+        item.poster_url ??
+        item.images?.jpg?.large_image_url ??
+        item.images?.jpg?.image_url ??
+        item.images?.webp?.large_image_url ??
+        item.images?.webp?.image_url ??
+        "BerryAnime_logo_leve.jpg";
 
-        id: anime.mal_id,
+    let tipo =
+        item.type ??
+        item.mediaType ??
+        item.media_type ??
+        "anime";
 
-        title:
-            anime.title ||
-            "Anime",
+    tipo =
+        String(tipo)
+        .toLowerCase();
 
-        image:
-            imagem,
+    if(
+        tipo.includes("manga") ||
+        tipo.includes("manhwa") ||
+        tipo.includes("manhua")
+    ){
 
-        type:
-            "anime",
+        tipo = "manga";
 
-        addedAt:
-            Date.now()
+    }
+
+    else{
+
+        tipo = "anime";
+
+    }
+
+    return {
+
+        id:String(id),
+
+        title:String(titulo),
+
+        image:String(imagem),
+
+        type:tipo
 
     };
 
+}
 
-    favoritos.push(
-        favorito
+
+/* =====================================================
+   PREPARAR FAVORITOS
+===================================================== */
+
+function prepararFavoritos(){
+
+    const favoritos =
+        obterFavoritos();
+
+    const resultado = [];
+
+    favoritos.forEach(
+        function(item){
+
+            const favorito =
+                normalizarFavorito(
+                    item
+                );
+
+            if(
+                favorito &&
+                favorito.id
+            ){
+
+                resultado.push(
+                    favorito
+                );
+
+            }
+
+        }
     );
 
+    return resultado;
 
-    salvarFavoritos(
-        favoritos
-    );
+}
 
 
-    return true;
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escaparHTML(
+    texto
+){
+
+    return String(texto)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   CRIAR CARD
+===================================================== */
+
+function criarCard(
+    favorito,
+    index
+){
+
+    const titulo =
+        escaparHTML(
+            favorito.title
+        );
+
+    const imagem =
+        escaparHTML(
+            favorito.image
+        );
+
+    const tipo =
+        favorito.type === "manga"
+            ? "MANGÁ"
+            : "ANIME";
+
+    return `
+
+        <article
+            class="favorite-card"
+            style="
+                animation-delay:
+                ${index * 0.04}s
+            "
+            onclick="
+                abrirFavorito(
+                    '${encodeURIComponent(favorito.id)}',
+                    '${favorito.type}'
+                )
+            ">
+
+            <div class="favorite-poster">
+
+                <img
+                    src="${imagem}"
+                    alt="${titulo}"
+                    loading="lazy"
+                    onerror="
+                        this.src=
+                        'BerryAnime_logo_leve.jpg'
+                    ">
+
+                <div class="poster-gradient">
+                </div>
+
+                <div class="favorite-type">
+                    ${tipo}
+                </div>
+
+                <button
+                    class="remove-favorite"
+                    onclick="
+                        event.stopPropagation();
+                        removerFavorito(
+                            '${favorito.id}',
+                            '${favorito.type}'
+                        )
+                    ">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M6 6l12 12">
+                        </path>
+
+                        <path
+                            d="M18 6L6 18">
+                        </path>
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+            <div class="favorite-name">
+                ${titulo}
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* =====================================================
+   RENDERIZAR
+===================================================== */
+
+function renderizarFavoritos(){
+
+    const favoritos =
+        prepararFavoritos();
+
+    let lista =
+        favoritos;
+
+
+    if(
+        filtroAtual !== "all"
+    ){
+
+        lista =
+            favoritos.filter(
+                function(item){
+
+                    return (
+                        item.type ===
+                        filtroAtual
+                    );
+
+                }
+            );
+
+    }
+
+
+    const total =
+        favoritos.length;
+
+
+    favoriteCount.textContent =
+        total === 1
+            ? "1 favorito"
+            : total + " favoritos";
+
+
+    if(
+        lista.length === 0
+    ){
+
+        favoritesGrid.innerHTML =
+            "";
+
+        emptyState.style.display =
+            "flex";
+
+        return;
+
+    }
+
+
+    emptyState.style.display =
+        "none";
+
+
+    favoritesGrid.innerHTML =
+        lista
+            .map(
+                criarCard
+            )
+            .join("");
 
 }
 
@@ -1624,323 +1261,142 @@ function adicionarFavorito(anime){
    REMOVER FAVORITO
 ===================================================== */
 
-function removerFavorito(animeId){
-
-    let favoritos =
-        carregarFavoritos();
-
-
-    favoritos =
-        favoritos.filter(
-            function(anime){
-
-                return String(anime.id) !==
-                       String(animeId);
-
-            }
-        );
-
-
-    salvarFavoritos(
-        favoritos
-    );
-
-
-    return true;
-
-}
-
-
-/* =====================================================
-   ALTERNAR FAVORITO
-===================================================== */
-
-function alternarFavorito(anime){
-
-    if(!anime || !anime.mal_id){
-
-        return false;
-
-    }
-
-
-    if(
-        ehFavorito(
-            anime.mal_id
-        )
-    ){
-
-        removerFavorito(
-            anime.mal_id
-        );
-
-        return false;
-
-    }
-
-
-    adicionarFavorito(
-        anime
-    );
-
-    return true;
-
-}
-
-
-/* =====================================================
-   ATUALIZAR ÍCONE DE FAVORITO
-===================================================== */
-
-function atualizarBotaoFavorito(
-    botao,
-    animeId
+function removerFavorito(
+    id,
+    tipo
 ){
 
-    if(!botao){
+    const favoritos =
+        obterFavoritos();
 
-        return;
+    const novaLista =
+        favoritos.filter(
+            function(item){
 
-    }
+                const favorito =
+                    normalizarFavorito(
+                        item
+                    );
 
+                if(!favorito){
 
-    if(
-        ehFavorito(
-            animeId
-        )
-    ){
-
-        botao.classList.add(
-            "favorito-ativo"
-        );
-
-        botao.setAttribute(
-            "aria-label",
-            "Remover dos favoritos"
-        );
-
-    }
-
-    else{
-
-        botao.classList.remove(
-            "favorito-ativo"
-        );
-
-        botao.setAttribute(
-            "aria-label",
-            "Adicionar aos favoritos"
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   CRIAR BOTÃO FAVORITO
-===================================================== */
-
-function criarBotaoFavorito(anime){
-
-    const ativo =
-        ehFavorito(
-            anime.mal_id
-        );
-
-
-    return `
-
-        <button
-            class="favorite-button
-            ${ativo ? "favorito-ativo" : ""}"
-            onclick="clicarFavorito(event, ${anime.mal_id})"
-            aria-label="${
-                ativo
-                ? "Remover dos favoritos"
-                : "Adicionar aos favoritos"
-            }">
-
-            <svg
-                viewBox="0 0 24 24">
-
-                <path
-                    d="
-                    M20.8 8.6
-                    c0 5.5-8.8 11-8.8 11
-                    S3.2 14.1 3.2 8.6
-                    A4.6 4.6 0 0 1 12 6.4
-                    a4.6 4.6 0 0 1 8.8 2.2z">
-                </path>
-
-            </svg>
-
-        </button>
-
-    `;
-
-}
-
-
-/* =====================================================
-   CLICAR NO BOTÃO DE FAVORITO
-===================================================== */
-
-window.clicarFavorito =
-function(event, animeId){
-
-    if(event){
-
-        event.stopPropagation();
-
-    }
-
-
-    let favoritos =
-        carregarFavoritos();
-
-
-    const indice =
-        favoritos.findIndex(
-            function(anime){
-
-                return String(anime.id) ===
-                       String(animeId);
-
-            }
-        );
-
-
-    const botao =
-        event
-        ? event.currentTarget
-        : null;
-
-
-    if(indice !== -1){
-
-        favoritos.splice(
-            indice,
-            1
-        );
-
-
-        salvarFavoritos(
-            favoritos
-        );
-
-
-        if(botao){
-
-            botao.classList.remove(
-                "favorito-ativo"
-            );
-
-        }
-
-        return;
-
-    }
-
-
-    /*
-       Se o anime estiver disponível
-       numa variável global, salvamos.
-    */
-
-    if(
-        typeof window.animesDisponiveis !==
-        "undefined"
-    ){
-
-        const anime =
-            window.animesDisponiveis.find(
-                function(item){
-
-                    return String(item.mal_id) ===
-                           String(animeId);
+                    return false;
 
                 }
-            );
 
-
-        if(anime){
-
-            adicionarFavorito(
-                anime
-            );
-
-
-            if(botao){
-
-                botao.classList.add(
-                    "favorito-ativo"
+                return !(
+                    String(
+                        favorito.id
+                    ) === String(id)
+                    &&
+                    favorito.type === tipo
                 );
 
             }
+        );
 
-        }
+
+    if(
+        salvarFavoritos(
+            novaLista
+        )
+    ){
+
+        mostrarToast(
+            "Removido dos favoritos"
+        );
+
+        setTimeout(
+            function(){
+
+                renderizarFavoritos();
+
+            },
+            180
+        );
 
     }
 
-};
+}
 
 
 /* =====================================================
-   ANIMAR BOTÃO
+   ABRIR FAVORITO
 ===================================================== */
 
-function animarFavorito(botao){
+function abrirFavorito(
+    id,
+    tipo
+){
 
-    if(!botao){
+    const valor =
+        decodeURIComponent(
+            id
+        );
+
+
+    if(
+        tipo === "manga"
+    ){
+
+        window.location.href =
+            "manga.html?id=" +
+            encodeURIComponent(
+                valor
+            );
 
         return;
 
     }
 
 
-    botao.classList.remove(
-        "favorite-pop"
-    );
-
-
-    void botao.offsetWidth;
-
-
-    botao.classList.add(
-        "favorite-pop"
-    );
+    window.location.href =
+        "detalhes.html?id=" +
+        encodeURIComponent(
+            valor
+        );
 
 }
 
 
 /* =====================================================
-   ATUALIZAR FAVORITOS QUANDO A PÁGINA
-   VOLTAR PARA O PRIMEIRO PLANO
+   FILTROS
 ===================================================== */
 
-window.addEventListener(
-    "pageshow",
-    function(){
+const filterButtons =
+    document.querySelectorAll(
+        ".filter-button"
+    );
 
-        document
-        .querySelectorAll(
-            ".favorite-button"
-        )
-        .forEach(
-            function(botao){
 
-                const id =
-                    botao.dataset.animeId;
+filterButtons.forEach(
+    function(button){
 
-                if(id){
+        button.addEventListener(
+            "click",
+            function(){
 
-                    atualizarBotaoFavorito(
-                        botao,
-                        id
-                    );
+                filterButtons.forEach(
+                    function(item){
 
-                }
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                filtroAtual =
+                    button.dataset.filter;
+
+
+                renderizarFavoritos();
 
             }
         );
@@ -1950,7 +1406,116 @@ window.addEventListener(
 
 
 /* =====================================================
-   ATUALIZAR QUANDO O LOCALSTORAGE MUDAR
+   TOAST
+===================================================== */
+
+let toastTimer = null;
+
+
+function mostrarToast(
+    mensagem
+){
+
+    toast.textContent =
+        mensagem;
+
+    toast.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        toastTimer
+    );
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            1800
+        );
+
+}
+
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+function carregarPerfil(){
+
+    const imagem =
+        localStorage.getItem(
+            PROFILE_KEY
+        );
+
+    const profileImage =
+        document.getElementById(
+            "profileImage"
+        );
+
+    const profileIcon =
+        document.getElementById(
+            "profileIcon"
+        );
+
+
+    if(
+        imagem &&
+        imagem.trim() !== ""
+    ){
+
+        profileImage.src =
+            imagem;
+
+        profileImage.style.display =
+            "block";
+
+        profileIcon.style.display =
+            "none";
+
+    }
+
+    else{
+
+        profileImage.style.display =
+            "none";
+
+        profileIcon.style.display =
+            "block";
+
+    }
+
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO
+===================================================== */
+
+function abrirPerfil(){
+
+    window.location.href =
+        "perfil.html";
+
+}
+
+
+function abrirPesquisa(){
+
+    mostrarToast(
+        "Pesquisa em breve"
+    );
+
+}
+
+
+/* =====================================================
+   ATUALIZAÇÕES
 ===================================================== */
 
 window.addEventListener(
@@ -1959,32 +1524,54 @@ window.addEventListener(
 
         if(
             event.key ===
-            "berryanime_favoritos"
+            PROFILE_KEY
         ){
 
-            document
-            .querySelectorAll(
-                ".favorite-button"
-            )
-            .forEach(
-                function(botao){
+            carregarPerfil();
 
-                    const id =
-                        botao.dataset.animeId;
+        }
 
-                    if(id){
+        if(
+            event.key ===
+            FAVORITES_KEY
+        ){
 
-                        atualizarBotaoFavorito(
-                            botao,
-                            id
-                        );
-
-                    }
-
-                }
-            );
+            renderizarFavoritos();
 
         }
 
     }
 );
+
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            !document.hidden
+        ){
+
+            carregarPerfil();
+
+            renderizarFavoritos();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+carregarPerfil();
+
+renderizarFavoritos();
+
+</script>
+
+</body>
+
+ </html>    
