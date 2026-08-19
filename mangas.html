@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>BerryAnime - Mangás</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#090909;
+    color:white;
+    padding-bottom:80px;
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.header{
+
+    height:68px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 16px;
+}
+
+.logo{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+    0 3px 12px rgba(255,64,84,.25);
+}
+
+.logo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+.header-icons{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+.header-button{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    border-radius:50%;
+
+    overflow:hidden;
+}
+
+.header-button:active{
+
+    background:#222;
+
+    transform:scale(.94);
+}
+
+.header-button svg{
+
+    width:25px;
+    height:25px;
+
+    stroke:white;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+.profile-button{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:#181818;
+
+    border:1px solid #333;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+}
+
+.profile-button img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:none;
+}
+
+.profile-button svg{
+
+    width:25px;
+    height:25px;
+
+    stroke:white;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.page-title{
+
+    font-size:25px;
+
+    font-weight:800;
+
+    margin:18px 15px 15px;
+}
+
+
+/* =====================================================
+   SECÇÕES DE MANGÁS
+===================================================== */
+
+.manga-section{
+
+    margin-bottom:24px;
+}
+
+.section-title{
+
+    font-size:21px;
+
+    font-weight:800;
+
+    margin:0 15px 12px;
+}
+
+
+/* =====================================================
+   LISTA HORIZONTAL
+===================================================== */
+
+.manga-container{
+
+    display:flex;
+
+    gap:10px;
+
+    overflow-x:auto;
+
+    padding:0 15px;
+
+    scrollbar-width:none;
+
+    scroll-behavior:smooth;
+}
+
+.manga-container::-webkit-scrollbar{
+
+    display:none;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.manga-card{
+
+    min-width:112px;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+    position:relative;
+}
+
+.manga-card:active{
+
+    transform:scale(.96);
+}
+
+.manga-cover{
+
+    width:112px;
+    height:165px;
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+    background:#171717;
+
+    box-shadow:
+    0 4px 14px rgba(0,0,0,.45);
+}
+
+.manga-cover img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+
+/* =====================================================
+   NOME DO MANGÁ SOBRE O CARTAZ
+===================================================== */
+
+.manga-title{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    z-index:2;
+
+    padding:7px 6px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    color:white;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.78),
+            rgba(0,0,0,.15),
+            transparent
+        );
+
+    border-radius:8px 8px 0 0;
+}
+
+
+/* =====================================================
+   CARREGAMENTO
+===================================================== */
+
+.manga-loading{
+
+    min-height:
+        calc(100vh - 150px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+}
+
+.loading-circle{
+
+    width:76px;
+    height:76px;
+
+    border-radius:50%;
+
+    background:#f5f5f5;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 5px 25px rgba(255,255,255,.12);
+}
+
+.loading-spinner{
+
+    width:29px;
+    height:29px;
+
+    border:4px solid #222;
+
+    border-top-color:#ff1744;
+
+    border-radius:50%;
+
+    animation:
+        girar .8s linear infinite;
+}
+
+.loading-book{
+
+    margin-top:45px;
+
+    font-size:70px;
+
+    animation:
+        livroPulse 1s ease-in-out infinite;
+}
+
+@keyframes girar{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+@keyframes livroPulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+}
+
+
+/* =====================================================
+   MENSAGEM VAZIA
+===================================================== */
+
+.empty-manga{
+
+    min-height:60vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:30px;
+}
+
+.empty-manga div{
+
+    font-size:65px;
+
+    margin-bottom:15px;
+}
+
+.empty-manga h2{
+
+    font-size:20px;
+
+    margin-bottom:8px;
+}
+
+.empty-manga p{
+
+    color:#888;
+
+    font-size:14px;
+}
+
+
+/* =====================================================
+   MENU INFERIOR
+===================================================== */
+
+.bottom-menu{
+
+    position:fixed;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:68px;
+
+    background:#101010;
+
+    border-top:1px solid #222;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    z-index:100;
+}
+
+.menu-item{
+
+    flex:1;
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:4px;
+
+    color:#777;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.menu-item svg{
+
+    width:21px;
+    height:21px;
+
+    stroke:currentColor;
+
+    fill:none;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.menu-item span{
+
+    font-size:12px;
+}
+
+.menu-active{
+
+    color:white;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .header{
+
+        height:65px;
+
+        padding:0 14px;
+    }
+
+    .logo{
+
+        width:40px;
+        height:40px;
+    }
+
+    .header-icons{
+
+        gap:10px;
+    }
+
+    .header-button{
+
+        width:40px;
+        height:40px;
+    }
+
+    .profile-button{
+
+        width:40px;
+        height:40px;
+    }
+
+    .page-title{
+
+        font-size:23px;
+
+        margin-left:14px;
+    }
+
+    .section-title{
+
+        font-size:20px;
+
+        margin-left:14px;
+    }
+
+    .manga-container{
+
+        padding-left:14px;
+
+        gap:10px;
+    }
+
+    .manga-card{
+
+        min-width:100px;
+    }
+
+    .manga-cover{
+
+        width:100px;
+        height:150px;
+    }
+
+    .manga-title{
+
+        font-size:11px;
+
+        padding:6px 5px;
+    }
+
+    .bottom-menu{
+
+        height:66px;
+    }
+
+}
+
+@media(max-width:380px){
+
+    .manga-card{
+
+        min-width:92px;
+    }
+
+    .manga-cover{
+
+        width:92px;
+        height:138px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">
+
+        <img
+            src="BerryAnime_logo_leve.jpg"
+            alt="BerryAnime">
+
+    </div>
+
+
+    <div class="header-icons">
+
+        <div
+            class="header-button"
+            onclick="abrirPesquisa()">
+
+            <svg viewBox="0 0 24 24">
+
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="6">
+                </circle>
+
+                <path
+                    d="M16 16l5 5">
+                </path>
+
+            </svg>
+
+        </div>
+
+
+        <div
+            class="profile-button"
+            onclick="abrirPerfil()">
+
+            <img
+                id="profileImage"
+                alt="Perfil">
+
+            <svg
+                id="profileIcon"
+                viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="4">
+                </circle>
+
+                <path
+                    d="M4 21c0-4 3.5-7 8-7s8 3 8 7">
+                </path>
+
+            </svg>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<h1 class="page-title">
+    Mangás
+</h1>
+
+
+<main id="app">
+
+    <!-- O conteúdo será carregado pelo JavaScript -->
+
+</main>
+
+
+<nav class="bottom-menu">
+
+    <div
+        class="menu-item"
+        onclick="window.location.href='home.html'">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M3 11l9-8 9 8"></path>
+
+            <path d="M5 10v10h14V10"></path>
+
+        </svg>
+
+        <span>Início</span>
+
+    </div>
+
+
+    <div
+        class="menu-item menu-active">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 4h7v16H4z"></path>
+
+            <path d="M13 4h7v16h-7z"></path>
+
+            <path
+                d="M6 7h3M6 10h3M15 7h3M15 10h3">
+            </path>
+
+        </svg>
+
+        <span>Mangás</span>
+
+    </div>
+
+
+    <div
+        class="menu-item"
+        onclick="window.location.href='favoritos.html'">
+
+        <svg viewBox="0 0 24 24">
+
+            <path
+                d="M20.8 8.6c0 5.5-8.8 11-8.8 11S3.2 14.1 3.2 8.6A4.6 4.6 0 0 1 12 6.4a4.6 4.6 0 0 1 8.8 2.2z">
+            </path>
+
+        </svg>
+
+        <span>Favoritos</span>
+
+    </div>
+
+
+    <div
+        class="menu-item"
+        onclick="window.location.href='mais.html'">
+
+        <svg viewBox="0 0 24 24">
+
+            <path d="M4 6h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 18h16"></path>
+
+        </svg>
+
+        <span>Mais</span>
+
+    </div>
+
+</nav>
+
+
+<!-- A PARTE 1 TERMINA AQUI. -->
+
+<!-- A PARTE 2 COMEÇA NO <script> -->
+
+  <script>
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+function abrirPerfil(){
+
+    window.location.href =
+        "perfil.html";
+
+}
+
+
+/* =====================================================
+   PESQUISA
+===================================================== */
+
+function abrirPesquisa(){
+
+    alert(
+        "A pesquisa do BerryAnime está sendo preparada."
+    );
+
+}
+
+
+/* =====================================================
+   CARREGAR FOTO DO PERFIL
+===================================================== */
+
+function carregarFotoPerfil(){
+
+    const imagem =
+        localStorage.getItem(
+            "berryanime_profile_avatar"
+        );
+
+
+    const profileImage =
+        document.getElementById(
+            "profileImage"
+        );
+
+
+    const profileIcon =
+        document.getElementById(
+            "profileIcon"
+        );
+
+
+    if(
+        imagem &&
+        imagem.trim() !== ""
+    ){
+
+        profileImage.src =
+            imagem;
+
+        profileImage.style.display =
+            "block";
+
+        profileIcon.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   API JIKAN
+===================================================== */
+
+const API =
+    "https://api.jikan.moe/v4";
+
+const app =
+    document.getElementById("app");
+
+
+async function api(url){
+
+    try{
+
+        const resposta =
+            await fetch(
+                API + url
+            );
+
+
+        if(!resposta.ok){
+
+            throw new Error(
+                "Erro na API"
+            );
+
+        }
+
+
+        const dados =
+            await resposta.json();
+
+
+        return dados.data || [];
+
+    }
+
+    catch(erro){
+
+        console.log(
+            "Erro Jikan:",
+            erro
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escaparHTML(texto){
+
+    if(!texto){
+
+        return "";
+
+    }
+
+
+    return String(texto)
+
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   CARD DE MANGÁ
+===================================================== */
+
+function criarCard(manga){
+
+    const imagem =
+        manga.images?.jpg?.large_image_url ||
+        manga.images?.jpg?.image_url ||
+        "";
+
+
+    const titulo =
+        escaparHTML(
+            manga.title ||
+            "Mangá"
+        );
+
+
+    const id =
+        manga.mal_id;
+
+
+    return `
+
+        <article
+            class="manga-card"
+            onclick="abrirManga(${id})">
+
+            <div class="manga-title">
+
+                ${titulo}
+
+            </div>
+
+
+            <div class="manga-cover">
+
+                <img
+                    src="${imagem}"
+                    alt="${titulo}"
+                    loading="lazy">
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* =====================================================
+   SECÇÃO
+===================================================== */
+
+function criarSecao(
+    titulo,
+    mangas
+){
+
+    if(
+        !mangas ||
+        mangas.length === 0
+    ){
+
+        return "";
+
+    }
+
+
+    return `
+
+        <section class="manga-section">
+
+            <h2 class="section-title">
+
+                ${titulo}
+
+            </h2>
+
+
+            <div class="manga-container">
+
+                ${mangas
+                    .slice(0,12)
+                    .map(criarCard)
+                    .join("")
+                }
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ABRIR MANGÁ
+===================================================== */
+
+function abrirManga(id){
+
+    if(!id){
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "manga-detalhes.html?id=" + id;
+
+}
+
+
+/* =====================================================
+   ANIMAÇÃO
+===================================================== */
+
+function mostrarCarregamento(){
+
+    app.innerHTML = `
+
+        <div class="manga-loading">
+
+            <div class="loading-circle">
+
+                <div class="loading-spinner"></div>
+
+            </div>
+
+
+            <div class="loading-book">
+
+                📖
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   CARREGAR MANGÁS
+===================================================== */
+
+async function carregarMangas(){
+
+    mostrarCarregamento();
+
+
+    /*
+       Animação do BerryAnime.
+       Duração: aproximadamente 2,3 segundos.
+    */
+
+    await new Promise(
+        resolver =>
+            setTimeout(
+                resolver,
+                2300
+            )
+    );
+
+
+    app.innerHTML = "";
+
+
+    /* =================================================
+       DESTAQUES
+    ================================================= */
+
+    const destaques =
+        await api(
+            "/manga?order_by=score&sort=desc"
+        );
+
+
+    app.innerHTML +=
+        criarSecao(
+            "🔥 Mangás em destaque",
+            destaques
+        );
+
+
+    /* =================================================
+       POPULARES
+    ================================================= */
+
+    const populares =
+        await api(
+            "/manga?order_by=popularity&sort=asc"
+        );
+
+
+    app.innerHTML +=
+        criarSecao(
+            "🍓 Mais populares",
+            populares
+        );
+
+
+    /* =================================================
+       AÇÃO
+    ================================================= */
+
+    const acao =
+        await api(
+            "/manga?genres=1&order_by=popularity&sort=asc"
+        );
+
+
+    app.innerHTML +=
+        criarSecao(
+            "⚔️ Ação",
+            acao
+        );
+
+
+    /* =================================================
+       AVENTURA
+    ================================================= */
+
+    const aventura =
+        await api(
+            "/manga?genres=2&order_by=popularity&sort=asc"
+        );
+
+
+    app.innerHTML +=
+        criarSecao(
+            "🌎 Aventura",
+            aventura
+        );
+
+
+    /* =================================================
+       FANTASIA
+    ================================================= */
+
+    const fantasia =
+        await api(
+            "/manga?genres=10&order_by=popularity&sort=asc"
+        );
+
+
+    app.innerHTML +=
+        criarSecao(
+            "✨ Fantasia",
+            fantasia
+        );
+
+
+    /* =================================================
+       COMÉDIA
+    ================================================= */
+
+    const comedia =
+        await api(
+            "/manga?genres=4&order_by=popularity&sort=asc"
+        );
+
+
+    app.innerHTML +=
+        criarSecao(
+            "😂 Comédia",
+            comedia
+        );
+
+
+    /* =================================================
+       TERROR
+    ================================================= */
+
+    const terror =
+        await api(
+            "/manga?genres=14&order_by=popularity&sort=asc"
+        );
+
+
+    app.innerHTML +=
+        criarSecao(
+            "👻 Terror",
+            terror
+        );
+
+
+    /* =================================================
+       ARTES MARCIAIS
+    ================================================= */
+
+    const artesMarciais =
+        await api(
+            "/manga?genres=17&order_by=popularity&sort=asc"
+        );
+
+
+    app.innerHTML +=
+        criarSecao(
+            "🥋 Artes marciais",
+            artesMarciais
+        );
+
+
+    /* =================================================
+       ERRO / VAZIO
+    ================================================= */
+
+    if(
+        app.innerHTML.trim() === ""
+    ){
+
+        app.innerHTML = `
+
+            <div class="empty-manga">
+
+                <div>
+                    📚
+                </div>
+
+                <h2>
+                    Nenhum mangá encontrado
+                </h2>
+
+                <p>
+                    Não foi possível carregar os mangás agora.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+carregarFotoPerfil();
+
+carregarMangas();
+
+
+/* =====================================================
+   ATUALIZAR FOTO DO PERFIL
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            "berryanime_profile_avatar"
+        ){
+
+            carregarFotoPerfil();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
