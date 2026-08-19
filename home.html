@@ -1283,7 +1283,324 @@ function porGenero(
 
 }
 
+/* =====================================================
+   CONSTRUIR HOME
+===================================================== */
 
+function construirHome(dados){
+
+    const usados = new Set();
+
+    const popular =
+        dados.popular || [];
+
+    const airing =
+        dados.airing || [];
+
+    const score =
+        dados.score || [];
+
+    const favorites =
+        dados.favorites || [];
+
+
+    /* =================================================
+       LISTAS ESPECÍFICAS DE CADA GÉNERO
+    ================================================= */
+
+    const action =
+        dados.action || [];
+
+    const comedy =
+        dados.comedy || [];
+
+    const shounen =
+        dados.shounen || [];
+
+    const slice =
+        dados.slice || [];
+
+    const romance =
+        dados.romance || [];
+
+    const fantasy =
+        dados.fantasy || [];
+
+
+    /* =================================================
+       CRIAR UNIVERSO
+    ================================================= */
+
+    const universo = [
+
+        ...popular,
+        ...airing,
+        ...score,
+        ...action,
+        ...comedy,
+        ...shounen,
+        ...slice,
+        ...romance,
+        ...fantasy
+
+    ];
+
+
+    /* =================================================
+       REMOVER DUPLICADOS
+    ================================================= */
+
+    const mapa = new Map();
+
+    universo.forEach(anime => {
+
+        if(
+            anime &&
+            anime.mal_id
+        ){
+
+            mapa.set(
+                anime.mal_id,
+                anime
+            );
+
+        }
+
+    });
+
+
+    const todos =
+        Array.from(
+            mapa.values()
+        );
+
+
+    let html = "";
+
+
+    /* =================================================
+       1. EM ALTA
+    ================================================= */
+
+    html += section(
+        "Em alta",
+        popular,
+        usados
+    );
+
+
+    /* =================================================
+       2. NOVOS EPISÓDIOS
+    ================================================= */
+
+    html += episodeSection(
+        "Novos episódios",
+        airing,
+        usados
+    );
+
+
+    /* =================================================
+       3. MAIS BEM AVALIADOS
+    ================================================= */
+
+    html += section(
+        "Mais bem avaliados",
+        score,
+        usados
+    );
+
+
+    /* =================================================
+       4. AÇÃO
+    ================================================= */
+
+    html += section(
+        "Ação",
+        action,
+        usados
+    );
+
+
+    /* =================================================
+       5. COMÉDIA
+    ================================================= */
+
+    html += section(
+        "Comédia",
+        comedy,
+        usados
+    );
+
+
+    /* =================================================
+       6. SHOUNEN
+    ================================================= */
+
+    html += section(
+        "Shounen",
+        shounen,
+        usados
+    );
+
+
+    /* =================================================
+       7. SLICE OF LIFE
+    ================================================= */
+
+    html += section(
+        "Slice of Life",
+        slice,
+        usados
+    );
+
+
+    /* =================================================
+       8. VOCÊ VAI AMAR
+    ================================================= */
+
+    html += section(
+        "Você vai amar",
+        popular.slice(10, 30),
+        usados
+    );
+
+
+    /* =================================================
+       9. LANÇAMENTOS
+    ================================================= */
+
+    let lancamento = null;
+
+
+    for(
+        const anime of airing
+    ){
+
+        if(
+            anime &&
+            anime.mal_id &&
+            !usados.has(
+                anime.mal_id
+            )
+        ){
+
+            lancamento = anime;
+
+            break;
+
+        }
+
+    }
+
+
+    if(!lancamento){
+
+        for(
+            const anime of score
+        ){
+
+            if(
+                anime &&
+                anime.mal_id &&
+                !usados.has(
+                    anime.mal_id
+                )
+            ){
+
+                lancamento = anime;
+
+                break;
+
+            }
+
+        }
+
+    }
+
+
+    html += releaseSection(
+        lancamento,
+        usados
+    );
+
+
+    /* =================================================
+       10. ROMANCE
+    ================================================= */
+
+    html += section(
+        "Romance",
+        romance,
+        usados
+    );
+
+
+    /* =================================================
+       11. FANTASIA
+    ================================================= */
+
+    html += section(
+        "Fantasia",
+        fantasy,
+        usados
+    );
+
+
+    /* =================================================
+       12. TALVEZ VOCÊ GOSTE
+    ================================================= */
+
+    html += section(
+        "Talvez você goste",
+        score.slice(10, 30),
+        usados
+    );
+
+
+    /* =================================================
+       13. OS MAIS CURTIDOS DE HOJE!
+    ================================================= */
+
+    html += section(
+        "Os mais curtidos de hoje!",
+        favorites,
+        usados
+    );
+
+
+    /* =================================================
+       CASO NÃO TENHA DADOS
+    ================================================= */
+
+    if(!html){
+
+        html = `
+
+            <div style="
+                text-align:center;
+                padding:60px 20px;
+                color:#888;
+            ">
+
+                Não foi possível carregar
+                os animes agora.
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =================================================
+       MOSTRAR NA HOME
+    ================================================= */
+
+    app.innerHTML =
+        html;
+
+      }
 
 
 /* =====================================================
@@ -1295,28 +1612,99 @@ async function atualizarHome(){
     try{
 
         /*
-         * Os pedidos são feitos ao mesmo tempo.
-         * Isso é muito mais rápido do que esperar
-         * uma secção terminar para começar outra.
+         * Todas as pesquisas acontecem
+         * simultaneamente.
          */
 
         const resultados =
             await Promise.all([
 
+                /* =================================================
+                   1. EM ALTA
+                ================================================= */
+
                 api(
                     "/top/anime?filter=bypopularity&limit=25"
                 ),
+
+
+                /* =================================================
+                   2. NOVOS EPISÓDIOS
+                ================================================= */
 
                 api(
                     "/seasons/now?limit=25"
                 ),
 
+
+                /* =================================================
+                   3. MAIS BEM AVALIADOS
+                ================================================= */
+
                 api(
                     "/anime?order_by=score&sort=desc&limit=25"
+                ),
+
+
+                /* =================================================
+                   4. AÇÃO
+                ================================================= */
+
+                api(
+                    "/anime?genres=1&order_by=popularity&limit=25"
+                ),
+
+
+                /* =================================================
+                   5. COMÉDIA
+                ================================================= */
+
+                api(
+                    "/anime?genres=4&order_by=popularity&limit=25"
+                ),
+
+
+                /* =================================================
+                   6. SHOUNEN
+                ================================================= */
+
+                api(
+                    "/anime?genres=27&order_by=popularity&limit=25"
+                ),
+
+
+                /* =================================================
+                   7. SLICE OF LIFE
+                ================================================= */
+
+                api(
+                    "/anime?genres=36&order_by=popularity&limit=25"
+                ),
+
+
+                /* =================================================
+                   8. ROMANCE
+                ================================================= */
+
+                api(
+                    "/anime?genres=22&order_by=popularity&limit=25"
+                ),
+
+
+                /* =================================================
+                   9. FANTASIA
+                ================================================= */
+
+                api(
+                    "/anime?genres=10&order_by=popularity&limit=25"
                 )
 
             ]);
 
+
+        /* =====================================================
+           ORGANIZAR OS DADOS
+        ===================================================== */
 
         const dados = {
 
@@ -1329,9 +1717,30 @@ async function atualizarHome(){
             score:
                 resultados[2],
 
+            action:
+                resultados[3],
+
+            comedy:
+                resultados[4],
+
+            shounen:
+                resultados[5],
+
+            slice:
+                resultados[6],
+
+            romance:
+                resultados[7],
+
+            fantasy:
+                resultados[8],
+
+
             /*
-             * Por enquanto usamos os mais populares
-             * como base para "Os mais curtidos de hoje".
+             * Os mais curtidos de hoje.
+             *
+             * Por enquanto usamos os animes
+             * mais populares como base.
              */
 
             favorites:
@@ -1340,18 +1749,18 @@ async function atualizarHome(){
         };
 
 
-        /*
-         * Guardar no aparelho
-         */
+        /* =====================================================
+           SALVAR NO CACHE
+        ===================================================== */
 
         salvarCache(
             dados
         );
 
 
-        /*
-         * Mostrar imediatamente
-         */
+        /* =====================================================
+           CONSTRUIR HOME
+        ===================================================== */
 
         construirHome(
             dados
@@ -1368,7 +1777,7 @@ async function atualizarHome(){
 
     }
 
-}
+      }
 
 
 /* =====================================================
