@@ -1254,8 +1254,526 @@ function releaseSection(
 
 
 /* =====================================================
-   GÉNERO
+   ENCONTRAR POR GÉNERO
 ===================================================== */
 
 function porGenero(
-    l
+    lista,
+    genero
+){
+
+    return lista.filter(
+        anime => {
+
+            const genres =
+                anime.genres || [];
+
+
+            return genres.some(
+                g =>
+                    String(
+                        g.name
+                    ).toLowerCase()
+                    ===
+                    genero.toLowerCase()
+            );
+
+        }
+    );
+
+}
+
+/* =====================================================
+   CONSTRUIR HOME
+===================================================== */
+
+function construirHome(dados){
+
+    const usados = new Set();
+
+    const popular =
+        dados.popular || [];
+
+    const airing =
+        dados.airing || [];
+
+    const score =
+        dados.score || [];
+
+    const favorites =
+        dados.favorites || [];
+
+
+    /*
+     * Criar um universo maior de animes.
+     * Assim conseguimos encontrar mais géneros
+     * sem repetir os mesmos animes.
+     */
+
+    const universo = [
+        ...popular,
+        ...airing,
+        ...score
+    ];
+
+
+    /*
+     * Remover duplicados
+     */
+
+    const mapa = new Map();
+
+    universo.forEach(anime => {
+
+        if(
+            anime &&
+            anime.mal_id
+        ){
+
+            mapa.set(
+                anime.mal_id,
+                anime
+            );
+
+        }
+
+    });
+
+
+    const todos =
+        Array.from(
+            mapa.values()
+        );
+
+
+    let html = "";
+
+
+    /* =================================================
+       1. EM ALTA
+    ================================================= */
+
+    html += section(
+        "Em alta",
+        popular,
+        usados
+    );
+
+
+    /* =================================================
+       2. NOVOS EPISÓDIOS
+    ================================================= */
+
+    html += episodeSection(
+        "Novos episódios",
+        airing,
+        usados
+    );
+
+
+    /* =================================================
+       3. MAIS BEM AVALIADOS
+    ================================================= */
+
+    html += section(
+        "Mais bem avaliados",
+        score,
+        usados
+    );
+
+
+    /* =================================================
+       4. AÇÃO
+    ================================================= */
+
+    html += section(
+        "Ação",
+        porGenero(
+            todos,
+            "Action"
+        ),
+        usados
+    );
+
+
+    /* =================================================
+       5. COMÉDIA
+    ================================================= */
+
+    html += section(
+        "Comédia",
+        porGenero(
+            todos,
+            "Comedy"
+        ),
+        usados
+    );
+
+
+    /* =================================================
+       6. SHOUNEN
+    ================================================= */
+
+    html += section(
+        "Shounen",
+        porGenero(
+            todos,
+            "Shounen"
+        ),
+        usados
+    );
+
+
+    /* =================================================
+       7. SLICE OF LIFE
+    ================================================= */
+
+    html += section(
+        "Slice of Life",
+        porGenero(
+            todos,
+            "Slice of Life"
+        ),
+        usados
+    );
+
+
+    /* =================================================
+       8. VOCÊ VAI AMAR
+    ================================================= */
+
+    html += section(
+        "Você vai amar",
+        popular.slice(10, 30),
+        usados
+    );
+
+
+    /* =================================================
+       9. LANÇAMENTOS
+    ================================================= */
+
+    let lancamento = null;
+
+
+    /*
+     * A secção terá apenas UM anime.
+     */
+
+    for(
+        const anime of airing
+    ){
+
+        if(
+            anime &&
+            anime.mal_id &&
+            !usados.has(
+                anime.mal_id
+            )
+        ){
+
+            lancamento = anime;
+            break;
+
+        }
+
+    }
+
+
+    /*
+     * Se não encontrou na temporada,
+     * procura nos mais bem avaliados.
+     */
+
+    if(!lancamento){
+
+        for(
+            const anime of score
+        ){
+
+            if(
+                anime &&
+                anime.mal_id &&
+                !usados.has(
+                    anime.mal_id
+                )
+            ){
+
+                lancamento = anime;
+                break;
+
+            }
+
+        }
+
+    }
+
+
+    html += releaseSection(
+        lancamento,
+        usados
+    );
+
+
+    /* =================================================
+       10. ROMANCE
+    ================================================= */
+
+    html += section(
+        "Romance",
+        porGenero(
+            todos,
+            "Romance"
+        ),
+        usados
+    );
+
+
+    /* =================================================
+       11. FANTASIA
+    ================================================= */
+
+    html += section(
+        "Fantasia",
+        porGenero(
+            todos,
+            "Fantasy"
+        ),
+        usados
+    );
+
+
+    /* =================================================
+       12. TALVEZ VOCÊ GOSTE
+    ================================================= */
+
+    html += section(
+        "Talvez você goste",
+        score.slice(10, 30),
+        usados
+    );
+
+
+    /* =================================================
+       13. OS MAIS CURTIDOS DE HOJE!
+    ================================================= */
+
+    html += section(
+        "Os mais curtidos de hoje!",
+        favorites,
+        usados
+    );
+
+
+    /*
+     * Mostrar resultado
+     */
+
+    if(!html){
+
+        html = `
+
+            <div style="
+                text-align:center;
+                padding:60px 20px;
+                color:#888;
+            ">
+
+                Não foi possível carregar
+                os animes agora.
+
+            </div>
+
+        `;
+
+    }
+
+
+    app.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   ATUALIZAR HOME
+===================================================== */
+
+async function atualizarHome(){
+
+    try{
+
+        /*
+         * Os pedidos são feitos ao mesmo tempo.
+         * Isso é muito mais rápido do que esperar
+         * uma secção terminar para começar outra.
+         */
+
+        const resultados =
+            await Promise.all([
+
+                api(
+                    "/top/anime?filter=bypopularity&limit=25"
+                ),
+
+                api(
+                    "/seasons/now?limit=25"
+                ),
+
+                api(
+                    "/anime?order_by=score&sort=desc&limit=25"
+                )
+
+            ]);
+
+
+        const dados = {
+
+            popular:
+                resultados[0],
+
+            airing:
+                resultados[1],
+
+            score:
+                resultados[2],
+
+            /*
+             * Por enquanto usamos os mais populares
+             * como base para "Os mais curtidos de hoje".
+             */
+
+            favorites:
+                resultados[0]
+
+        };
+
+
+        /*
+         * Guardar no aparelho
+         */
+
+        salvarCache(
+            dados
+        );
+
+
+        /*
+         * Mostrar imediatamente
+         */
+
+        construirHome(
+            dados
+        );
+
+    }
+
+    catch(error){
+
+        console.log(
+            "Erro ao atualizar Home:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIAR HOME
+===================================================== */
+
+function iniciarHome(){
+
+    carregarFotoPerfil();
+
+
+    /*
+     * Primeiro tenta usar o cache.
+     * Assim, quando o utilizador voltar à Home,
+     * as capas podem aparecer quase imediatamente.
+     */
+
+    const cache =
+        lerCache();
+
+
+    if(cache){
+
+        construirHome(
+            cache
+        );
+
+    }
+
+
+    /*
+     * Depois atualiza os dados da API
+     * sem bloquear a Home.
+     */
+
+    atualizarHome();
+
+}
+
+
+/* =====================================================
+   QUANDO VOLTAR PARA A HOME
+===================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        carregarFotoPerfil();
+
+
+        const cache =
+            lerCache();
+
+
+        if(cache){
+
+            construirHome(
+                cache
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ATUALIZAR FOTO DO PERFIL
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            AVATAR_KEY
+        ){
+
+            carregarFotoPerfil();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+iniciarHome();
+
+</script>
+
+</body>
+
+</html>      
