@@ -1955,4 +1955,551 @@ async function loadAnime(){
 
 /* =====================================================
    RESTANTE DA HOME
-==============================
+===================================================== */
+
+
+/* =====================================================
+   FUNÇÃO PARA PEGAR ANIMES
+   Cada seção pode usar os seus próprios animes.
+===================================================== */
+
+function pegarAnimes(lista, quantidade = 12){
+
+    if(!Array.isArray(lista)){
+        return [];
+    }
+
+    return lista
+        .filter(anime =>
+            anime &&
+            anime.mal_id &&
+            anime.images
+        )
+        .slice(0, quantidade);
+
+}
+
+
+/* =====================================================
+   CRIAR UMA SEÇÃO
+===================================================== */
+
+function criarSecao(
+    titulo,
+    lista,
+    quantidade = 12,
+    tipo = "normal"
+){
+
+    const animes =
+        pegarAnimes(
+            lista,
+            quantidade
+        );
+
+
+    if(animes.length === 0){
+
+        return `
+            <section>
+
+                <div class="title-section">
+                    ${titulo}
+                </div>
+
+                <div class="container">
+
+                    <div style="
+                        color:#666;
+                        padding:15px 0;
+                        font-size:14px;
+                    ">
+                        Nenhum anime disponível.
+                    </div>
+
+                </div>
+
+            </section>
+        `;
+
+    }
+
+
+    let conteudo = "";
+
+
+    if(tipo === "episode"){
+
+        conteudo =
+            animes
+                .map(
+                    (anime,index) =>
+                        episodeCard(
+                            anime,
+                            index
+                        )
+                )
+                .join("");
+
+    }
+
+    else{
+
+        conteudo =
+            animes
+                .map(
+                    smallCard
+                )
+                .join("");
+
+    }
+
+
+    return section(
+        titulo,
+        conteudo
+    );
+
+}
+
+
+/* =====================================================
+   MOSTRAR HOME
+===================================================== */
+
+async function mostrarHome(
+    popular,
+    airing,
+    avaliados,
+    action,
+    comedy,
+    shounen,
+    sliceLife,
+    romance,
+    fantasy,
+    recomendados,
+    maisCurtidos
+){
+
+    app.innerHTML = "";
+
+
+    /* =================================================
+       EM ALTA
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Em Alta",
+            popular,
+            12
+        );
+
+
+    /* =================================================
+       NOVOS EPISÓDIOS
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Novos episódios",
+            airing,
+            10,
+            "episode"
+        );
+
+
+    /* =================================================
+       MAIS BEM AVALIADOS
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Mais bem avaliados",
+            avaliados,
+            12
+        );
+
+
+    /* =================================================
+       AÇÃO
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Ação",
+            action,
+            12
+        );
+
+
+    /* =================================================
+       COMÉDIA
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Comédia",
+            comedy,
+            12
+        );
+
+
+    /* =================================================
+       SHOUNEN
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Shounen",
+            shounen,
+            12
+        );
+
+
+    /* =================================================
+       SLICE OF LIFE
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Slice of Life",
+            sliceLife,
+            12
+        );
+
+
+    /* =================================================
+       VOCÊ VAI AMAR
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Você vai amar",
+            avaliados,
+            12
+        );
+
+
+    /* =================================================
+       LANÇAMENTOS
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Lançamentos",
+            airing,
+            12
+        );
+
+
+    /* =================================================
+       ROMANCE
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Romance",
+            romance,
+            12
+        );
+
+
+    /* =================================================
+       FANTASIA
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Fantasia",
+            fantasy,
+            12
+        );
+
+
+    /* =================================================
+       TALVEZ VOCÊ GOSTE
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Talvez você goste",
+            recomendados,
+            12
+        );
+
+
+    /* =================================================
+       OS MAIS CURTIDOS
+    ================================================= */
+
+    app.innerHTML +=
+        criarSecao(
+            "Os mais curtidos de hoje!",
+            maisCurtidos,
+            12
+        );
+
+}
+
+
+/* =====================================================
+   CARREGAR HOME
+===================================================== */
+
+async function loadAnime(){
+
+    mostrarLoader();
+
+
+    try{
+
+        /*
+         * Fazemos as requisições em paralelo.
+         *
+         * Antes estavam sendo feitas uma por uma.
+         * Isso deixava a Home muito lenta.
+         */
+
+        const resultados =
+            await Promise.allSettled([
+
+                api(
+                    "/top/anime?filter=bypopularity"
+                ),
+
+                api(
+                    "/seasons/now"
+                ),
+
+                api(
+                    "/top/anime?filter=favorite"
+                ),
+
+                api(
+                    "/anime?genres=1&order_by=score&sort=desc"
+                ),
+
+                api(
+                    "/anime?genres=4&order_by=score&sort=desc"
+                ),
+
+                api(
+                    "/anime?genres=27&order_by=popularity&sort=asc"
+                ),
+
+                api(
+                    "/anime?genres=36&order_by=score&sort=desc"
+                ),
+
+                api(
+                    "/anime?genres=22&order_by=score&sort=desc"
+                ),
+
+                api(
+                    "/anime?genres=10&order_by=score&sort=desc"
+                ),
+
+                api(
+                    "/anime?order_by=popularity&sort=asc"
+                ),
+
+                api(
+                    "/anime?order_by=favorites&sort=desc"
+                )
+
+            ]);
+
+
+        /*
+         * Se alguma requisição falhar,
+         * as outras continuam funcionando.
+         */
+
+        function resultado(
+            indice
+        ){
+
+            const item =
+                resultados[indice];
+
+            if(
+                item &&
+                item.status === "fulfilled" &&
+                Array.isArray(item.value)
+            ){
+
+                return item.value;
+
+            }
+
+            console.warn(
+                "Uma seção da Home não carregou:",
+                indice,
+                item
+            );
+
+            return [];
+
+        }
+
+
+        const popular =
+            resultado(0);
+
+        const airing =
+            resultado(1);
+
+        const avaliados =
+            resultado(2);
+
+        const action =
+            resultado(3);
+
+        const comedy =
+            resultado(4);
+
+        const shounen =
+            resultado(5);
+
+        const sliceLife =
+            resultado(6);
+
+        const romance =
+            resultado(7);
+
+        const fantasy =
+            resultado(8);
+
+        const recomendados =
+            resultado(9);
+
+        const maisCurtidos =
+            resultado(10);
+
+
+        /*
+         * Mostra a Home imediatamente
+         * quando os resultados chegam.
+         */
+
+        await mostrarHome(
+
+            popular,
+            airing,
+            avaliados,
+            action,
+            comedy,
+            shounen,
+            sliceLife,
+            romance,
+            fantasy,
+            recomendados,
+            maisCurtidos
+
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Erro ao carregar a Home:",
+            error
+        );
+
+
+        app.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:50px 20px;
+                color:#aaa;
+            ">
+
+                <div style="
+                    font-size:18px;
+                    color:white;
+                    margin-bottom:12px;
+                ">
+                    Não foi possível carregar os animes.
+                </div>
+
+                <div style="
+                    font-size:14px;
+                ">
+                    Verifique sua conexão e tente novamente.
+                </div>
+
+                <button
+                    onclick="loadAnime()"
+                    style="
+                        margin-top:20px;
+                        padding:12px 22px;
+                        border:0;
+                        border-radius:8px;
+                        background:#ff1744;
+                        color:white;
+                        font-weight:bold;
+                        cursor:pointer;
+                    "
+                >
+                    Tentar novamente
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+carregarFotoPerfil();
+
+loadAnime();
+
+
+/* =====================================================
+   ATUALIZAR FOTO AO VOLTAR
+===================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        carregarFotoPerfil();
+
+    }
+);
+
+
+/* =====================================================
+   ATUALIZAR FOTO ENTRE ABAS/PÁGINAS
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key === AVATAR_KEY
+        ){
+
+            carregarFotoPerfil();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+      
+</html>
