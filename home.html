@@ -545,6 +545,7 @@ section{
 
     </div>
 
+
     <div
         class="menu-item"
         onclick="window.location.href='mangas.html'">
@@ -561,6 +562,7 @@ section{
 
     </div>
 
+
     <div
         class="menu-item"
         onclick="window.location.href='favoritos.html'">
@@ -576,6 +578,7 @@ section{
         <span>Favoritos</span>
 
     </div>
+
 
     <div
         class="menu-item"
@@ -594,6 +597,7 @@ section{
     </div>
 
 </div>
+
 
 <script>
 
@@ -825,6 +829,7 @@ function pegarSemRepetir(
 
 }
 
+
 /* =====================================================
    CARD NORMAL
 ===================================================== */
@@ -977,7 +982,6 @@ function esconderLoader(){
 
 }
 
-
 /* =====================================================
    CARREGAR HOME
 ===================================================== */
@@ -986,15 +990,8 @@ async function loadAnime(){
 
     mostrarLoader();
 
-
-    /*
-     * Guarda o momento em que começou.
-     * O círculo ficará pelo menos 2 segundos.
-     */
-
     const inicio =
         Date.now();
-
 
     try{
 
@@ -1131,10 +1128,6 @@ async function loadAnime(){
             );
 
 
-        /*
-         * Garante os 2 segundos mínimos.
-         */
-
         const tempoPassado =
             Date.now() - inicio;
 
@@ -1148,10 +1141,6 @@ async function loadAnime(){
             restante
         );
 
-
-        /*
-         * Só agora mostramos a Home.
-         */
 
         app.innerHTML = "";
 
@@ -1290,7 +1279,8 @@ async function loadAnime(){
                     .join("")
             );
 
-      /* =================================================
+
+        /* =================================================
            8. VOCÊ VAI AMAR
         ================================================= */
 
@@ -1412,7 +1402,6 @@ async function loadAnime(){
             error
         );
 
-
         app.innerHTML = `
 
             <div style="
@@ -1483,4 +1472,4 @@ window.addEventListener(
 
 </body>
 
-</html>
+</html>      
