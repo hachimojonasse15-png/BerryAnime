@@ -1455,4 +1455,536 @@ function carregarFavoritos(){
    SALVAR FAVORITOS
 ===================================================== */
 
-function 
+function salvarFavoritos(favoritos){
+
+    try{
+
+        localStorage.setItem(
+            "berryanime_favoritos",
+            JSON.stringify(favoritos)
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Erro ao salvar favoritos:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CARREGAR FAVORITOS
+===================================================== */
+
+function carregarFavoritos(){
+
+    try{
+
+        const dados =
+            localStorage.getItem(
+                "berryanime_favoritos"
+            );
+
+        if(!dados){
+
+            return [];
+
+        }
+
+        const favoritos =
+            JSON.parse(dados);
+
+        if(!Array.isArray(favoritos)){
+
+            return [];
+
+        }
+
+        return favoritos;
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Erro ao carregar favoritos:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   VERIFICAR SE É FAVORITO
+===================================================== */
+
+function ehFavorito(animeId){
+
+    const favoritos =
+        carregarFavoritos();
+
+    return favoritos.some(
+        function(anime){
+
+            return String(anime.id) ===
+                   String(animeId);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ADICIONAR FAVORITO
+===================================================== */
+
+function adicionarFavorito(anime){
+
+    if(!anime || !anime.mal_id){
+
+        return false;
+
+    }
+
+    let favoritos =
+        carregarFavoritos();
+
+
+    const jaExiste =
+        favoritos.some(
+            function(item){
+
+                return String(item.id) ===
+                       String(anime.mal_id);
+
+            }
+        );
+
+
+    if(jaExiste){
+
+        return false;
+
+    }
+
+
+    const imagem =
+        anime.images?.jpg?.large_image_url ||
+        anime.images?.jpg?.image_url ||
+        "";
+
+
+    const favorito = {
+
+        id: anime.mal_id,
+
+        title:
+            anime.title ||
+            "Anime",
+
+        image:
+            imagem,
+
+        type:
+            "anime",
+
+        addedAt:
+            Date.now()
+
+    };
+
+
+    favoritos.push(
+        favorito
+    );
+
+
+    salvarFavoritos(
+        favoritos
+    );
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   REMOVER FAVORITO
+===================================================== */
+
+function removerFavorito(animeId){
+
+    let favoritos =
+        carregarFavoritos();
+
+
+    favoritos =
+        favoritos.filter(
+            function(anime){
+
+                return String(anime.id) !==
+                       String(animeId);
+
+            }
+        );
+
+
+    salvarFavoritos(
+        favoritos
+    );
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   ALTERNAR FAVORITO
+===================================================== */
+
+function alternarFavorito(anime){
+
+    if(!anime || !anime.mal_id){
+
+        return false;
+
+    }
+
+
+    if(
+        ehFavorito(
+            anime.mal_id
+        )
+    ){
+
+        removerFavorito(
+            anime.mal_id
+        );
+
+        return false;
+
+    }
+
+
+    adicionarFavorito(
+        anime
+    );
+
+    return true;
+
+}
+
+
+/* =====================================================
+   ATUALIZAR ÍCONE DE FAVORITO
+===================================================== */
+
+function atualizarBotaoFavorito(
+    botao,
+    animeId
+){
+
+    if(!botao){
+
+        return;
+
+    }
+
+
+    if(
+        ehFavorito(
+            animeId
+        )
+    ){
+
+        botao.classList.add(
+            "favorito-ativo"
+        );
+
+        botao.setAttribute(
+            "aria-label",
+            "Remover dos favoritos"
+        );
+
+    }
+
+    else{
+
+        botao.classList.remove(
+            "favorito-ativo"
+        );
+
+        botao.setAttribute(
+            "aria-label",
+            "Adicionar aos favoritos"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CRIAR BOTÃO FAVORITO
+===================================================== */
+
+function criarBotaoFavorito(anime){
+
+    const ativo =
+        ehFavorito(
+            anime.mal_id
+        );
+
+
+    return `
+
+        <button
+            class="favorite-button
+            ${ativo ? "favorito-ativo" : ""}"
+            onclick="clicarFavorito(event, ${anime.mal_id})"
+            aria-label="${
+                ativo
+                ? "Remover dos favoritos"
+                : "Adicionar aos favoritos"
+            }">
+
+            <svg
+                viewBox="0 0 24 24">
+
+                <path
+                    d="
+                    M20.8 8.6
+                    c0 5.5-8.8 11-8.8 11
+                    S3.2 14.1 3.2 8.6
+                    A4.6 4.6 0 0 1 12 6.4
+                    a4.6 4.6 0 0 1 8.8 2.2z">
+                </path>
+
+            </svg>
+
+        </button>
+
+    `;
+
+}
+
+
+/* =====================================================
+   CLICAR NO BOTÃO DE FAVORITO
+===================================================== */
+
+window.clicarFavorito =
+function(event, animeId){
+
+    if(event){
+
+        event.stopPropagation();
+
+    }
+
+
+    let favoritos =
+        carregarFavoritos();
+
+
+    const indice =
+        favoritos.findIndex(
+            function(anime){
+
+                return String(anime.id) ===
+                       String(animeId);
+
+            }
+        );
+
+
+    const botao =
+        event
+        ? event.currentTarget
+        : null;
+
+
+    if(indice !== -1){
+
+        favoritos.splice(
+            indice,
+            1
+        );
+
+
+        salvarFavoritos(
+            favoritos
+        );
+
+
+        if(botao){
+
+            botao.classList.remove(
+                "favorito-ativo"
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    /*
+       Se o anime estiver disponível
+       numa variável global, salvamos.
+    */
+
+    if(
+        typeof window.animesDisponiveis !==
+        "undefined"
+    ){
+
+        const anime =
+            window.animesDisponiveis.find(
+                function(item){
+
+                    return String(item.mal_id) ===
+                           String(animeId);
+
+                }
+            );
+
+
+        if(anime){
+
+            adicionarFavorito(
+                anime
+            );
+
+
+            if(botao){
+
+                botao.classList.add(
+                    "favorito-ativo"
+                );
+
+            }
+
+        }
+
+    }
+
+};
+
+
+/* =====================================================
+   ANIMAR BOTÃO
+===================================================== */
+
+function animarFavorito(botao){
+
+    if(!botao){
+
+        return;
+
+    }
+
+
+    botao.classList.remove(
+        "favorite-pop"
+    );
+
+
+    void botao.offsetWidth;
+
+
+    botao.classList.add(
+        "favorite-pop"
+    );
+
+}
+
+
+/* =====================================================
+   ATUALIZAR FAVORITOS QUANDO A PÁGINA
+   VOLTAR PARA O PRIMEIRO PLANO
+===================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        document
+        .querySelectorAll(
+            ".favorite-button"
+        )
+        .forEach(
+            function(botao){
+
+                const id =
+                    botao.dataset.animeId;
+
+                if(id){
+
+                    atualizarBotaoFavorito(
+                        botao,
+                        id
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   ATUALIZAR QUANDO O LOCALSTORAGE MUDAR
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            "berryanime_favoritos"
+        ){
+
+            document
+            .querySelectorAll(
+                ".favorite-button"
+            )
+            .forEach(
+                function(botao){
+
+                    const id =
+                        botao.dataset.animeId;
+
+                    if(id){
+
+                        atualizarBotaoFavorito(
+                            botao,
+                            id
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+    }
+);
