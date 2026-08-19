@@ -28,10 +28,6 @@ body{
     padding-bottom:80px;
 }
 
-/* =====================================================
-   TOPO
-===================================================== */
-
 .header{
     height:68px;
     display:flex;
@@ -39,10 +35,6 @@ body{
     justify-content:space-between;
     padding:0 16px;
 }
-
-/* =====================================================
-   LOGO
-===================================================== */
 
 .logo{
     width:42px;
@@ -61,10 +53,6 @@ body{
     object-fit:cover;
     display:block;
 }
-
-/* =====================================================
-   ÍCONES
-===================================================== */
 
 .header-icons{
     display:flex;
@@ -98,10 +86,6 @@ body{
     stroke-linecap:round;
     stroke-linejoin:round;
 }
-
-/* =====================================================
-   PERFIL
-===================================================== */
 
 .profile-button{
     width:42px;
@@ -141,19 +125,11 @@ body{
     stroke-linejoin:round;
 }
 
-/* =====================================================
-   TÍTULOS
-===================================================== */
-
 .title-section{
     font-size:21px;
     font-weight:bold;
     margin:20px 15px 12px;
 }
-
-/* =====================================================
-   LISTAS
-===================================================== */
 
 .container{
     display:flex;
@@ -167,10 +143,6 @@ body{
 .container::-webkit-scrollbar{
     display:none;
 }
-
-/* =====================================================
-   CARDS
-===================================================== */
 
 .anime-card{
     min-width:92px;
@@ -189,10 +161,6 @@ body{
     object-fit:cover;
     display:block;
 }
-
-/* =====================================================
-   EPISÓDIOS
-===================================================== */
 
 .episode-card{
     min-width:270px;
@@ -255,10 +223,6 @@ body{
     margin-top:4px;
 }
 
-/* =====================================================
-   LANÇAMENTO
-===================================================== */
-
 .release-card{
     margin:0 15px;
     height:190px;
@@ -277,13 +241,12 @@ body{
 .release-gradient{
     position:absolute;
     inset:0;
-    background:
-        linear-gradient(
-            to right,
-            rgba(0,0,0,.88),
-            rgba(0,0,0,.25),
-            rgba(0,0,0,.05)
-        );
+    background:linear-gradient(
+        to right,
+        rgba(0,0,0,.88),
+        rgba(0,0,0,.25),
+        rgba(0,0,0,.05)
+    );
 }
 
 .release-info{
@@ -313,10 +276,6 @@ body{
     color:#ddd;
     font-size:12px;
 }
-
-/* =====================================================
-   MENU
-===================================================== */
 
 .bottom-menu{
     position:fixed;
@@ -372,10 +331,6 @@ body{
 section{
     margin-bottom:18px;
 }
-
-/* =====================================================
-   MOBILE
-===================================================== */
 
 @media(max-width:600px){
 
@@ -514,9 +469,7 @@ section{
                     r="6">
                 </circle>
 
-                <path
-                    d="M16 16l5 5">
-                </path>
+                <path d="M16 16l5 5"></path>
 
             </svg>
 
@@ -718,6 +671,7 @@ async function api(url){
                 API + url
             );
 
+
         if(!res.ok){
 
             throw new Error(
@@ -726,8 +680,10 @@ async function api(url){
 
         }
 
+
         const data =
             await res.json();
+
 
         return data.data || [];
 
@@ -753,6 +709,7 @@ async function api(url){
 
 const CACHE_KEY =
     "berryanime_home_cache_v5";
+
 
 const CACHE_TIME =
     1000 * 60 * 30;
@@ -796,16 +753,19 @@ function lerCache(){
                 CACHE_KEY
             );
 
+
         if(!salvo){
 
             return null;
 
         }
 
+
         const objeto =
             JSON.parse(
                 salvo
             );
+
 
         if(
             !objeto ||
@@ -815,6 +775,7 @@ function lerCache(){
             return null;
 
         }
+
 
         return objeto.data;
 
@@ -830,7 +791,7 @@ function lerCache(){
 
 
 /* =====================================================
-   CAPA
+   CAPA DO ANIME
 ===================================================== */
 
 function imagemAnime(anime){
@@ -846,7 +807,7 @@ function imagemAnime(anime){
 
 
 /* =====================================================
-   CARD
+   CARD NORMAL
 ===================================================== */
 
 function smallCard(anime){
@@ -857,6 +818,7 @@ function smallCard(anime){
     const id =
         anime?.mal_id;
 
+
     if(
         !image ||
         !id
@@ -865,6 +827,7 @@ function smallCard(anime){
         return "";
 
     }
+
 
     return `
 
@@ -885,16 +848,20 @@ function smallCard(anime){
 
 
 /* =====================================================
-   EPISÓDIO
+   CARD DE EPISÓDIO
 ===================================================== */
 
-function episodeCard(anime,index){
+function episodeCard(
+    anime,
+    index
+){
 
     const image =
         imagemAnime(anime);
 
     const id =
         anime?.mal_id;
+
 
     if(
         !image ||
@@ -904,6 +871,7 @@ function episodeCard(anime,index){
         return "";
 
     }
+
 
     return `
 
@@ -942,7 +910,7 @@ function episodeCard(anime,index){
 
 
 /* =====================================================
-   ABRIR ANIME
+   ABRIR DETALHES
 ===================================================== */
 
 function abrirAnime(id){
@@ -952,6 +920,7 @@ function abrirAnime(id){
         return;
 
     }
+
 
     window.location.href =
         "detalhes.html?id=" + id;
@@ -967,6 +936,7 @@ function removerDuplicados(lista){
 
     const mapa =
         new Map();
+
 
     (lista || []).forEach(
         anime => {
@@ -986,6 +956,7 @@ function removerDuplicados(lista){
         }
     );
 
+
     return Array.from(
         mapa.values()
     );
@@ -999,8 +970,7 @@ function removerDuplicados(lista){
 
 function section(
     nome,
-    lista,
-    usados
+    lista
 ){
 
     const disponiveis =
@@ -1008,51 +978,21 @@ function section(
             lista
         );
 
-    const selecionados = [];
-
-
-    for(
-        const anime of disponiveis
-    ){
-
-        const id =
-            anime.mal_id;
-
-
-        if(
-            usados.has(id)
-        ){
-
-            continue;
-
-        }
-
-
-        usados.add(id);
-
-        selecionados.push(
-            anime
-        );
-
-
-        if(
-            selecionados.length >= 10
-        ){
-
-            break;
-
-        }
-
-    }
-
 
     if(
-        !selecionados.length
+        !disponiveis.length
     ){
 
         return "";
 
     }
+
+
+    const selecionados =
+        disponiveis.slice(
+            0,
+            10
+        );
 
 
     return `
@@ -1067,7 +1007,9 @@ function section(
 
                 ${
                     selecionados
-                    .map(smallCard)
+                    .map(
+                        smallCard
+                    )
                     .join("")
                 }
 
@@ -1081,13 +1023,12 @@ function section(
 
 
 /* =====================================================
-   SECÇÃO EPISÓDIOS
+   SECÇÃO DE EPISÓDIOS
 ===================================================== */
 
 function episodeSection(
     nome,
-    lista,
-    usados
+    lista
 ){
 
     const disponiveis =
@@ -1095,51 +1036,21 @@ function episodeSection(
             lista
         );
 
-    const selecionados = [];
-
-
-    for(
-        const anime of disponiveis
-    ){
-
-        const id =
-            anime.mal_id;
-
-
-        if(
-            usados.has(id)
-        ){
-
-            continue;
-
-        }
-
-
-        usados.add(id);
-
-        selecionados.push(
-            anime
-        );
-
-
-        if(
-            selecionados.length >= 8
-        ){
-
-            break;
-
-        }
-
-    }
-
 
     if(
-        !selecionados.length
+        !disponiveis.length
     ){
 
         return "";
 
     }
+
+
+    const selecionados =
+        disponiveis.slice(
+            0,
+            8
+        );
 
 
     return `
@@ -1178,8 +1089,7 @@ function episodeSection(
 ===================================================== */
 
 function releaseSection(
-    anime,
-    usados
+    anime
 ){
 
     if(!anime){
@@ -1190,7 +1100,7 @@ function releaseSection(
 
 
     const id =
-        anime.mal_id;
+        anime?.mal_id;
 
     const image =
         imagemAnime(anime);
@@ -1198,16 +1108,12 @@ function releaseSection(
 
     if(
         !id ||
-        !image ||
-        usados.has(id)
+        !image
     ){
 
         return "";
 
     }
-
-
-    usados.add(id);
 
 
     return `
@@ -1254,42 +1160,31 @@ function releaseSection(
 
 
 /* =====================================================
-   ENCONTRAR POR GÉNERO
+   FIM DA PARTE 2
 ===================================================== */
 
-function porGenero(
-    lista,
-    genero
-){
+ /* =====================================================
+   BUSCAR GÉNERO
+===================================================== */
 
-    return lista.filter(
-        anime => {
+async function buscarGenero(genero){
 
-            const genres =
-                anime.genres || [];
-
-
-            return genres.some(
-                g =>
-                    String(
-                        g.name
-                    ).toLowerCase()
-                    ===
-                    genero.toLowerCase()
-            );
-
-        }
+    return await api(
+        "/anime?genres=" +
+        genero +
+        "&order_by=score" +
+        "&sort=desc" +
+        "&limit=15"
     );
 
 }
+
 
 /* =====================================================
    CONSTRUIR HOME
 ===================================================== */
 
 function construirHome(dados){
-
-    const usados = new Set();
 
     const popular =
         dados.popular || [];
@@ -1302,11 +1197,6 @@ function construirHome(dados){
 
     const favorites =
         dados.favorites || [];
-
-
-    /* =================================================
-       LISTAS ESPECÍFICAS DE CADA GÉNERO
-    ================================================= */
 
     const action =
         dados.action || [];
@@ -1327,251 +1217,113 @@ function construirHome(dados){
         dados.fantasy || [];
 
 
-    /* =================================================
-       CRIAR UNIVERSO
-    ================================================= */
-
-    const universo = [
-
-        ...popular,
-        ...airing,
-        ...score,
-        ...action,
-        ...comedy,
-        ...shounen,
-        ...slice,
-        ...romance,
-        ...fantasy
-
-    ];
-
-
-    /* =================================================
-       REMOVER DUPLICADOS
-    ================================================= */
-
-    const mapa = new Map();
-
-    universo.forEach(anime => {
-
-        if(
-            anime &&
-            anime.mal_id
-        ){
-
-            mapa.set(
-                anime.mal_id,
-                anime
-            );
-
-        }
-
-    });
-
-
-    const todos =
-        Array.from(
-            mapa.values()
-        );
-
-
     let html = "";
 
 
-    /* =================================================
-       1. EM ALTA
-    ================================================= */
+    /* 1 */
 
     html += section(
         "Em alta",
-        popular,
-        usados
+        popular
     );
 
 
-    /* =================================================
-       2. NOVOS EPISÓDIOS
-    ================================================= */
+    /* 2 */
 
     html += episodeSection(
         "Novos episódios",
-        airing,
-        usados
+        airing
     );
 
 
-    /* =================================================
-       3. MAIS BEM AVALIADOS
-    ================================================= */
+    /* 3 */
 
     html += section(
         "Mais bem avaliados",
-        score,
-        usados
+        score
     );
 
 
-    /* =================================================
-       4. AÇÃO
-    ================================================= */
+    /* 4 */
 
     html += section(
         "Ação",
-        action,
-        usados
+        action
     );
 
 
-    /* =================================================
-       5. COMÉDIA
-    ================================================= */
+    /* 5 */
 
     html += section(
         "Comédia",
-        comedy,
-        usados
+        comedy
     );
 
 
-    /* =================================================
-       6. SHOUNEN
-    ================================================= */
+    /* 6 */
 
     html += section(
         "Shounen",
-        shounen,
-        usados
+        shounen
     );
 
 
-    /* =================================================
-       7. SLICE OF LIFE
-    ================================================= */
+    /* 7 */
 
     html += section(
         "Slice of Life",
-        slice,
-        usados
+        slice
     );
 
 
-    /* =================================================
-       8. VOCÊ VAI AMAR
-    ================================================= */
+    /* 8 */
 
     html += section(
         "Você vai amar",
-        popular.slice(10, 30),
-        usados
+        popular.slice(10,30)
     );
 
 
-    /* =================================================
-       9. LANÇAMENTOS
-    ================================================= */
-
-    let lancamento = null;
-
-
-    for(
-        const anime of airing
-    ){
-
-        if(
-            anime &&
-            anime.mal_id &&
-            !usados.has(
-                anime.mal_id
-            )
-        ){
-
-            lancamento = anime;
-
-            break;
-
-        }
-
-    }
-
-
-    if(!lancamento){
-
-        for(
-            const anime of score
-        ){
-
-            if(
-                anime &&
-                anime.mal_id &&
-                !usados.has(
-                    anime.mal_id
-                )
-            ){
-
-                lancamento = anime;
-
-                break;
-
-            }
-
-        }
-
-    }
-
+    /* 9 */
 
     html += releaseSection(
-        lancamento,
-        usados
+        airing[0] ||
+        score[0] ||
+        popular[0]
     );
 
 
-    /* =================================================
-       10. ROMANCE
-    ================================================= */
+    /* 10 */
 
     html += section(
         "Romance",
-        romance,
-        usados
+        romance
     );
 
 
-    /* =================================================
-       11. FANTASIA
-    ================================================= */
+    /* 11 */
 
     html += section(
         "Fantasia",
-        fantasy,
-        usados
+        fantasy
     );
 
 
-    /* =================================================
-       12. TALVEZ VOCÊ GOSTE
-    ================================================= */
+    /* 12 */
 
     html += section(
         "Talvez você goste",
-        score.slice(10, 30),
-        usados
+        score.slice(10,30)
     );
 
 
-    /* =================================================
-       13. OS MAIS CURTIDOS DE HOJE!
-    ================================================= */
+    /* 13 */
 
     html += section(
         "Os mais curtidos de hoje!",
-        favorites,
-        usados
+        favorites
     );
 
-
-    /* =================================================
-       CASO NÃO TENHA DADOS
-    ================================================= */
 
     if(!html){
 
@@ -1593,14 +1345,10 @@ function construirHome(dados){
     }
 
 
-    /* =================================================
-       MOSTRAR NA HOME
-    ================================================= */
-
     app.innerHTML =
         html;
 
-      }
+}
 
 
 /* =====================================================
@@ -1612,155 +1360,99 @@ async function atualizarHome(){
     try{
 
         /*
-         * Todas as pesquisas acontecem
-         * simultaneamente.
+         * Primeiro buscamos as listas principais.
          */
 
-        const resultados =
+        const principais =
             await Promise.all([
-
-                /* =================================================
-                   1. EM ALTA
-                ================================================= */
 
                 api(
                     "/top/anime?filter=bypopularity&limit=25"
                 ),
 
-
-                /* =================================================
-                   2. NOVOS EPISÓDIOS
-                ================================================= */
-
                 api(
                     "/seasons/now?limit=25"
                 ),
 
-
-                /* =================================================
-                   3. MAIS BEM AVALIADOS
-                ================================================= */
-
                 api(
                     "/anime?order_by=score&sort=desc&limit=25"
-                ),
-
-
-                /* =================================================
-                   4. AÇÃO
-                ================================================= */
-
-                api(
-                    "/anime?genres=1&order_by=popularity&limit=25"
-                ),
-
-
-                /* =================================================
-                   5. COMÉDIA
-                ================================================= */
-
-                api(
-                    "/anime?genres=4&order_by=popularity&limit=25"
-                ),
-
-
-                /* =================================================
-                   6. SHOUNEN
-                ================================================= */
-
-                api(
-                    "/anime?genres=27&order_by=popularity&limit=25"
-                ),
-
-
-                /* =================================================
-                   7. SLICE OF LIFE
-                ================================================= */
-
-                api(
-                    "/anime?genres=36&order_by=popularity&limit=25"
-                ),
-
-
-                /* =================================================
-                   8. ROMANCE
-                ================================================= */
-
-                api(
-                    "/anime?genres=22&order_by=popularity&limit=25"
-                ),
-
-
-                /* =================================================
-                   9. FANTASIA
-                ================================================= */
-
-                api(
-                    "/anime?genres=10&order_by=popularity&limit=25"
                 )
 
             ]);
 
 
-        /* =====================================================
-           ORGANIZAR OS DADOS
-        ===================================================== */
+        /*
+         * Depois buscamos os géneros.
+         *
+         * Eles também são pedidos
+         * simultaneamente.
+         */
+
+        const generos =
+            await Promise.all([
+
+                buscarGenero("1"),
+
+                buscarGenero("4"),
+
+                buscarGenero("27"),
+
+                buscarGenero("36"),
+
+                buscarGenero("22"),
+
+                buscarGenero("10")
+
+            ]);
+
 
         const dados = {
 
             popular:
-                resultados[0],
+                principais[0],
 
             airing:
-                resultados[1],
+                principais[1],
 
             score:
-                resultados[2],
-
-            action:
-                resultados[3],
-
-            comedy:
-                resultados[4],
-
-            shounen:
-                resultados[5],
-
-            slice:
-                resultados[6],
-
-            romance:
-                resultados[7],
-
-            fantasy:
-                resultados[8],
-
-
-            /*
-             * Os mais curtidos de hoje.
-             *
-             * Por enquanto usamos os animes
-             * mais populares como base.
-             */
+                principais[2],
 
             favorites:
-                resultados[0]
+                principais[0],
+
+            action:
+                generos[0],
+
+            comedy:
+                generos[1],
+
+            shounen:
+                generos[2],
+
+            slice:
+                generos[3],
+
+            romance:
+                generos[4],
+
+            fantasy:
+                generos[5]
 
         };
 
 
-        /* =====================================================
-           SALVAR NO CACHE
-        ===================================================== */
+        /*
+         * Guardar tudo no cache.
+         */
 
         salvarCache(
             dados
         );
 
 
-        /* =====================================================
-           CONSTRUIR HOME
-        ===================================================== */
+        /*
+         * Mostrar tudo na Home.
+         */
 
         construirHome(
             dados
@@ -1777,7 +1469,7 @@ async function atualizarHome(){
 
     }
 
-      }
+}
 
 
 /* =====================================================
@@ -1790,9 +1482,8 @@ function iniciarHome(){
 
 
     /*
-     * Primeiro tenta usar o cache.
-     * Assim, quando o utilizador voltar à Home,
-     * as capas podem aparecer quase imediatamente.
+     * Mostrar cache imediatamente,
+     * se existir.
      */
 
     const cache =
@@ -1809,8 +1500,7 @@ function iniciarHome(){
 
 
     /*
-     * Depois atualiza os dados da API
-     * sem bloquear a Home.
+     * Atualizar em segundo plano.
      */
 
     atualizarHome();
@@ -1819,7 +1509,7 @@ function iniciarHome(){
 
 
 /* =====================================================
-   QUANDO VOLTAR PARA A HOME
+   VOLTAR PARA A HOME
 ===================================================== */
 
 window.addEventListener(
@@ -1846,7 +1536,7 @@ window.addEventListener(
 
 
 /* =====================================================
-   ATUALIZAR FOTO DO PERFIL
+   FOTO DO PERFIL ALTERADA
 ===================================================== */
 
 window.addEventListener(
@@ -1876,4 +1566,4 @@ iniciarHome();
 
 </body>
 
-</html>      
+</html>     
