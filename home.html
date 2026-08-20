@@ -610,9 +610,15 @@ section{
 
     </div>
 
-</div>
+              </div>
 
 <script>
+
+/* =====================================================
+   BERRYANIME - HOME
+   Jikan API v4
+===================================================== */
+
 
 /* =====================================================
    PERFIL
@@ -620,8 +626,7 @@ section{
 
 function abrirPerfil(){
 
-    window.location.href =
-        "perfil.html";
+    window.location.href = "perfil.html";
 
 }
 
@@ -632,9 +637,7 @@ function abrirPerfil(){
 
 function abrirPesquisa(){
 
-    alert(
-        "A pesquisa ainda está sendo preparada."
-    );
+    alert("A pesquisa ainda está sendo preparada.");
 
 }
 
@@ -643,26 +646,18 @@ function abrirPesquisa(){
    FOTO DO PERFIL
 ===================================================== */
 
-const AVATAR_KEY =
-    "berryanime_profile_avatar";
-
+const AVATAR_KEY = "berryanime_profile_avatar";
 
 function carregarFotoPerfil(){
 
     const imagem =
-        localStorage.getItem(
-            AVATAR_KEY
-        );
+        localStorage.getItem(AVATAR_KEY);
 
     const profileImage =
-        document.getElementById(
-            "profileImage"
-        );
+        document.getElementById("profileImage");
 
     const profileIcon =
-        document.getElementById(
-            "profileIcon"
-        );
+        document.getElementById("profileIcon");
 
 
     if(
@@ -670,8 +665,7 @@ function carregarFotoPerfil(){
         imagem.trim() !== ""
     ){
 
-        profileImage.src =
-            imagem;
+        profileImage.src = imagem;
 
         profileImage.style.display =
             "block";
@@ -683,9 +677,7 @@ function carregarFotoPerfil(){
 
     else{
 
-        profileImage.removeAttribute(
-            "src"
-        );
+        profileImage.removeAttribute("src");
 
         profileImage.style.display =
             "none";
@@ -699,42 +691,52 @@ function carregarFotoPerfil(){
 
 
 /* =====================================================
-   API JIKAN
+   ELEMENTOS
 ===================================================== */
 
 const app =
-    document.getElementById(
-        "app"
-    );
+    document.getElementById("app");
+
+
+/* =====================================================
+   JIKAN API
+===================================================== */
 
 const API =
     "https://api.jikan.moe/v4";
 
 
-/* =====================================================
-   FILA DA API
-===================================================== */
+/*
+ * Mantemos uma distância segura entre
+ * as requisições para reduzir 429.
+ */
+
+const INTERVALO_API =
+    1200;
 
 let ultimaRequisicao = 0;
 
-const INTERVALO_API =
-    1500;
 
+/* =====================================================
+   UTILITÁRIO
+===================================================== */
 
-function esperar(
-    milissegundos
-){
+function esperar(ms){
 
     return new Promise(
         resolve =>
             setTimeout(
                 resolve,
-                milissegundos
+                ms
             )
     );
 
 }
 
+
+/* =====================================================
+   REQUISIÇÃO JIKAN
+===================================================== */
 
 async function api(
     url,
@@ -745,23 +747,25 @@ async function api(
         Date.now();
 
 
-    const espera =
+    const tempoDesdeUltima =
+        agora -
+        ultimaRequisicao;
+
+
+    const esperaNecessaria =
         Math.max(
             0,
             INTERVALO_API -
-            (
-                agora -
-                ultimaRequisicao
-            )
+            tempoDesdeUltima
         );
 
 
     if(
-        espera > 0
+        esperaNecessaria > 0
     ){
 
         await esperar(
-            espera
+            esperaNecessaria
         );
 
     }
@@ -774,23 +778,37 @@ async function api(
     try{
 
         console.log(
-            "Jikan:",
+            "🍓 Jikan:",
             url
         );
 
 
         const resposta =
             await fetch(
-                API + url
+                API + url,
+                {
+                    method:"GET",
+
+                    headers:{
+                        "Accept":
+                            "application/json"
+                    },
+
+                    cache:"no-store"
+                }
             );
 
+
+        /* =========================
+           RATE LIMIT
+        ========================= */
 
         if(
             resposta.status === 429
         ){
 
-            console.log(
-                "Jikan 429"
+            console.warn(
+                "⚠️ Jikan 429"
             );
 
 
@@ -804,10 +822,10 @@ async function api(
 
 
             const espera429 =
-                4000 +
+                5000 +
                 (
                     tentativa *
-                    2000
+                    3000
                 );
 
 
@@ -824,14 +842,62 @@ async function api(
         }
 
 
+        /* =========================
+           ERROS DO SERVIDOR
+        ========================= */
+
+        if(
+            resposta.status === 500 ||
+            resposta.status === 502 ||
+            resposta.status === 503 ||
+            resposta.status === 504
+        ){
+
+            console.warn(
+                "⚠️ Jikan indisponível:",
+                resposta.status
+            );
+
+
+            if(
+                tentativa < 3
+            ){
+
+                await esperar(
+                    4000 +
+                    (
+                        tentativa *
+                        2000
+                    )
+                );
+
+
+                return api(
+                    url,
+                    tentativa + 1
+                );
+
+            }
+
+
+            return [];
+
+        }
+
+
+        /* =========================
+           OUTROS ERROS
+        ========================= */
+
         if(
             !resposta.ok
         ){
 
-            console.log(
-                "Erro HTTP:",
+            console.warn(
+                "⚠️ Jikan HTTP:",
                 resposta.status
             );
+
 
             return [];
 
@@ -849,6 +915,12 @@ async function api(
             )
         ){
 
+            console.warn(
+                "⚠️ Resposta sem data:",
+                url
+            );
+
+
             return [];
 
         }
@@ -860,8 +932,8 @@ async function api(
 
     catch(error){
 
-        console.log(
-            "Erro Jikan:",
+        console.warn(
+            "⚠️ Erro de rede:",
             error
         );
 
@@ -871,7 +943,11 @@ async function api(
         ){
 
             await esperar(
-                3000
+                4000 +
+                (
+                    tentativa *
+                    2000
+                )
             );
 
 
@@ -895,11 +971,35 @@ async function api(
 ===================================================== */
 
 const CACHE_KEY =
-    "berryanime_home_cache_v7";
+    "berryanime_home_cache_v10";
+
+
+/*
+ * Cache válido durante 6 horas.
+ */
 
 const CACHE_TIME =
-    1000 * 60 * 30;
+    1000 *
+    60 *
+    60 *
+    6;
 
+
+/*
+ * Cache de emergência:
+ * pode ser usado até 72 horas.
+ */
+
+const CACHE_FALLBACK_TIME =
+    1000 *
+    60 *
+    60 *
+    72;
+
+
+/* =====================================================
+   SALVAR CACHE
+===================================================== */
 
 function salvarCache(
     dados
@@ -924,8 +1024,8 @@ function salvarCache(
 
     catch(error){
 
-        console.log(
-            "Erro ao guardar cache:",
+        console.warn(
+            "Erro ao salvar cache:",
             error
         );
 
@@ -934,7 +1034,13 @@ function salvarCache(
 }
 
 
-function lerCache(){
+/* =====================================================
+   LER CACHE
+===================================================== */
+
+function lerCache(
+    aceitarAntigo = false
+){
 
     try{
 
@@ -944,7 +1050,9 @@ function lerCache(){
             );
 
 
-        if(!salvo){
+        if(
+            !salvo
+        ){
 
             return null;
 
@@ -967,21 +1075,23 @@ function lerCache(){
         }
 
 
-        /*
-         * Cache antigo ou vazio
-         * não será usado.
-         */
-
         const idade =
             Date.now() -
             (
-                objeto.time || 0
+                objeto.time ||
+                0
             );
+
+
+        const limite =
+            aceitarAntigo
+                ? CACHE_FALLBACK_TIME
+                : CACHE_TIME;
 
 
         if(
             idade >
-            CACHE_TIME
+            limite
         ){
 
             return null;
@@ -995,10 +1105,11 @@ function lerCache(){
 
     catch(error){
 
-        console.log(
-            "Erro no cache:",
+        console.warn(
+            "Erro ao ler cache:",
             error
         );
+
 
         return null;
 
@@ -1008,7 +1119,7 @@ function lerCache(){
 
 
 /* =====================================================
-   CAPA
+   IMAGEM DO ANIME
 ===================================================== */
 
 function imagemAnime(
@@ -1016,6 +1127,12 @@ function imagemAnime(
 ){
 
     return (
+
+        anime?.images?.webp
+            ?.large_image_url ||
+
+        anime?.images?.webp
+            ?.image_url ||
 
         anime?.images?.jpg
             ?.large_image_url ||
@@ -1034,6 +1151,41 @@ function imagemAnime(
 
 
 /* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escaparHTML(
+    texto
+){
+
+    return String(
+        texto || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
    ABRIR ANIME
 ===================================================== */
 
@@ -1041,7 +1193,9 @@ function abrirAnime(
     id
 ){
 
-    if(!id){
+    if(
+        !id
+    ){
 
         return;
 
@@ -1050,7 +1204,9 @@ function abrirAnime(
 
     window.location.href =
         "detalhes.html?id=" +
-        id;
+        encodeURIComponent(
+            id
+        );
 
 }
 
@@ -1069,7 +1225,8 @@ function removerDuplicados(
 
     (
         lista || []
-    ).forEach(
+    )
+    .forEach(
         anime => {
 
             if(
@@ -1090,6 +1247,41 @@ function removerDuplicados(
 
     return Array.from(
         mapa.values()
+    );
+
+}
+
+
+/* =====================================================
+   VALIDAR ANIME
+===================================================== */
+
+function animeValido(
+    anime
+){
+
+    return !!(
+        anime &&
+        anime.mal_id &&
+        imagemAnime(anime)
+    );
+
+}
+
+
+/* =====================================================
+   FILTRAR VÁLIDOS
+===================================================== */
+
+function somenteValidos(
+    lista
+){
+
+    return removerDuplicados(
+        lista
+    )
+    .filter(
+        animeValido
     );
 
 }
@@ -1123,6 +1315,13 @@ function smallCard(
     }
 
 
+    const titulo =
+        escaparHTML(
+            anime.title ||
+            "Anime"
+        );
+
+
     return `
 
         <div
@@ -1131,8 +1330,10 @@ function smallCard(
 
             <img
                 src="${imagem}"
-                alt="${anime.title || "Anime"}"
-                loading="lazy">
+                alt="${titulo}"
+                loading="lazy"
+                decoding="async"
+                onerror="this.style.display='none';">
 
         </div>
 
@@ -1140,8 +1341,9 @@ function smallCard(
 
 }
 
+
 /* =====================================================
-   CARD DE EPISÓDIO
+   CARD EPISÓDIO
 ===================================================== */
 
 function episodeCard(
@@ -1168,6 +1370,13 @@ function episodeCard(
     }
 
 
+    const titulo =
+        escaparHTML(
+            anime.title ||
+            "Novo episódio"
+        );
+
+
     return `
 
         <div
@@ -1176,8 +1385,10 @@ function episodeCard(
 
             <img
                 src="${imagem}"
-                alt="${anime.title || "Novo episódio"}"
-                loading="lazy">
+                alt="${titulo}"
+                loading="lazy"
+                decoding="async"
+                onerror="this.style.display='none';">
 
             <div class="badge">
                 NOVO
@@ -1188,7 +1399,7 @@ function episodeCard(
             <div class="episode-text">
 
                 <div class="episode-title">
-                    ${anime.title || "Novo episódio"}
+                    ${titulo}
                 </div>
 
                 <div class="episode-sub">
@@ -1205,7 +1416,7 @@ function episodeCard(
 
 
 /* =====================================================
-   SECÇÃO NORMAL
+   SEÇÃO NORMAL
 ===================================================== */
 
 function section(
@@ -1214,7 +1425,7 @@ function section(
 ){
 
     const disponiveis =
-        removerDuplicados(
+        somenteValidos(
             lista
         );
 
@@ -1263,7 +1474,7 @@ function section(
 
 
 /* =====================================================
-   SECÇÃO EPISÓDIOS
+   SEÇÃO EPISÓDIOS
 ===================================================== */
 
 function episodeSection(
@@ -1272,7 +1483,7 @@ function episodeSection(
 ){
 
     const disponiveis =
-        removerDuplicados(
+        somenteValidos(
             lista
         );
 
@@ -1321,14 +1532,16 @@ function episodeSection(
 
 
 /* =====================================================
-   LANÇAMENTOS
+   LANÇAMENTO
 ===================================================== */
 
 function releaseSection(
     anime
 ){
 
-    if(!anime){
+    if(
+        !anime
+    ){
 
         return "";
 
@@ -1355,6 +1568,13 @@ function releaseSection(
     }
 
 
+    const titulo =
+        escaparHTML(
+            anime.title ||
+            "Lançamento"
+        );
+
+
     return `
 
         <section>
@@ -1369,7 +1589,10 @@ function releaseSection(
 
                 <img
                     src="${imagem}"
-                    alt="${anime.title || "Lançamento"}">
+                    alt="${titulo}"
+                    loading="eager"
+                    decoding="async"
+                    onerror="this.style.display='none';">
 
                 <div class="release-gradient"></div>
 
@@ -1380,7 +1603,7 @@ function releaseSection(
                     </div>
 
                     <div class="release-title">
-                        ${anime.title || "Lançamento"}
+                        ${titulo}
                     </div>
 
                     <div class="release-sub">
@@ -1399,7 +1622,7 @@ function releaseSection(
 
 
 /* =====================================================
-   ENCONTRAR POR GÉNERO
+   ENCONTRAR GÊNERO
 ===================================================== */
 
 function porGenero(
@@ -1417,23 +1640,33 @@ function porGenero(
 
     return (
         lista || []
-    ).filter(
+    )
+    .filter(
         anime => {
 
-            const generos =
-                Array.isArray(
-                    anime?.genres
-                )
+            const grupos = [
+
+                ...(Array.isArray(anime?.genres)
                     ? anime.genres
-                    : [];
+                    : []),
+
+                ...(Array.isArray(anime?.themes)
+                    ? anime.themes
+                    : []),
+
+                ...(Array.isArray(anime?.demographics)
+                    ? anime.demographics
+                    : [])
+
+            ];
 
 
-            return generos.some(
-                generoAnime => {
+            return grupos.some(
+                item => {
 
                     const nome =
                         String(
-                            generoAnime?.name ||
+                            item?.name ||
                             ""
                         )
                         .toLowerCase()
@@ -1455,20 +1688,22 @@ function porGenero(
 
 
 /* =====================================================
-   UNIVERSO DE ANIMES
+   UNIVERSO
 ===================================================== */
 
 function criarUniverso(
     dados
 ){
 
-    return removerDuplicados([
+    return somenteValidos([
 
         ...(dados.popular || []),
 
         ...(dados.airing || []),
 
-        ...(dados.score || [])
+        ...(dados.score || []),
+
+        ...(dados.favorites || [])
 
     ]);
 
@@ -1483,7 +1718,9 @@ function construirHome(
     dados
 ){
 
-    if(!dados){
+    if(
+        !dados
+    ){
 
         return;
 
@@ -1505,15 +1742,6 @@ function construirHome(
     const favorites =
         dados.favorites || [];
 
-
-    /*
-     * IMPORTANTE:
-     *
-     * NÃO existe Set "usados".
-     *
-     * Portanto um anime pode aparecer
-     * em várias categorias.
-     */
 
     const universo =
         criarUniverso(
@@ -1625,8 +1853,8 @@ function construirHome(
 
     const lancamento =
         airing[0] ||
-        score[0] ||
         popular[0] ||
+        score[0] ||
         null;
 
 
@@ -1698,6 +1926,7 @@ function construirHome(
                 text-align:center;
                 padding:60px 20px;
                 color:#888;
+                font-size:16px;
             ">
 
                 Não foi possível carregar
@@ -1717,7 +1946,7 @@ function construirHome(
 
 
 /* =====================================================
-   CARREGAR DADOS
+   ATUALIZAR HOME
 ===================================================== */
 
 async function atualizarHome(){
@@ -1740,8 +1969,15 @@ async function atualizarHome(){
     };
 
 
+    /*
+     * Cada requisição é feita separadamente.
+     *
+     * Se uma falhar, as outras continuam.
+     */
+
+
     /* =================================================
-       1 — POPULARES PÁGINA 1
+       1 — POPULARES
     ================================================= */
 
     const populares1 =
@@ -1751,13 +1987,14 @@ async function atualizarHome(){
 
 
     dados.popular =
-        removerDuplicados(
+        somenteValidos(
             populares1
         );
 
 
     /*
-     * Mostra logo os dados que já temos.
+     * Mostra imediatamente os populares
+     * se a primeira requisição funcionar.
      */
 
     if(
@@ -1779,7 +2016,7 @@ async function atualizarHome(){
 
 
     /* =================================================
-       2 — POPULARES PÁGINA 2
+       2 — SEGUNDA PÁGINA POPULARES
     ================================================= */
 
     const populares2 =
@@ -1788,29 +2025,21 @@ async function atualizarHome(){
         );
 
 
-    dados.popular =
-        removerDuplicados([
+    if(
+        populares2.length
+    ){
 
-            ...dados.popular,
+        dados.popular =
+            somenteValidos([
 
-            ...populares2
+                ...dados.popular,
 
-        ]);
+                ...populares2
 
+            ]);
 
-    /* =================================================
-       3 — TEMPORADA ATUAL
-    ================================================= */
+    }
 
-    dados.airing =
-        await api(
-            "/seasons/now?page=1&limit=25"
-        );
-
-
-    /*
-     * Atualiza a Home imediatamente.
-     */
 
     dados.favorites =
         dados.popular.slice(
@@ -1818,6 +2047,37 @@ async function atualizarHome(){
             15
         );
 
+
+    construirHome(
+        dados
+    );
+
+
+    /* =================================================
+       3 — TEMPORADA ATUAL
+    ================================================= */
+
+    const temporada =
+        await api(
+            "/seasons/now?page=1&limit=25"
+        );
+
+
+    if(
+        temporada.length
+    ){
+
+        dados.airing =
+            somenteValidos(
+                temporada
+            );
+
+    }
+
+
+    /*
+     * Atualiza imediatamente.
+     */
 
     construirHome(
         dados
@@ -1830,14 +2090,43 @@ async function atualizarHome(){
 
     const score1 =
         await api(
-            "/top/anime?page=1&limit=25"
+            "/top/anime?filter=bypopularity&page=1&limit=25"
         );
 
 
-    dados.score =
-        removerDuplicados(
-            score1
+    /*
+     * Não usamos a mesma lista diretamente.
+     *
+     * Pegamos agora o ranking por nota.
+     */
+
+    const scoreReal =
+        await api(
+            "/top/anime?sort=desc&limit=25&page=1"
         );
+
+
+    if(
+        scoreReal.length
+    ){
+
+        dados.score =
+            somenteValidos(
+                scoreReal
+            );
+
+    }
+
+    else if(
+        score1.length
+    ){
+
+        dados.score =
+            somenteValidos(
+                score1
+            );
+
+    }
 
 
     construirHome(
@@ -1846,47 +2135,72 @@ async function atualizarHome(){
 
 
     /* =================================================
-       5 — SEGUNDA PÁGINA DOS AVALIADOS
+       5 — SEGUNDA PÁGINA DO RANKING
     ================================================= */
 
     const score2 =
         await api(
-            "/top/anime?page=2&limit=25"
+            "/top/anime?sort=desc&limit=25&page=2"
         );
 
 
-    dados.score =
-        removerDuplicados([
+    if(
+        score2.length
+    ){
 
-            ...dados.score,
+        dados.score =
+            somenteValidos([
 
-            ...score2
+                ...dados.score,
 
-        ]);
+                ...score2
+
+            ]);
+
+    }
 
 
     /* =================================================
        FAVORITOS
     ================================================= */
 
-    dados.favorites =
-        dados.popular.slice(
-            0,
-            15
-        );
+    if(
+        !dados.favorites.length
+    ){
+
+        dados.favorites =
+            dados.popular.slice(
+                0,
+                15
+            );
+
+    }
 
 
     /* =================================================
-       GUARDAR CACHE
+       SALVAR CACHE
     ================================================= */
 
-    salvarCache(
-        dados
-    );
+    /*
+     * Só guarda o cache quando temos
+     * pelo menos alguma informação válida.
+     */
+
+    if(
+        dados.popular.length ||
+        dados.airing.length ||
+        dados.score.length
+    ){
+
+        salvarCache(
+            dados
+        );
+
+    }
 
 
     /* =================================================
-       MOSTRAR RESULTADO FINAL
+       RESULTADO FINAL
     ================================================= */
 
     construirHome(
@@ -1901,6 +2215,7 @@ async function atualizarHome(){
 
 }
 
+
 /* =====================================================
    INICIAR HOME
 ===================================================== */
@@ -1911,14 +2226,42 @@ function iniciarHome(){
 
 
     /*
-     * Primeiro usa o cache válido.
+     * Primeiro tenta o cache normal.
      */
 
-    const cache =
-        lerCache();
+    let cache =
+        lerCache(
+            false
+        );
 
 
-    if(cache){
+    /*
+     * Se não existir cache recente,
+     * tenta um cache antigo de emergência.
+     */
+
+    if(
+        !cache
+    ){
+
+        cache =
+            lerCache(
+                true
+            );
+
+    }
+
+
+    /*
+     * Mostra o cache imediatamente.
+     *
+     * Assim a página não fica vazia
+     * enquanto a Jikan responde.
+     */
+
+    if(
+        cache
+    ){
 
         construirHome(
             cache
@@ -1928,11 +2271,36 @@ function iniciarHome(){
 
 
     /*
-     * Depois atualiza a Home
-     * progressivamente.
+     * Atualiza os dados em segundo plano.
      */
 
-    atualizarHome();
+    atualizarHome()
+        .catch(
+            erro => {
+
+                console.warn(
+                    "Erro ao atualizar Home:",
+                    erro
+                );
+
+
+                /*
+                 * Se a API falhar completamente,
+                 * mantém o cache que já foi mostrado.
+                 */
+
+                if(
+                    cache
+                ){
+
+                    construirHome(
+                        cache
+                    );
+
+                }
+
+            }
+        );
 
 }
 
@@ -1978,8 +2346,9 @@ window.addEventListener(
 
 iniciarHome();
 
-</script>
 
-</body>
+/* =====================================================
+   FIM DO SCRIPT
+===================================================== */
 
-</html>      
+</script>      
